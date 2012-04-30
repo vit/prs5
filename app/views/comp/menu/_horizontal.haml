@@ -1,0 +1,36 @@
+
+-#- data.each do |m|
+-# ="&nbsp;&#8226;&nbsp;<a title='#{m[0]}' href='#{m[1]}'>#{current_id==m[2] ? '<b>'+m[0]+'</b>' : m[0]}</a>"
+
+%ul.menu{align: "left", class: "menu"}
+ -data.each do |m|
+  -if not m[3] or not @menu_access or @menu_access[m[3]]
+   -if defined?(base)
+    - m[1] = base+m[1]
+   -if current_id==m[2]
+    %li.current><
+     %a{:title => m[0], :href => m[1]}><= m[0]
+   -else
+    %li><
+     %a{:title => m[0], :href => m[1]}><= m[0]
+
+-#.menu
+ %ul
+  -data.each do |m|
+   -if current_id==m[2]
+    %li.current
+     %a{:title => m[0], :href => m[1]}= m[0]
+   -else
+    %li
+     %a{:title => m[0], :href => m[1]}= m[0]
+
+-#   -if current_id==m[2]
+-#    %li.current
+-#     %a{:title => m[0], :href => m[1]}= m[0]
+-#    %li
+-#     %a{:title => m[0], :href => m[1]}= m[0]
+
+-# a{:title => m[0], :href => m[1]}= m[0]
+-#="<a title='#{m[0]}' #{current_id==m[2] ? 'class=current' : ''} href='#{m[1]}'>#{m[0]}</a>"
+-#=" &nbsp;&#8226;&nbsp;<a title='#{m[0]}' #{current_id==m[2] ? 'class=current' : ''} href='#{m[1]}'>#{m[0]}</a>"
+

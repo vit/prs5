@@ -1,0 +1,28 @@
+
+<%
+	topnav = [
+		{id: 'home', text: 'Главная', url: '/', title: ''},
+		{id: 'company', text: 'О компании', url: '/company/', title: ''},
+		{id: 'activity', text: 'Деятельность', url: '/activity/', title: ''},
+		{id: 'production', text: 'Продукция', url: '/production/', title: ''},
+		{id: 'press', text: 'Пресс-центр', url: '/press/', title: ''},
+	#	{id: 'contact', text: 'Контакты', url: '/contact/', title: ''},
+	#	{id: '', text: '', url: '/', title: ''},
+	]
+%>
+<!-- div class='top' -->
+<div class='nav'><ul>
+<% topnav.each do |elm| %>
+	<% if elm[:id]==content_for(:section_id) %>
+		<li><a href="<%= elm[:url]%>" class="current" title="<%= elm[:title]%>"><strong><%= elm[:text] %></strong></a></li>
+	<% else %>
+		<li><a href="<%= elm[:url]%>" title="<%= elm[:title]%>"><%= elm[:text] %></a></li>
+	<% end %>
+<% end %>
+</ul>
+<!-- br style="clear:left"/ -->
+<div style="clear:left"></div>
+</div>
+<!-- div style="clear:left"></div>
+</div -->
+

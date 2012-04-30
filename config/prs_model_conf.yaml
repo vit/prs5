@@ -1,0 +1,20 @@
+
+
+development:
+        mongo:
+                host: localhost
+                #dbname: ph3_dev
+                dbname: coms
+#        sphinx:
+#                table: rt
+
+test:
+
+production:
+        mongo:
+                host: localhost
+                dbname: coms
+#        sphinx:
+#                table: rt
+
+

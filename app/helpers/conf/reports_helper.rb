@@ -1,0 +1,2 @@
+module Conf::ReportsHelper
+end

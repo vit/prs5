@@ -1,0 +1,2 @@
+module Conf::MainHelper
+end
