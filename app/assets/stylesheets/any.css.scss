@@ -7,10 +7,16 @@ $bgcolor: white;
 $textcolor2: rgb(20,40,128);
 //$textcolor2: rgb(255,255,255);
 $textcolor: rgb(0,0,0);
-$color3: #080f21;
+//$color3: #080f21;
+//$color3: #98b3f8;
+$color3: #eeeeee;
+//$color4: #3db4f1;
+//$color4: #3df7f1;
+$color4: #dde9fa;
 //$textcolor: $textcolor2;
 @mixin font1 {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	//font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: sans-serif;
 	//font-family: Verdana, Arial, Helvetica, sans-serif;
 	//font-family: Arial, Helvetica, sans-serif;
 	//font-family: Helvetica, sans-serif;
@@ -19,44 +25,55 @@ $color3: #080f21;
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.clear {
-	clear: both;
-}
+.clear { clear: both; }
 
 body.any {
+	@include font1;
+	font-size: 12pt;
 	margin: 0;
 	padding: 0;
-	background-color: yellow;
-	color: red;
+	background-color: $bgcolor;
+	//color: red;
 	.top {
-		border: solid thin red;
+		color: black;
+		a { color: black; }
 		margin: 0;
 		padding: 0;
-	//	background-color: $textcolor2;
-		background-color: $color3;
+		> .title {
+			@include font2;
+			font-size: 20pt;
+			margin: 0.5em;
+		}
 		> .nav {
-	//	margin: 0;
+	//		box-shadow:1px 1px 10px 0px #777;
+		//	box-shadow: 0px 0px 3px #000;
+	//		box-shadow: 0px 0px 3px #000;
+		//	border: solid thin red;
+			background-color: $color3;
+			//margin: 15px 30px;
+			margin: 1em 2em;
 			> .left {
-	//	margin: 0;
-		> ul.menu {
-					border: solid thin red;
-		//	ul {
+				> ul.menu {
+			//		border: solid thin red;
 					list-style: none;
-					margin: 0 7px;
-						float: left;
+				//	margin: 0 7px;
+					margin: 0;
+					float: left;
 					padding: 0;
-				li {
-						margin: 0 7px;
-					//		color: #000033;
-					//		background-color: white;
+					li {
+					//	margin: 0 7px;
+					//	margin: 0 .5em;
 						display: inline;
 				//		display: block;
 				//		float: left;
-					a {
-						float: left;
-					//	color: green;
-						color: white;
-						text-decoration: none;
+						a {
+						//	box-shadow: 0px 0px 3px 3px #777;
+						//	box-shadow: inset 3px 3px 3px 3px #000;
+							float: left;
+						//	color: green;
+						//	color: white;
+						//	color: black;
+							text-decoration: none;
 
 							display: block;
 			//			//	border: #007 solid thin;
@@ -70,56 +87,57 @@ body.any {
 			//				text-decoration: none;
 						//	padding: 1em 1em 1em 1em;
 							padding: 0.8em 0.8em 0.8em 0.8em;
-							margin: 0 7px;
+						//	margin: 0 7px;
+							margin: 0 0em;
 
+						}
+						a:hover {
+					//		box-shadow:1px 1px 3px 3px #777;
+						//	background-color: $bgcolor;
+							background-color: $color4;
+						}
 					}
 				}
-		//	}
-		}
 			}
-		.right {
-			.block {
-			//	position: absolute;
-				position: relative;
-			}
-			//	width: 300px;
-			//	width: 250px;
-		//		width: 20em;
-				text-align: center;
-					margin: 0 7px;
-			border: solid thin red;
-			float: right;
-			a {
+			.right {
+				.login, .logged {
+					text-align: center;
+					margin: 0;
+					float: right;
+					> a {
+						span.underlined {
+							border-bottom: dashed thin black;
+						}
+						padding: 0.8em 0.8em 0.8em 0.8em;
 						overflow-x:hidden;
 						overflow-y:hidden;
 						white-space:nowrap;
 						text-decoration: none;
-							display: block;
-							padding: 0.8em 0.8em 0.8em 0.8em;
-							margin: 0 7px;
-				color: white;
+						display: block;
+					}
+					.block {
+						position: relative;
+						.panel {
+							padding: 2em;
+							background-color: $color4;
+						//	width: 40em;
+							position: absolute;
+							display: none;
+							right: 0;
+							td {
+								padding: 0.5em;
+							}
+						}
+					}
+				}
 			}
-			.panel {
-				background-color: $color3;
-					border: solid thin red;
-			//	width: 500px;
-				width: 40em;
-				position: absolute;
-			//	left: -250px;
-		//		left: -20em;
-				display: none;
-				color: white;
-			//	left:-9999em;z-index:5000;
-				right: 0px;
+			.right:hover {
+				.login, .logged {
+					background-color: $color4;
+					.block { .panel { display: block; } }
+				}
 			}
 		}
-		.right:hover {
-			.panel {
-				display: block;
-			//	left:auto;top:28px;
-			}
-		}
-	}
 	}
 }
 

@@ -1,0 +1,22 @@
+
+en:
+        user: 'User'
+        pin: 'PIN'
+        password: 'Password'
+        login: 'Login'
+        logout: 'Logout'
+        addnewuser: New user
+        restorepassword: Forgot password?
+        profile: User profile
+
+ru:
+        user: 'Пользователь'
+        pin: 'PIN'
+        password: 'Пароль'
+        login: 'Войти'
+        logout: 'Выйти'
+        addnewuser: Новый пользователь
+        restorepassword: Забыли пароль?
+        profile: Профиль пользователя
+
+

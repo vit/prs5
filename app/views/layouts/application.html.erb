@@ -8,16 +8,20 @@
 </head>
 <body class="any">
 	<div class=top>
+		<!-- div class= title>
+			<%= _ :systemnameabbreviation %>
+		</div -->
 		<div class=nav>
 			<div class=left>
-		<%= render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :data => [
-			[_(:conf), '/conf', 'conf'],
-			[_(:lib), '/lib', 'lib'],
-			[_(:adm), '/adm/', 'adm', :adm]
-		]} %>
+			<%= render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :data => [
+				[_(:conf), '/conf', 'conf'],
+				[_(:lib), '/lib', 'lib'],
+				[_(:adm), '/adm/', 'adm', :adm]
+			]} %>
 			</div>
 			<div class=right>
-				<a>qqqqqqqq wwwwwwwwwwwwwwwww</a>
+				<%= render :partial => "comp/user/logon-form" %>
+				<!-- a>qqqqqqqq wwwwwwwwwwwwwwwww</a>
 				<div class=block>
 				<div class=panel>
 					jhli glqwrt  tt ert wert ert er er tertet 
@@ -27,10 +31,10 @@
 					 tyu rtutryu titui yui yuityui ytui 
 					 yui tyuiytuity uitytuityui yui yiyui yuyui
 				</div>
-				</div>
+				</div -->
 			</div>
+			<div class="clear"></div>
 		</div>
-		<div class="clear"></div>
 	</div>
 	<div class=body>
 		<!-- %= render "comp/menu/horizontal"% -->
