@@ -1,0 +1,52 @@
+-#%script{:src => "/js/my/comp/user/logon.js", :type => "text/javascript"}
+
+- user = @current_user
+-if user[:user_id]
+ -#.logged
+ .item
+  %a{href: '#'}><
+   %span.underlined><
+    %span.username><&= user[:info]['fullname']
+    =', ' + _(:pin) + ': '
+    %span.name><= user[:user_id]
+   %span>< &darr;
+  .block
+   .panel
+    %input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
+    %a{href: '/user/profile.html'}><&= _(:profile)
+    %br
+    %br
+    %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+     %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
+-else
+ -#.login{aalign: 'right'}
+ .item
+  %a{href: '#'}><
+   %span.underlined><= :enter
+   %span>< &darr;
+  .block
+   .panel
+    %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+     %table
+      %tr
+       %td
+        =_(:pin)+':'
+       %td
+        %input.logoninput{:type=>'text', :name=>'log_pin', :size=>'6'}
+       %td
+        =_(:password)+':'
+       %td
+        %input.logoninput{:type=>'password', :name=>'log_pass', :size=>'6'}
+       %td
+        %input.logonbutton{:type=>'submit', :name=>"login", :value=>_(:login)}
+    %br
+    %table
+     %tr
+      %td
+       %a{href: '/user/restore.html'}><= _( :restorepassword )
+      -#%td
+       &nbsp;|&nbsp;
+      %td
+       %a{href: '/user/new.html'}><= _( :addnewuser )
+-# .clear
+
