@@ -1,15 +1,17 @@
 
 en:
+        enter: Log out
         user: 'User'
         pin: 'PIN'
         password: 'Password'
-        login: 'Login'
-        logout: 'Logout'
+        login: 'Log in'
+        logout: 'Log out'
         addnewuser: New user
         restorepassword: Forgot password?
         profile: User profile
 
 ru:
+        enter: Вход
         user: 'Пользователь'
         pin: 'PIN'
         password: 'Пароль'

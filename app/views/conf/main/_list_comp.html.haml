@@ -3,29 +3,33 @@
 
 -#%p= get_current_template_name
 
-%table{border: 1, width: '100%', cellpadding: 5}
+%table.confs_list{border: 1, width: '100%', cellpadding: 5}
  %tr
   %th{colspan: 2}= _ :conference_info
-  %th{rowspan: 2}= _ :working_language
-  %th{rowspan: 2}= _ :virtualoffice
- %tr
+  -#%w[en ru].each do |lang|
+   %th= _( 'lang_'+lang )
+  %th{rowspan: 1}= _ :working_language
+  %th{rowspan: 1}= _ :virtualoffice
+ -#%tr
   -%w[en ru].each do |lang|
    %th= _( 'lang_'+lang )
  -@list.each do |c|
   %tr
    -%w[en ru].each do |lang|
-    %td
+    %td.item
      -#if c['info']['lang'] == 'bilingual' or c['info']['lang'] == lang
      -if [ 'bilingual', lang ].include?( c['info']['lang'] )
       -if c['info']['title'][lang]
-       %b= c['info']['title'][lang].to_s
+       %b.title= c['info']['title'][lang].to_s
        %br
       -if c['info']['description'][lang]
-       =c['info']['description'][lang].to_s
-       %br
+       .description
+        %span= c['info']['description'][lang].to_s
+        -#%br
       -if c['info']['homepage'][lang]
-       %a{href: c['info']['homepage'][lang].to_s, target: '_blank'}= _ :homepage
-       %br
+       .link
+        %a{href: c['info']['homepage'][lang].to_s, target: '_blank'}= _ :homepage
+        -#%br
      -else
       =''
    %td{align: 'center'}

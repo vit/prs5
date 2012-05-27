@@ -3,7 +3,8 @@
 
 - user = @current_user
 -if user[:user_id]
- .logged
+ -#.logged
+ .item
   %a{href: '#'}><
    %span.underlined><
     %span.username><&= user[:info]['fullname']
@@ -19,9 +20,10 @@
     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
      %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
 -else
- .login{aalign: 'right'}
+ -#.login{aalign: 'right'}
+ .item
   %a{href: '#'}><
-   %span.underlined>< Вход
+   %span.underlined><= _ :enter
    %span>< &darr;
   .block
    .panel

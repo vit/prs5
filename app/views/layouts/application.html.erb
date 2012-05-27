@@ -3,6 +3,8 @@
 <head>
   <title>Prs5</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js" type="text/javascript"></script -->
+  <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools.js" type="text/javascript"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -13,25 +15,19 @@
 		</div -->
 		<div class=nav>
 			<div class=left>
-			<%= render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :data => [
+			<%= render :partial => "comp/menu/horizontal", :locals => {:current_id => @part_id, :data => [
 				[_(:conf), '/conf', 'conf'],
 				[_(:lib), '/lib', 'lib'],
 				[_(:adm), '/adm/', 'adm', :adm]
 			]} %>
 			</div>
 			<div class=right>
-				<%= render :partial => "comp/user/logon-form" %>
-				<!-- a>qqqqqqqq wwwwwwwwwwwwwwwww</a>
-				<div class=block>
-				<div class=panel>
-					jhli glqwrt  tt ert wert ert er er tertet 
-					twe yowty pyiowjhpoyi wjpyowijptyo itjyp oy ty
-					t yrty eru yu tyu yu yu ui ri i
-					ui uy iyuirtui  eyoeritjhyp ouiyrty eruy yu
-					 tyu rtutryu titui yui yuityui ytui 
-					 yui tyuiytuity uitytuityui yui yiyui yuyui
-				</div>
-				</div -->
+				<!-- div class=item -->
+					<%= render :partial => "comp/user/logon-form" %>
+				<!-- /div -->
+				<!-- div class=item -->
+					<%= render :partial => "comp/user/my-messages" %>
+				<!-- /div -->
 			</div>
 			<div class="clear"></div>
 		</div>

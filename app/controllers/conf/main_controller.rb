@@ -3,6 +3,10 @@ class Conf::MainController < ApplicationController
 	#@list = Coms::App.model.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='active' }
 	@list = @appl.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='active' }
   end
+  def list_archive
+	#@list = Coms::App.model.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='active' }
+	@list = @appl.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='archived' }
+  end
   def index
   end
 end

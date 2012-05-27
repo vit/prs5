@@ -5,18 +5,21 @@ module ApplicationHelper
 	#	@__translation ? @__translation[s] : s
 	#	@__translation ? @__translation['qqq'] : s
 	#	@__translations_stack ? @__translations_stack.last['qqq'] : s
-		@__translations_stack ? @__translations_stack.last[s] : s
+	puts s.to_s+'@@@'
+	puts	@__translations_stack ? @__translations_stack.last[s] : s
+#		@__translations_stack ? @__translations_stack.last[s] : s
+		@__translations_stack && @__translations_stack.last && @__translations_stack.last[s] ? @__translations_stack.last[s] : s.to_s
 	#	`pwd`
 	end
 	def init_translation
 		id0 = get_current_template_name
-		puts id0
+#		puts id0
 		id = id0.gsub(/^app\/views\//, '')
 	#	id1 = id1.gsub(/\.(.*?)$/, 'q')
 	#	id2 = id1.gsub(/\.(.*)$/, 'q')
 	#	id2 = id1.gsub(/\.(.*)/, 'q')
 		id = id.gsub(/\.\w*$/, '')
-		puts id
+#		puts id
 	#	puts '>>>>>> init'
 	#	id = 'app/lang/test'
 #		id = 'test'

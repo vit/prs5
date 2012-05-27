@@ -62,12 +62,17 @@ Prs5::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
+  get "rpc/call"
+
+  match "/rpc" => 'rpc#call'
 
 #  root :to => 'home#index'
   match '/' => redirect("/conf/")
 
   scope :module => 'conf' do
 	match '/conf/' => 'main#list'
+	match '/conf/archive.html' => 'main#list_archive'
+#	match '/conf/archive.html' => 'main#list'
   end
 
   namespace :conf do

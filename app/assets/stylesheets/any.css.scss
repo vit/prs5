@@ -16,9 +16,10 @@ $color4: #dde9fa;
 //$textcolor: $textcolor2;
 @mixin font1 {
 	//font-family: Arial, Verdana, Helvetica, sans-serif;
-	font-family: sans-serif;
+//	font-family: sans-serif;
 	//font-family: Verdana, Arial, Helvetica, sans-serif;
-	//font-family: Arial, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
+//	font-family: Arial;
 	//font-family: Helvetica, sans-serif;
 }
 @mixin font2 {
@@ -28,30 +29,43 @@ $color4: #dde9fa;
 .clear { clear: both; }
 
 body.any {
+	width: 95%;
+	margin: 0 auto;
 	@include font1;
 	font-size: 12pt;
-	margin: 0;
+//	margin: 0;
 	padding: 0;
+	color: black;
+	font-size: 12pt;
+	a {
+		color: black;
+	}
 	background-color: $bgcolor;
 	//color: red;
 	.top {
+	//	@include font2;
 		color: black;
 		a { color: black; }
 		margin: 0;
 		padding: 0;
 		> .title {
-			@include font2;
+		//	@include font2;
 			font-size: 20pt;
 			margin: 0.5em;
 		}
 		> .nav {
+		//	border: solid thin $color4;
+			border: solid 2px $color4;
 	//		box-shadow:1px 1px 10px 0px #777;
 		//	box-shadow: 0px 0px 3px #000;
 	//		box-shadow: 0px 0px 3px #000;
 		//	border: solid thin red;
 			background-color: $color3;
 			//margin: 15px 30px;
-			margin: 1em 2em;
+			font-size: 10pt;
+		//	margin: 1em 2em;
+			margin: 1em 0em;
+		//	border-radius: 5px;
 			> .left {
 				> ul.menu {
 			//		border: solid thin red;
@@ -67,6 +81,10 @@ body.any {
 				//		display: block;
 				//		float: left;
 						a {
+						//	border-top: solid thin $color4;
+						//	border-bottom: solid thin $color4;
+						//	border-right: solid thin $color4;
+							border-right: solid 2px $color4;
 						//	box-shadow: 0px 0px 3px 3px #777;
 						//	box-shadow: inset 3px 3px 3px 3px #000;
 							float: left;
@@ -86,12 +104,13 @@ body.any {
 			//			//	background-color: $textcolor;
 			//				text-decoration: none;
 						//	padding: 1em 1em 1em 1em;
-							padding: 0.8em 0.8em 0.8em 0.8em;
+					//		padding: 0.8em 0.8em 0.8em 0.8em;
+							padding: 0.5em 0.5em 0.5em 0.5em;
 						//	margin: 0 7px;
 							margin: 0 0em;
 
 						}
-						a:hover {
+						a:hover, a.current {
 					//		box-shadow:1px 1px 3px 3px #777;
 						//	background-color: $bgcolor;
 							background-color: $color4;
@@ -100,44 +119,112 @@ body.any {
 				}
 			}
 			.right {
-				.login, .logged {
-					text-align: center;
-					margin: 0;
-					float: right;
-					> a {
-						span.underlined {
-							border-bottom: dashed thin black;
+				.item {
+						text-align: center;
+						margin: 0;
+						float: right;
+				//	.login, .logged {
+						> a {
+							span.underlined {
+						//		border-bottom: dashed thin black;
+							}
+						//	padding: 0.8em 0.8em 0.8em 0.8em;
+							padding: 0.5em 0.5em 0.5em 0.5em;
+							overflow-x:hidden;
+							overflow-y:hidden;
+							white-space:nowrap;
+							text-decoration: none;
+							display: block;
 						}
-						padding: 0.8em 0.8em 0.8em 0.8em;
-						overflow-x:hidden;
-						overflow-y:hidden;
-						white-space:nowrap;
-						text-decoration: none;
-						display: block;
-					}
-					.block {
-						position: relative;
-						.panel {
-							padding: 2em;
-							background-color: $color4;
-						//	width: 40em;
-							position: absolute;
-							display: none;
-							right: 0;
-							td {
-								padding: 0.5em;
+						.block {
+							position: relative;
+							.panel {
+								border-radius: 0 0 15px 15px;
+								padding: 2em;
+								background-color: $color4;
+							//	width: 40em;
+								position: absolute;
+								display: none;
+								right: -2px;
+								td {
+									padding: 0.5em;
+								}
 							}
 						}
-					}
+				//	}
 				}
-			}
-			.right:hover {
-				.login, .logged {
-					background-color: $color4;
-					.block { .panel { display: block; } }
+				.item:hover {
+						background-color: $color4;
+				//	.login, .logged {
+						.block { .panel { display: block; } }
+				//	}
 				}
 			}
 		}
+	}
+	.body {
+		font-size: 10pt;
+		h2 {
+	//		@include font2;
+		//	background-color: $color4;
+		//	@include font1;
+		//	font-size: 14pt;
+			font-size: 140%;
+			margin: 0.8em;
+		}
+		table {
+		//	font-size: 10pt;
+			border-collapse:collapse;
+		//	border: solid 5px $color4;
+		//	border: solid 2px black;
+			border: none;
+			border-top: solid 2px $color4;
+			border-bottom: solid 2px $color4;
+			tr {
+			//	td, th {
+				td {
+				//	border: solid 2px $color4;
+				//	border: solid 1px black;
+					border: none;
+					padding: 1em;
+				}
+				th {
+					background-color: $color3;
+					border: none;
+//					padding: 1em;
+					padding: 0.5em;
+				}
+			}
+		}
+		.confs_list {
+	//		@include font2;
+		//	font-size: 12pt;
+			.item {
+				.title {
+				}
+				.description {
+					margin: 0.5em 0 0 0;
+					font-style: italic;
+				//	line-height: 2em;
+			//		margin: 1.5em 0 0 0;
+				}
+				.link {
+					margin: 0.5em 0 0 0;
+				}
+			}
+		}
+
+	}
+	.bottom {
+	//	@include font2;
+		background-color: $color3;
+		font-size: 8pt;
+	//	border-top: solid 2px $color4;
+	//	border: solid 2px $color4;
+	//	background-color: $color4;
+		margin: 1em 0;
+	//	padding: 1em 0;
+		padding: 0.5em;
 	}
 }
 

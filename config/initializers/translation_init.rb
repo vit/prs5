@@ -1,4 +1,4 @@
-
+=begin
 
 	class TranslationLoader
 		attr_accessor :path
@@ -41,4 +41,6 @@
 		#	-> s { locale_data.inspect }
 		end
 	end
+
+=end
 

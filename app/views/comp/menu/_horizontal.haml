@@ -8,11 +8,13 @@
    -if defined?(base)
     - m[1] = base+m[1]
    -if current_id==m[2]
-    %li.current><
-     %a{:title => m[0], :href => m[1]}><= m[0]
+    %li><
+     -#%a{:title => m[0], :href => m[1]}><= m[0]
+     %a.current{:href => m[1]}><= m[0]
    -else
     %li><
-     %a{:title => m[0], :href => m[1]}><= m[0]
+     -#%a{:title => m[0], :href => m[1]}><= m[0]
+     %a{:href => m[1]}><= m[0]
 
 -#.menu
  %ul
