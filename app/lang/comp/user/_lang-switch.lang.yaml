@@ -1,0 +1,12 @@
+
+en:
+        lang_english: Switch to english
+#        lang_russian: Russian
+        lang_russian: Переключить на русский язык
+ru:
+#        lang_english: English
+        lang_english: Switch to english
+#        lang_russian: Russian
+        lang_russian: Переключить на русский язык
+#        lang_russian: Русский
+

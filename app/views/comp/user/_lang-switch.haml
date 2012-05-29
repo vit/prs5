@@ -1,0 +1,9 @@
+
+.item
+ .lang
+  %script{:language => "javascript"} function setlang(l) { Cookie.write('ecms_lang', l, {path: '/'}); document.getElementById('langform').submit(); }
+  %form{:name => "langform", :id => "langform", :method => "post"}><
+  %a{href: 'javascript:setlang("en")', title: _(:lang_english)}>< Eng
+  %span>< &nbsp;/&nbsp;
+  %a{href: 'javascript:setlang("ru")', title: _(:lang_russian)}>< Рус
+

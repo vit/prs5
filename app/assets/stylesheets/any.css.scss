@@ -119,11 +119,13 @@ body.any {
 				}
 			}
 			.right {
+
 				.item {
+					border-left: solid 2px $color4;
 						text-align: center;
 						margin: 0;
 						float: right;
-				//	.login, .logged {
+					.highlighted {
 						> a {
 							span.underlined {
 						//		border-bottom: dashed thin black;
@@ -135,6 +137,7 @@ body.any {
 							white-space:nowrap;
 							text-decoration: none;
 							display: block;
+							cursor: pointer;
 						}
 						.block {
 							position: relative;
@@ -151,12 +154,22 @@ body.any {
 								}
 							}
 						}
-				//	}
+					}
+						.lang {
+							padding: 0.5em 0.5em 0.5em 0.5em;
+							background-color: $color4;
+							> a {
+								cursor: pointer;
+								text-decoration: none;
+							}
+						}
 				}
 				.item:hover {
+					.highlighted {
 						background-color: $color4;
-				//	.login, .logged {
 						.block { .panel { display: block; } }
+					}
+				//	.login, .logged {
 				//	}
 				}
 			}

@@ -1,7 +1,14 @@
--#%script{:src => "/js/my/comp/user/logon.js", :type => "text/javascript"}
 
-- user = @current_user
+-user = @current_user
 -if user[:user_id]
+ .item
+  .highlighted
+   %a{href: '/my/messages'}><
+    %span><= _ :my_messages
+    %span>= ' '+'(0)'
+
+-# user = @current_user
+-#if user[:user_id]
  -#.logged
  .item
   %a{href: '#'}><
@@ -18,11 +25,11 @@
     %br
     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
      %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
--else
+-#else
  -#.login{aalign: 'right'}
  .item
   %a{href: '#'}><
-   %span.underlined><= :enter
+   %span.underlined><= :my_messages
    %span>< &darr;
   .block
    .panel
