@@ -19,7 +19,7 @@
 			#path1 = File.join(@path, "#{id}.lang.yaml")
 			path1 = File.join(path, "#{id}.lang.yaml")
 		#	path1 = path + '/' + "#{id}.lang.yaml"
-			puts path1
+#			puts path1
 			data1 = File::exists?(path1) && File::readable?(path1) ? File::open(path1, 'r:utf-8') { |file| YAML.load file.read } || {} : {}
 			data = {}
 
@@ -36,7 +36,7 @@
 				dd.is_a?(Hash) ? dd.merge(acc) : acc
 			end unless locale_data && locale_data.is_a?(Hash)
 
-			puts locale_data.to_s
+#			puts locale_data.to_s
 
 			-> s { locale_data[s.to_s] if locale_data }
 		#	-> s { locale_data.inspect }

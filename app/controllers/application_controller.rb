@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info
+	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info
 	def wrap_login
 	#	@aaaaa='qqqqq'
 		yield
@@ -23,6 +23,12 @@ class ApplicationController < ActionController::Base
 		else
 			response.delete_cookie 'session_key', :path => '/'
 		end
+	end
+	def wr_lang_selected
+		request.languages.unshift request.cookies['ecms_lang'] if request.cookies['ecms_lang']
+		request.languages << 'en' << 'ru'
+		request.languages.uniq!
+		yield
 	end
 	def wr_web_login
 #=begin
