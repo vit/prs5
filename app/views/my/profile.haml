@@ -1,0 +1,15 @@
+
+sfgdfgsdghsdhsfghfg fdj ghj fgj fgj 
+
+-content_for :section_content do
+ %h2{:align => 'center'}= _ :title
+ -if @current_user[:user_id]
+  = render '/comp/user/profile'
+ -else
+
+- @page_id='user'
+- @page_title = _ :title
+
+
+
+

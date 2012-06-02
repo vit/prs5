@@ -62,9 +62,15 @@ Prs5::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  get "rpc/call"
+#  get "rpc/call"
 
   match "/rpc" => 'rpc#call'
+
+  match '/my(/)' => redirect("/my/profile")
+  match '/my/(:action)' => 'my'
+
+  match '/account(/)' => redirect("/account/tos")
+  match '/account/(:action)' => 'account'
 
 #  root :to => 'home#index'
   match '/' => redirect("/conf/")

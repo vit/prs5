@@ -12,4 +12,5 @@
 //
 // q= require jquery
 // q= require jquery_ujs
-//= require_tree .
+//q= require_tree .
+//= require_tree ./common

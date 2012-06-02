@@ -1,0 +1,22 @@
+
+-content_for :section_content do
+ -#lang = @lang.first=='ru' ? 'ru' : 'en'
+
+ %h2{:align => 'center'}= _ :title
+
+ %table{width: '100%', border: 1}
+  %tr
+   %th= _ :english
+   %th= _ :russian
+  %tr
+   %td{valign: 'top'}
+    =render 'tos_ru'
+   %td{valign: 'top'}
+    =render 'tos_en'
+
+
+- @page_id='user'
+- @page_title = _ :title
+
+
+

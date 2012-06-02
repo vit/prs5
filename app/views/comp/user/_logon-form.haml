@@ -1,4 +1,6 @@
 
+= javascript_include_tag 'comp/user/logon'
+
 - user = @current_user
 .item
  .highlighted
@@ -12,7 +14,8 @@
    .block
     .panel
      %input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
-     %a{href: '/user/profile.html'}><&= _(:profile)
+     -#%a{href: '/user/profile.html'}><&= _(:profile)
+     %a{href: '/my/profile'}><&= _(:profile)
      %br
      %br
      %form{:style=>"margin: 0;", :method=>'post', :action=>""}
@@ -40,9 +43,11 @@
      %table
       %tr
        %td
-        %a{href: '/user/restore.html'}><= _( :restorepassword )
+        -#%a{href: '/user/restore.html'}><= _( :restorepassword )
+        %a{href: '/account/restore'}><= _( :restorepassword )
        %td
-        %a{href: '/user/new.html'}><= _( :addnewuser )
+        -#%a{href: '/user/new.html'}><= _( :addnewuser )
+        %a{href: '/account/new'}><= _( :addnewuser )
 
 
 

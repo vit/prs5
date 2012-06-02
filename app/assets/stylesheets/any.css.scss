@@ -185,33 +185,22 @@ body.any {
 			font-size: 140%;
 			margin: 0.8em;
 		}
-		table {
-		//	font-size: 10pt;
+		table.confs_list {
 			border-collapse:collapse;
-		//	border: solid 5px $color4;
-		//	border: solid 2px black;
 			border: none;
 			border-top: solid 2px $color4;
 			border-bottom: solid 2px $color4;
 			tr {
-			//	td, th {
 				td {
-				//	border: solid 2px $color4;
-				//	border: solid 1px black;
 					border: none;
 					padding: 1em;
 				}
 				th {
 					background-color: $color3;
 					border: none;
-//					padding: 1em;
 					padding: 0.5em;
 				}
 			}
-		}
-		.confs_list {
-	//		@include font2;
-		//	font-size: 12pt;
 			.item {
 				.title {
 				}
@@ -226,7 +215,6 @@ body.any {
 				}
 			}
 		}
-
 	}
 	.bottom {
 	//	@include font2;

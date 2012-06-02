@@ -1,0 +1,39 @@
+
+-#= @list.inspect
+
+-#%p= get_current_template_name
+
+%table.confs_list{border: 1, width: '100%', cellpadding: 5}
+ %tr
+  %th{colspan: 2}= _ :conference_info
+  -#%w[en ru].each do |lang|
+   %th= _( 'lang_'+lang )
+  %th{rowspan: 1}= _ :working_language
+  %th{rowspan: 1}= _ :virtualoffice
+ -#%tr
+  -%w[en ru].each do |lang|
+   %th= _( 'lang_'+lang )
+ -@list.each do |c|
+  %tr
+   -%w[en ru].each do |lang|
+    %td.item
+     -#if c['info']['lang'] == 'bilingual' or c['info']['lang'] == lang
+     -if [ 'bilingual', lang ].include?( c['info']['lang'] )
+      -if c['info']['title'][lang]
+       %b.title= c['info']['title'][lang].to_s
+       %br
+      -if c['info']['description'][lang]
+       .description
+        %span= c['info']['description'][lang].to_s
+        -#%br
+      -if c['info']['homepage'][lang]
+       .link
+        %a{href: c['info']['homepage'][lang].to_s, target: '_blank'}= _ :homepage
+        -#%br
+     -else
+      =''
+   %td{align: 'center'}
+    = _( 'lang_'+c['info']['lang'] )
+   %td{align: 'center'}
+    %a{href: '/conf/'+c['_id']+'/'}= _ :myvirtualoffice
+

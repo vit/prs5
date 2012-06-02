@@ -1,0 +1,114 @@
+
+-@titles = {en: ['Dr.', 'Prof.', 'Eng.', 'Mr.', 'Ms.'], ru: ['Др.', 'Проф.', 'Инж.', 'Господин', 'Госпожа']}
+
+-#%script{:src => "/js/my/comp/user/profile.js", :type => "text/javascript"}
+-#%input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
+
+= javascript_include_tag 'comp/user/profile'
+
+%form#changeinfo{align: 'center', style: 'display: none'}
+ %h3= _ :title_info
+ %div{name: 'dict', style: 'display: none'}
+  -%w[].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+ %table
+  %tr
+   %td= _ :gender
+   %td
+    %select{name: 'gender'}
+     %option{value: 'M'}= _ :male
+     %option{value: 'F'}= _ :female
+  %tr
+   %td= _ :country
+   %td
+    %select{name: 'country'}
+     %option{value: ''}= _ :choosecountry
+     -#= call '/comp/user/country'
+     %option{value: '-1'}= _ :othercountry
+  %tr
+   %td= _ :phone
+   %td
+    %input{type: 'text', size: 30, name: 'phone'}
+  %tr
+   %td= _ :fax
+   %td
+    %input{type: 'text', size: 30, name: 'fax'}
+  -[:en, :ru].each do |lang|
+   %tr
+    %td{colspan: 2} &nbsp;
+   %tr
+    %td= _ :language
+    %td= _ lang
+   %tr
+    %td= _ :title
+    %td
+     %select{name: 'title_'+lang.to_s}
+      -@titles[lang].each do |t|
+       %option{value: t}= t
+   %tr
+    %td= _ :fname
+    %td
+     %input{type: 'text', size: 30, name: 'fname_'+lang.to_s}
+   %tr
+    %td= _ :mname
+    %td
+     %input{type: 'text', size: 30, name: 'mname_'+lang.to_s}
+   %tr
+    %td= _ :lname
+    %td
+     %input{type: 'text', size: 30, name: 'lname_'+lang.to_s}
+   %tr
+    %td= _ :city
+    %td
+     %input{type: 'text', size: 30, name: 'city_'+lang.to_s}
+   %tr
+    %td= _ :affiliation
+    %td
+     %input{type: 'text', size: 30, name: 'affiliation_'+lang.to_s}
+  %tr
+   %td{colspan: 2} &nbsp;
+  %tr
+   %td
+   %td
+    %input{type: 'button', name: 'senddata', value: _(:send_info) }
+
+%form#changepassword{align: 'center', style: 'display: none'}
+ %h3= _ :title_password
+ %div{name: 'dict', style: 'display: none'}
+  -%w[passwordnotequal].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+ %table
+  %tr
+   %td= _ :oldpassword
+   %td
+    %input{type: 'password', size: 30, name: 'oldpassword'}
+  %tr
+   %td= _ :password
+   %td
+    %input{type: 'password', size: 30, name: 'password'}
+  %tr
+   %td= _ :password2
+   %td
+    %input{type: 'password', size: 30, name: 'password2'}
+  %tr
+   %td{colspan: 2} &nbsp;
+  %tr
+   %td
+   %td
+    %input{type: 'button', name: 'sendpassword', value: _(:send_password) }
+
+%form#changeemail{align: 'center', style: 'display: none'}
+ %h3= _ :title_email
+ %table
+  %tr
+   %td= _ :email
+   %td
+    %input{type: 'text', size: 30, name: 'email'}
+  %tr
+   %td{colspan: 2} &nbsp;
+  %tr
+   %td
+   %td
+    %input{type: 'button', name: 'sendemail', value: _(:send_email) }
+
+

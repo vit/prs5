@@ -1,0 +1,71 @@
+
+en:
+
+        email: E-mail
+        oldpassword: Old password
+        password: New password
+        password2: Retype password
+        gender: Gender
+        male: Male
+        female: Female
+        country: Country
+        choosecountry: Choose country
+        othercountry: Other country
+        phone: Phone
+        fax: Fax
+        language: Language
+        en: English
+        ru: Russian
+        title: Title
+        fname: First Name
+        mname: Middle Name
+        lname: Last Name
+        city: City
+        affiliation: Affiliation
+
+        title_info: Change info
+        title_password: Change password
+        title_email: Change e-mail
+
+        send_info: Save info
+        send_password: Set password
+        send_email: Set e-mail
+
+        passwordnotequal: Two password copies must be equal
+
+
+ru:
+
+        email: E-mail
+        oldpassword: Старый пароль
+        password: Новый пароль
+        password2: Повторите пароль
+        gender: Пол
+        male: Мужской
+        female: Женский
+        country: Страна
+        choosecountry: Выберите страну
+        othercountry: Другая страна
+        phone: Телефон
+        fax: Факс
+        language: Язык
+        en: Английский
+        ru: Русский
+        title: Обращение
+        fname: Имя (First Name)
+        mname: Отчество (Middle Name)
+        lname: Фамилия (Last Name)
+        city: Город
+        affiliation: Место работы
+
+        title_info: Изменить данные
+        title_password: Изменить пароль
+        title_email: Изменить e-mail
+
+        send_info: Сохранить данные
+        send_password: Задать пароль
+        send_email: Задать e-mail
+
+        passwordnotequal: Две копии пароля должны совпадать
+
+
