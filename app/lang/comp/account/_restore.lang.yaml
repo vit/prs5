@@ -1,0 +1,30 @@
+
+en:
+        text_above: Please fill in any two fields
+        pin: PIN
+        email: Email
+        lname: Last name
+        send: Restore
+
+        notenoughdata: Not enough data
+        not_found: User not found 
+        found_sent_ok: User found, password sent by email
+        error_msg: Unknown error
+        requestsent: Request sent
+
+
+ru:
+        text_above: Заполните, пожалуйста, любые два поля
+        pin: PIN
+        email: Email
+        lname: Фамилия
+        send: Восстановить
+
+        notenoughdata: Недостаточно данных введено
+        not_found: Пользователь не найден
+        found_sent_ok: Пользователь найден, письмо с паролем выслано по email
+        error_msg: Неизвестная ошибка
+        requestsent: Запрос отправлен
+
+
+

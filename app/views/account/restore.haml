@@ -1,4 +1,13 @@
 
+
 -content_for :section_content do
- rrrrr
+
+ %h2{:align => 'center'}= _ :title
+
+ -if @current_user[:user_id]
+ -else
+  = render 'comp/account/restore'
+
+- @page_id='user'
+- @page_title = _ :title
 

@@ -1,0 +1,36 @@
+
+-#%script{:src => "/js/my/comp/user/restore.js", :type => "text/javascript"}
+= javascript_include_tag 'comp/account/restore'
+
+%div#recoveryform{align: 'center', style: 'display: none'}
+ %form
+  %div{name: 'dict', style: 'display: none'}
+   -%w[notenoughdata not_found found_sent_ok error_msg requestsent].each do |word|
+    %input{:type=>'hidden', :name=>word, :value => _(word)}
+  %table
+   %tr
+    %td{colspan: 2}= _ :text_above
+   %tr
+    %td
+     = _ :pin
+    %td
+     %input{type: 'text', size: 30, name: 'pin'}
+   %tr
+    %td
+     = _ :email
+    %td
+     %input{type: 'text', size: 30, name: 'email'}
+   %tr
+    %td
+     = _ :lname
+    %td
+     %input{type: 'text', size: 30, name: 'lname'}
+   %tr
+    -#%td{colspan: 2} &nbsp;
+    %td &nbsp;
+    %td{name: 'status', align: 'center'}
+   %tr
+    %td
+    %td
+     %input{type: 'button', name: 'senddata', value: _(:send) }
+

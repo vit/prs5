@@ -1,0 +1,84 @@
+
+en:
+
+        email: E-mail
+        password: Password
+        password2: Retype password
+        gender: Gender
+        male: Male
+        female: Female
+        country: Country
+        choosecountry: Choose country
+        othercountry: Other country
+        phone: Phone
+        fax: Fax
+        language: Language
+        en: English
+        ru: Russian
+        title: Title
+        fname: First Name
+        mname: Middle Name
+        lname: Last Name
+        city: City
+        affiliation: Affiliation
+
+        langinfo_en: ''
+        langinfo_ru: users from outside of Russia enter the data below either in English or in Russian
+
+        send: Register
+
+        text_above: Please fill in this form. Fields, marked by the asterisk cannot be empty.
+        data_missing: Some necessary data fields are missing
+        passwordnotequal: Two password copies must be equal
+
+        confirm1: I confirm that I have read
+        confirm2: terms of service
+        confirm3: and accept it.
+
+        pin_message_1: 'Your PIN is '
+        pin_message_2: '. You can enter the system now.'
+        pin_message_3: '.'
+        err_message_1: 'Error'
+
+ru:
+
+        email: E-mail
+        password: Пароль
+        password2: Повторите пароль
+        gender: Пол
+        male: Мужской
+        female: Женский
+        country: Страна
+        choosecountry: Выберите страну
+        othercountry: Другая страна
+        phone: Телефон
+        fax: Факс
+        language: Язык
+        en: Английский
+        ru: Русский
+        title: Обращение
+        fname: Имя (First Name)
+        mname: Отчество (Middle Name)
+        lname: Фамилия (Last Name)
+        city: Город (City)
+        affiliation: Место работы (Affiliation)
+
+        langinfo_en: ''
+        langinfo_ru: пользователи, имеющие Российское гражданство, должны ввести данные ниже на русском языке
+
+        send: Зарегистрировать
+
+        text_above: Пожалуйста, заполните форму. Поля, помеченные звездочкой, не должны оставаться пустыми. 
+        data_missing: Некоторые обязательные данные не заполнены
+        passwordnotequal: Две копии пароля должны совпадать
+
+        confirm1: Я подтверждаю, что ознакомился с условиями
+        confirm2: пользовательского соглашения
+        confirm3: и принимаю их.
+
+        pin_message_1: 'Вам присвоен PIN '
+        pin_message_2: '. С ним теперь можно войти в систему.'
+        pin_message_3: '.'
+        err_message_1: 'Что-то пошло неправильно...'
+
+

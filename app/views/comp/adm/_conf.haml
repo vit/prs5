@@ -1,0 +1,179 @@
+
+
+%script{:src => "/js/my/tabs.js", :type => "text/javascript"}
+-#%script{:src => "/js/my/adm-conf.js", :type => "text/javascript"}
+%script{:src => "/js/my/comp/adm/conf.js", :type => "text/javascript"}
+
+#confcomp{:sstyle=>"display: none"}
+ -#%input#cont_id{:type=>'hidden', :name=>'cont_id', :value => @cont_id}
+ %fieldset
+  %input{name: 'newconfbutton', type: 'button', value: _(:new_conf)}
+  %fieldset{name: 'confslist', style: 'display: none'}
+   %legend= _ :confslist
+   %div{name: 'container', sstyle: 'display: none'}
+  %fieldset{name: 'confpage', style: 'display: none'}
+   %div{name: 'dict', style: 'display: none'}
+    -%w[role_rights role_members delete_role delete_role_confirm].each do |word|
+     %input{:type=>'hidden', :name=>word, :value => _(word)}
+   %div{name: 'conftitle', style: 'font-weight: bold; margin: 2px 0 5px 0;'}
+   %input{name: 'tolistbutton', type: 'button', value: _(:back)}
+   -#%input{name: 'savebutton', type: 'button', value: _(:save)}
+   %div{name: 'tabs'}
+    %div.menu{name: 'header'}><
+     -%w[tab_info tab_keywords tab_sections tab_decisions tab_roles tab_permissions].each do |t|
+      %li{nname: t}><
+       %a{href: '#'}><= _( t.to_sym )
+    %div{name: 'container'}
+     %div{name: 'info', style: 'display: none'}
+      %table{:aalign=>"center", :border=>0, wwidth: '100%'}
+       -#%tr
+        %td{:align=>"left"}
+         %b= _ :conf_homepage
+        %td
+         %input{type: 'text', name: 'homepage', size: 60}
+       %tr
+        %td{:align=>"left"}
+         %b= _ :conf_lang
+        %td
+         %select{name: 'lang'}
+          -%w[bilingual en ru].each do |v|
+           %option{value: v}= _ ('lang_'+v).to_sym
+       %tr
+        %td{:align=>"left"}
+         %b= _ :conf_status
+        %td
+         %select{name: 'status'}
+          -%w[inactive active archived].each do |v|
+           %option{value: v}= _ v.to_sym
+       %tr
+        %td{:align=>"left"}
+         %b= _ :conf_email
+        %td
+         %input{type: 'text', name: 'email', size: 60}
+       %tr
+        %td{:align=>"left"}
+         %br
+        %td
+         %br
+       -%w[en ru].each do |lang_code|
+        %tr
+         %td{:align=>"left"}
+          %b= _ :language
+         %td
+          %b= _( ('lang_'+lang_code).to_sym )
+        %tr
+         %td{:align=>"left"}
+          %b= _ :conf_homepage
+         %td
+          %input{type: 'text', name: 'homepage_'+lang_code, size: 60}
+        %tr
+         %td{:align=>"left"}
+          %b= _ :conf_title
+         %td
+          %textarea{name: 'title_'+lang_code, cols: 60, rows: 2}
+        %tr
+         %td{:align=>"left"}
+          %b= _ :conf_description
+         %td
+          %textarea{name: 'description_'+lang_code, cols: 60, rows: 4}
+       %tr
+        %td{:align=>"left"}
+         %br
+        %td
+         %input{name: 'saveinfobutton', type: 'button', value: _(:saveinfo)}
+     %div{name: 'keywords', style: 'display: none'}
+      %input{name: 'newkeywordbutton', type: 'button', value: _(:newkeyword)}
+      %input{name: 'savekeywordsbutton', type: 'button', value: _(:savekeywords)}
+      %table{name: 'container', border: 1, width: '100%'}
+       %tr
+        -%w[en ru].each do |lang_code|
+         %th= _ ( 'lang_'+lang_code )
+        %th= _ :removekeyword
+     %div{name: 'sections', style: 'display: none'}
+     -#%div{name: 'sections', style: 'display: none'}
+      %input{name: 'newkeywordbutton', type: 'button', value: _(:newkeyword)}
+      %input{name: 'savekeywordsbutton', type: 'button', value: _(:savekeywords)}
+      %table{name: 'container', border: 1, width: '100%'}
+       %tr
+        -%w[en ru].each do |lang_code|
+         %th= _ ( 'lang_'+lang_code )
+        %th= _ :removekeyword
+     %div{name: 'decisions', style: 'display: none'}
+     %div{name: 'roles', style: 'display: none'}
+      %div{name: 'newblock'}
+       %input{name: 'newrole', type: 'text'}
+       %input{name: 'newrolebutton', type: 'button', value: _(:newrole)}
+      %table
+       %tr
+        %td{class: 'hmenu', :valign => 'top'}
+         %div{name: 'roleslist'}
+        %td{:valign => 'top'}
+         %div{name: 'members'}
+          = _ :enter_member_pin
+          %input{name: 'userpin', type: 'text'}
+          %input{name: 'add_role_member', type: 'button', value: _(:add_role_member)}
+          %fieldset
+           %legend= _ :role_members_list
+           %div{name: 'container'}
+         %div{name: 'rights'}
+          %ul
+           %li
+            %i= _(:reports_view)+':'
+            %input{:type=>'checkbox', :name=>'reports_view'}
+            %ul
+             %li
+              = _(:reports)
+              %ul
+               -@reports.each_pair do |k,e|
+                %li
+                 =_(e[:title])
+                 %br
+                 %i= _(:view)+':'
+                 %input{:type=>'checkbox', :name=>k.to_s+'_view'}
+           %li
+            %i= _(:files_view)+':'
+            %input{:type=>'checkbox', :name=>'files_view'}
+            %ul
+             %li
+              = _(:files)
+              %ul
+               -%w[abstract_files paper_files presentation_files].each do |e|
+                %li
+                 =_(e)
+                 %br
+                 %i= _(:view)+':'
+                 %input{:type=>'checkbox', :name=>e.to_s+'_view'}
+           %li
+            %i= _(:reviewing)+':'
+            %ul
+             %li
+              = _(:review)
+              %ul
+               -%w[review_everything].each do |e|
+                %li
+                 =_(e)
+                 %input{:type=>'checkbox', :name=>e.to_s+''}
+             %li
+              = _(:appoint_reviewers)
+              %input{:type=>'checkbox', :name=>'appoint_reviewers'}
+             %li
+              = _(:set_final_decision)
+              %input{:type=>'checkbox', :name=>'set_final_decision'}
+             %li
+              = _(:delete_reviews)
+              %input{:type=>'checkbox', :name=>'delete_reviews'}
+           %li
+            %i= _(:submission)+':'
+            %ul
+             -%w[USER_REGISTER_NEW_PAPER PAPREG_PAPER_EDIT PAPREG_PAPER_DELETE PAPREG_PAPER_ABSTRACT_UPLOAD PAPREG_PAPER_ABSTRACT_REUPLOAD PAPREG_PAPER_ABSTRACT_REMOVE PAPREG_PAPER_FILE_UPLOAD PAPREG_PAPER_FILE_REUPLOAD PAPREG_PAPER_FILE_REMOVE PAPREG_PAPER_PRESENTATION_UPLOAD PAPREG_PAPER_PRESENTATION_REUPLOAD PAPREG_PAPER_PRESENTATION_REMOVE PAPREG_VIEW_FINAL_DECISION PAPREG_VIEW_REVIEWERS_COMMENTS PAPREG_VIEW_SECTMANS_COMMENTS].each do |r|
+              %li
+               = _('role_'+r)
+               %input{:type=>'checkbox', :name=>r}
+     %div{name: 'permissions', style: 'display: none'}
+      %div{name: 'container'}
+       %ul
+        -@permissions.each do |k|
+         %li
+          %input{:type=>'checkbox', :name=>k.to_s}
+          =_( k )
+

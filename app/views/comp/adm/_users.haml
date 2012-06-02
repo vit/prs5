@@ -1,0 +1,17 @@
+
+%script{:src => "/js/my/comp/adm/users.js", :type => "text/javascript"}
+
+#userscomp{}
+ %fieldset
+  %span= _ :querytext
+  %input{name: 'userquery', type: 'text'}
+  %fieldset
+   %legend= _ :result
+   %div{name: 'container'}
+ -#%fieldset
+  %input{name: 'userpin', type: 'text'}
+  %input{name: 'addpin', type: 'button', value: _(:addpin)}
+  %fieldset
+   %legend= _ :adminslist
+   %div{name: 'container', sstyle: 'display: none'}
+

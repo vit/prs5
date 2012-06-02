@@ -1,0 +1,6 @@
+
+
+-#@country_list.each do |c|
+-@appl.country.list.each do |c|
+ %option{value: c[:code]}= request.languages.first=='ru' ? c[:ru] : c[:en]
+

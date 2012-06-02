@@ -1,0 +1,12 @@
+
+en:
+        querytext: Enter last name
+#        addpin: Add PIN
+#        adminslist: Superusers list
+
+ru:
+        querytext: Введите фамилию
+#        addpin: Добавить PIN
+#        adminslist: Список суперпользователей
+
+

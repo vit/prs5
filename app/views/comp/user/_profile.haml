@@ -23,7 +23,7 @@
    %td
     %select{name: 'country'}
      %option{value: ''}= _ :choosecountry
-     -#= call '/comp/user/country'
+     = render 'comp/account/country'
      %option{value: '-1'}= _ :othercountry
   %tr
    %td= _ :phone

@@ -1,0 +1,12 @@
+
+
+%script{:src => "/js/my/comp/adm/admins.js", :type => "text/javascript"}
+
+#adminscomp{:sstyle=>"display: none"}
+ %fieldset
+  %input{name: 'userpin', type: 'text'}
+  %input{name: 'addpin', type: 'button', value: _(:addpin)}
+  %fieldset
+   %legend= _ :adminslist
+   %div{name: 'container', sstyle: 'display: none'}
+

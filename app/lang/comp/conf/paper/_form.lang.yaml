@@ -1,0 +1,182 @@
+
+en:
+        lang_en: English
+        lang_ru: Russian
+
+        info_text: Filling in the forms in Russian is required only for authors from Russia.
+
+        new_paper: Create new abstract/paper
+        papers: Papers
+        edit: Edit / view
+        delete: Delete
+        delete_paper_confirm: Delete abstract/paper, are you sure?
+        submit_paper: Submit
+        submitted: Submitted
+        submit_paper_confirm: Are you sure this abstract/paper is ready for submission? You could not change it after.
+
+        msg_bad_title: Title is missing or too short
+        msg_bad_abstract: Abstract is missing or too short
+        msg_bad_keywords: Keywords are missing
+        msg_bad_authors: Authors list or some authors data is missing
+        msg_bad_files: No files uploaded
+
+        file_type: Type
+        file_size: Size
+        bytes: Bytes
+        timestamp: Timestamp
+        download_file: Download
+
+
+        back: << Back to the list
+        save: Save abstract/paper
+        paper_saved: Paper is saved
+        paper_title: Title
+        paper_abstract: Abstract
+
+        pleasefilltabs: "Please fill in all data tabs below.
+Having entered Text, Keywords and Authors data save abstract/paper.
+Abstract/paper will get a number (N) appearing in the list of the abstracts/papers.
+Then upload the abstract/paper file."
+        tab_text: Texts
+        tab_authors: Authors
+        tab_keywords: Keywords
+        tab_files: Files
+        tab_reviews: Reviews, etc.
+
+        selectfromlist: You can insert keyword from the list
+        selectpredefined: Select
+        fromlist: Insert
+        addnew: or add new
+        newkeyword: Add new
+        removekeyword: Remove
+
+        author: Author
+        removeauthor:  Remove
+        addnewauthor: Press this button to add new author
+        newauthor: Add
+
+        fname: First Name
+        mname: Middle Name
+        lname: Last Name
+        city: City
+        affiliation: Affiliation
+        country: Country
+        choosecountry: Choose country
+        othercountry: Other country
+
+        save_before_file_submittion: Save this abstract/paper before you upload files
+
+        file_abstract: Abstract file
+        file_paper: Paper file
+        file_presentation: Presentation file
+
+        t_reviews: Reviews
+        t_reviews2: Comments from section managers
+        t_decision: Decision
+        decision_decision:  Decision
+        decision_section: Section (session)
+
+        section_uncertain: Uncertain
+        decision_uncertain: Uncertain
+        decision_reject: Reject
+        decision_accept: Accept
+        decision_accept_poster: Accept as a poster
+        decision_accept_plenary: Accept as a plenary paper
+
+        view_review_disabled: "You can't see reviewers' comments now"
+        view_review2_disabled: "You can't see section managers' comments now"
+        view_decision_disabled: "You can't see decision now"
+
+        language: Language
+
+ru:
+        lang_en: Английский
+        lang_ru: Русский
+
+        info_text: 'При подаче на двуязычную конференцию для авторов из России обязательно заполнение полей на обоих языках.
+Для авторов из остальных стран заполнение русскоязычных полей не обязательно.'
+
+
+        new_paper: Создать новый реферат/доклад
+        papers: Рефераты/доклады
+        edit: Изменить / просмотреть
+        delete: Удалить
+        delete_paper_confirm: Вы правда хотите удалить этот реферат/доклад? 
+        submit_paper: Подать
+        submitted: Поданные
+        submit_paper_confirm: Вы уверены, что реферат готов к подаче? Потом вы не сможете изменить его.
+
+        msg_bad_title: Название отсутствует или слишком короткое
+        msg_bad_abstract: Текст реферата отсутствует или слишком короткий
+        msg_bad_keywords: Ключевые слова не указаны
+        msg_bad_authors: Не заполнен список авторов или отсутствуют некоторые данные авторов.
+        msg_bad_files: Файлы не загружены
+
+        file_type: Тип
+        file_size: Размер
+        bytes: Байт
+        timestamp: Время загрузки
+        download_file: Скачать
+
+        back: << Назад к списку
+        save: Сохранить реферат/доклад
+        paper_saved: Реферат сохранен
+        paper_title: Заголовок
+        paper_abstract: Текст реферата
+
+        pleasefilltabs: "Заполните, пожалуйста, все вкладки ниже.
+После ввода Текста, Ключевых слов и данных Авторов сохраните реферат/доклад.
+Реферат/доклад получит номер (N), который отобразится в Списке рефератов/докладов.
+После этого нужно загрузить файл реферата/доклада."
+        tab_text: Текст
+        tab_authors: Авторы
+        tab_keywords: Ключевые слова
+        tab_files: Файлы
+        tab_reviews: Рецензии и пр.
+
+        selectfromlist: Вы можете вставить ключевое слово из списка
+        selectpredefined: Выберите
+        fromlist: Вставить
+        addnew: или добавить новое
+        newkeyword: Добавить новое
+        removekeyword: Удалить
+
+        author: Автор
+        removeauthor: Удалить
+        addnewauthor: Чтобы добавить нового автора, нажмите эту кнопку
+        newauthor: Добавить
+
+        fname: Имя (First Name)
+        mname: Отчество (Middle Name)
+        lname: Фамилия (Last Name)
+        city: Город
+        affiliation: Место работы
+        country: Страна
+        choosecountry: Выберите страну
+        othercountry: Другая страна
+
+        save_before_file_submittion: Чтобы загрузить файлы реферата, нужно прежде хоть раз сохранить остальное
+
+        file_abstract: Файл реферата
+        file_paper: Файл доклада
+        file_presentation: Файл презентации
+
+        t_reviews: Рецензии
+        t_reviews2: Комментарии руководителей секции
+        t_decision: Решение
+        decision_decision: Решение
+        decision_section: Секция (заседание)
+
+        section_uncertain: Не задано
+        decision_uncertain: Не задано
+        decision_reject: Отклонить
+        decision_accept: Принять
+        decision_accept_poster: Принять как стендовый
+        decision_accept_plenary: Принять как пленарный
+
+        view_review_disabled: Сейчас нельзя просматривать комментарии рецензентов
+        view_review2_disabled: Сейчас нельзя просматривать комментарии руководителей секции
+        view_decision_disabled: Сейчас нельзя просматривать решение
+
+        language: Язык
+

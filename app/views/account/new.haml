@@ -1,4 +1,12 @@
 
 -content_for :section_content do
- nnnnnnnnnn
+
+ %h2{:align => 'center'}= _ :title
+
+ -if @current_user[:user_id]
+ -else
+  = render 'comp/account/new'
+
+- @page_id='user'
+- @page_title = _ :title
 

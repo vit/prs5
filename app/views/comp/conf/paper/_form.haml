@@ -1,0 +1,147 @@
+
+
+%script{:src => "/js/my/tabs.js", :type => "text/javascript"}
+%script{:src => "/js/my/comp/conf/paper/paper.js", :type => "text/javascript"}
+
+#papercomp{:sstyle=>"display: none"}
+ %div{name: 'dict', style: 'display: none'}
+  -%w[lang_en lang_ru  delete edit submit_paper delete_paper_confirm submit_paper_confirm msg_bad_title msg_bad_abstract msg_bad_keywords msg_bad_authors msg_bad_files bytes file_type file_size timestamp download_file paper_saved file_abstract file_paper file_presentation].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+ -#%input#cont_id{:type=>'hidden', :name=>'cont_id', :value => @cont_id}
+ -#%input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
+ %div{name: 'country_helper', style: 'display: none'}
+  -#%select{name: 'country_sample', style: 'display: none', width: '100%'}
+  %select{name: 'country', style: 'display: none', width: '100%'}
+   %option{value: ''}= _ :choosecountry
+   = call '/comp/user/country'
+   %option{value: '-1'}= _ :othercountry
+ %fieldset
+  -if @lang_list.length > 1
+   %div{name: 'info'}= _ :info_text
+  %div{name: 'paperslist', style: 'display: none'}
+   -#%div{name: 'dict', style: 'display: none'}
+    -#%w[lang_en lang_ru  delete edit submit_paper delete_draft_confirm submit_paper_confirm msg_bad_title msg_bad_abstract msg_bad_keywords msg_bad_authors msg_bad_files bytes file_type file_size timestamp download_file].each do |word|
+     %input{:type=>'hidden', :name=>word, :value => _(word)}
+   %fieldset{name: 'papers', sstyle: 'display: none'}
+    %legend
+     -#%b= _ :drafts
+     %b= _ :papers
+    %input{name: 'newpaperbutton', type: 'button', value: _(:new_paper)}
+    %div{name: 'container', sstyle: 'display: none'}
+
+  -#%div{name: 'submittedlist', style: 'display: none'}
+   %div{name: 'dict', style: 'display: none'}
+    -%w[lang_en lang_ru].each do |word|
+     %input{:type=>'hidden', :name=>word, :value => _(word)}
+   %fieldset{name: 'drafts', sstyle: 'display: none'}
+    -#%legend= _ :submitted
+    %legend
+     %b= _ :submitted
+    %div{name: 'container', sstyle: 'display: none'}
+
+  %fieldset{name: 'paperform', style: 'display: none'}
+   %input{name: 'tolistbutton', type: 'button', value: _(:back)}
+   %input{name: 'savebutton', type: 'button', value: _(:save)}
+   %div
+    %br
+    =_ :pleasefilltabs
+    %br
+   %div{name: 'tabs'}
+    %div.menu{name: 'header'}><
+     -%w[tab_text tab_keywords tab_authors].each do |t|
+      %li{nname: t}><
+       %a{href: '#'}><= _( t.to_sym )
+     &nbsp;
+     -%w[tab_files].each do |t|
+      %li{nname: t}><
+       %a{href: '#'}><= _( t.to_sym )
+     &nbsp;&bull;&nbsp;
+     -%w[tab_reviews].each do |t|
+      %li{nname: t}><
+       %a{href: '#'}><= _( t.to_sym )
+    %div{name: 'container'}
+     %div{name: 'text', style: 'display: none'}
+      %form
+       %table{:aalign=>"center", :border=>0, wwidth: '100%'}
+        -#%w[en ru].each do |lang_code|
+        -@lang_list.each do |lang_code|
+         %tr
+          %td{:align=>"left"}
+           %br
+          %td
+           %br
+         %tr
+          %td{:align=>"left"}
+           %b= _ :language
+          %td
+           %b= _( ('lang_'+lang_code).to_sym )
+         %tr
+          %td{:align=>"left"}
+           %b= _ :paper_title
+          %td
+           %textarea{name: 'title_'+lang_code, cols: 60, rows: 2}
+         %tr
+          %td{:align=>"left"}
+           %b= _ :paper_abstract
+          %td
+           %textarea{name: 'abstract_'+lang_code, cols: 60, rows: 4}
+     %div{name: 'keywords', style: 'display: none'}
+      = _ :selectfromlist
+      %select{name: 'predefined'}
+       %option= _ :selectpredefined
+      %input{name: 'fromlistbutton', type: 'button', value: _(:fromlist)}
+      %br
+      = _ :addnew
+      %input{name: 'newkeywordbutton', type: 'button', value: _(:newkeyword)}
+      -#%input{name: 'savekeywordsbutton', type: 'button', value: _(:savekeywords)}
+      %table{name: 'container', border: 1, width: '100%'}
+       %tr
+        -#%w[en ru].each do |lang_code|
+        -@lang_list.each do |lang_code|
+         %th= _ ( 'lang_'+lang_code )
+        %th= _ :removekeyword
+     %div{name: 'authors', style: 'display: none'}
+      -#%select{name: 'country', style: 'display: none', width: '100%'}
+       %option{value: ''}= _ :choosecountry
+       = call '/comp/user/country'
+       %option{value: '-1'}= _ :othercountry
+      %div{name: 'dict', style: 'display: none'}
+       -%w[lang_en lang_ru fname mname lname affiliation city country].each do |word|
+        %input{:type=>'hidden', :name=>word, :value => _(word)}
+      = _ :addnewauthor
+      %input{name: 'newauthorbutton', type: 'button', value: _(:newauthor)}
+      %table{name: 'container', border: 1, width: '100%', cellpadding: 3}
+       %tr
+        -%w[author removeauthor].each do |name|
+         %th= _ ( name )
+       -#%tr
+        %th= _ :language
+        -%w[fname mname lname].each do |name|
+         %th= _ ( name )
+        %th= _ :removeauthor
+       -#%tr
+        -%w[en ru].each do |lang_code|
+         %th= _ ( 'lang_'+lang_code )
+        %th= _ :removeauthor
+     %div{name: 'files', style: 'display: none'}
+      %div{name: 'dict', style: 'display: none'}
+       -%w[lang_en lang_ru save_before_file_submittion save file_abstract file_paper file_presentation].each do |word|
+        %input{:type=>'hidden', :name=>word, :value => _(word)}
+      %div{name: 'container'}
+       %iframe{src: 'file'}
+       -#%br
+       -#%input{type: 'file', onChange: 'alert(this.value)'}
+     %div{name: 'reviews', style: 'display: none'}
+      %div{name: 'dict', style: 'display: none'}
+       -%w[view_review_disabled view_review2_disabled view_decision_disabled].each do |word|
+        %input{:type=>'hidden', :name=>word, :value => _(word)}
+       -%w[lang_en lang_ru t_reviews t_reviews2 t_decision decision_decision decision_section].each do |word|
+        %input{:type=>'hidden', :name=>word, :value => _(word)}
+       -%w[section_uncertain decision_uncertain decision_reject decision_accept decision_accept_poster decision_accept_plenary].each do |word|
+        %input{:type=>'hidden', :name=>word, :value => _(word)}
+      %div{name: 'container'}
+   %div
+    %br
+   %input{name: 'tolistbutton', type: 'button', value: _(:back)}
+   %input{name: 'savebutton', type: 'button', value: _(:save)}
+

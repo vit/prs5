@@ -1,0 +1,79 @@
+
+
+%script{:src => "/js/my/review.js", :type => "text/javascript"}
+
+#reviewcomp{:style=>"display: none"}
+
+ %h3{:align => 'center'}= _ :textPaperInfo
+ %p{:align => 'center'}
+  %b= _(:paper_id)+':'
+  %span{:name=>'paper_id'}
+  %br
+  %b= _(:paper_title)+':'
+  %span{:name=>'paper_title'}
+  %br
+  %b= _(:paper_registrator)+':'
+  %span{:name=>'paper_registrator'}
+  %br
+  %b= _(:paper_authors)+':'
+  %span{:name=>'paper_authors'}
+  %br
+
+ %h3{:align => 'center'}= _ :title 
+
+ %table{:align=>"center", :border=>0}
+  %tr
+   %td{:align=>"left"}
+    %form{:method=>"post"}
+     %input#cont_id{:type=>'hidden', :name=>'cont_id', :value => @cont_id}
+     %input#rev_id{:type=>'hidden', :name=>'rev_id', :value => @revid}
+     %b
+      = _(:id)+': ' + @revid.to_s
+     %br
+     %input{:type=>"hidden", :name=>"reviewflag", :value=>"save"}
+     %table{:border=>0}
+      %tr
+       %td{:valign=>"top"}
+        %b= _ :reviewer
+       %td{:name=>'reviewer_text'}
+      %tr
+       %td{:valign=>"top"}
+        %b= _ :score
+       %td
+        %SELECT{:name=>"score", :size=>1}
+      %tr
+       %td{:valign=>"top"}
+        %b= _ :decision
+       %td
+        %SELECT{:name=>"decision", :size=>1}
+      %tr
+       %td{:valign=>"top"}
+        %b= _ :section
+       %td
+        %SELECT{:name=>"section", :size=>1}
+         %option{:value=>0}= _ :uncertain
+      - ({ :en => {name: _(:english)}, :ru => {name: _(:russian)} }).each_pair do |langcode, langdata|
+       %tr
+        %td{:colspan=>2} &nbsp;
+       %tr
+        %td{:valign=>"top"}
+         %b= _(:language)+':'
+        %td
+         %b= langdata[:name]
+       %tr
+        %td{:valign=>"top"}
+         %b= _ :IPCComments
+        %td
+         %textarea{:name=>"ipccomments_#{langcode}", :cols=>60, :rows=>3}
+       %tr
+        %td{:valign=>"top"}
+         %b= _ :authorComments
+        %td
+         %textarea{:name=>"authcomments_#{langcode}", :cols=>60, :rows=>3}
+     %br
+     %table{:width=>"100%", :cellpadding=>2, :cellspacing=>0}
+      %td
+       %input{:style=>"color: red;", :type=>"button", :name=>"submit", :value=>_(:submit)}
+      %td= _ :noticeText1
+     %br
+

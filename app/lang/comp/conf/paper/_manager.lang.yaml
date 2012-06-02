@@ -1,0 +1,97 @@
+
+en:
+        language: Language
+        lang_en: English
+        lang_ru: Russian
+
+        back_to_list: '<< Back'
+        tab_paper: Paper data
+        tab_review: My review
+        tab_reviewers: Reviewers
+        tab_reviews: Reviews
+        tab_finaldecision: Decision
+
+        open_paper_page: Open
+        score: Score
+        decision: Recommended decision
+        ipccomments: Comments to the IPC
+        authcomments: Comments to the authors
+        score_uncertain: Uncertain
+        score_a: A/5.0 (Accept)
+        score_b: B/4.0 (Accept if possible)
+        score_c: C/3.0 (Accept as last resort)
+        score_d: D/2.0 (Reject)
+        decision_uncertain: Uncertain
+        decision_reject: Reject
+        decision_accept: Accept
+        decision_accept_poster: Accept as a poster
+        decision_accept_plenary: Accept as a plenary paper
+        section_uncertain: Uncertain
+        final_decision: Final decision
+        final_section: Final section (session)
+
+        review_submit: Save review
+        review_saved: Review is saved
+        final_decision_submit: Save decision
+        final_decision_saved: Decision is saved
+
+        file_type: Type
+        file_size: Size
+        bytes: Bytes
+        timestamp: Timestamp
+        download_file: Download
+
+        reviewers_list: Reviewers list
+        add_pin: Add PIN
+
+        delete_review_are_you_sure: Are you sure?
+
+ru:
+        language: Язык
+        lang_en: Английский
+        lang_ru: Русский
+
+        back_to_list: '<< Назад к списку'
+        tab_paper: Данные реферата/доклада
+        tab_review: Моя рецензия
+        tab_reviewers: Рецензенты
+        tab_reviews: Рецензии
+        tab_finaldecision: Решение
+
+        open_paper_page: Открыть
+        score: Оценка
+        decision: Рекомендованное решение
+        ipccomments: Комментарий для МПК
+        authcomments: Комментарий для авторов
+        score_uncertain: Не задано
+        score_a: A/5.0 (Принять)
+        score_b: B/4.0 (Принять по возможности)
+        score_c: C/3.0 (Принять в виде исключения)
+        score_d: D/2.0 (Отклонить)
+        decision_uncertain: Не задано
+        decision_reject: Отклонить
+        decision_accept: Принять
+        decision_accept_poster: Принять как стендовый
+        decision_accept_plenary: Принять как пленарный
+        section_uncertain: Не задано
+        final_decision: Финальное решение
+        final_section: Финальная секция (заседание)
+
+        review_submit: Сохранить рецензию
+        review_saved: Рецензия сохранена
+        final_decision_submit: Сохранить решение
+        final_decision_saved: Решение сохранено
+
+        file_type: Тип
+        file_size: Размер
+        bytes: Байт
+        timestamp: Время загрузки
+        download_file: Скачать
+
+        reviewers_list: Список рецензентов
+        add_pin: Добавить PIN
+
+        delete_review_are_you_sure: Вы уверены?
+
+
+

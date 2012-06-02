@@ -1,0 +1,43 @@
+
+en:
+        english: English
+        russian: Russian
+        textPaperInfo: Paper info
+        paper_id: Paper ID
+        paper_title: Title
+        paper_registrator: Registrator
+        paper_authors: Authors
+        title: Review
+        id: Review ID
+        reviewer: Reviewer
+        uncertain: Uncertain
+        score: Score
+        decision: Recommended decision
+        section: Recommended section
+        language: Language
+        IPCComments: Comments to IPC
+        authorComments: Comments to authors
+        submit: Submit
+        noticeText1: ""
+
+ru:
+        english: Английский
+        russian: Русский
+        textPaperInfo: Информация о реферате
+        paper_id: Идентификатор реферата
+        paper_title: Заголовок
+        paper_registrator: Регистратор
+        paper_authors: Авторы
+        title: Рецензия
+        id: Идентификатор рецензии
+        reviewer: Рецензент
+        uncertain: Не задано
+        score: Оценка
+        decision: Рекомендованное решение
+        section: Рекомендованная секция
+        language: Язык
+        IPCComments: Комментарии для МПК
+        authorComments: Комментарии для авторов
+        submit: Отослать
+        noticeText1: До окончания срока  рецензирования  рецензию можно менять неограниченное число раз. После окончания срока рецензирования изменения невозможны.
+

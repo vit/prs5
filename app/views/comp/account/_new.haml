@@ -1,0 +1,102 @@
+
+-@titles = {en: ['Dr.', 'Prof.', 'Eng.', 'Mr.', 'Ms.'], ru: ['Др.', 'Проф.', 'Инж.', 'Господин', 'Госпожа']}
+
+-#%script{:src => "/js/my/comp/user/new.js", :type => "text/javascript"}
+= javascript_include_tag 'comp/account/new'
+
+%div#newuserform{align: 'center', style: 'display: none'}
+ %form
+  %div{name: 'dict', style: 'display: none'}
+   -%w[data_missing passwordnotequal pin_message_1 pin_message_2 pin_message_3 err_message_1].each do |word|
+    %input{:type=>'hidden', :name=>word, :value => _(word)}
+  %table{border: 0}
+   %tr
+    %td{colspan: 2, align: 'left'}= _ :text_above
+   %tr
+    %td
+     = _ :email
+     %span.important *
+    %td{align: 'left'}
+     %input{type: 'text', size: 30, name: 'email'}
+   %tr
+    %td
+     = _ :password
+     %span.important *
+    %td{align: 'left'}
+     %input{type: 'password', size: 30, name: 'password'}
+   %tr
+    %td
+     = _ :password2
+     %span.important *
+    %td{align: 'left'}
+     %input{type: 'password', size: 30, name: 'password2'}
+   %tr
+    %td{colspan: 2} &nbsp;
+   %tr
+    %td
+     = _ :gender
+     %span.important *
+    %td{align: 'left'}
+     %select{name: 'gender'}
+      %option{value: 'M'}= _ :male
+      %option{value: 'F'}= _ :female
+   %tr
+    %td
+     = _ :country
+     %span.important *
+    %td{align: 'left'}
+     %select{name: 'country'}
+      %option{value: ''}= _ :choosecountry
+      = render 'comp/account/country'
+      %option{value: '-1'}= _ :othercountry
+   %tr
+    %td
+     = _ :phone
+     %span.important *
+    %td{align: 'left'}
+     %input{type: 'text', size: 30, name: 'phone'}
+   %tr
+    %td
+     = _ :fax
+     %span.important *
+    %td{align: 'left'}
+     %input{type: 'text', size: 30, name: 'fax'}
+   -#%w[en ru].each do |lang|
+   -[:en, :ru].each do |lang|
+    %tr
+     %td{colspan: 2} &nbsp;
+    %tr
+     %td= _ :language
+     %td{align: 'left'}
+      = _ lang
+      = -> msg { msg.length==0 ? '' :  '('+ msg +')'}[ _('langinfo_'+lang.to_s) ]
+    %tr
+     %td
+      = _ :title
+      %span.important *
+     %td{align: 'left'}
+      %select{name: 'title_'+lang.to_s}
+       -@titles[lang].each do |t|
+        %option{value: t}= t
+    -[{f: :fname, n: true}, {f: :mname, n: false}, {f: :lname, n: true}, {f: :city, n: true}, {f: :affiliation, n: true}].each do |p|
+     %tr
+      %td
+       = _( p[:f] )
+       -if p[:n]
+        %span.important *
+      %td{align: 'left'}
+       %input{type: 'text', size: 30, name: p[:f].to_s+'_'+lang.to_s}
+   %tr
+    %td{colspan: 2} &nbsp;
+   %tr
+    %td
+    %td{align: 'left'}
+     %input{type: 'checkbox', name: 'confirm'}
+     = _ :confirm1
+     %a{href: '/user/tos.html', target: '_blank'}= _ :confirm2
+     = _ :confirm3
+   %tr
+    %td
+    %td{align: 'left'}
+     %input{type: 'button', name: 'senddata', value: _(:send) }
+

@@ -81,6 +81,10 @@ class ApplicationController < ActionController::Base
 		end
 		yield
 	end
+#	def wr_country_list
+#		@appl.country = ::Coms::User::Country
+#		yield
+#	end
 	HEADERS = -> do
 		@response.header['Content-Type'] = 'text/html; charset=UTF-8'
 		#@response.header['Cache-Control'] = 'no-cache, must-revalidate'

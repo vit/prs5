@@ -1,0 +1,259 @@
+
+en:
+        lang_en: English
+        lang_ru: Russian
+        lang_bilingual: Bilingual
+        inactive: Inactive
+        active: Active
+        archived: Archived
+        conf_homepage: Home page
+        conf_email: Email
+        conf_status: Status
+        conf_lang: Working language
+
+        new_conf: Create new conference
+        back: << Back to the list
+        confslist: Conferences list
+
+        conf_title: Title
+        conf_description: Description
+        saveinfo: Save info
+
+        newkeyword: Add new keyword
+        removekeywords: Remove
+        savekeywords: Save keywords list
+
+        tab_info: Info
+        tab_keywords: Keywords
+        tab_sections: Sections
+        tab_decisions: Decisions
+        tab_roles: Roles
+        tab_permissions: Permissions
+
+
+        newrole: Add new role
+        role_rights: Rights
+        role_members: Members
+        delete_role: Delete
+        delete_role_confirm: Are you sure?
+
+        enter_member_pin: Enter PIN
+        add_role_member: Add role member
+        role_members_list: Role members list
+
+
+
+        reports_view: 'View reports'
+        reviews_view: 'View reviews'
+        reports: 'Reports'
+        view: 'View'
+        files_view: Download files
+        files: Files
+        abstract_files: Abstract files
+        paper_files: Paper files
+        presentation_files: Presentation files
+        reviewing: Reviewing
+        review: Review
+        review_everything: Review everything
+        appoint_reviewers: Appoint reviewers
+        set_final_decision: Set final decision
+        delete_reviews: DANGER!!! Delete reviews
+
+        report_1: 'Summary'
+        report_2: 'Papers list with abstracts and keywords'
+        abstracts_by_country: Abstracts by registrator country
+        papers_by_section: Papers by section
+        abstracts_with_files: Abstracts with files
+        abstracts_with_paper_files: Abstracts with paper files
+
+        abstract_ids_with_files: Abstract numbers with files
+
+        papers_statistics: Papers statistics
+        papers_statistics_after_decision: Papers statistics after decision
+        papers_list_with_reviews: Papers list with reviews
+        papers_list_with_reviews2: Papers list with reviews 2
+        authors_list: Authors list
+        registrators_list: Registrators list
+        reviewers_list: Reviewers list
+
+
+        textPaperInfo: Paper info
+        conf_id: Paper ID
+        conf_registrator: Registrator
+        conf_authors: Authors
+        title: Review
+        id: Review ID
+        language: Language
+        submit: Submit
+
+
+        PAPREG_PAPER_ABSTRACT_REMOVE:
+        PAPREG_PAPER_ABSTRACT_REUPLOAD:
+        PAPREG_PAPER_ABSTRACT_UPLOAD:
+        PAPREG_PAPER_DELETE:
+        PAPREG_PAPER_EDIT:
+        PAPREG_PAPER_FILE_REMOVE:
+        PAPREG_PAPER_FILE_REUPLOAD:
+        PAPREG_PAPER_FILE_UPLOAD:
+        PAPREG_PAPER_PRESENTATION_REMOVE:
+        PAPREG_PAPER_PRESENTATION_REUPLOAD:
+        PAPREG_PAPER_PRESENTATION_UPLOAD:
+        PAPREG_VIEW_FINAL_DECISION:
+        PAPREG_VIEW_REVIEWERS_COMMENTS:
+        PARTICIPANT_EDIT_REGFORM:
+        PARTICIPANT_GIVE_UP_PARTICIPATION:
+        REVIEWER_EDIT_REVIEWS:
+        REVIEWER_VIEW_REVIEWING_DATA:
+        SYS_ADMIN_IS_ORDINARY:
+        SYS_ALLOW_PRESENTATION_FILE:
+        USER_REGISTER_NEW_PAPER:
+        USER_REGISTER_PARTICIPATION:
+
+        submission: Submission against permissions
+        role_USER_REGISTER_NEW_PAPER:
+        role_PAPREG_PAPER_ABSTRACT_REMOVE:
+        role_PAPREG_PAPER_ABSTRACT_REUPLOAD:
+        role_PAPREG_PAPER_ABSTRACT_UPLOAD:
+        role_PAPREG_PAPER_DELETE:
+        role_PAPREG_PAPER_EDIT:
+        role_PAPREG_PAPER_FILE_REMOVE:
+        role_PAPREG_PAPER_FILE_REUPLOAD:
+        role_PAPREG_PAPER_FILE_UPLOAD:
+        role_PAPREG_PAPER_PRESENTATION_REMOVE:
+        role_PAPREG_PAPER_PRESENTATION_REUPLOAD:
+        role_PAPREG_PAPER_PRESENTATION_UPLOAD:
+        role_PAPREG_VIEW_FINAL_DECISION:
+        role_PAPREG_VIEW_REVIEWERS_COMMENTS:
+        role_PAPREG_VIEW_SECTMANS_COMMENTS:
+
+
+ru:
+        lang_en: Английский
+        lang_ru: Русский
+        lang_bilingual: Двуязычная
+        inactive: Неактивная
+        active: Активная
+        archived: Архивная
+        conf_homepage: Сайт
+        conf_email: Email
+        conf_status: Статус
+        conf_lang: Рабочий язык
+
+        new_conf: Создать новую конференцию
+        back: << Назад к списку
+        confslist: Список конференций
+
+        conf_title: Название
+        conf_description: Описание
+        saveinfo: Сохранить данные
+
+        newkeyword: Добавить ключевое слово
+        removekeyword: Удалить
+        savekeywords: Сохранить список ключевых слов
+
+        tab_info: Инфо
+        tab_keywords: Ключевые слова
+        tab_sections: Секции
+        tab_decisions: Решения
+        tab_roles: Роли
+        tab_permissions: Разрешения
+
+
+        newrole: Добавить новую роль
+        role_rights: Права
+        role_members: Члены
+        delete_role: Удалить
+        delete_role_confirm: Вы уверены?
+
+        enter_member_pin: Введите PIN
+        add_role_member: Добавить члена роли
+        role_members_list: Члены роли
+
+
+        reports_view: 'Смотреть все отчеты'
+        reviews_view: 'Смотреть рецензии'
+        reports: 'Отчеты'
+        view: 'Смотреть'
+        files_view: Скачивать все файлы
+        files: Файлы
+        abstract_files: Файлы рефератов
+        paper_files: Файлы докладов
+        presentation_files: Файлы презентаций
+        reviewing: Рецензирование
+        review: Рецензировать
+        review_everything: Рецензировать всё
+        appoint_reviewers: Назначать рецензентов
+        set_final_decision: Назначать финальное решение 
+        delete_reviews: ОПАСНО!!! Удалять рецензии
+
+        report_1: 'Статистика'
+        report_2: 'Список поданных рефератов с текстами'
+        abstracts_by_country: Рефераты по странам регистраторов
+        papers_by_section: Доклады по секциям
+        abstracts_with_files: Рефераты с файлами
+        abstracts_with_paper_files: Рефераты с файлами докладов
+
+        abstract_ids_with_files: Список номеров рефератов с файлами
+
+        papers_statistics: Статистика подачи докладов
+        papers_statistics_after_decision: Статистика после рецензирования и принятия финального решения
+        papers_list_with_reviews: Списки поданных рефератов (докладов) с рецензиями
+        papers_list_with_reviews2: Списки поданных рефератов (докладов) с рецензиями 2
+        authors_list: Список данных авторов
+        registrators_list: Список данных регистраторов
+        reviewers_list: Список рецензентов
+
+        textPaperInfo: Информация о реферате
+        conf_id: Идентификатор реферата
+        conf_registrator: Регистратор
+        conf_authors: Авторы
+        title: Рецензия
+        id: Идентификатор рецензии
+        language: Язык
+        submit: Отослать
+
+
+
+        PAPREG_PAPER_DELETE: Регистратору доклада на удаление реферата/доклада целиком
+        PAPREG_PAPER_EDIT: Регистратору доклада на редактирование текстов и пр.
+        PAPREG_PAPER_ABSTRACT_REMOVE: Регистратору доклада на удаление файла реферата
+        PAPREG_PAPER_ABSTRACT_REUPLOAD: Регистратору доклада на замену файла реферата
+        PAPREG_PAPER_ABSTRACT_UPLOAD: Регистратору доклада на загрузку файла реферата
+        PAPREG_PAPER_FILE_REMOVE: Регистратору доклада на удаление файла доклада
+        PAPREG_PAPER_FILE_REUPLOAD: Регистратору доклада на замену файла доклада
+        PAPREG_PAPER_FILE_UPLOAD: Регистратору доклада на загрузку файла доклада
+        PAPREG_PAPER_PRESENTATION_REMOVE: Регистратору доклада на удаление файла презентации
+        PAPREG_PAPER_PRESENTATION_REUPLOAD: Регистратору доклада на замену файла презентации
+        PAPREG_PAPER_PRESENTATION_UPLOAD: Регистратору доклада на загрузку файла презентации
+
+        PAPREG_VIEW_FINAL_DECISION: Регистратору доклада на просмотр окончательного решения
+        PAPREG_VIEW_REVIEWERS_COMMENTS: Регистратору доклада на просмотр комментариев рецензентов
+        PAPREG_VIEW_SECTMANS_COMMENTS: Регистратору доклада на просмотр комментариев руководителей секций
+        PARTICIPANT_EDIT_REGFORM: Участнику на редактирование регистрационной формы
+        PARTICIPANT_GIVE_UP_PARTICIPATION: Участнику на отказ от участия
+        REVIEWER_EDIT_REVIEWS: Рецензенту на редактирование рецензии
+        REVIEWER_VIEW_REVIEWING_DATA: Рецензенту на просмотр данных рецензирования
+        SECTMAN_WRITE_COMMENTS: Руководителю секции на написание комментариев
+        SYS_ADMIN_IS_ORDINARY: Системному администратору на подачу рефератов докладов
+        SYS_ALLOW_PRESENTATION_FILE: Включение подачи презентаций в конференцию
+        USER_REGISTER_NEW_PAPER: Пользователю на регистрацию нового доклада
+        USER_REGISTER_PARTICIPATION: Пользователю на регистрацию участия
+
+        submission: Подача вопреки разрешениям
+        role_USER_REGISTER_NEW_PAPER: Регистрировать новый доклад
+        role_PAPREG_PAPER_ABSTRACT_REMOVE: Удалять файл реферата
+        role_PAPREG_PAPER_ABSTRACT_REUPLOAD: Перезагружать файл реферата
+        role_PAPREG_PAPER_ABSTRACT_UPLOAD: Загружать файл реферата
+        role_PAPREG_PAPER_DELETE: Удалять доклад
+        role_PAPREG_PAPER_EDIT: Редактировать тексты доклада и пр.
+        role_PAPREG_PAPER_FILE_REMOVE: Удалять файл доклада
+        role_PAPREG_PAPER_FILE_REUPLOAD: Перезагружать файл доклада
+        role_PAPREG_PAPER_FILE_UPLOAD: Загружать файл доклада
+        role_PAPREG_PAPER_PRESENTATION_REMOVE: Удалять файл презентации
+        role_PAPREG_PAPER_PRESENTATION_REUPLOAD: Перезагружать файл презентации
+        role_PAPREG_PAPER_PRESENTATION_UPLOAD: Загружать файл презентации
+        role_PAPREG_VIEW_FINAL_DECISION: Просматривать окончательное решение
+        role_PAPREG_VIEW_REVIEWERS_COMMENTS: Просматривать комментарии рецензентов
+        role_PAPREG_VIEW_SECTMANS_COMMENTS: Просматривать комментарии руководителей секций
+
+
