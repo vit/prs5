@@ -81,6 +81,8 @@ Prs5::Application.routes.draw do
   scope :module => 'conf' do
 	match '/conf/' => 'main#list'
 	match '/conf/archive.html' => 'main#list_archive'
+#	match '/conf/:cont_id/' => redirect("/conf/%{cont_id}")
+	match '/conf/:cont_id(/(:action))' => 'main'
 #	match '/conf/archive.html' => 'main#list'
   end
 
