@@ -1,0 +1,11 @@
+
+- @page_title= _ :title
+
+-#content_for :page_content do
+-content_for :section_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+  %div= _ :text
+
+-#render :file => 'adm/layout'
+

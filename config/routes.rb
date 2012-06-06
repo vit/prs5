@@ -66,6 +66,9 @@ Prs5::Application.routes.draw do
 
   match "/rpc" => 'rpc#call'
 
+#  match '/adm' => redirect("/adm/")
+  match '/adm/(:action)' => 'adm'
+
   match '/my(/)' => redirect("/my/profile")
   match '/my/(:action)' => 'my'
 

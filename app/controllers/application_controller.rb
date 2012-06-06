@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info
+	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info, :wr_menu_access
 	def wrap_login
 	#	@aaaaa='qqqqq'
 		yield
@@ -111,6 +111,16 @@ class ApplicationController < ActionController::Base
 			}.map{ |a|
 				a.empty? ? nil : a.first.to_s.strip
 			}.select{ |s| not (s.nil? or s.empty?) } : []
+		yield
+	end
+	def wr_menu_access
+		@menu_access = -> id {
+			case id
+			when :adm then @appl.user.is_admin @current_user[:user_id] or @appl.conf.user_is_conf_owner @current_user[:user_id]
+				#	when :reports then true
+			else false
+			end
+		}
 		yield
 	end
 	JSONBODY = -> do
