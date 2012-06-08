@@ -1,0 +1,14 @@
+
+- @page_title= _ :title
+- @page_id='mypapers'
+
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+
+  -#%a{'href' => 'myreviews.html'}= '<< '+_(:back)
+
+  =render "/comp/conf/paper/form", :locals => {:current_id => @page_id}
+
+-render :file => 'conf/main/layout'
+

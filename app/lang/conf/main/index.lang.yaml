@@ -1,0 +1,40 @@
+
+en:
+        title: Main
+
+        perm_yes: 'Yes'
+        perm_no: 'No'
+        what_author_can_do: 'What author can do now:'
+        USER_REGISTER_NEW_PAPER: Submit new paper abstract
+        PAPREG_PAPER_EDIT: Change submitted abstract
+        PAPREG_PAPER_DELETE: Delete submitted abstract
+        PAPREG_PAPER_ABSTRACT_UPLOAD: "Upload abstract file if it isn't uploaded yet"
+        PAPREG_PAPER_ABSTRACT_REUPLOAD: Replace abstract file
+        PAPREG_PAPER_ABSTRACT_REMOVE: Remove abstract file
+        PAPREG_PAPER_FILE_UPLOAD: "Upload paper file if it isn't uploaded yet"
+        PAPREG_PAPER_FILE_REUPLOAD: Replace paper file
+        PAPREG_PAPER_FILE_REMOVE: Remove paper file
+        PAPREG_PAPER_PRESENTATION_UPLOAD: "Upload presentation file if it isn't uploaded yet"
+        PAPREG_PAPER_PRESENTATION_REUPLOAD: Replace presentation file
+        PAPREG_PAPER_PRESENTATION_REMOVE: Remove presentation file
+
+ru:
+        title: Главная
+
+        perm_yes: Да
+        perm_no: Нет
+        what_author_can_do: 'Вы сейчас можете:'
+        USER_REGISTER_NEW_PAPER: Подавать реферат нового доклада
+        PAPREG_PAPER_EDIT: Изменять реферат поданного доклада
+        PAPREG_PAPER_DELETE: Удалять поданный реферат/доклад
+        PAPREG_PAPER_ABSTRACT_UPLOAD: Загружать файл реферата, если он еще не загружен
+        PAPREG_PAPER_ABSTRACT_REUPLOAD: Заменять файл реферата
+        PAPREG_PAPER_ABSTRACT_REMOVE: Удалять файл реферата
+        PAPREG_PAPER_FILE_UPLOAD: Загружать файл доклада, если он еще не загружен
+        PAPREG_PAPER_FILE_REUPLOAD: Заменять файл доклада
+        PAPREG_PAPER_FILE_REMOVE: Удалять файл доклада
+        PAPREG_PAPER_PRESENTATION_UPLOAD: Загружать файл презентации, если он еще не загружен
+        PAPREG_PAPER_PRESENTATION_REUPLOAD: Заменять файл презентации
+        PAPREG_PAPER_PRESENTATION_REMOVE: Удалять файл презентации
+
+

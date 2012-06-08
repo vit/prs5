@@ -1,0 +1,24 @@
+
+-content_for :section_content do
+ .confinside
+  %h2{:align => 'center'}
+   &= @lang_list.map{ |lang| @conf_data['info']['title'][lang] }.join(' | ')
+   \/
+   = _(:myvirtualoffice)
+
+  -#%script{:src => "/js/my/comp/conf/conf.js", :type => "text/javascript"}
+  = javascript_include_tag 'comp/conf/conf'
+  %div{style: 'display: none'}
+   %input#cont_id{:type=>'hidden', :name=>'cont_id', :value => @cont_id}
+   %input#conf_lang{:type=>'hidden', :name=>'conf_lang', :value => @conf_lang}
+
+  %div{:align=>"left"}
+   =render :partial => "/comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/conf/#{@cont_id}/", :data => [ [_(:main), './', 'main'], [_(:mypapers), 'mypapers/', 'mypapers'], [_(:reviewing), 'reviewing/', 'reviewing', :reviewing] , [_(:reviewing2), 'reviewing2/', 'reviewing2', :reviewing2] , [_(:reports), 'reports/', 'reports', :reports] ]}
+   .clear
+
+  -#%div= yield
+  %div= yield :page_content
+
+-# @page_id='conf'
+- @part_id='conf'
+

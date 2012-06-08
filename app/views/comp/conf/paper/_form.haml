@@ -1,7 +1,9 @@
 
 
-%script{:src => "/js/my/tabs.js", :type => "text/javascript"}
-%script{:src => "/js/my/comp/conf/paper/paper.js", :type => "text/javascript"}
+-#%script{:src => "/js/my/tabs.js", :type => "text/javascript"}
+-#%script{:src => "/js/my/comp/conf/paper/paper.js", :type => "text/javascript"}
+= javascript_include_tag 'common/tabs'
+= javascript_include_tag 'comp/conf/paper/paper'
 
 #papercomp{:sstyle=>"display: none"}
  %div{name: 'dict', style: 'display: none'}
@@ -13,7 +15,8 @@
   -#%select{name: 'country_sample', style: 'display: none', width: '100%'}
   %select{name: 'country', style: 'display: none', width: '100%'}
    %option{value: ''}= _ :choosecountry
-   = call '/comp/user/country'
+   -#= call '/comp/user/country'
+   = render '/comp/account/country'
    %option{value: '-1'}= _ :othercountry
  %fieldset
   -if @lang_list.length > 1

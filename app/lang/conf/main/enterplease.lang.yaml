@@ -1,0 +1,10 @@
+
+en:
+        title: Enter please
+        text: You have to enter the system to see this page
+
+ru:
+        title: Вы не вошли в систему
+        text: Для доступа к этой странице нужно войти в систему
+
+

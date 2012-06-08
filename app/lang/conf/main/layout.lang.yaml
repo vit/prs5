@@ -1,0 +1,34 @@
+
+en:
+
+        myvirtualoffice: 'My virtual office'
+
+        main: 'Main'
+        mypapers: 'My papers'
+        reviewing: 'Reviewing'
+        reviewing2: 'Reviewing 2'
+        myparticipation: 'My participation'
+        myreviews: 'My reviews'
+        config: 'Conference config'
+        objects: 'Conference objects'
+        mail: 'Post office'
+        reports: 'Reports'
+
+ru:
+
+        myvirtualoffice: 'Мой виртуальный офис'
+
+        main: 'Главная'
+        mypapers: 'Мои рефераты и доклады'
+        reviewing: 'Рецензирование'
+        reviewing2: 'Рецензирование 2'
+        myparticipation: 'Мое участие'
+        myreviews: 'Мои рецензии'
+        config: 'Параметры конференции'
+        objects: 'Объекты конференции'
+        mail: 'Почтовая система'
+        reports: 'Отчеты'
+
+
+
+

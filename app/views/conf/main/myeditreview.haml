@@ -1,0 +1,12 @@
+
+- @page_title= _ :title
+- @page_id='myreviews'
+
+%div
+ %h3{:align => 'center'}= _ :title
+
+ %a{'href' => 'myreviews.html'}= '<< '+_(:back)
+
+ =call "/comp/conf/review/form", :locals => {:current_id => @page_id}
+
+

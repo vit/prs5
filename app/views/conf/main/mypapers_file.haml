@@ -1,0 +1,38 @@
+
+-#= @existed_before.inspect
+-#= @current_user.inspect
+-#= @required_lang_list.inspect
+-#= @cond_ok.inspect if @cond_ok
+
+%table{border: 1, width: '100%', cellpadding: 0, cellspacing: 0, style: 'margin: 0'}
+ %tr
+  %th= _ :upload_file
+  %th= _ :uploaded_file
+ %tr
+  %td{valign: 'top'}
+   %form{method: "post",  enctype: "multipart/form-data", style: 'margin: 0'}
+    -#if @file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_REUPLOAD'] || !@file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_UPLOAD']
+    -if @can_upload
+     %input{type: 'hidden', name: 'type', value: @type}
+     %input{type: "file", name: "file", onChange: "this.form.submit();"}
+    -else
+     -#= _( :abstract_submission_not_allowed )
+     = _( :file_submission_not_allowed )
+  %td{valign: 'top'}
+   -if @file_info
+    -#= _(:file_type) + ' ' + @file_info.content_type.to_s + ', ' + _(:file_size) + ' ' + @file_info.file_length.to_s + ' ' + _(:bytes)
+    = _(:file_type) + ' ' + @file_info[:content_type].to_s + ', ' + _(:file_size) + ' ' + @file_info[:length].to_s + ' ' + _(:bytes)
+    %br
+    -#= _(:timestamp) +' ' + @file_info['_meta']['ctime'].to_s
+    = _(:timestamp) +' ' + @file_info[:_meta]['ctime'].to_s
+    %form{method: "post", style: 'margin: 0'}
+     %input{type: 'hidden', name: 'delete', value: '1'}
+     %input{type: 'hidden', name: 'type', value: @type}
+     -#if @conf_permissions['PAPREG_PAPER_ABSTRACT_REMOVE']
+     -if @can_delete
+      %input{type: "submit", value: _(:submit_delete)}
+     -#%a{href: 'getfile/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type=abstract', target: '_blank'}= _ :download_file
+     %a{href: '../download/abstract/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type='+@type, target: '_blank'}= _ :download_file
+
+-# @_tj_next_template=''
+

@@ -1,0 +1,28 @@
+
+en:
+        upload_file: Upload file
+        uploaded_file: Uploaded file
+        file_type: Type
+        file_size: Size
+        bytes: Bytes
+        timestamp: Timestamp
+        submit_delete: Delete
+        download_file: Download
+
+        abstract_submission_not_allowed: Abstract submission is not allowed now
+        file_submission_not_allowed: File submission is not allowed now
+
+ru:
+        upload_file: Загрузка файла
+        uploaded_file: Ранее загруженный файл
+        file_type: Тип
+        file_size: Размер
+        bytes: Байт
+        timestamp: Время загрузки
+        submit_delete: Удалить
+        download_file: Скачать
+
+        abstract_submission_not_allowed: Сейчас загрузка файла реферата не разрешена
+        file_submission_not_allowed: Сейчас загрузка файла этого типа не разрешена
+
+
