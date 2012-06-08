@@ -131,9 +131,7 @@
        -%w[lang_en lang_ru save_before_file_submittion save file_abstract file_paper file_presentation].each do |word|
         %input{:type=>'hidden', :name=>word, :value => _(word)}
       %div{name: 'container'}
-       %iframe{src: 'file'}
-       -#%br
-       -#%input{type: 'file', onChange: 'alert(this.value)'}
+       -#%iframe{src: 'file'}
      %div{name: 'reviews', style: 'display: none'}
       %div{name: 'dict', style: 'display: none'}
        -%w[view_review_disabled view_review2_disabled view_decision_disabled].each do |word|

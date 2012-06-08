@@ -14,15 +14,80 @@ class Conf::MainController < ApplicationController
 		render @current_user[:user_id] ? '/conf/main/mypapers' : '/conf/main/enterplease'
 	end
 	def mypapers_file
+		user_id = @current_user[:user_id]
+		@_id = request.params['id']
+		@type = request.params['type']
+		@lng = request.params['lang']
+		delete = request.params['delete']
+		@can_delete = @can_upload = false
+		if %w[abstract paper presentation].include? @type
+			@can_delete =
+				#	@type=='abstract' && @conf_permissions['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
+				#	@type=='paper' && @conf_permissions['PAPREG_PAPER_FILE_REMOVE'] ||
+				#	@type=='presentation' && @conf_permissions['PAPREG_PAPER_PRESENTATION_REMOVE'] ||
+				@type=='abstract' && @user_rights['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
+				@type=='paper' && @user_rights['PAPREG_PAPER_FILE_REMOVE'] ||
+				@type=='presentation' && @user_rights['PAPREG_PAPER_PRESENTATION_REMOVE']
+			if user_id && @cont_id && @_id && @lng && delete && @can_delete
+				@appl.conf.paper.delete_my_paper_file(user_id, @cont_id, @_id, @lng, @type)
+			end
+			if user_id && @cont_id && @_id && @lng
+				@existed_before = @lang_list.inject({}) do |acc, lang|
+					acc[lang] = true if @appl.conf.paper.get_my_paper_file_info(user_id, @cont_id, @_id, lang, @type)
+					acc
+				end
+				@file_info = @appl.conf.paper.get_my_paper_file_info(user_id, @cont_id, @_id, @lng, @type)
+				@can_upload = 	@type=='abstract' && (
+					#	@file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_REUPLOAD'] ||
+					#	!@file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_UPLOAD'] ||
+					@file_info && @user_rights['PAPREG_PAPER_ABSTRACT_REUPLOAD'] ||
+					!@file_info && @user_rights['PAPREG_PAPER_ABSTRACT_UPLOAD']
+				) ||
+					@type=='paper' && (
+						#	@file_info && @conf_permissions['PAPREG_PAPER_FILE_REUPLOAD'] ||
+						#	!@file_info && @conf_permissions['PAPREG_PAPER_FILE_UPLOAD'] ||
+						@file_info && @user_rights['PAPREG_PAPER_FILE_REUPLOAD'] ||
+						!@file_info && @user_rights['PAPREG_PAPER_FILE_UPLOAD']
+				) ||
+					@type=='presentation' && (
+						#	@file_info && @conf_permissions['PAPREG_PAPER_PRESENTATION_REUPLOAD'] ||
+						#	!@file_info && @conf_permissions['PAPREG_PAPER_PRESENTATION_UPLOAD'] ||
+						@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_REUPLOAD'] ||
+						!@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_UPLOAD']
+				)
+				inputfile = request.params['file']
+				if inputfile && @can_upload
+					@appl.conf.paper.put_my_paper_file(user_id, @cont_id, @_id, @lng, @type, inputfile[:tempfile], {
+						content_type: inputfile[:type],
+						filename: inputfile[:filename]
+					})
+					required_lang_list = ['ru', 'by', 'ua'].include?(@current_user[:info]['country']) ?
+						@lang_list :
+						(@lang_list.length==1 ? @lang_list : ['en'])
+					check_files_condition = -> arr {
+						required_lang_list.inject(true) do |acc, l|
+						acc && arr[l]
+						end
+					}
+					@file_info = @appl.conf.paper.get_my_paper_file_info(user_id, @cont_id, @_id, @lng, @type)
+					if !check_files_condition[@existed_before] && check_files_condition[@existed_before.merge({@lng => true})]
+						#@cond_ok = true
+						@appl.mail.send_notification :files_uploaded, :both, {receiver_pin: user_id, file_type: @type, paper_id: @_id, cont_id: @cont_id}
+					end
+				end
+			end
+		end
 		render :layout => false
 	end
 	def reviewing
 		can_view = @user_rights['appoint_reviewers'] || @user_rights['review_everything'] || @user_rights['set_final_decision'] || @user_rights['delete_reviews'] || @appl.conf.paper.has_papers_for_reviewing(@current_user[:user_id], @cont_id)
-		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing/index' : '/conf/main/norights') : '/conf/main/enterplease'
+	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing/index' : '/conf/main/norights') : '/conf/main/enterplease'
+		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing' : '/conf/main/norights') : '/conf/main/enterplease'
 	end
 	def reviewing2
 		can_view = @appl.conf.user_is_section_manager(@current_user[:user_id], @cont_id)
-		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2/index' : '/conf/main/norights') : '/conf/main/enterplease'
+	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2/index' : '/conf/main/norights') : '/conf/main/enterplease'
+		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2' : '/conf/main/norights') : '/conf/main/enterplease'
 	end
 	def preparation
 		@cont_id = params[:cont_id].to_s

@@ -1,0 +1,12 @@
+
+- @page_title= _ :title
+- @page_id='reviewing2'
+
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+
+  =render "/comp/conf/paper/smanager", :locals => {:current_id => @page_id}
+
+-render :file => 'conf/main/layout'
+

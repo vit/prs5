@@ -394,7 +394,8 @@ window.addEvent('domready',function() {
 						var tr = (new Element('tr').inject(tbody));
 						tr.grab(new Element('td', {align: 'center', text: dict('lang_'+lang)}));
 						tr.grab(new Element('td', {align: 'center'}).grab(
-							new Element('iframe', {src: 'file?id='+paper_id+'&lang='+lang+'&type='+type, styles: {width: '100%', height: '100pt'}})
+						//	new Element('iframe', {src: 'file?id='+paper_id+'&lang='+lang+'&type='+type, styles: {width: '100%', height: '100pt'}})
+							new Element('iframe', {src: 'mypapers_file?id='+paper_id+'&lang='+lang+'&type='+type, styles: {width: '100%', height: '100pt'}})
 						));
 					});
 				});
