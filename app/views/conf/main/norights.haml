@@ -2,9 +2,11 @@
 - @page_title= _ :title
 -# @page_id='admins'
 
-%div
- %h3{:align => 'center'}= _ :title
- %div= _ :text
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+  %div= _ :text
 
+-render :file => 'conf/main/layout'
 
 
