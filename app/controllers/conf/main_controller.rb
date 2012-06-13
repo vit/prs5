@@ -10,6 +10,43 @@ class Conf::MainController < ApplicationController
 	end
 	def index
 	end
+	def download
+		@_id = request.params['id']
+		@type = request.params['type']
+		@lng = request.params['lang']
+		can_download = false
+		username = "anonymous"
+=begin
+		if @current_user[:user_id]
+			username = @current_user[:user_id]
+			can_download =
+				@user_rights['files_view'] ||
+				@user_rights['abstract_files_view'] && @type=='abstract' ||
+				@user_rights['paper_files_view'] && @type=='paper' ||
+				@user_rights['presentation_files_view'] && @type=='presentation' ||
+				@user_rights['review_everything'] ||
+				@appl.conf.paper.get_paper_owner(@cont_id, @_id) == @current_user[:user_id] ||
+				@appl.conf.paper.is_paper_reviewer(@current_user[:user_id], @cont_id, @_id) # ||
+			#	true
+		end
+		if can_download
+			if @cont_id && @_id && @lng
+				@file = @appl.conf.paper.get_paper_file(@cont_id, @_id, @lng, @type)
+				if @file
+					@response.header['Content-Type'] = @file.content_type
+					@file.read
+				else
+					''
+				end
+			else
+				''
+			end
+		else
+=end
+			#	"Abstract file downloading is not permitted for user '#{username}'"
+			render :inline => "User '#{username}' doesn't have permittion to download this file"
+	#	end
+	end
 	def mypapers
 		render @current_user[:user_id] ? '/conf/main/mypapers' : '/conf/main/enterplease'
 	end

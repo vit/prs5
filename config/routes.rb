@@ -82,7 +82,11 @@ Prs5::Application.routes.draw do
 	match '/conf/' => 'main#list'
 	match '/conf/archive.html' => 'main#list_archive'
 #	match '/conf/:cont_id/' => redirect("/conf/%{cont_id}")
-	match '/conf/:cont_id(/(:action))' => 'main'
+#	match '/conf/:cont_id(/(:action))' => 'main'
+
+	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'
+	match '/conf/:cont_id/:action' => redirect("/conf/:cont_id/%{action}/")
+
 #	match '/conf/archive.html' => 'main#list'
   end
 
