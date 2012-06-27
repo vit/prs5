@@ -140,6 +140,27 @@ window.addEvent('domready',function() {
 		return me;
 	})();
 
+	Mixin = OM;
+	Mixin.Observable = {
+		init: function(){
+			this.__events = {};
+		},
+		attach: function(name, callback){
+			if( !this.__events[name] ) this.__events[name] = [];
+			this.__events[name].include(callback);
+		},
+		detach: function(name, callback){
+			if( this.__events[name] ) this.__events[name].erase(callback);
+		},
+		notify: function(name){
+			var args = [];
+			for(var i=1; i<arguments.length; i++)
+				args.push(arguments[i]);
+			if( this.__events[name] ) this.__events[name].each(function(callback){
+				callback.apply(null, args);
+			});
+		}
+	};
 	OM.Events = {
 	//	__events: {},
 		init: function(){
