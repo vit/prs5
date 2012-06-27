@@ -59,10 +59,24 @@ window.addEvent('domready',function() {
 			panel.grab(new Element('legend', {text: 'Topic messages'}));
 
 			var close_thread_btn = new Element('input', {type: 'button', class: 'close_thread_btn', value: '<< Leave topic'});
-			panel.grab(close_thread_btn);
+			//panel.grab(close_thread_btn);
+			panel.grab( (new Element('div')).grab(close_thread_btn) );
 			close_thread_btn.addEvents({
 				click: function (e) {
 					me.notify('close_thread');
+					return false;
+				}
+			});
+
+			var add_message_btn = new Element('input', {type: 'button', class: 'add_message_btn', value: 'Add message'});
+			var add_message_text = new Element('textarea', {class: 'add_message_text'});
+			//panel.grab(close_thread_btn);
+			panel.grab( (new Element('div')).grab(add_message_text) );
+			panel.grab( (new Element('div')).grab(add_message_btn) );
+			add_message_btn.addEvents({
+				click: function (e) {
+					alert('Error');
+				//	me.notify('close_thread');
 					return false;
 				}
 			});
@@ -105,6 +119,8 @@ window.addEvent('domready',function() {
 			function reload() { loadData(); }
 			function init(id) {
 				msg_id = id
+				//add_message_text.set('value', '');
+				add_message_text.value = '';
 			//	alert(msg_id);
 				reload();
 			}
@@ -168,8 +184,6 @@ window.addEvent('domready',function() {
 			});
 			bottom_div.grab(oneThread.panel);
 
-		//	panel.set('text', 'rtw erewt ert wty wy ey ey wy');
-		//	bottom_div.set('text', 'rtw erewt ert wty wy ey ey wy');
 			function render(list) {
 	//			cont.empty();
 	//			if(list) list.each(function(v){ addRow(v); });
