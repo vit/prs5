@@ -44,6 +44,7 @@ window.addEvent('domready',function() {
 		lang: Cookie.read('ecms_lang')
 	});
 	self.user.init();
+//	alert(user);
 });
 
 

@@ -212,6 +212,8 @@ module Coms
 			})
 =end
 
+			'msg.get_my_threads_on_paper' => ITS_ME,
+
 		}
 		def self.check user_id, name, attr={} 
 			RIGHTS[name] ? RIGHTS[name][user_id, attr] : false

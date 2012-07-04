@@ -290,7 +290,8 @@ window.addEvent('domready',function() {
 				lname: 'ml',
 				affiliation: 'ml',
 				city: 'ml',
-				country: null
+				country: null,
+				email: null
 				//country_sample: null
 			};
 			function addRow( data ) {
@@ -330,12 +331,18 @@ window.addEvent('domready',function() {
 				//country.setProperty('width', '100%');
 				tr1.grab((new Element('td', {colspan: 2}).grab(
 					country
-				//	new Element('input', {type: 'text',
-				//		value: data[name] ? data[name][lang] : null,
-				//		name: name+'_'+lang,
-				//		styles: {width: '100%'}
-				//	})
 				)));
+
+				var tr1 = (new Element('tr').inject(tbd));
+			//	tr1.grab(new Element('th', {text: dict('email')}));
+				tr1.grab(new Element('th', {text: dict('Email')}));
+				tr1.grab((new Element('td', {colspan: 2}).grab(
+							new Element('input', {type: 'text',
+								name: 'email',
+								styles: {width: '100%'}
+							})
+				)));
+
 				tr.grab((new Element('td', {align: 'center'})).grab(
 					new Element('a', {text: '[X]', href: '#', 'events': {'click': function() {
 						tr.destroy();
@@ -553,7 +560,8 @@ window.addEvent('domready',function() {
 					return necessary_fields.ffold(acc, function(acc, field) {
 						return acc && (aml[field] && aml[field][lang] && (aml[field][lang].trim().length > 0) || is_optional(lang));
 					});
-				}) && aml.country;
+			//	}) && aml.country;
+				}) && aml.country && aml.email;
 			})) alert( dict('msg_bad_authors') );
 			else {
 				savebutton.setProperty('disabled', true);

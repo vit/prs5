@@ -1,11 +1,100 @@
 
 window.addEvent('domready',function() {
 
+
 	self.Coms = self.Coms || {};
 	self.Coms.Comp = self.Coms.Comp || {};
 
+	self.Coms.Comp.AddThreadPanel = (function() {
+		return function(args) {
+		//	var user = window.user;
+			var panel = new Element('div', { class: '' });
+			var new_thread_btn = new Element('input', {type: 'button', class: 'new_thread_btn', value: 'New topic', events: {
+				click: function(e){
+					cont.setStyles({display: 'block'});
+				}
+			}});
+			panel.grab(new_thread_btn);
+			var cont = new Element('div', {styles: {display: 'none'}});
+			panel.grab(cont);
+			var thread_title_label = new Element('b', {text: 'Topic title '});
+			var thread_title = new Element('input', {type: 'text'});
+			var msg_text_label = new Element('b', {text: 'Message text'});
+			var msg_text = new Element('textarea', {styles: {
+				width: '40em',
+				height: '6em'
+			}});
+			var add_msg_btn = new Element('input', {type: 'button', class: '', value: 'Send message'});
+			var cancel_msg_btn = new Element('input', {type: 'button', class: '', value: 'Cancel', events: {
+				click: function(e){
+					clear_form();
+					cont.setStyles({display: 'none'});
+				}
+			}});
+			cont.adopt(
+				thread_title_label,
+				thread_title,
+				new Element('br'),
+				msg_text_label,
+				new Element('br'),
+				msg_text,
+				new Element('br'),
+				add_msg_btn,
+				cancel_msg_btn
+			);
+			function clear_form() {
+				thread_title.set('value', '');
+				msg_text.set('value', '');
+			}
+			/*
+			function addRow(v) {
+				var div = new Element('div', { class: 'item' });
+				var a = new Element('a', {
+					href: '#',
+					events: {
+						click: function (e) {
+							me.notify('show_thread', v['title']);
+							return false;
+						}
+					}
+				});
+				a.set('text', v['title']);
+				div.grab(a);
+				cont.grab(div);
+			}
+			function render(list) {
+				cont.empty();
+				if(list) list.each(function(v){ addRow(v); });
+			}
+			function loadData(){
+	//			var result = [
+	//				{title: 'post 001'},
+	//				{title: 'post 002'},
+	//				{title: 'post 003'},
+	//				{title: 'post 004'}
+	//			];
+			//	alert('hgw gefjqwgef uy tfu');
+				RPC.send('msg.get_my_threads_on_paper', [user.id, args.cont_id, args.paper_id], function(result, error) {
+				//	alert(result);
+		//			alert(JSON.encode(result));
+					render(result);
+				});
+			}
+			function reload() { loadData(); }
+			*/
+			var me = {
+				panel: panel //,
+			//	reload: reload,
+			//	show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+			};
+			Mixin.implement(me, Mixin.Observable);
+			return me;
+		};
+	}());
 	self.Coms.Comp.ObjectThreadsList = (function() {
-		var constr = function(args) {
+		return function(args) {
+			var user = window.user;
+	//		alert(user);
 			var panel = new Element('fieldset', { class: 'topics_list' });
 			panel.grab(new Element('legend', {text: 'Topics list'}));
 			var cont = new Element('div');
@@ -30,16 +119,18 @@ window.addEvent('domready',function() {
 				if(list) list.each(function(v){ addRow(v); });
 			}
 			function loadData(){
-				var result = [
-					{title: 'post 001'},
-					{title: 'post 002'},
-					{title: 'post 003'},
-					{title: 'post 004'}
-				];
+	//			var result = [
+	//				{title: 'post 001'},
+	//				{title: 'post 002'},
+	//				{title: 'post 003'},
+	//				{title: 'post 004'}
+	//			];
 			//	alert('hgw gefjqwgef uy tfu');
-		//		RPC.send('conf.review.get_paper_reviews_ext', [conf.id, paper_id], function(result, error) {
+				RPC.send('msg.get_my_threads_on_paper', [user.id, args.cont_id, args.paper_id], function(result, error) {
+				//	alert(result);
+		//			alert(JSON.encode(result));
 					render(result);
-		//		});
+				});
 			}
 			function reload() { loadData(); }
 			var me = {
@@ -50,10 +141,9 @@ window.addEvent('domready',function() {
 			Mixin.implement(me, Mixin.Observable);
 			return me;
 		}
-		return constr;
 	}());
 	self.Coms.Comp.ObjectOneThread = (function() {
-		var constr = function(args) {
+		return function(args) {
 			var msg_id;
 			var panel = new Element('fieldset', { class: 'topic_messages' });
 			panel.grab(new Element('legend', {text: 'Topic messages'}));
@@ -132,12 +222,11 @@ window.addEvent('domready',function() {
 			};
 			Mixin.implement(me, Mixin.Observable);
 			return me;
-		}
-		return constr;
+		};
 	}());
 
 	self.Coms.Comp.ObjectMessages = (function() {
-		var constr = function(_cont_id, _paper_id) {
+		return function(_cont_id, _paper_id) {
 			var panel = new Element('div', {
 				styles: {
 			//		width: '100px',
@@ -148,17 +237,14 @@ window.addEvent('domready',function() {
 				panel: panel
 		//		init: init
 			};
-		//	Mixin.implement(me, Mixin.Observable);
-			//var top_div = new Element('div', {class: 'top_div'});
-			//var bottom_div = new Element('div', {class: 'bottom_div'});
 			var top_div = new Element('div', {class: 'top_div'});
-		//	var new_thread_btn = new Element('input.new_thread_btn', {type: 'button', value: 'qqq', name: 'www'});
-			var new_thread_btn = new Element('input', {type: 'button', class: 'new_thread_btn', value: 'New topic'});
-			top_div.grab(new_thread_btn);
+	//		var new_thread_btn = new Element('input', {type: 'button', class: 'new_thread_btn', value: 'New topic'});
+	//		top_div.grab(new_thread_btn);
+			var new_thread_element = new Coms.Comp.AddThreadPanel();
+			top_div.grab(new_thread_element.panel);
 			var bottom_div = new Element('div', {class: 'bottom_div'});
 			panel.grab(top_div);
 			panel.grab(bottom_div);
-		//	top_div.grab(new_thread_btn);
 			var threadsList = new Coms.Comp.ObjectThreadsList({
 				cont_id: _cont_id,
 				paper_id: _paper_id //,
@@ -197,8 +283,7 @@ window.addEvent('domready',function() {
 			}
 			loadData();
 			return me;
-		}
-		return constr;
+		};
 	}());
 
 

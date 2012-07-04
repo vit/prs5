@@ -1,6 +1,7 @@
 window.addEvent('domready',function() {
 	var conf = self.conf;
 	var user = self.user;
+	//	alert(user);
 
 	function PapersList(args) {
 		var panel = args.panel;
