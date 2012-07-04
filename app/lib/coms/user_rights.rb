@@ -212,7 +212,9 @@ module Coms
 			})
 =end
 
+		#MSG
 			'msg.get_my_threads_on_paper' => ITS_ME,
+			'msg.add_my_message_on_paper' => ITS_ME,
 
 		}
 		def self.check user_id, name, attr={} 
