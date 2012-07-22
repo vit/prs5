@@ -215,6 +215,11 @@ module Coms
 		#MSG
 			'msg.get_my_threads_on_paper' => ITS_ME,
 			'msg.add_my_message_on_paper' => ITS_ME,
+			'msg.get_my_threads_drafts_on_paper' => ITS_ME,
+			'msg.create_my_message_draft_on_paper' => ITS_ME,
+			'msg.save_my_message_draft_data' => ITS_ME,
+			'msg.get_my_message_draft_data' => ITS_ME,
+			'msg.delete_my_message_draft' => ITS_ME,
 
 		}
 		def self.check user_id, name, attr={} 
