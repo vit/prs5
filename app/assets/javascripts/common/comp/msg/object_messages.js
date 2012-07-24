@@ -5,6 +5,7 @@ window.addEvent('domready',function() {
 	self.Coms = self.Coms || {};
 	self.Coms.Comp = self.Coms.Comp || {};
 
+	/*
 	self.Coms.Comp.AddThreadPanel = (function() {
 		return function(args) {
 			var user = window.user;
@@ -66,6 +67,7 @@ window.addEvent('domready',function() {
 			return me;
 		};
 	}());
+	*/
 
 	/* MessageDraftPanel -- Create, save, edit and delete message draft, send message */
 	self.Coms.Comp.MessageDraftPanel = (function() {
@@ -84,27 +86,20 @@ window.addEvent('domready',function() {
 			}});
 			var add_msg_btn = new Element('input', {type: 'button', class: '', value: 'Send message', events: {
 				click: function(e){
-				//	alert( msg_text.get('value') );
-					       /*
-				//	alert( msg_text.get('value') );
-					RPC.send('msg.add_my_message_on_paper', [user.id, args.cont_id, args.paper_id, msg_text.get('value'), null, thread_title.get('value')], function(result, error) {
-					//	alert(JSON.encode(result));
-			//			render(result);
-						clear_form();
-						cont.setStyles({display: 'none'});
+					RPC.send('msg.save_my_message_draft_data', [user.id, msg_id, {msg_text: msg_text.get('value'), thread_title: thread_title.get('value')}], function(result, error) {
+						RPC.send('msg.save_my_draft_as_message', [user.id, msg_id], function(result, error) {
+					//		alert(JSON.encode(result));
+							me.notify('message_saved', msg_id);
+							me.panel.dispose();
+						});
 					});
-					*/
 				}
 			}});
 			var save_draft_btn = new Element('input', {type: 'button', class: '', value: 'Save draft', events: {
 				click: function(e){
-				//	alert( msg_text.get('value') );
 				//	alert( msg_id );
 					RPC.send('msg.save_my_message_draft_data', [user.id, msg_id, {msg_text: msg_text.get('value'), thread_title: thread_title.get('value')}], function(result, error) {
-						alert(JSON.encode(result));
-			//			render(result);
-				//		clear_form();
-				//		cont.setStyles({display: 'none'});
+				//		alert(JSON.encode(result));
 					});
 				}
 			}});
@@ -182,26 +177,17 @@ window.addEvent('domready',function() {
 			function addRow(v) {
 		//		alert(JSON.encode(v));
 				var new_panel = new Coms.Comp.MessageDraftPanel(args, v ? v._id : null);
+				new_panel.attach('message_saved', function(arg) {
+				//	alert(arg);
+					me.notify('message_saved', arg);
+				});
 		//		new_panel.attach('deleted', function(arg) {
 		//			alert(arg);
 		//		});
-			//	var div = new Element('div', { class: 'item' });
-				/*
-				var a = new Element('a', { href: '#',
-					events: {
-						click: function (e) {
-							me.notify('show_thread', v['title']);
-							return false;
-						}
-					}
-				});
-				a.set('text', v['title']);
-				div.grab(a);
-				*/
 				cont.grab(new_panel.panel);
 			}
 			function render(list) {
-				alert(JSON.encode(list));
+			//	alert(JSON.encode(list));
 				cont.empty();
 				if(list) list.each(function(v){ addRow(v); });
 			}
@@ -244,12 +230,12 @@ window.addEvent('domready',function() {
 				var a = new Element('a', { href: '#',
 					events: {
 						click: function (e) {
-							me.notify('show_thread', v['title']);
+							me.notify('show_thread', v['thread_title']);
 							return false;
 						}
 					}
 				});
-				a.set('text', v['title']);
+				a.set('text', v['thread_title']);
 				div.grab(a);
 				cont.grab(div);
 			}
@@ -259,7 +245,7 @@ window.addEvent('domready',function() {
 			}
 			function loadData(){
 				RPC.send('msg.get_my_threads_on_paper', [user.id, args.cont_id, args.paper_id], function(result, error) {
-		//			alert(JSON.encode(result));
+			//		alert(JSON.encode(result));
 					render(result);
 				});
 			}
@@ -358,24 +344,14 @@ window.addEvent('domready',function() {
 
 	self.Coms.Comp.ObjectMessages = (function() {
 		return function(_cont_id, _paper_id) {
-			var panel = new Element('div', {
-				styles: {
-			//		width: '100px',
-			//		height: '100px'
-				}
-			});
-			var me = {
-				panel: panel
-		//		init: init
-			};
+			var panel = new Element('div', { styles: { } });
+			var me = { panel: panel };
 			var args = {
 				cont_id: _cont_id,
 				paper_id: _paper_id //,
 			}
 
 			var top_div = new Element('div', {class: 'top_div'});
-	//		var new_thread_element = new Coms.Comp.AddThreadPanel( args );
-	//		top_div.grab(new_thread_element.panel);
 			var new_thread_draft_btn = new Element('input', {class: 'new_thread_draft_btn', type: 'button', value: 'New topic draft', events: {
 				click: function() {
 					threadsDraftsList.addNewDraft();
@@ -387,20 +363,15 @@ window.addEvent('domready',function() {
 			panel.grab(bottom_div);
 
 			var threadsDraftsList = new Coms.Comp.ObjectThreadsDraftsList( args );
-			threadsDraftsList.attach('show_thread', function(arg) {
-			//	alert('Error ');
-			//	alert(arg);
-				oneThread.init(arg);
-				threadsList.show(false);
-				oneThread.show(true);
+			threadsDraftsList.attach('message_saved', function(arg) {
+		//		alert(arg);
+				threadsList.reload();
 			});
 			threadsDraftsList.reload();
 			bottom_div.grab(threadsDraftsList.panel);
 
 			var threadsList = new Coms.Comp.ObjectThreadsList( args );
 			threadsList.attach('show_thread', function(arg) {
-			//	alert('Error ');
-			//	alert(arg);
 				oneThread.init(arg);
 				threadsList.show(false);
 				threadsDraftsList.show(false);
@@ -412,26 +383,12 @@ window.addEvent('domready',function() {
 			var oneThread = new Coms.Comp.ObjectOneThread({});
 			oneThread.show(false);
 			oneThread.attach('close_thread', function(arg) {
-			//	alert('Error ');
-			//	alert(arg);
 				oneThread.show(false);
 				threadsList.show(true);
 				threadsDraftsList.show(true);
 			});
 			bottom_div.grab(oneThread.panel);
 
-			function render(list) {
-	//			cont.empty();
-	//			if(list) list.each(function(v){ addRow(v); });
-			}
-			function loadData(){
-				var result = [];
-			//	alert('hgw gefjqwgef uy tfu');
-		//		RPC.send('conf.review.get_paper_reviews_ext', [conf.id, paper_id], function(result, error) {
-					render(result);
-		//		});
-			}
-			loadData();
 			return me;
 		};
 	}());

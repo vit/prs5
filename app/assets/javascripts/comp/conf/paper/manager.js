@@ -578,55 +578,11 @@ window.addEvent('domready',function() {
 				//		cont
 				//	);
 					div.inject(panel);
-					var comp = new Coms.Comp.ObjectMessages(conf.id, paper_id);
+				//	var comp = new Coms.Comp.ObjectMessages(conf.id, paper_id);
+					var comp = new Coms.Comp.ObjectThreads(conf.id, paper_id);
 				//	comp.init(conf.id, paper_id);
 					var panel = comp.panel;
 			//		alert(comp.test);
-					/*
-					function addRow(data){
-						var pin = data;
-						var li = (new Element('li', {styles: {'margin': '0.8em 0 0.0em 1em'}})).inject(cont);
-						li.adopt(
-								new Element('a', {text: '[X]', href: '#', 'events': {'click': function() {
-									if( confirm(dict('delete_review_are_you_sure')) ) {
-										RPC.send('conf.review.delete_review', [conf.id, paper_id, data._meta.owner], function(result, error) {
-											loadData();
-										});
-									}
-									//alert(data._meta._id);
-									return false;
-								}}}),
-								new Element('span', {text: ' '}),
-								new Element('span', {text: conf.lang_list().map(function(lang){
-									return data.reviewer.fname[lang] +' '+ data.reviewer.mname[lang] +' '+ data.reviewer.lname[lang];
-								}).join(' | ') + ' ('+data._meta.owner+') '}),
-								new Element('br'),
-								new Element('b').grab(
-									new Element('span', {text: dict('score')+':'})
-								),
-								new Element('span', {text: ' '+ dict(data.data.score ? 'score_'+data.data.score : 'score_uncertain')}),
-								new Element('br'),
-								new Element('b').grab(
-									new Element('span', {text: dict('decision')+':'})
-								),
-								new Element('span', {text: ' '+ dict(data.data.decision ? 'decision_'+data.data.decision : 'decision_uncertain')}),
-							//	new Element('br'),
-							//	new Element('span', {text: JSON.encode(data)}),
-								new Element('span')
-							);
-
-					}
-					function render(list) {
-						cont.empty();
-						if(list) list.each(function(v){ addRow(v); });
-					}
-					function loadData(){
-						RPC.send('conf.review.get_paper_reviews_ext', [conf.id, paper_id], function(result, error) {
-							render(result);
-						});
-					}
-					loadData();
-					*/
 					return panel;
 				}
 
