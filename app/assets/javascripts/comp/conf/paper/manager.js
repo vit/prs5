@@ -579,7 +579,7 @@ window.addEvent('domready',function() {
 				//	);
 					div.inject(panel);
 				//	var comp = new Coms.Comp.ObjectMessages(conf.id, paper_id);
-					var comp = new Coms.Comp.ObjectThreads(conf.id, paper_id);
+					var comp = new Coms.Comp.ObjectMessageThreads(conf.id, paper_id);
 				//	comp.init(conf.id, paper_id);
 					var panel = comp.panel;
 			//		alert(comp.test);
