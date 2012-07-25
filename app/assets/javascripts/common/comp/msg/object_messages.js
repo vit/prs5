@@ -23,8 +23,8 @@ window.addEvent('domready',function() {
 					threadsDraftsList.addNewDraft();
 				}
 			}});
-			panel.grab(new_thread_draft_btn); var bottom_div =
-				new Element('div', {class: 'bottom_div'});
+			panel.grab(new_thread_draft_btn);
+			var bottom_div = new Element('div', {class: 'bottom_div'});
 
 			var threadsDraftsList = new Coms.Comp.ObjectThreadsDraftsList( args );
 			threadsDraftsList.attach('message_saved', function(arg) {
@@ -58,7 +58,7 @@ window.addEvent('domready',function() {
 
 	/* MessageDraftPanel -- Create, save, edit or delete single message draft, send message */
 	self.Coms.Comp.MessageDraftPanel = (function() {
-		return function(args, msg_id) {
+		return function(args, msg_id, thread_id) {
 			var user = window.user;
 		//	var user = window.user;
 			var panel = new Element('div', { class: '' });
@@ -123,13 +123,12 @@ window.addEvent('domready',function() {
 					}
 				});
 			} else {
-				RPC.send('msg.create_my_message_draft_on_paper', [user.id, args.cont_id, args.paper_id, null], function(result, error) {
+			//	RPC.send('msg.create_my_message_draft_on_paper', [user.id, args.cont_id, args.paper_id, null], function(result, error) {
+				RPC.send('msg.create_my_message_draft_on_paper', [user.id, args.cont_id, args.paper_id, thread_id], function(result, error) {
 				//	alert(JSON.encode(result));
 					if(result) {
 						msg_id = result._id;
 					}
-//		//			render(result);
-//				//	cont.setStyles({display: 'none'});
 				});
 			}
 
@@ -256,14 +255,16 @@ window.addEvent('domready',function() {
 	/* Selected thread panel, container for messages and messages drafts */
 	self.Coms.Comp.ObjectOneThread = (function() {
 		return function(args) {
-			var msg_id;
+			var thread_id;
 			var user = window.user;
 
 			var panel = new Element('div', { styles: { } });
 			var me = { panel: panel };
 
+			var thread_title_txt = new Element('div', {class: 'thread_title_txt', text: 'qwerqwertwetewy'});
+			panel.grab(thread_title_txt);
+
 			var close_thread_btn = new Element('input', {type: 'button', class: 'close_thread_btn', value: '<< Leave topic'});
-			//panel.grab(close_thread_btn);
 			panel.grab( (new Element('div')).grab(close_thread_btn) );
 			close_thread_btn.addEvents({
 				click: function (e) {
@@ -271,6 +272,13 @@ window.addEvent('domready',function() {
 					return false;
 				}
 			});
+
+			var new_message_draft_btn = new Element('input', {class: 'new_message_draft_btn', type: 'button', value: 'New message draft', events: {
+				click: function() {
+					messagesDraftsList.addNewDraft();
+				}
+			}});
+			panel.grab(new_message_draft_btn);
 
 			var messagesDraftsList = new Coms.Comp.ThreadMessagesDraftsList( args );
 		//	messagesList.reload();
@@ -280,34 +288,24 @@ window.addEvent('domready',function() {
 		//	messagesList.reload();
 			panel.grab(messagesList.panel);
 
-			function addRow(v) {
-		//		var div = new Element('div', { class: 'item' });
-		//		div.set('text', v['text']);
-		//		cont.grab(div);
-			}
-			function render(list) {
-		//		cont.empty();
-				if(list) list.each(function(v){ addRow(v); });
-			}
-			function loadData(){
-				RPC.send('msg.get_my_messages_from_thread', [user.id, msg_id], function(result, error) {
+			function reloadData() {
+				RPC.send('msg.get_my_message_data', [user.id, thread_id], function(result, error) {
 					alert(JSON.encode(result));
-					render(result);
+					if(result) {
+					//	msg_text.set('value', result.msg_text);
+						thread_title_txt.set('text', result.thread_title);
+					}
 				});
 			}
-			function reload() { loadData(); }
 			function init(id) {
-				msg_id = id
-				//add_message_text.set('value', '');
-	//			add_message_text.value = '';
-			//	alert(msg_id);
-	//			reload();
-				messagesList.init(msg_id);
+				thread_id = id;
+				reloadData();
+				messagesList.init(thread_id);
+				messagesDraftsList.init(thread_id);
 			}
 			var me = {
 				panel: panel,
 				init: init,
-				reload: reload,
 				show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
 			};
 			Mixin.implement(me, Mixin.Observable);
@@ -318,11 +316,9 @@ window.addEvent('domready',function() {
 	/* Messages drafts list for selected thread */
 	self.Coms.Comp.ThreadMessagesDraftsList = (function() {
 		return function(args) {
+			var thread_id;
 			var user = window.user;
-	//		alert(user);
 			var panel = new Element('div', { class: '' });
-		//	var new_thread_element = new Coms.Comp.AddThreadPanel( args );
-		//	panel.grab(new_thread_element.panel);
 
 			var messages_list = new Element('fieldset', { class: 'messages_list' });
 			messages_list.grab(new Element('legend', {text: 'Messages drafts list'}));
@@ -331,66 +327,21 @@ window.addEvent('domready',function() {
 			panel.grab(messages_list);
 
 			function addRow(v) {
-				var div = new Element('div', { class: 'item' });
-				var a = new Element('a', { href: '#',
-					events: {
-						click: function (e) {
-							me.notify('show_thread', v['thread_id']);
-							return false;
-						}
-					}
-				});
-				a.set('text', v['thread_title']);
-				div.grab(a);
-				cont.grab(div);
-			}
-			function render(list) {
-				cont.empty();
-				if(list) list.each(function(v){ addRow(v); });
-			}
-			function loadData(){
-				RPC.send('msg.get_my_messages_from_thread', [user.id, msg_id], function(result, error) {
-					alert(JSON.encode(result));
-					render(result);
-				});
-			}
-			function reload() { loadData(); }
-			function init(id) {
-				msg_id = id;
-				reload();
-			}
-			var me = {
-				panel: panel,
-				reload: reload,
-				init: init,
-				show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
-			};
-			/*
-			var topics_list = new Element('fieldset', { class: 'topics_drafts_list' });
-			topics_list.grab(new Element('legend', {text: 'Topics drafts list'}));
-			var cont = new Element('div');
-			topics_list.grab(cont);
-			panel.grab(topics_list);
-			function addRow(v) {
 		//		alert(JSON.encode(v));
-				var new_panel = new Coms.Comp.MessageDraftPanel(args, v ? v._id : null);
+				var new_panel = new Coms.Comp.MessageDraftPanel(args, v ? v._id : null, thread_id ? thread_id : null);
 				new_panel.attach('message_saved', function(arg) {
 				//	alert(arg);
 					me.notify('message_saved', arg);
 				});
-		//		new_panel.attach('deleted', function(arg) {
-		//			alert(arg);
-		//		});
 				cont.grab(new_panel.panel);
 			}
 			function render(list) {
-			//	alert(JSON.encode(list));
 				cont.empty();
 				if(list) list.each(function(v){ addRow(v); });
 			}
 			function loadData(){
-				RPC.send('msg.get_my_threads_drafts_on_paper', [user.id, args.cont_id, args.paper_id], function(result, error) {
-		//			alert(JSON.encode(result));
+				RPC.send('msg.get_my_messages_drafts_from_thread', [user.id, thread_id], function(result, error) {
+				//	alert(JSON.encode(result));
 					render(result);
 				});
 			}
@@ -399,13 +350,17 @@ window.addEvent('domready',function() {
 			//	alert('add new');
 				addRow();
 			}
+			function init(id) {
+				thread_id = id;
+				reload();
+			}
 			var me = {
 				panel: panel,
 				reload: reload,
 				addNewDraft: addNewDraft,
+				init: init,
 				show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
 			};
-			*/
 			Mixin.implement(me, Mixin.Observable);
 			return me;
 		}
@@ -414,7 +369,7 @@ window.addEvent('domready',function() {
 	/* Messages list for selected thread */
 	self.Coms.Comp.ThreadMessagesList = (function() {
 		return function(args) {
-			var msg_id;
+			var thread_id;
 			var user = window.user;
 	//		alert(user);
 			var panel = new Element('div', { class: '' });
@@ -428,17 +383,13 @@ window.addEvent('domready',function() {
 			panel.grab(messages_list);
 
 			function addRow(v) {
-				var div = new Element('div', { class: 'item' });
-				var a = new Element('a', { href: '#',
-					events: {
-						click: function (e) {
-							me.notify('show_thread', v['thread_id']);
-							return false;
-						}
-					}
+				var div = new Element('div', { class: 'item',
+					styles: {
+						border: 'solid thin',
+						margin: '1em',
+					},
+					text: v && v.data ? v.data.msg_text : ''
 				});
-				a.set('text', v['thread_title']);
-				div.grab(a);
 				cont.grab(div);
 			}
 			function render(list) {
@@ -446,14 +397,14 @@ window.addEvent('domready',function() {
 				if(list) list.each(function(v){ addRow(v); });
 			}
 			function loadData(){
-				RPC.send('msg.get_my_messages_from_thread', [user.id, msg_id], function(result, error) {
-					alert(JSON.encode(result));
+				RPC.send('msg.get_my_messages_from_thread', [user.id, thread_id], function(result, error) {
+				//	alert(JSON.encode(result));
 					render(result);
 				});
 			}
 			function reload() { loadData(); }
 			function init(id) {
-				msg_id = id;
+				thread_id = id;
 				reload();
 			}
 			var me = {
@@ -467,6 +418,10 @@ window.addEvent('domready',function() {
 		}
 	}());
 
+
+	/*
+	 * =============================================================================================
+	 */
 
 	/*
 	self.Coms.Comp.ObjectMessageItems = (function() {
