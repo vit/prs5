@@ -23,6 +23,8 @@ window.addEvent('domready',function() {
 					threadsDraftsList.addNewDraft();
 				}
 			}});
+			function new_thread_draft_btn_show(flag) { new_thread_draft_btn.setStyle('display', flag ? 'block' : 'none'); }
+
 			panel.grab(new_thread_draft_btn);
 			var bottom_div = new Element('div', {class: 'bottom_div'});
 
@@ -38,6 +40,7 @@ window.addEvent('domready',function() {
 				oneThread.init(arg);
 				threadsList.show(false);
 				threadsDraftsList.show(false);
+				new_thread_draft_btn_show(false);
 				oneThread.show(true);
 			});
 			threadsList.reload();
@@ -49,6 +52,7 @@ window.addEvent('domready',function() {
 				oneThread.show(false);
 				threadsList.show(true);
 				threadsDraftsList.show(true);
+				new_thread_draft_btn_show(true);
 			});
 			panel.grab(oneThread.panel);
 
@@ -101,10 +105,14 @@ window.addEvent('domready',function() {
 				//	cont.setStyles({display: 'none'});
 				}
 			}});
+			if( !thread_id ) {
+				cont.adopt(
+					thread_title_label,
+					thread_title,
+					new Element('br')
+				);
+			}
 			cont.adopt(
-				thread_title_label,
-				thread_title,
-				new Element('br'),
 				msg_text_label,
 				new Element('br'),
 				msg_text,
@@ -258,10 +266,14 @@ window.addEvent('domready',function() {
 			var thread_id;
 			var user = window.user;
 
-			var panel = new Element('div', { styles: { } });
+		//	var panel = new Element('div', { styles: { } });
+			var panel = new Element('fieldset', { styles: { } });
+			var panel_legend = new Element('legend', {text: 'Selected topic'})
+			panel.grab(panel_legend);
+
 			var me = { panel: panel };
 
-			var thread_title_txt = new Element('div', {class: 'thread_title_txt', text: 'qwerqwertwetewy'});
+			var thread_title_txt = new Element('div', {class: 'thread_title_txt', text: ''});
 			panel.grab(thread_title_txt);
 
 			var close_thread_btn = new Element('input', {type: 'button', class: 'close_thread_btn', value: '<< Leave topic'});
@@ -281,6 +293,9 @@ window.addEvent('domready',function() {
 			panel.grab(new_message_draft_btn);
 
 			var messagesDraftsList = new Coms.Comp.ThreadMessagesDraftsList( args );
+			messagesDraftsList.attach('message_saved', function(arg) {
+				messagesList.reload();
+			});
 		//	messagesList.reload();
 			panel.grab(messagesDraftsList.panel);
 
@@ -290,7 +305,7 @@ window.addEvent('domready',function() {
 
 			function reloadData() {
 				RPC.send('msg.get_my_message_data', [user.id, thread_id], function(result, error) {
-					alert(JSON.encode(result));
+				//	alert(JSON.encode(result));
 					if(result) {
 					//	msg_text.set('value', result.msg_text);
 						thread_title_txt.set('text', result.thread_title);
@@ -422,51 +437,6 @@ window.addEvent('domready',function() {
 	/*
 	 * =============================================================================================
 	 */
-
-	/*
-	self.Coms.Comp.ObjectMessageItems = (function() {
-		return function(args, _thread_id) {
-			var panel = new Element('div', { styles: { } });
-			var me = { panel: panel };
-
-			var new_thread_draft_btn = new Element('input', {class: 'new_thread_draft_btn', type: 'button', value: 'New topic draft', events: {
-				click: function() {
-					threadsDraftsList.addNewDraft();
-				}
-			}});
-			panel.grab(new_thread_draft_btn); var bottom_div =
-				new Element('div', {class: 'bottom_div'});
-
-			var threadsDraftsList = new Coms.Comp.ObjectThreadsDraftsList( args );
-			threadsDraftsList.attach('message_saved', function(arg) {
-				threadsList.reload();
-			});
-			threadsDraftsList.reload();
-			panel.grab(threadsDraftsList.panel);
-
-			var threadsList = new Coms.Comp.ObjectThreadsList( args );
-			threadsList.attach('show_thread', function(thread_id) {
-				oneThread.init(thread_id);
-				threadsList.show(false);
-				threadsDraftsList.show(false);
-				oneThread.show(true);
-			});
-			threadsList.reload();
-			panel.grab(threadsList.panel);
-
-			var oneThread = new Coms.Comp.ObjectOneThread({});
-			oneThread.show(false);
-			oneThread.attach('close_thread', function(arg) {
-				oneThread.show(false);
-				threadsList.show(true);
-				threadsDraftsList.show(true);
-			});
-			panel.grab(oneThread.panel);
-
-			return me;
-		};
-	}());
-	*/
 
 });
 
