@@ -1,0 +1,12 @@
+
+- @page_title= _ :title
+- @page_id='post'
+
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+  -#=render "/comp/adm/post"
+
+-render :file => 'adm/layout'
+
+

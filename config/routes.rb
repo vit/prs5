@@ -66,8 +66,21 @@ Prs5::Application.routes.draw do
 
   match "/rpc" => 'rpc#call'
 
-#  match '/adm' => redirect("/adm/")
-  match '/adm/(:action)' => 'adm'
+#  match '/adm/(:action)' => 'adm'
+
+#  namespace :adm do
+  scope :module => 'adm' do
+#  scope 'adm' do
+#	match '/adm(/(:action))' => 'adm'
+##	match '/adm(/(:action))' => 'main'
+	match '/adm(/(:action))' => 'main'
+#	match '/conf/archive.html' => 'main#list_archive'
+#	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'
+#	match '/conf/:cont_id/:action' => redirect("/conf/:cont_id/%{action}/")
+  end
+  namespace :adm do
+	match 'reports/(:action)' => 'reports'
+  end
 
   match '/my(/)' => redirect("/my/profile")
   match '/my/(:action)' => 'my'
