@@ -1,0 +1,11 @@
+
+- @page_title= _ :title
+- @page_id='mailing'
+
+-content_for :post_page_content do
+ %div
+  mailing page
+  -#=render "comp/adm/conf", :locals => {:current_id => @page_id}
+
+-render :file => 'adm/post/layout'
+
