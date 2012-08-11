@@ -69,14 +69,7 @@ Prs5::Application.routes.draw do
 #  match '/adm/(:action)' => 'adm'
 
   namespace :adm do
-#  scope 'adm', :module => 'adm' do
-#  scope 'adm' do
-#	match '/adm(/(:action))' => 'adm'
-##	match '/adm(/(:action))' => 'main'
-#	match '/adm(/(:action))' => 'main'
-	scope 'post' do
-		match '(/(:action))' => 'post'
-	end
+	match '/post(/(:action))' => 'post'
 	match '(/(:action))' => 'main'
 #	match '/conf/archive.html' => 'main#list_archive'
 #	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'
