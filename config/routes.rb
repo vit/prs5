@@ -75,9 +75,6 @@ Prs5::Application.routes.draw do
 #	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'
 #	match '/conf/:cont_id/:action' => redirect("/conf/:cont_id/%{action}/")
   end
-#  namespace :adm do
-#	match 'reports/(:action)' => 'reports'
-#  end
 
   match '/my(/)' => redirect("/my/profile")
   match '/my/(:action)' => 'my'

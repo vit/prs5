@@ -1,7 +1,14 @@
 window.addEvent('domready',function() {
 	var user_lang_code = Cookie.read('ecms_lang');
 	var lang_list = ['en', 'ru'];
-	var comp = $('userscomp');
+
+	(function() {
+		var panel = $('templatescomp');
+		var comp = new Coms.Comp.Post.EditTemplates();
+		//	comp.init(conf.id, paper_id);
+		panel.adopt(comp.panel);
+
+	}());
 /*
 	(function( panel ) {
 		var timeout = 500;
