@@ -226,6 +226,9 @@ module Coms
 			'msg.save_my_draft_as_message' => ITS_ME,
 			'msg.get_my_message_data' => ITS_ME,
 
+		#POST	
+			'post.get_templates' => SUPERUSER,
+
 		}
 		def self.check user_id, name, attr={} 
 			RIGHTS[name] ? RIGHTS[name][user_id, attr] : false

@@ -99,7 +99,8 @@ window.addEvent('domready',function() {
 				*/
 
 			//	div.set('text', v['thread_title']);
-				div.set('text', 'qqq qqq qqq qqq qqq');
+			//	div.set('text', 'qqq qqq qqq qqq qqq');
+				div.set('text', v);
 				cont.grab(div);
 			}
 			function render(list) {
@@ -108,10 +109,10 @@ window.addEvent('domready',function() {
 			}
 			function loadData(){
 				var result = [1,2,3];
-			//	RPC.send('msg.get_my_threads_on_paper', [user.id, args.cont_id, args.paper_id], function(result, error) {
+				RPC.send('post.get_templates', [null], function(result, error) {
 				//	alert(JSON.encode(result));
 					render(result);
-			//	});
+				});
 			}
 			function reload() { loadData(); }
 			var me = {
