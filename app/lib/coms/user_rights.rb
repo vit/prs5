@@ -228,6 +228,7 @@ module Coms
 
 		#POST	
 			'post.get_templates' => SUPERUSER,
+			'post.get_template_data' => SUPERUSER,
 
 		}
 		def self.check user_id, name, attr={} 

@@ -46,17 +46,17 @@ window.addEvent('domready',function() {
 
 			var tList = new Coms.Comp.Post.TemplatesList( args );
 			tList.attach('show_item', function(arg) {
-			//	oneT.init(arg);
+				oneT.init(arg);
 				tList.show(false);
 			//	new_thread_draft_btn_show(false);
-			//	oneT.show(true);
+				oneT.show(true);
 			});
 			tList.reload();
 			panel.grab(tList.panel);
 
 ///*
 			var oneT = new Coms.Comp.Post.EditOneTemplate({});
-		//	oneT.show(false);
+			oneT.show(false);
 			oneT.attach('close_item', function(arg) {
 				oneT.show(false);
 				List.show(true);
@@ -85,22 +85,23 @@ window.addEvent('domready',function() {
 			panel.grab(t_list);
 			function addRow(v) {
 				var div = new Element('div', { class: 'item' });
-				/*
+			//	/*
 				var a = new Element('a', { href: '#',
 					events: {
 						click: function (e) {
-							me.notify('show_thread', v['thread_id']);
+							me.notify('show_item', v['_id']);
 							return false;
 						}
 					}
 				});
-				a.set('text', v['thread_title']);
+			//	a.set('text', v['thread_title']);
+				a.set('text', v.title ? JSON.encode(v.title) : '???' );
 				div.grab(a);
-				*/
+			//	*/
 
 			//	div.set('text', v['thread_title']);
 			//	div.set('text', 'qqq qqq qqq qqq qqq');
-				div.set('text', v);
+			//	div.set('text', v.title ? JSON.encode(v.title) : '???' );
 				cont.grab(div);
 			}
 			function render(list) {
@@ -108,7 +109,7 @@ window.addEvent('domready',function() {
 				if(list) list.each(function(v){ addRow(v); });
 			}
 			function loadData(){
-				var result = [1,2,3];
+			//	var result = [1,2,3];
 				RPC.send('post.get_templates', [null], function(result, error) {
 				//	alert(JSON.encode(result));
 					render(result);
@@ -128,19 +129,23 @@ window.addEvent('domready',function() {
 	/* TemplatePanel -- Create, save, edit or delete single template */
 //	self.Coms.Comp.Post.TemplatePanel = (function() {
 	self.Coms.Comp.Post.EditOneTemplate = (function() {
-		return function(args, msg_id, thread_id) {
+		return function(args) {
 			var user = window.user;
 		//	var user = window.user;
 			var panel = new Element('div', { class: '' });
+
+			var template_id = null;
+
 			var cont = new Element('div', {styles: {ddisplay: 'none'}});
 			panel.grab(cont);
-			var thread_title_label = new Element('b', {text: 'Topic title '});
+			var thread_title_label = new Element('b', {text: 'Template title '});
 			var thread_title = new Element('input', {type: 'text'});
-			var msg_text_label = new Element('b', {text: 'Message text'});
+			var msg_text_label = new Element('b', {text: 'Template text'});
 			var msg_text = new Element('textarea', {styles: {
 				width: '40em',
 				height: '6em'
 			}});
+			/*
 			var add_msg_btn = new Element('input', {type: 'button', class: '', value: 'Send message', events: {
 				click: function(e){
 					RPC.send('msg.save_my_message_draft_data', [user.id, msg_id, {msg_text: msg_text.get('value'), thread_title: thread_title.get('value')}], function(result, error) {
@@ -171,21 +176,22 @@ window.addEvent('domready',function() {
 				//	cont.setStyles({display: 'none'});
 				}
 			}});
-			if( !thread_id ) {
+			*/
+		//	if( !thread_id ) {
 				cont.adopt(
 					thread_title_label,
 					thread_title,
 					new Element('br')
 				);
-			}
+		//	}
 			cont.adopt(
 				msg_text_label,
 				new Element('br'),
 				msg_text,
-				new Element('br'),
-				add_msg_btn,
-				save_draft_btn,
-				delete_msg_btn
+				new Element('br')//,
+			//	add_msg_btn,
+			//	save_draft_btn,
+			//	delete_msg_btn
 			);
 
 			/*
@@ -213,10 +219,31 @@ window.addEvent('domready',function() {
 			}
 			*/
 
+			function loadData(){
+			//	alert(template_id);
+				if(template_id) {
+					RPC.send('post.get_template_data', [null, template_id], function(result, error) {
+					//	msg_text.set('value', result.msg_text);
+					//	thread_title.set('value', result.template_title);
+						thread_title.set('value', JSON.encode(result.title));
+					//	alert(JSON.encode(result));
+					//	render(result);
+					});
+				}
+			}
+			function reload() { loadData(); }
+			function init(id) {
+				template_id = id;
+				reload();
+			//	reloadData();
+			//	messagesList.init(thread_id);
+			//	messagesDraftsList.init(thread_id);
+			}
 			var me = {
-				panel: panel //,
+				panel: panel,
+				init: init,
 			//	reload: reload,
-			//	show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+				show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
 			};
 			Mixin.implement(me, Mixin.Observable);
 			return me;
