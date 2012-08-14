@@ -140,6 +140,8 @@ window.addEvent('domready',function() {
 			panel.grab(cont);
 			var thread_title_label = new Element('b', {text: 'Template title '});
 			var thread_title = new Element('input', {type: 'text'});
+			var t_title_en = new Element('input', {type: 'text', name: 'title_en'});
+			var t_title_ru = new Element('input', {type: 'text', name: 'title_ru'});
 			var msg_text_label = new Element('b', {text: 'Template text'});
 			var msg_text = new Element('textarea', {styles: {
 				width: '40em',
@@ -180,7 +182,13 @@ window.addEvent('domready',function() {
 		//	if( !thread_id ) {
 				cont.adopt(
 					thread_title_label,
-					thread_title,
+					new Element('br'),
+					new Element('b', {text: 'en '}),
+					t_title_en,
+					new Element('br'),
+					new Element('b', {text: 'ru '}),
+					t_title_ru,
+				//	thread_title,
 					new Element('br')
 				);
 		//	}
@@ -193,6 +201,21 @@ window.addEvent('domready',function() {
 			//	save_draft_btn,
 			//	delete_msg_btn
 			);
+
+
+			var t_info = FormDataInputs( cont, {
+			//	gender: null,
+			//	country: null,
+			//	phone: null,
+			//	fax: null,
+				title: 'ml' //,
+			//	fname: 'ml',
+			//	mname: 'ml',
+			//	lname: 'ml',
+			//	city: 'ml',
+			//	affiliation: 'ml'
+			} );
+
 
 			/*
 			if( msg_id ) {
@@ -225,8 +248,10 @@ window.addEvent('domready',function() {
 					RPC.send('post.get_template_data', [null, template_id], function(result, error) {
 					//	msg_text.set('value', result.msg_text);
 					//	thread_title.set('value', result.template_title);
-						thread_title.set('value', JSON.encode(result.title));
+				//		thread_title.set('value', JSON.encode(result.title));
+						t_info.set(result);
 					//	alert(JSON.encode(result));
+			//			alert( JSON.encode(t_info.get()) );
 					//	render(result);
 					});
 				}
