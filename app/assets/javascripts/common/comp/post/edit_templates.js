@@ -59,7 +59,7 @@ window.addEvent('domready',function() {
 			oneT.show(false);
 			oneT.attach('close_item', function(arg) {
 				oneT.show(false);
-				List.show(true);
+				tList.show(true);
 			//	threadsDraftsList.show(true);
 			//	new_thread_draft_btn_show(true);
 			});
@@ -75,8 +75,17 @@ window.addEvent('domready',function() {
 			var user = window.user;
 	//		alert(user);
 			var panel = new Element('div', { class: '' });
-		//	var new_thread_element = new Coms.Comp.AddThreadPanel( args );
-		//	panel.grab(new_thread_element.panel);
+		//	var new_element = new Coms.Comp.AddThreadPanel( args );
+		//	panel.grab(new_element.panel);
+
+			var new_element_btn = new Element('input', {type: 'button', value: 'New template ', events: {
+				click: function() {
+				//	alert('qqq');
+					me.notify('show_item', null);
+					return false;
+				}
+			}});
+			panel.grab(new_element_btn);
 
 			var t_list = new Element('fieldset', { class: 'templates_list' });
 			t_list.grab(new Element('legend', {text: 'Templates list'}));
@@ -126,8 +135,7 @@ window.addEvent('domready',function() {
 		}
 	}());
 
-	/* TemplatePanel -- Create, save, edit or delete single template */
-//	self.Coms.Comp.Post.TemplatePanel = (function() {
+	/* EditOneTemplate -- Create, save, edit or delete single template */
 	self.Coms.Comp.Post.EditOneTemplate = (function() {
 		return function(args) {
 			var user = window.user;
@@ -139,7 +147,7 @@ window.addEvent('domready',function() {
 			var cont = new Element('div', {styles: {ddisplay: 'none'}});
 			panel.grab(cont);
 			var thread_title_label = new Element('b', {text: 'Template title '});
-			var thread_title = new Element('input', {type: 'text'});
+		//	var thread_title = new Element('input', {type: 'text'});
 			var t_title_en = new Element('input', {type: 'text', name: 'title_en'});
 			var t_title_ru = new Element('input', {type: 'text', name: 'title_ru'});
 			var msg_text_label = new Element('b', {text: 'Template text'});
@@ -159,28 +167,41 @@ window.addEvent('domready',function() {
 					});
 				}
 			}});
-			var save_draft_btn = new Element('input', {type: 'button', class: '', value: 'Save draft', events: {
-				click: function(e){
-				//	alert( msg_id );
-					RPC.send('msg.save_my_message_draft_data', [user.id, msg_id, {msg_text: msg_text.get('value'), thread_title: thread_title.get('value')}], function(result, error) {
-				//		alert(JSON.encode(result));
-					});
-				}
-			}});
-			var delete_msg_btn = new Element('input', {type: 'button', class: '', value: 'Delete draft', events: {
+			*/
+			var back_btn = new Element('input', {type: 'button', class: '', value: '<< Back to the list', events: {
 				click: function(e){
 					clear_form();
-					RPC.send('msg.delete_my_message_draft', [user.id, msg_id], function(result, error) {
-				//		alert(JSON.encode(result));
-				//		me.notify('deleted', msg_id);
-						me.panel.dispose();
-					});
-				//	cont.setStyles({display: 'none'});
+			//		RPC.send('msg.delete_my_message_draft', [user.id, msg_id], function(result, error) {
+			//	//		alert(JSON.encode(result));
+						me.notify('close_item', template_id);
+					//	me.panel.dispose();
+			//		});
+			//	//	cont.setStyles({display: 'none'});
 				}
 			}});
-			*/
+			var save_t_btn = new Element('input', {type: 'button', class: '', value: 'Save template', events: {
+				click: function(e){
+				//	alert( JSON.encode(t_info.get()) );
+					RPC.send('post.save_template_data', [null, template_id, t_info.get()], function(result, error) {
+						alert(JSON.encode(result));
+					});
+				}
+			}});
+			var delete_t_btn = new Element('input', {type: 'button', class: '', value: 'Delete template', events: {
+				click: function(e){
+					clear_form();
+			//		RPC.send('msg.delete_my_message_draft', [user.id, msg_id], function(result, error) {
+			//	//		alert(JSON.encode(result));
+						me.notify('close_item', template_id);
+					//	me.panel.dispose();
+			//		});
+			//	//	cont.setStyles({display: 'none'});
+				}
+			}});
 		//	if( !thread_id ) {
 				cont.adopt(
+					back_btn,
+					new Element('br'),
 					thread_title_label,
 					new Element('br'),
 					new Element('b', {text: 'en '}),
@@ -196,10 +217,10 @@ window.addEvent('domready',function() {
 				msg_text_label,
 				new Element('br'),
 				msg_text,
-				new Element('br')//,
-			//	add_msg_btn,
-			//	save_draft_btn,
-			//	delete_msg_btn
+				new Element('br'),
+			//	add_t_btn,
+				save_t_btn,
+				delete_t_btn
 			);
 
 
@@ -235,12 +256,12 @@ window.addEvent('domready',function() {
 					}
 				});
 			}
+			*/
 
 			function clear_form() {
-				thread_title.set('value', '');
-				msg_text.set('value', '');
+			//	thread_title.set('value', '');
+			//	msg_text.set('value', '');
 			}
-			*/
 
 			function loadData(){
 			//	alert(template_id);
