@@ -5,10 +5,6 @@ window.addEvent('domready',function() {
 	self.Coms.Comp = self.Coms.Comp || {};
 	self.Coms.Comp.Post = self.Coms.Comp.Post || {};
 
-	/*
-	 * 
-	 */
-
 	/*  */
 
 	self.Coms.Comp.Post.EditTemplates = (function() {
@@ -54,17 +50,14 @@ window.addEvent('domready',function() {
 			tList.reload();
 			panel.grab(tList.panel);
 
-///*
 			var oneT = new Coms.Comp.Post.EditOneTemplate({});
 			oneT.show(false);
 			oneT.attach('close_item', function(arg) {
 				oneT.show(false);
+				tList.reload();
 				tList.show(true);
-			//	threadsDraftsList.show(true);
-			//	new_thread_draft_btn_show(true);
 			});
 			panel.grab(oneT.panel);
-//*/
 
 			return me;
 		};
@@ -103,14 +96,8 @@ window.addEvent('domready',function() {
 						}
 					}
 				});
-			//	a.set('text', v['thread_title']);
 				a.set('text', v.title ? JSON.encode(v.title) : '???' );
 				div.grab(a);
-			//	*/
-
-			//	div.set('text', v['thread_title']);
-			//	div.set('text', 'qqq qqq qqq qqq qqq');
-			//	div.set('text', v.title ? JSON.encode(v.title) : '???' );
 				cont.grab(div);
 			}
 			function render(list) {
@@ -155,19 +142,6 @@ window.addEvent('domready',function() {
 				width: '40em',
 				height: '6em'
 			}});
-			/*
-			var add_msg_btn = new Element('input', {type: 'button', class: '', value: 'Send message', events: {
-				click: function(e){
-					RPC.send('msg.save_my_message_draft_data', [user.id, msg_id, {msg_text: msg_text.get('value'), thread_title: thread_title.get('value')}], function(result, error) {
-						RPC.send('msg.save_my_draft_as_message', [user.id, msg_id], function(result, error) {
-					//		alert(JSON.encode(result));
-							me.notify('message_saved', msg_id);
-							me.panel.dispose();
-						});
-					});
-				}
-			}});
-			*/
 			var back_btn = new Element('input', {type: 'button', class: '', value: '<< Back to the list', events: {
 				click: function(e){
 					clear_form();
@@ -190,11 +164,11 @@ window.addEvent('domready',function() {
 			var delete_t_btn = new Element('input', {type: 'button', class: '', value: 'Delete template', events: {
 				click: function(e){
 					clear_form();
-			//		RPC.send('msg.delete_my_message_draft', [user.id, msg_id], function(result, error) {
-			//	//		alert(JSON.encode(result));
+					RPC.send('post.delete_template', [null, template_id], function(result, error) {
+					//	alert(JSON.encode(result));
 						me.notify('close_item', template_id);
 					//	me.panel.dispose();
-			//		});
+					});
 			//	//	cont.setStyles({display: 'none'});
 				}
 			}});
@@ -225,55 +199,21 @@ window.addEvent('domready',function() {
 
 
 			var t_info = FormDataInputs( cont, {
-			//	gender: null,
-			//	country: null,
-			//	phone: null,
 			//	fax: null,
 				title: 'ml' //,
-			//	fname: 'ml',
-			//	mname: 'ml',
-			//	lname: 'ml',
-			//	city: 'ml',
-			//	affiliation: 'ml'
 			} );
 
-
-			/*
-			if( msg_id ) {
-				RPC.send('msg.get_my_message_draft_data', [user.id, msg_id], function(result, error) {
-				//	alert(JSON.encode(result));
-					if(result) {
-						msg_text.set('value', result.msg_text);
-						thread_title.set('value', result.thread_title);
-					}
-				});
-			} else {
-			//	RPC.send('msg.create_my_message_draft_on_paper', [user.id, args.cont_id, args.paper_id, null], function(result, error) {
-				RPC.send('msg.create_my_message_draft_on_paper', [user.id, args.cont_id, args.paper_id, thread_id], function(result, error) {
-				//	alert(JSON.encode(result));
-					if(result) {
-						msg_id = result._id;
-					}
-				});
-			}
-			*/
-
 			function clear_form() {
-			//	thread_title.set('value', '');
-			//	msg_text.set('value', '');
+				t_info.set({
+					title: {en: '', ru: ''}
+				});
 			}
 
 			function loadData(){
 			//	alert(template_id);
 				if(template_id) {
 					RPC.send('post.get_template_data', [null, template_id], function(result, error) {
-					//	msg_text.set('value', result.msg_text);
-					//	thread_title.set('value', result.template_title);
-				//		thread_title.set('value', JSON.encode(result.title));
 						t_info.set(result);
-					//	alert(JSON.encode(result));
-			//			alert( JSON.encode(t_info.get()) );
-					//	render(result);
 					});
 				}
 			}
@@ -281,9 +221,6 @@ window.addEvent('domready',function() {
 			function init(id) {
 				template_id = id;
 				reload();
-			//	reloadData();
-			//	messagesList.init(thread_id);
-			//	messagesDraftsList.init(thread_id);
 			}
 			var me = {
 				panel: panel,

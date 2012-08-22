@@ -230,6 +230,7 @@ module Coms
 			'post.get_templates' => SUPERUSER,
 			'post.get_template_data' => SUPERUSER,
 			'post.save_template_data' => SUPERUSER,
+			'post.delete_template' => SUPERUSER,
 
 		}
 		def self.check user_id, name, attr={} 
