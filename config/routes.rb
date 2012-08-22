@@ -68,6 +68,8 @@ Prs5::Application.routes.draw do
 
 #  match '/adm/(:action)' => 'adm'
 
+  match '/lib(/(:action))' => 'lib'
+
   namespace :adm do
 	match '/post(/(:action))' => 'post'
 	match '(/(:action))' => 'main'

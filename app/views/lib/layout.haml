@@ -1,0 +1,17 @@
+
+-#set_content_for :site_id, 'lib'
+
+-content_for :section_content do
+ .lib
+  %h2{:align => 'center'}= _ :library
+
+  -#%div{:align=>"left"}
+   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users'], [_(:post), './post/', 'post'] ]}
+   .clear
+
+  %div= yield :page_content
+
+- @part_id='lib'
+
+
+
