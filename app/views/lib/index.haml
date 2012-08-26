@@ -3,9 +3,17 @@
 - @page_id='main'
 
 -content_for :page_content do
- %div
-  Library main page
-  -#=render "comp/adm/conf", :locals => {:current_id => @page_id}
+ .page
+  %h3.title Publications
+  %ul
+   -[:conferences, :magazines, :books].each do |elm|
+    %li
+     %span= _(elm)+': '
+     %a{href: '/lib/'+elm.to_s+'/?l=en'}<
+      %b><= _(:en)
+     %a{href: '/lib/'+elm.to_s+'/?l=ru'}<
+      %b><= _(:ru)
+  .clear
 
 -render :file => 'lib/layout'
 -#render :file => 'adm/post/layout'

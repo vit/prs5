@@ -8,7 +8,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="any">
+<body class="<%= 'any'+ (@part_id ? ' '+@part_id.to_s : '') %>">
 	<div class=top>
 		<!-- div class= title>
 			<%= _ :systemnameabbreviation %>

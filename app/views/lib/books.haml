@@ -1,0 +1,12 @@
+
+- @page_title= _ :title
+- @page_id='books'
+
+-content_for :page_content do
+ .page
+  %h3.title Books
+  =lib_query_str
+
+-render :file => 'lib/layout'
+-#render :file => 'adm/post/layout'
+

@@ -1,0 +1,26 @@
+
+
+body.lib {
+
+	.body {
+		.page {
+		//	background-color: red;
+			.title {
+			//	background-color: green;
+				text-align: center;
+
+			}
+			ul {
+				float: left;
+			}
+			.row {
+				border: solid thin black;
+				.col {
+					border: solid thin green;
+					float: left;
+				}
+			}
+		}
+	}
+
+}

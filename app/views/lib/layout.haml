@@ -5,8 +5,8 @@
  .lib
   %h2{:align => 'center'}= _ :library
 
-  -#%div{:align=>"left"}
-   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users'], [_(:post), './post/', 'post'] ]}
+  %div{:align=>"left"}
+   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/lib/", :data => [ [_(:conferences), './conferences', 'conferences'], [_(:magazines), './magazines', 'magazines'], [_(:books), './books', 'books'] ]}
    .clear
 
   %div= yield :page_content
