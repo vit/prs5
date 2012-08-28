@@ -3,9 +3,14 @@
 - @page_id='conferences'
 
 -content_for :page_content do
- .page
+ -#.page
   %h3.title Conferences
-  =lib_query_str
+  -#=lib_query_str
+  -#=@data.to_s
+
+
+ =render :partial => 'lib/types/conf'
+
 
 -render :file => 'lib/layout'
 -#render :file => 'adm/post/layout'

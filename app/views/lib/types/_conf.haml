@@ -1,0 +1,14 @@
+
+- @page_title= _ :title
+- @page_id='conferences'
+
+-#content_for :page_content do
+.page
+ %h3.title Conf
+ =lib_query_str
+ %div=@data.to_s
+ %div=@children.to_s
+
+-#render :file => 'lib/layout'
+-#render :file => 'adm/post/layout'
+
