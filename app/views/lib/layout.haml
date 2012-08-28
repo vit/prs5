@@ -6,7 +6,7 @@
   %h2{:align => 'center'}= _ :library
 
   %div{:align=>"left"}
-   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/lib/", :data => [ [_(:conferences), './conferences', 'conferences'], [_(:magazines), './magazines', 'magazines'], [_(:books), './books', 'books'] ]}
+   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/lib/", :data => [ [_(:main), './', 'main'], [_(:conferences), './conferences', 'conferences'], [_(:periodicals), './periodicals', 'periodicals'], [_(:books), './books', 'books'] ]}
    .clear
 
   %div= yield :page_content

@@ -6,7 +6,7 @@
  .page
   %h3.title Publications
   %ul
-   -[:conferences, :magazines, :books].each do |elm|
+   -[:conferences, :periodicals, :books].each do |elm|
     %li
      %span= _(elm)+': '
      %a{href: '/lib/'+elm.to_s+'/?l=en'}<
