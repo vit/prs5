@@ -1,0 +1,23 @@
+
+- @page_title= _ :title
+- @page_id='conferences'
+
+-content_for :page_content do
+ -#.page
+  %h3.title Conferences
+  -#=lib_query_str
+  -#=@data.to_s
+
+ -#=render :partial => 'lib/types/conf'
+
+ -#case @data['type']
+ -templ = case @data['type']
+ -when 'CONF:LIST' then 'lib/types/conf_list'
+ -when 'CONF:ITEM' then 'lib/types/conf_item'
+ -when 'CONF:PAPER' then 'lib/types/conf_paper'
+ =render :partial => templ if templ
+
+
+-render :file => 'lib/layout'
+-#render :file => 'adm/post/layout'
+

@@ -1,0 +1,18 @@
+
+- @page_title= _ :title
+- @page_id='conferences'
+
+-#content_for :page_content do
+.page
+ %h3.title Conference papers list
+ =lib_query_str
+ %div=@data.to_s
+ .children
+  -@children.each do |c|
+   -#%div= c.to_s
+   %div
+    %a{href: ('item?id='+c['id'].to_s)}= c.to_s
+
+-#render :file => 'lib/layout'
+-#render :file => 'adm/post/layout'
+

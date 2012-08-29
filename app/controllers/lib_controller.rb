@@ -9,6 +9,7 @@ class LibController < ApplicationController
   end
   def conferences
 	id = Coms::App.model.lib.get_id_by_alias 'conferences'
+	id = '1'
 	item id
 
 	#render text: 'wwwww'
@@ -30,7 +31,8 @@ class LibController < ApplicationController
 #		end
 #	end
 	#render text: 'wwwww'
-	render :file => 'lib/conferences'
+#	render :file => 'lib/conferences'
+	render :file => 'lib/item'
   end
 end
 
