@@ -77,6 +77,7 @@ Prs5::Application.routes.draw do
 
   namespace :adm do
 	match '/post(/(:action))' => 'post'
+	match '/lib(/(:action))' => 'lib'
 	match '(/(:action))' => 'main'
 #	match '/conf/archive.html' => 'main#list_archive'
 #	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'

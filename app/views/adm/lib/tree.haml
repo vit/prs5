@@ -1,0 +1,10 @@
+
+- @page_title= _ :title
+- @page_id='tree'
+
+-content_for :lib_page_content do
+ %div
+  =render "comp/adm/lib/tree", :locals => {:current_id => @page_id}
+
+-render :file => 'adm/lib/layout'
+
