@@ -51,7 +51,32 @@ window.addEvent('domready',function() {
 			var user = window.user;
 	//		alert(user);
 			var panel = new Element('div', { class: '' });
-			panel.grab( new Element('div', {text: 'Node data'}) );
+
+			var viewData = (function(){
+				var panel = new Element('div', { class: '' });
+				panel.grab( new Element('div', {text: 'View node data'}) );
+				var me = {
+					panel: panel,
+				//	reload: reload,
+					show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+				};
+				Mixin.implement(me, Mixin.Observable);
+				return me;
+			}());
+			panel.grab( viewData.panel );
+
+			var editData = (function(){
+				var panel = new Element('div', { class: '' });
+				panel.grab( new Element('div', {text: 'Edit node data'}) );
+				var me = {
+					panel: panel,
+				//	reload: reload,
+					show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+				};
+				Mixin.implement(me, Mixin.Observable);
+				return me;
+			}());
+			panel.grab( editData.panel );
 
 		//	var new_element = new Coms.Comp.AddThreadPanel( args );
 		//	panel.grab(new_element.panel);
@@ -115,52 +140,6 @@ window.addEvent('domready',function() {
 	//		alert(user);
 			var panel = new Element('div', { class: '' });
 			panel.grab( new Element('div', {text: 'Node children'}) );
-
-		//	var new_element = new Coms.Comp.AddThreadPanel( args );
-		//	panel.grab(new_element.panel);
-/*
-			var new_element_btn = new Element('input', {type: 'button', value: 'New template ', events: {
-				click: function() {
-				//	alert('qqq');
-					me.notify('show_item', null);
-					return false;
-				}
-			}});
-			panel.grab(new_element_btn);
-
-			var t_list = new Element('fieldset', { class: 'templates_list' });
-			t_list.grab(new Element('legend', {text: 'Templates list'}));
-			var cont = new Element('div');
-			t_list.grab(cont);
-			panel.grab(t_list);
-			function addRow(v) {
-				var div = new Element('div', { class: 'item' });
-			//	/*
-				var a = new Element('a', { href: '#',
-					events: {
-						click: function (e) {
-							me.notify('show_item', v['_id']);
-							return false;
-						}
-					}
-				});
-				a.set('text', v.title ? JSON.encode(v.title) : '???' );
-				div.grab(a);
-				cont.grab(div);
-			}
-			function render(list) {
-				cont.empty();
-				if(list) list.each(function(v){ addRow(v); });
-			}
-			function loadData(){
-			//	var result = [1,2,3];
-				RPC.send('post.get_templates', [null], function(result, error) {
-				//	alert(JSON.encode(result));
-					render(result);
-				});
-			}
-			function reload() { loadData(); }
-			*/
 
 			var me = {
 				panel: panel,
