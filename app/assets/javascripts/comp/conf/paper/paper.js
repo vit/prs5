@@ -392,7 +392,8 @@ window.addEvent('domready',function() {
 			var container = panel.getElement('[name="container"]');
 			var dict = Dict( panel.getChildren('[name="dict"]')[0] );
 			function renderYes() {
-				['abstract', 'paper', 'presentation'].each(function(type){
+			//	['abstract', 'paper', 'presentation'].each(function(type){
+				['abstract', 'paper', 'presentation', 'exdoc'].each(function(type){
 					//var h3 = (new Element('h3', {text: dict('file_'+type), align: 'center'})).inject(container);
 					var table = (new Element('table', {border: 1, width: '100%'})).inject(container);
 					var tbody = (new Element('tbody')).inject(table);
