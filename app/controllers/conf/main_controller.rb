@@ -121,6 +121,9 @@ class Conf::MainController < ApplicationController
 		end
 		render :layout => false
 	end
+	def myparticipation
+		render @current_user[:user_id] ? '/conf/main/myparticipation' : '/conf/main/enterplease'
+	end
 	def reviewing
 		can_view = @user_rights['appoint_reviewers'] || @user_rights['review_everything'] || @user_rights['set_final_decision'] || @user_rights['delete_reviews'] || @appl.conf.paper.has_papers_for_reviewing(@current_user[:user_id], @cont_id)
 	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing/index' : '/conf/main/norights') : '/conf/main/enterplease'
@@ -146,6 +149,8 @@ class Conf::MainController < ApplicationController
 		prev_menu_access = @menu_access
 		@menu_access = -> id {
 			case id
+			when :myparticipation then
+				true
 			when :reports then
 				@appl.conf.report.get_reports_list( @cont_id ).keys.push('reports').inject(false) do |acc, k|
 					acc || @user_rights[k.to_s+'_view']

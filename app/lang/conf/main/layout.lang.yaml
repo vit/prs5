@@ -5,6 +5,7 @@ en:
 
         main: 'Main'
         mypapers: 'My papers'
+        myparticipation: 'My participation'
         reviewing: 'Reviewing'
         reviewing2: 'Reviewing 2'
         myparticipation: 'My participation'
@@ -20,6 +21,7 @@ ru:
 
         main: 'Главная'
         mypapers: 'Мои рефераты и доклады'
+        mypartycipation: Мое участие
         reviewing: 'Рецензирование'
         reviewing2: 'Рецензирование 2'
         myparticipation: 'Мое участие'
