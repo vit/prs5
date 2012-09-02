@@ -98,6 +98,9 @@ en:
         PAPREG_PAPER_PRESENTATION_REMOVE:
         PAPREG_PAPER_PRESENTATION_REUPLOAD:
         PAPREG_PAPER_PRESENTATION_UPLOAD:
+        PAPREG_PAPER_EXDOC_REMOVE:
+        PAPREG_PAPER_EXDOC_REUPLOAD:
+        PAPREG_PAPER_EXDOC_UPLOAD:
         PAPREG_VIEW_FINAL_DECISION:
         PAPREG_VIEW_REVIEWERS_COMMENTS:
         PARTICIPANT_EDIT_REGFORM:
@@ -122,6 +125,9 @@ en:
         role_PAPREG_PAPER_PRESENTATION_REMOVE:
         role_PAPREG_PAPER_PRESENTATION_REUPLOAD:
         role_PAPREG_PAPER_PRESENTATION_UPLOAD:
+        role_PAPREG_PAPER_EXDOC_REMOVE:
+        role_PAPREG_PAPER_EXDOC_REUPLOAD:
+        role_PAPREG_PAPER_EXDOC_UPLOAD:
         role_PAPREG_VIEW_FINAL_DECISION:
         role_PAPREG_VIEW_REVIEWERS_COMMENTS:
         role_PAPREG_VIEW_SECTMANS_COMMENTS:
@@ -225,6 +231,9 @@ ru:
         PAPREG_PAPER_PRESENTATION_REMOVE: Регистратору доклада на удаление файла презентации
         PAPREG_PAPER_PRESENTATION_REUPLOAD: Регистратору доклада на замену файла презентации
         PAPREG_PAPER_PRESENTATION_UPLOAD: Регистратору доклада на загрузку файла презентации
+        PAPREG_PAPER_EXDOC_REMOVE: Регистратору доклада на удаление файла экспертного документа
+        PAPREG_PAPER_EXDOC_REUPLOAD: Регистратору доклада на замену файла экспертного документа
+        PAPREG_PAPER_EXDOC_UPLOAD: Регистратору доклада на загрузку файла экспертного документа
 
         PAPREG_VIEW_FINAL_DECISION: Регистратору доклада на просмотр окончательного решения
         PAPREG_VIEW_REVIEWERS_COMMENTS: Регистратору доклада на просмотр комментариев рецензентов
@@ -252,6 +261,9 @@ ru:
         role_PAPREG_PAPER_PRESENTATION_REMOVE: Удалять файл презентации
         role_PAPREG_PAPER_PRESENTATION_REUPLOAD: Перезагружать файл презентации
         role_PAPREG_PAPER_PRESENTATION_UPLOAD: Загружать файл презентации
+        role_PAPREG_PAPER_EXDOC_REMOVE: Удалять файл экспертного документа
+        role_PAPREG_PAPER_EXDOC_REUPLOAD: Перезагружать файл экспертного документа
+        role_PAPREG_PAPER_EXDOC_UPLOAD: Загружать файл экспертного документа
         role_PAPREG_VIEW_FINAL_DECISION: Просматривать окончательное решение
         role_PAPREG_VIEW_REVIEWERS_COMMENTS: Просматривать комментарии рецензентов
         role_PAPREG_VIEW_SECTMANS_COMMENTS: Просматривать комментарии руководителей секций

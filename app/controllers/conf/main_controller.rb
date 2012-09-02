@@ -57,14 +57,15 @@ class Conf::MainController < ApplicationController
 		@lng = request.params['lang']
 		delete = request.params['delete']
 		@can_delete = @can_upload = false
-		if %w[abstract paper presentation].include? @type
+		if %w[abstract paper presentation exdoc].include? @type
 			@can_delete =
 				#	@type=='abstract' && @conf_permissions['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
 				#	@type=='paper' && @conf_permissions['PAPREG_PAPER_FILE_REMOVE'] ||
 				#	@type=='presentation' && @conf_permissions['PAPREG_PAPER_PRESENTATION_REMOVE'] ||
 				@type=='abstract' && @user_rights['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
 				@type=='paper' && @user_rights['PAPREG_PAPER_FILE_REMOVE'] ||
-				@type=='presentation' && @user_rights['PAPREG_PAPER_PRESENTATION_REMOVE']
+				@type=='presentation' && @user_rights['PAPREG_PAPER_PRESENTATION_REMOVE'] ||
+				@type=='exdoc' && @user_rights['PAPREG_PAPER_EXDOC_REMOVE']
 			if user_id && @cont_id && @_id && @lng && delete && @can_delete
 				@appl.conf.paper.delete_my_paper_file(user_id, @cont_id, @_id, @lng, @type)
 			end
@@ -91,6 +92,10 @@ class Conf::MainController < ApplicationController
 						#	!@file_info && @conf_permissions['PAPREG_PAPER_PRESENTATION_UPLOAD'] ||
 						@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_REUPLOAD'] ||
 						!@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_UPLOAD']
+				) ||
+					@type=='exdoc' && (
+						@file_info && @user_rights['PAPREG_PAPER_EXDOC_REUPLOAD'] ||
+						!@file_info && @user_rights['PAPREG_PAPER_EXDOC_UPLOAD']
 				)
 				inputfile = request.params['file']
 				if inputfile && @can_upload
