@@ -17,6 +17,9 @@ en:
         PAPREG_PAPER_PRESENTATION_UPLOAD: "Upload presentation file if it isn't uploaded yet"
         PAPREG_PAPER_PRESENTATION_REUPLOAD: Replace presentation file
         PAPREG_PAPER_PRESENTATION_REMOVE: Remove presentation file
+        PAPREG_EXDOC_FILE_UPLOAD: "Upload expert document file if it isn't uploaded yet"
+        PAPREG_EXDOC_FILE_REUPLOAD: Replace expert document file
+        PAPREG_EXDOC_FILE_REMOVE: Remove expert document file
 
 ru:
         title: Главная
@@ -36,5 +39,8 @@ ru:
         PAPREG_PAPER_PRESENTATION_UPLOAD: Загружать файл презентации, если он еще не загружен
         PAPREG_PAPER_PRESENTATION_REUPLOAD: Заменять файл презентации
         PAPREG_PAPER_PRESENTATION_REMOVE: Удалять файл презентации
+        PAPREG_EXDOC_FILE_UPLOAD: Загружать файл  экспертного документа, если он еще не загружен
+        PAPREG_EXDOC_FILE_REUPLOAD: Заменять файл  экспертного документа
+        PAPREG_EXDOC_FILE_REMOVE: Удалять файл экспертного документа
 
 
