@@ -9,7 +9,13 @@ window.addEvent('domready',function() {
 
 	self.Coms.Comp.Conf.ParticipationForm = (function() {
 		return function() {
-			alert('Registration Form');
+		//	alert('Registration Form');
+		//	RPC.send('util.get_dict', [user.id, conf.id], function(result, error) {
+			RPC.send('util.get_dict', ['common/comp/conf/participation', ['en']], function(result, error) {
+				//alert( JSON.encode(result) );
+				if(!result) result = {};
+				alert( JSON.encode(result) );
+			});
 
 			var panel = new Element('div', { styles: { } });
 			var me = { panel: panel };

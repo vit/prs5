@@ -9,6 +9,9 @@ module Coms
 		SUPERUSER_OR_CONF_OWNER = -> user_id, attr {
 			SUPERUSER[user_id, attr] or attr[:appl].conf.user_is_conf_owner(user_id, attr[:rpc_params].first)
 		}
+		ANYONE = -> user_id, attr {
+			true
+		}
 		ANY_USER = -> user_id, attr {
 			user_id
 		}
@@ -231,6 +234,9 @@ module Coms
 			'post.get_template_data' => SUPERUSER,
 			'post.save_template_data' => SUPERUSER,
 			'post.delete_template' => SUPERUSER,
+
+		#UTIL
+			'util.get_dict' => ANYONE,
 
 		}
 		def self.check user_id, name, attr={} 
