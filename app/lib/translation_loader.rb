@@ -55,10 +55,10 @@
 			#path1 = File.join(@path, "#{id}.lang.yaml")
 			path1 = File.join(path, "#{id}.lang.yaml")
 		#	path1 = path + '/' + "#{id}.lang.yaml"
-			puts path1
+	#		puts path1
 			data1 = File::exists?(path1) && File::readable?(path1) ? File::open(path1, 'r:utf-8') { |file| YAML.load file.read } || {} : {}
-			puts data1
-			puts lang
+	#		puts data1
+	#		puts lang
 			data = {}
 
 			lang.each do |l|
