@@ -21,25 +21,6 @@ window.addEvent('domready',function() {
 			//	paper_id: _paper_id //,
 			}
 
-			/*
-			var new_thread_draft_btn = new Element('input', {class: 'new_thread_draft_btn', type: 'button', value: 'New topic draft', events: {
-				click: function() {
-					threadsDraftsList.addNewDraft();
-				}
-			}});
-			function new_thread_draft_btn_show(flag) { new_thread_draft_btn.setStyle('display', flag ? 'block' : 'none'); }
-
-			panel.grab(new_thread_draft_btn);
-			var bottom_div = new Element('div', {class: 'bottom_div'});
-
-			var threadsDraftsList = new Coms.Comp.ObjectThreadsDraftsList( args );
-			threadsDraftsList.attach('message_saved', function(arg) {
-				threadsList.reload();
-			});
-			threadsDraftsList.reload();
-			panel.grab(threadsDraftsList.panel);
-			*/
-
 			var tList = new Coms.Comp.Post.TemplatesList( args );
 			tList.attach('show_item', function(arg) {
 				oneT.init(arg);

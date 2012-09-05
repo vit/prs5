@@ -215,6 +215,14 @@ module Coms
 			})
 =end
 
+		#CONF.PARTICIPATION
+			#!!!!!!!!!
+			'create_my_participation' => ITS_ME,
+			'save_my_participation_data' => ITS_ME,
+			'get_my_participation_data' => ITS_ME,
+			'drop_my_participation' => ITS_ME,
+
+
 		#MSG
 			'msg.get_my_threads_on_paper' => ITS_ME,
 			'msg.add_my_message_on_paper' => ITS_ME,
