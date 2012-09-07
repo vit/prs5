@@ -16,74 +16,129 @@ window.addEvent('domready',function() {
 	var conf_user_rights = {};
 	*/
 
+	/*
+	self.conf.addEvent('init_ok', function(result, error) {
+		//conf_permissions = self.conf.permissions;
+		conf_user_rights = self.conf.my_rights;
+	//	MyPapers();
+	});
+	*/
+
 	/*  */
+
+	var NotYetForm = function(args) {
+		var conf = self.conf;
+		var user = self.user;
+		var dict = args.dict;
+
+		var panel = new Element('div', { styles: {display: 'none'} });
+		var me = {
+			panel: panel,
+			show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+		};
+
+		panel.grab(new Element('div', {text: 'NotYetForm'}));
+		var text1 = new Element('div', {text: dict('not_yet_text')});
+		var register_btn = new Element('input', {type: 'button', value: dict('register_btn'), events: {
+			click: function(e) {
+				alert('wwwwwwwwwww');
+			}
+		}});
+		panel.adopt(
+			text1,
+			register_btn
+		);
+
+		Mixin.implement(me, Mixin.Observable);
+		return me;
+	};
+	var RegisteredForm = function(args) {
+		var conf = self.conf;
+		var user = self.user;
+		var dict = args.dict;
+
+		var panel = new Element('div', { styles: {display: 'none'} });
+		var me = {
+			panel: panel,
+			show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
+		};
+
+	//	panel.grab(new Element('div', {text: 'RegisteredForm'}));
+
+		var text1 = new Element('div', {text: dict('you_have_registered_already_text')});
+		var unregister_btn = new Element('input', {type: 'button', value: dict('unregister_btn'), events: {
+			click: function(e) {
+				alert('wwwwwwwwwww');
+			}
+		}});
+		panel.adopt(
+			text1,
+			unregister_btn
+		);
+		Mixin.implement(me, Mixin.Observable);
+		return me;
+	};
+	var CommonForm = function(args) {
+		var conf = self.conf;
+		var user = self.user;
+	//	alert('Registration Form');
+	//	RPC.send('util.get_dict', [user.id, conf.id], function(result, error) {
+//		RPC.send('util.get_dict', ['common/comp/conf/participation', ['en']], function(result, error) {
+//			//alert( JSON.encode(result) );
+//			if(!result) result = {};
+//			alert( JSON.encode(result) );
+//		});
+
+		var panel = new Element('div', { styles: { } });
+		var me = {
+			panel: panel,
+			show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')},
+			init: function(user_id, conf_id) {
+				RPC.send('conf.participation.get_my_participation_data', [user_id, conf_id], function(result, error) {
+					notYetForm.show(!result);
+					registeredForm.show(!!result);
+	//				alert( JSON.encode(result) );
+		//			if(!result) result = {};
+		//			alert( JSON.encode(result) );
+				});
+			}
+		};
+
+		var notYetForm = new NotYetForm(args);
+		var registeredForm = new RegisteredForm(args);
+		panel.adopt(
+			notYetForm.panel,
+			registeredForm.panel
+		);
+
+		Mixin.implement(me, Mixin.Observable);
+		return me;
+	};
 
 	self.Coms.Comp.Conf.ParticipationForm = (function() {
 		return function() {
-		//	alert('Registration Form');
-		//	RPC.send('util.get_dict', [user.id, conf.id], function(result, error) {
-	//		RPC.send('util.get_dict', ['common/comp/conf/participation', ['en']], function(result, error) {
-	//			//alert( JSON.encode(result) );
-	//			if(!result) result = {};
-	//			alert( JSON.encode(result) );
-	//		});
+			var conf = self.conf;
+			var user = self.user;
+			var user_lang_code = Cookie.read('ecms_lang');
+			user_lang_code = user_lang_code || 'ru';
 
 			var panel = new Element('div', { styles: { } });
 			var me = { panel: panel };
 
-			Coms.Util.LoadDictionary('common/comp/conf/participation', 'en', function(dict) {
-				alert( dict('test') );
-			});
-
-
-		//	panel.set('text', 'dfgsdghdgh dfgdfgh dfj gh');
-
-//			var qqq = new Element();
-
-			var args = {
-			//	cont_id: _cont_id,
-			//	paper_id: _paper_id //,
-			}
-
-			/*
-			var new_thread_draft_btn = new Element('input', {class: 'new_thread_draft_btn', type: 'button', value: 'New topic draft', events: {
-				click: function() {
-					threadsDraftsList.addNewDraft();
+			Coms.Util.LoadDictionary('common/comp/conf/participation', user_lang_code, function(dict) {
+				var args = {
+					dict: dict
 				}
-			}});
-			function new_thread_draft_btn_show(flag) { new_thread_draft_btn.setStyle('display', flag ? 'block' : 'none'); }
-
-			panel.grab(new_thread_draft_btn);
-			var bottom_div = new Element('div', {class: 'bottom_div'});
-
-			var threadsDraftsList = new Coms.Comp.ObjectThreadsDraftsList( args );
-			threadsDraftsList.attach('message_saved', function(arg) {
-				threadsList.reload();
+				var commonForm = new CommonForm(args);
+				panel.grab( commonForm.panel );
+				commonForm.init(user.id, conf.id);
+	//			alert( dict('test') );
+//				RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
+//	//				alert( JSON.encode(result) );
+//		//			if(!result) result = {};
+//		//			alert( JSON.encode(result) );
+//				});
 			});
-			threadsDraftsList.reload();
-			panel.grab(threadsDraftsList.panel);
-			*/
-
-			/*
-			var tList = new Coms.Comp.Post.TemplatesList( args );
-			tList.attach('show_item', function(arg) {
-				oneT.init(arg);
-				tList.show(false);
-			//	new_thread_draft_btn_show(false);
-				oneT.show(true);
-			});
-			tList.reload();
-			panel.grab(tList.panel);
-
-			var oneT = new Coms.Comp.Post.EditOneTemplate({});
-			oneT.show(false);
-			oneT.attach('close_item', function(arg) {
-				oneT.show(false);
-				tList.reload();
-				tList.show(true);
-			});
-			panel.grab(oneT.panel);
-			*/
 
 			return me;
 		};

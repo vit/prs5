@@ -1,6 +1,12 @@
 
 en:
-    test: qwerty
+        not_yet_text: You have not registered as a participant yet
+        register_btn: Register you participation now
+        you_have_registered_already_text: You have registered as a participation
+        unregister_btn: Give up participation
 
 ru:
-    test: йцукен
+        not_yet_text:
+        register_btn:
+        you_have_registered_already_text:
+        unregister_btn:

@@ -217,10 +217,10 @@ module Coms
 
 		#CONF.PARTICIPATION
 			#!!!!!!!!!
-			'create_my_participation' => ITS_ME,
-			'save_my_participation_data' => ITS_ME,
-			'get_my_participation_data' => ITS_ME,
-			'drop_my_participation' => ITS_ME,
+			'conf.participation.create_my_participation' => ITS_ME,
+			'conf.participation.save_my_participation_data' => ITS_ME,
+			'conf.participation.get_my_participation_data' => ITS_ME,
+			'conf.participation.drop_my_participation' => ITS_ME,
 
 
 		#MSG
