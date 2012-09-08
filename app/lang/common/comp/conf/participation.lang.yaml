@@ -6,7 +6,7 @@ en:
         unregister_btn: Give up participation
 
 ru:
-        not_yet_text:
-        register_btn:
-        you_have_registered_already_text:
-        unregister_btn:
+        not_yet_text: Вы еще не зарегистрированы как участник
+        register_btn: Зарегистрировать участие
+        you_have_registered_already_text: Вы зарегистрировались как участник
+        unregister_btn: Отказаться от участия

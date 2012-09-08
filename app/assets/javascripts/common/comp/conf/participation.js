@@ -30,6 +30,7 @@ window.addEvent('domready',function() {
 		var conf = self.conf;
 		var user = self.user;
 		var dict = args.dict;
+		var conf_user_rights = self.conf.my_rights;
 
 		var panel = new Element('div', { styles: {display: 'none'} });
 		var me = {
@@ -37,17 +38,34 @@ window.addEvent('domready',function() {
 			show: function (flag) {panel.setStyle('display', flag ? 'block' : 'none')}
 		};
 
-		panel.grab(new Element('div', {text: 'NotYetForm'}));
-		var text1 = new Element('div', {text: dict('not_yet_text')});
-		var register_btn = new Element('input', {type: 'button', value: dict('register_btn'), events: {
-			click: function(e) {
-				alert('wwwwwwwwwww');
-			}
-		}});
+	//	panel.grab(new Element('div', {text: 'NotYetForm'}));
+		var top_text = new Element('div', {text: dict('not_yet_text')});
 		panel.adopt(
-			text1,
-			register_btn
+			top_text
 		);
+	//	if(conf_user_rights[]) {
+			var register_btn = new Element('input', {type: 'button', value: dict('register_btn'), events: {
+				click: function(e) {
+					RPC.send('conf.participation.create_my_participation', [user.id, conf.id], function(result, error) {
+						me.notify('reload');
+					//	notYetForm.show(!result);
+					//	registeredForm.show(!!result);
+		//				alert( JSON.encode(result) );
+			//			if(!result) result = {};
+			//			alert( JSON.encode(result) );
+					});
+				//	alert('wwwwwwwwwww');
+				}
+			}});
+			panel.adopt(
+				register_btn
+			);
+	//	} else {
+//			var you_cant_create_text = new Element('div', {text: dict('you_cant_create_text')});
+//			panel.adopt(
+//				you_cant_create_text
+//			);
+//		}
 
 		Mixin.implement(me, Mixin.Observable);
 		return me;
@@ -68,7 +86,15 @@ window.addEvent('domready',function() {
 		var text1 = new Element('div', {text: dict('you_have_registered_already_text')});
 		var unregister_btn = new Element('input', {type: 'button', value: dict('unregister_btn'), events: {
 			click: function(e) {
-				alert('wwwwwwwwwww');
+				RPC.send('conf.participation.drop_my_participation', [user.id, conf.id], function(result, error) {
+					me.notify('reload');
+				//	notYetForm.show(!result);
+				//	registeredForm.show(!!result);
+	//				alert( JSON.encode(result) );
+		//			if(!result) result = {};
+		//			alert( JSON.encode(result) );
+				});
+//			alert('wwwwwwwwwww');
 			}
 		}});
 		panel.adopt(
@@ -97,7 +123,7 @@ window.addEvent('domready',function() {
 				RPC.send('conf.participation.get_my_participation_data', [user_id, conf_id], function(result, error) {
 					notYetForm.show(!result);
 					registeredForm.show(!!result);
-	//				alert( JSON.encode(result) );
+			//		alert( JSON.encode(result) );
 		//			if(!result) result = {};
 		//			alert( JSON.encode(result) );
 				});
@@ -110,6 +136,12 @@ window.addEvent('domready',function() {
 			notYetForm.panel,
 			registeredForm.panel
 		);
+		notYetForm.attach('reload', function() {
+			me.init(user.id, conf.id);
+		});
+		registeredForm.attach('reload', function() {
+			me.init(user.id, conf.id);
+		});
 
 		Mixin.implement(me, Mixin.Observable);
 		return me;
