@@ -4,9 +4,16 @@ en:
         register_btn: Register you participation now
         you_have_registered_already_text: You have registered as a participation
         unregister_btn: Give up participation
+        you_can_change_text: You can change your registration form
+        save_form_btn: Save registration form
+        form_saved_ok: Registration form is saved
 
 ru:
         not_yet_text: Вы еще не зарегистрированы как участник
         register_btn: Зарегистрировать участие
         you_have_registered_already_text: Вы зарегистрировались как участник
         unregister_btn: Отказаться от участия
+        you_can_change_text: Вы можете изменить ваши регистрационные данные
+        save_form_btn: Сохранить данные регистрационной формы
+        form_saved_ok: Данные сохранены
+
