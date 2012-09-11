@@ -44,6 +44,19 @@ window.addEvent('domready',function() {
 				inputs[name] = type;
 				return new Element(tag, args);
 			},
+			clear: function() {
+				$H(inputs).each(function(v,k){
+					if(v=='ml') {
+						lang_list.each(function(lang){
+							var e = container.getElement('[name="'+k+'_'+lang+'"]');
+							if(e) e.setProperty('value', null);
+						});
+					} else {
+						var e = container.getElement('[name="'+k+'"]');
+						if(e) e.setProperty('value', null);
+					}
+				});
+			},
 			get: function() {
 				var res = {};
 				$H(inputs).each(function(v,k){
