@@ -1,0 +1,10 @@
+
+- @page_title= _ :title
+- @page_id='slots'
+
+-content_for :post_page_content do
+ %div
+  -#=render "comp/adm/post/slots", :locals => {:current_id => @page_id}
+
+-render :file => 'adm/post/layout'
+
