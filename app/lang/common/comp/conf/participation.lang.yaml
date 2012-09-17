@@ -8,6 +8,17 @@ en:
         save_form_btn: Save registration form
         form_saved_ok: Registration form is saved
 
+        form_badgename: Badge name
+        form_birthyear: Birth year
+        form_degree: Degree
+        form_organization: Organization
+        form_position: Position
+        form_address: Address
+        form_zipcode: Zipcode
+        form_phone: Phone
+        form_fax: Fax
+        form_email: Email
+
 ru:
         not_yet_text: Вы еще не зарегистрированы как участник
         register_btn: Зарегистрировать участие
@@ -16,4 +27,15 @@ ru:
         you_can_change_text: Вы можете изменить ваши регистрационные данные
         save_form_btn: Сохранить данные регистрационной формы
         form_saved_ok: Данные сохранены
+
+        form_badgename: Имя на бейдж
+        form_birthyear: Год рождения
+        form_degree: Ученая степень
+        form_organization: Организация
+        form_position: Должность
+        form_address: Адрес
+        form_zipcode: Индекс
+        form_phone: Телефон
+        form_fax: Факс
+        form_email: Email
 
