@@ -1,3 +1,118 @@
-// Place all the styles related to the Conf::Main controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$bgcolor: white;
+$textcolor2: rgb(20,40,128);
+$textcolor: rgb(0,0,0);
+$color3: #eeeeee;
+$color4: #dde9fa;
+$color: #000000;
+$shadowcolor: #777777;
+$lightshadowcolor: #cccccc;
+
+
+@mixin font1 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+@mixin font2 {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.dateinput.hidden {
+	display: none;
+}
+.dateinput {
+//	border: solid red thin;
+//	margin: 0;
+//	padding: 0;
+//	text-align: center;
+//	form {
+//		display: inline-block;
+		border: solid green thin;
+		margin: 4px;
+		padding: 4px;
+	//	width: 50px;
+
+//	}
+	.hidden {
+//		display: none;
+	}
+	.is-bound {
+		position: absolute;
+		box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+	}
+}
+
+#participationcomp {
+//	border: red solid thin;
+		text-align: center;
+	.edit {
+	//	text-align: center;
+	//	.row {
+			border: green solid thin;
+//			text-align: center;
+			display: inline-block;
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			.label {
+				display: inline-block;
+			//	width: 20em;
+				width: 200px;
+			//	margin-right: 0.2em;
+			//	margin: 0.2em;
+				margin: 5px;
+				padding: 0;
+				text-align: right;
+				font-weight: bold;
+			}
+			.input {
+			//	margin: 0;
+			//	margin: 0.2em;
+				margin: 5px;
+				padding: 0;
+			//	width: 30em;
+				width: 300px;
+			//	margin: 0.2em;
+			//	padding: 0.1em;
+			}
+			.save {
+			//	margin: 0.2em 0.2em 0.2em 20.6em;
+				border-width: 10px;
+				padding: 0;
+				margin: 0;
+		//		margin-left: 20.6em;
+				margin-left: 215px;
+				float: left;
+			//	clear: both;
+			}
+	//	}
+	}
+
+	/*
+	.edit {
+		text-align: center;
+		.row {
+			border: green solid thin;
+//			text-align: center;
+			display: inline-block;
+			.label {
+				display: inline-block;
+				width: 20em;
+				margin-right: 0.2em;
+				text-align: right;
+				font-weight: bold;
+			}
+			.input {
+				width: 30em;
+				margin: 0.2em;
+				padding: 0.1em;
+			}
+			.save {
+				float: left;
+			}
+		}
+	}
+	*/
+}
+
+

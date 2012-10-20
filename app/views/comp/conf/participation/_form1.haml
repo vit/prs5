@@ -1,0 +1,38 @@
+
+-#= javascript_include_tag 'common/tabs'
+
+-#= javascript_include_tag 'comp/conf/participation/form'
+
+-#= javascript_include_tag 'http://www.monkeyphysics.com/mootools/download/jsmin/2/datepicker.js'
+= javascript_include_tag 'https://raw.github.com/dbushell/Pikaday/master/pikaday.js'
+
+- content_for :css do
+ - stylesheet_link_tag 'https://raw.github.com/dbushell/Pikaday/master/css/pikaday.css'
+
+#participationcomp{:sstyle=>"display: none"}
+ %div{name: 'container'}
+  %form.edit
+   -%w[badgename birthyear degree organization position address zipcode phone fax email].each do |n|
+    %p
+     %label.label{for: 'form_'+n}= _('form_'+n)
+     %input.input{type: 'text', name: n, id: 'form_'+n}
+   %p
+    %input.input{type: 'text', name: 'date', id: 'form_'+'date'}
+   %p
+    %input.save{type: 'button', value: _(:save_btn)}
+  -#%form.edit
+   -%w[badgename birthyear degree organization position address zipcode phone fax email].each do |n|
+    %div.row
+     %label.label{for: 'form_'+n}= _('form_'+n)
+     %input.input{type: 'text', name: n, id: 'form_'+n}
+    .clear
+   %div.row
+    %input.save{type: 'button', value: _(:save_btn)}
+
+:javascript
+  //new DatePicker('#form_date' , {});
+  //new Pikaday( {field: $('form_date')} );
+  new DateInput( {field: $('form_date')} );
+
+
+

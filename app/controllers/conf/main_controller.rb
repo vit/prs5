@@ -124,6 +124,9 @@ class Conf::MainController < ApplicationController
 	def myparticipation
 		render @current_user[:user_id] ? '/conf/main/myparticipation' : '/conf/main/enterplease'
 	end
+	def myparticipation1
+		render @current_user[:user_id] ? '/conf/main/myparticipation1' : '/conf/main/enterplease'
+	end
 	def reviewing
 		can_view = @user_rights['appoint_reviewers'] || @user_rights['review_everything'] || @user_rights['set_final_decision'] || @user_rights['delete_reviews'] || @appl.conf.paper.has_papers_for_reviewing(@current_user[:user_id], @cont_id)
 	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing/index' : '/conf/main/norights') : '/conf/main/enterplease'
