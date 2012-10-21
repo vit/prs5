@@ -37,23 +37,28 @@ var DateInput = function(args) {
 		month_elem.adopt( new Element('option', {text: months[m]}) );
 	}
 	var days_elem = (function() {
-		function daysInMonth(iMonth, iYear) {
-			return 32 - new Date(iYear, iMonth, 32).getDate();
+		// See http://stackoverflow.com/a/4881951
+		function getNumberOfDays(year, month) {
+			var isLeap = ((year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0));
+			return [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+		}
+		function daysInMonth(year, month) {
+			//return 32 - new Date(year, month, 32).getDate();
+			return new Date(year, month+1, 0).getDate();
 		}
 
 		var panel = new Element('div', {text: ''});
 		function render(year, month) {
 			var daysN = daysInMonth( year, month );
+		//	var daysN = getNumberOfDays(year, month);
 			var day1 = new Date(year, month, 1);
-			var wDay1 = day1.getDay()-1;
-			if( wDay1<0 ) wDay1 = 6;
-	//		alert(wDay1);
+			var wDay1 = day1.getDay()-1; if( wDay1<0 ) wDay1 = 6;
 			panel.empty();
 			var table = new Element('table', {});
 			var tbody = new Element('tbody', {});
 			var tr = new Element('tr', {});
 			weekDaysShort.each(function(v){
-				var th = new Element('th', {text: v});
+				var th = new Element('th', {class: 'wday', text: v});
 				tr.adopt(th);
 			});
 			tbody.adopt(tr);
@@ -63,7 +68,7 @@ var DateInput = function(args) {
 				var tr = new Element('tr', {});
 				for( var wDay = 0; wDay < 7; wDay++ ) {
 					dayCnt++;
-					var td = new Element('td', {text: (dayCnt>0&&dayCnt<=daysN) ? dayCnt : ''});
+					var td = new Element('td', {class: 'day', text: (dayCnt > 0 && dayCnt <= daysN) ? dayCnt : ''});
 					tr.adopt( td );
 				}
 				tbody.adopt(tr);
@@ -78,7 +83,7 @@ var DateInput = function(args) {
 		};
 		return me;
 	}());
-	days_elem.render(2012, 1);
+	days_elem.render(2012, 9);
 	form.adopt(
 		year_elem,
 		month_elem,

@@ -21,7 +21,7 @@ $lightshadowcolor: #cccccc;
 }
 .dateinput {
 
-position: relative;
+	position: relative;
 	//width: 240px;
         padding: 8px;
 
@@ -31,8 +31,12 @@ position: relative;
 		z-index: 100;
 		background-color: rgba(33,220,255,0.9);
 	//	position: relative;
-
 	//	box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+
+	.day {
+		text-align: right;
+	}
+
 //	border: solid red thin;
 //	margin: 0;
 //	padding: 0;
@@ -47,13 +51,13 @@ position: relative;
 	//	width: 50px;
 
 //	}
-	.hidden {
-//		display: none;
-	}
-	.is-bound {
-		position: absolute;
-		box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
-	}
+//	.hidden {
+////		display: none;
+//	}
+//	.is-bound {
+//		position: absolute;
+//		box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+//	}
 }
 
 #participationcomp {
