@@ -20,6 +20,19 @@ $lightshadowcolor: #cccccc;
 	display: none;
 }
 .dateinput {
+
+position: relative;
+	//width: 240px;
+        padding: 8px;
+
+
+
+		position: absolute;
+		z-index: 100;
+		background-color: rgba(33,220,255,0.9);
+	//	position: relative;
+
+	//	box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
 //	border: solid red thin;
 //	margin: 0;
 //	padding: 0;
@@ -27,8 +40,10 @@ $lightshadowcolor: #cccccc;
 //	form {
 //		display: inline-block;
 		border: solid green thin;
-		margin: 4px;
-		padding: 4px;
+		//margin: 4px;
+		margin: 0 4px 4px 4px;
+		//padding: 4px;
+		padding: 0 4px 4px 4px;
 	//	width: 50px;
 
 //	}
@@ -51,10 +66,13 @@ $lightshadowcolor: #cccccc;
 //			text-align: center;
 			display: inline-block;
 			p {
+			//	border: red solid thin;
+			//	vertical-align: top;
 				margin: 0;
 				padding: 0;
 			}
 			.label {
+				vertical-align: top;
 				display: inline-block;
 			//	width: 20em;
 				width: 200px;
@@ -74,6 +92,13 @@ $lightshadowcolor: #cccccc;
 				width: 300px;
 			//	margin: 0.2em;
 			//	padding: 0.1em;
+			}
+			.inputspan {
+				display: inline-block;
+				//display: inline;
+				margin: 0;
+				padding: 0;
+			//	width: 300px;
 			}
 			.save {
 			//	margin: 0.2em 0.2em 0.2em 20.6em;

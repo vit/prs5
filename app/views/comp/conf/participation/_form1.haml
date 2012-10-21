@@ -16,8 +16,13 @@
     %p
      %label.label{for: 'form_'+n}= _('form_'+n)
      %input.input{type: 'text', name: n, id: 'form_'+n}
-   %p
+   -#%p
+    %label.label{for: 'form_'+'date'}= _('form_'+'date')
     %input.input{type: 'text', name: 'date', id: 'form_'+'date'}
+   %p
+    %label.label{for: 'form_'+'date'}= _('form_'+'date')
+    %span.inputspan
+     %input.input{type: 'text', name: 'date', id: 'form_'+'date'}
    %p
     %input.save{type: 'button', value: _(:save_btn)}
   -#%form.edit
