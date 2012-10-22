@@ -68,7 +68,18 @@ var DateInput = function(args) {
 				var tr = new Element('tr', {});
 				for( var wDay = 0; wDay < 7; wDay++ ) {
 					dayCnt++;
-					var td = new Element('td', {class: 'day', text: (dayCnt > 0 && dayCnt <= daysN) ? dayCnt : ''});
+					//var td = new Element('td', {class: 'day', text: (dayCnt > 0 && dayCnt <= daysN) ? dayCnt : ''});
+					var td = new Element('td', {class: 'day', ttext: (dayCnt > 0 && dayCnt <= daysN) ? dayCnt : ''});
+					var validDay = dayCnt > 0 && dayCnt <= daysN;
+					(function( dayCnt ) {
+						var a = new Element('a', {text: validDay ? dayCnt : '', href: '#', events: {
+							click: function() {
+								alert( dayCnt );
+								return false;
+							}
+						}});
+						td.adopt( a );
+					}( dayCnt ));
 					tr.adopt( td );
 				}
 				tbody.adopt(tr);
