@@ -1,4 +1,4 @@
-window.addEvent('domready',function() {
+//window.addEvent('domready',function() {
 
 	Array.prototype.fzip = function(arr) {
 		var i, j, len = this.length;
@@ -230,6 +230,6 @@ window.addEvent('domready',function() {
 		}
 	};
 
-});
+//});
 
 
