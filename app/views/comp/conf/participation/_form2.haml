@@ -1,0 +1,181 @@
+
+-#= javascript_include_tag 'https://raw.github.com/dbushell/Pikaday/master/pikaday.js'
+
+=javascript_include_tag 'comp/conf/participation/form.js'
+
+-# content_for :css do
+ - stylesheet_link_tag 'https://raw.github.com/dbushell/Pikaday/master/css/pikaday.css'
+
+#participationcomp{:sstyle=>"display: none"}
+ %div{name: 'container'}
+  %form.edit#participation_form
+   %fieldset
+    %legend= _(:person_info)
+    %p
+     %span.label= _('form_gender')
+     %label
+      %input.iinput{type: 'radio', name: 'gender', value: 'M'}
+      = _('form_male')
+     %label
+      %input.iinput{type: 'radio', name: 'gender', value: 'F'}
+      = _('form_female')
+    %p
+     %label.label{for: 'person_title'}= _('form_person_title')
+     %select.input
+    %p
+     %label.label{for: 'form_lname'}= _('form_lname')
+     %input.input{type: 'text', name: 'lname', id: 'form_lname'}
+    %p
+     %label.label{for: 'form_fname'}= _('form_fname')
+     %input.input{type: 'text', name: 'fname', id: 'form_fname'}
+    %p
+     %label.label{for: 'form_mname'}= _('form_mname')
+     %input.input{type: 'text', name: 'mname', id: 'form_mname'}
+    %p
+     %label.label{for: 'form_birthdate'}= _('form_birthdate')
+     %input.input{type: 'text', name: 'birthdate', id: 'form_birthdate', value: '1981-03-14'}
+     -#%input.input{type: 'date', name: 'birthdate', id: 'form_birthdate', value: '1981-03-14'}
+   %fieldset
+    %legend= _(:participation_info)
+    %p
+     %span.label= _('form_parttype')
+     %label
+      %input{type: 'radio', name: 'parttype', value: 'author'}
+      = _('form_part_author')
+     %label
+      %input{type: 'radio', name: 'parttype', value: 'speaker'}
+      = _('form_part_speaker')
+     %label
+      %input{type: 'radio', name: 'parttype', value: 'nonauthor'}
+      = _('form_part_nonauthor')
+    %p
+     %label.label{for: 'form_coauthors'}= _('form_coauthors')
+     %textarea.input{name: 'coauthors', id: 'form_coauthors', rows: 5}
+   %fieldset
+    %legend= _(:work_info)
+    %p
+     %span.label= _('form_occupation')
+     %label
+      %input{type: 'radio', name: 'occupation', value: 'work'}
+      = _('form_occupation_work')
+     %label
+      %input{type: 'radio', name: 'occupation', value: 'student'}
+      = _('form_occupation_student')
+     %label
+      %input{type: 'radio', name: 'occupation', value: 'postgraduate'}
+      = _('form_occupation_postgraduate')
+    %p
+     %label.label{for: 'form_organization'}= _('form_organization')
+     %textarea.input{name: 'organization', id: 'form_organization', rows: 5}
+    %p
+     %label.label{for: 'form_position'}= _('form_position')
+     %textarea.input{name: 'position', id: 'form_position', rows: 5}
+    %p
+     %label.label{for: 'form_rank'}= _('form_rank')
+     %input.input{type: 'text', name: 'rank', id: 'form_rank'}
+    %p
+     %label.label{for: 'form_degree'}= _('form_degree')
+     %input.input{type: 'text', name: 'degree', id: 'form_degree'}
+    %p
+     %label.label{for: 'form_responsibilities'}= _('form_responsibilities')
+     %textarea.input{name: 'responsibilities', id: 'form_responsibilities', rows: 5}
+   %fieldset
+    %legend= _(:organization_info)
+    %h3= _(:org_address)
+    %p
+     %label.label{for: 'form_org_country'}= _('form_org_country')
+     %select.input{name: 'org_country', id: 'form_org_country'}
+    %p
+     %label.label{for: 'form_org_city'}= _('form_org_city')
+     %input.input{type: 'text', name: 'org_city', id: 'form_org_city'}
+    %p
+     %label.label{for: 'form_org_postcode'}= _('form_org_postcode')
+     %input.input{type: 'text', name: 'org_postcode', id: 'form_org_postcode'}
+    %p
+     %label.label{for: 'form_org_street'}= _('form_org_street')
+     %input.input{type: 'text', name: 'org_street', id: 'form_org_street'}
+    %p
+     %label.label{for: 'form_org_house'}= _('form_org_house')
+     %input.input{type: 'text', name: 'org_house', id: 'form_org_house'}
+    %p
+     %span.label= _('form_org_foreign')
+     %label
+      %input.iinput{type: 'checkbox', name: 'org_foreign', id: 'form_org_foreign'}
+      = _(:org_is_foreign)
+   %fieldset
+    %legend= _(:participant_contacts)
+    %p
+     %label.label{for: 'form_phone'}= _('form_phone')
+     %input.input{type: 'text', name: 'phone', id: 'form_phone'}
+    %p
+     %label.label{for: 'form_mobile_phone'}= _('form_mobile_phone')
+     %input.input{type: 'text', name: 'mobile_phone', id: 'form_mobile_phone'}
+    %p
+     %label.label{for: 'form_fax'}= _('form_fax')
+     %input.input{type: 'text', name: 'fax', id: 'form_fax'}
+    %p
+     %label.label{for: 'form_email'}= _('form_email')
+     %input.input{type: 'text', name: 'email', id: 'form_email'}
+   %fieldset
+    %legend= _(:participant_security)
+    %p= _(:text_foreign_passport)
+    %p
+     %label.label{for: 'form_nationality'}= _('form_nationality')
+     %select.input{name: 'nationality', id: 'form_nationality'}
+    %p
+     %label.label{for: 'form_passport'}= _('form_passport')
+     %input.input{type: 'text', name: 'passport', id: 'form_passport'}
+   %fieldset
+    %legend= _(:accompanying_persons)
+    %h3= _(:accompanying_persons_title)
+    %p ...
+   %fieldset
+    %legend= _(:hotel_reservation)
+    %h3= _(:hotel_title)
+    %p
+     -#%span.label= _('form_gender')
+     %label
+      %input.iinput{type: 'radio', name: 'hotel', value: 'hotel_via_agent'}
+      = _('form_hotel_via_agent')
+    %p
+     %label
+      %input.iinput{type: 'radio', name: 'hotel', value: 'hotel_myself'}
+      = _('form_hotel_myself')
+    %p
+     %label.label{for: 'form_hotel_name'}= _('form_hotel_name')
+     %textarea.input{name: 'hotel_name', id: 'form_hotel_name', rows: 5}
+    %p
+     %label
+      %input.iinput{type: 'radio', name: 'hotel', value: 'hotel_no'}
+      = _('form_hotel_no')
+   %h3= _(:publish_agree_title)
+   %p
+    %label
+     %sup>< *
+     %input{type: 'radio', name: 'publish_agree', value: 'yes'}><
+     = _('form_publish_agree_yes')
+    %label
+     %input{type: 'radio', name: 'publish_agree', value: 'no'}
+     = _('form_publish_agree_no')
+    %span.llabel= _('form_publish_agree_text')
+   %p
+    %input.save{type: 'button', value: _(:save_btn)}
+
+:javascript
+  ParticipationForm();
+  //jQuery( "#form_birthdate" ).datepicker({
+  //  "dateFormat": 'yy-mm-dd'
+  //});
+  //jQuery( "#form_date" ).datepicker({
+  //  "dateFormat": 'yy-mm-dd'
+  //});
+
+  //new DatePicker('#form_date' , {});
+  //new Pikaday( {field: $('form_date')} );
+  //new DateInput( {field: $('form_date')} );
+//  new DateInput( {field: $('form_date'), y1: 1990
+//    , y2: 2030
+//  } );
+
+
+

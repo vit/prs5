@@ -2,8 +2,19 @@
 'use strict'
 
 var DateInput = function(args) {
-
+	//var args = Object.merge({
+	args = $H({
+		y1: 1980,
+		y2: 2020
+	}).extend(args);
+//	}).combine(args);
+//	alert( JSON.encode(args) );
 	var field = args.field;
+	field.set('readonly', 'readonly');
+
+	var date0 = new Date(field.get('value'));
+	alert(date0);
+
 //	field.setStyles({'margin-bottom': 0});
 //	var cont = new Element('div', {class: 'dateinput'});
 	var form = new Element('form', {class: 'dateinput', events: {submit: function() {
@@ -35,7 +46,8 @@ var DateInput = function(args) {
 	});
 
 	var year_elem = new Element('select', {class: 'year'});
-	for(var y = 2000; y<2013; y++) {
+	//for(var y = 2000; y<2013; y++) {
+	for(var y = args.y1; y<=args.y2; y++) {
 		year_elem.adopt( new Element('option', {text: y}) );
 	}
 	var month_elem = new Element('select', {class: 'month'});
@@ -48,16 +60,8 @@ var DateInput = function(args) {
 			var isLeap = ((year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0));
 			return [31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
 		}
-		/*
-		function daysInMonth(year, month) {
-			//return 32 - new Date(year, month, 32).getDate();
-			return new Date(year, month+1, 0).getDate();
-		}
-		*/
-
 		var panel = new Element('div', {text: ''});
 		function render(year, month) {
-		//	var daysN = daysInMonth( year, month );
 			var daysN = getNumberOfDays(year, month);
 			var day1 = new Date(year, month, 1);
 			var wDay1 = day1.getDay()-1; if( wDay1<0 ) wDay1 = 6;
@@ -107,6 +111,9 @@ var DateInput = function(args) {
 	function renderDays() {
 		days_elem.render(year_elem.get('value'), month_elem.get('value'));
 	}
+	function format2(m) {
+		return m>9 ? m : '0'+m;
+	}
 	year_elem.addEvents({'change': function() {
 		renderDays();
 	}});
@@ -115,12 +122,17 @@ var DateInput = function(args) {
 	}});
 	days_elem.render(2012, 9);
 	days_elem.attach('selected', function(day) {
-		var year = year_elem.getSelected().get("value");
+	//	var year = year_elem.getSelected().get("value");
+		var year = year_elem.get("value");
 	//	var month = month_elem.getSelected().get("value");
+	//	var month = parseInt( month_elem.get("value") );
 		var month = month_elem.get("value");
-		var date = new Date(year, month, day);
-		var date_s = date.toISOString().split('T')[0];
-		alert( date_s );
+	//	var date = new Date(year, month, day);
+	//	var date_s = date.toISOString().split('T')[0];
+	//	var date_s = date.format('Y-m-d');
+		var date_s = '' + year + '-' + format2( 1+parseInt(month) ) + '-' + format2( day );
+		field.set('value', date_s);
+	//	alert( date_s );
 	//	alert( year );
 	//	alert( month );
 	//	alert( day );

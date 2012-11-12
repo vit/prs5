@@ -22,7 +22,7 @@
    %p
     %label.label{for: 'form_'+'date'}= _('form_'+'date')
     %span.inputspan
-     %input.input{type: 'text', name: 'date', id: 'form_'+'date'}
+     %input.input{type: 'text', name: 'date', id: 'form_'+'date', value: '2010-07-05'}
    %p
     %input.save{type: 'button', value: _(:save_btn)}
   -#%form.edit
@@ -37,7 +37,10 @@
 :javascript
   //new DatePicker('#form_date' , {});
   //new Pikaday( {field: $('form_date')} );
-  new DateInput( {field: $('form_date')} );
+  //new DateInput( {field: $('form_date')} );
+  new DateInput( {field: $('form_date'), y1: 1990
+    , y2: 2030
+  } );
 
 
 

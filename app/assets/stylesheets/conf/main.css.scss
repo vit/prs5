@@ -62,8 +62,13 @@ $lightshadowcolor: #cccccc;
 
 #participationcomp {
 //	border: red solid thin;
-		text-align: center;
+//		text-align: center;
 	.edit {
+		h3 {
+			text-align: center;
+		}
+//		width: 750px;
+		/*
 	//	text-align: center;
 	//	.row {
 			border: green solid thin;
@@ -115,6 +120,32 @@ $lightshadowcolor: #cccccc;
 			//	clear: both;
 			}
 	//	}
+		*/
+
+
+.label {
+	float: left;
+	width: 230px;
+	margin-right: 10px;
+	text-align: right;
+	font-weight: bold;
+	clear: left;
+}
+
+.input, #name, #email, #comments {
+	background-color: #FBEF99;
+	font-family:"Lucida Console", Monaco, monospace;
+	font-size: .9em;
+	width: 500px;
+	margin-top: -2px;
+}
+.save {
+	margin-left: 240px;
+	background-color: #CBD893;
+	font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+
 	}
 
 	/*
