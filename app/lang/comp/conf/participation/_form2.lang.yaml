@@ -1,0 +1,136 @@
+
+en:
+        person_info: Person info
+        gender: Sex
+        male: Male
+        female: Female
+        person_title: Form of address
+        lname: Family name
+        fname: First name
+        mname: Middle name (s)
+        birthdate: Date of birth
+
+        participation_info: Participation info
+        part_type: I am an
+        part_author: author
+        part_speaker: author speaker
+        part_nonauthor: non-author
+        coauthors: Paper title and names of all its co-authors (mandatory for a speaker)
+
+        work_info: Work info
+        occupation: Occupation
+        occupation_work: I work
+        occupation_student: I am a student
+        occupation_postgraduate: I am a postgraduate
+        organization: Full name of your organization or educational institution
+        position: Posision (mandatory for working persons)
+        rank: Academic rank
+        degree: Degree
+        responsibilities: Current responsibilities (mandatory for a speaker)
+
+        organization_info: Address of your organization or educational institution
+        org_country: Country
+        org_city: City
+        org_postcode: Postcode
+        org_street: Street
+        org_house: House number / P.O.Box
+        org_foreign: ' '
+        org_is_foreign: This is foreign organization
+        org_foreign_comment:
+
+        participant_contacts: Participant contacts
+        phone: Contact phone number (including country & city codes)
+        mobile_phone: Mobile phone number (advisable )
+        fax: Fax number (including country & city codes) 
+        email: Email
+
+        participant_security: Security
+        text_foreign_passport: In accordance with the requirements in the regulations for foreign citizens visiting the territory of enterprises in Russia all conferees-to-be in addition to the above data should provide the following personal data
+        nationality: Citizenship (Nationality) 
+        passport: Passport number
+
+        accompanying_persons: Accompanying persons
+
+        hotel_reservation: Hotel reservation
+        hotel_via_agent: I am going to make a hotel reservation via the Conference service-agent 
+        hotel_myself: I am going to make a reservation by myself at the Hotel (give the hotel name)
+        hotel_name: Hotel name
+        hotel_no: I don’t need the hotel reservation
+
+        publishing_agreement: Publishing agreement
+        publish_agree_yes: I agree
+        publish_agree_no: "I don't agree"
+        publish_agree_text: that my first name, family name, country, organization, phone, fax numbers and email will be published in the list of conferees.
+
+        save_btn: Save
+
+
+
+
+ru:
+        person_info: Сведения о человеке
+        gender: Пол
+        male: Мужской
+        female: Женский
+        person_title: Форма обращения
+        lname: Фамилия
+        fname: Имя
+        mname: Отчество
+        birthdate: Дата рождения
+
+        participation_info: Информация об участии
+        part_type: Я -
+        part_author: автор
+        part_speaker: автор-докладчик
+        part_nonauthor: участник без доклада
+        coauthors: Название доклада и Ф.И.О. всех авторов (обязательно для докладчика)
+
+        work_info: Сведения о работе
+        occupation: Род занятий
+        occupation_work: работаю
+        occupation_student: студент
+        occupation_postgraduate: аспирант
+        organization: Полное название организации или учебного заведения
+        position: Должность (обязательно для работающих)
+        rank: Ученое звание
+        degree: Ученая степень
+        responsibilities: Сфера деятельности в настоящее время (обязательно для докладчика)
+
+        organization_info: Адрес организации или учебного заведения
+        org_country: Страна
+        org_city: Город
+        org_postcode: Индекс
+        org_street: Улица
+        org_house: Номер дома
+        org_foreign: ' '
+        org_is_foreign: Эта организация является иностранной
+        org_foreign_comment:
+
+        participant_contacts: Контактная информация
+        phone: Телефон для связи (+код города)
+        mobile_phone: Мобильный телефон (желательно)
+        fax: Факс (+код города) (желательно)
+        email: Email
+
+        participant_security: Безопасность
+        text_foreign_passport: В соответствии с требованиями в правилах пребывания иностранных граждан на территории предприятий Российской Федерации всем участникам конференции, не являющимся гражданами России, дополнительно к выше перечисленному необходимо сообщить следующие паспортные данные
+        nationality: Гражданство
+        passport: Номер паспорта
+
+        accompanying_persons: Сопровождающие лица
+
+        hotel_reservation: Бронирование гостиницы
+        hotel_via_agent: Я собираюсь бронировать номер в гостинице через сервис - агента конференции
+        hotel_myself: Я собираюсь самостоятельно бронировать номер в гостинице (указать название гостиницы)
+        hotel_name: Название гостиницы
+        hotel_no: Гостиница не требуется
+
+        publishing_agreement: Согласие на публикацию
+        publish_agree_yes: Я согласен
+        publish_agree_no: Я НЕ согласен
+        publish_agree_text: "с тем, чтобы в списке  участников конференции были опубликованы сообщенные мной сведения: имя, фамилия, страна, организация, телефон, факс, email"
+
+        save_btn: Сохранить
+
+
+
