@@ -8,20 +8,21 @@
 
 #participationcomp{:sstyle=>"display: none"}
  %div{name: 'container'}
+  -#%div= @par.to_s
   %form.edit#participation_form
    %fieldset
     %legend= _(:person_info)
     %p
      %span.label= _('gender')
      %label
-      %input.iinput{type: 'radio', name: 'gender', value: 'M'}
+      %input.iinput{type: 'radio', name: 'gender', value: 'M', id: 'form_gender'}
       = _('male')
      %label
-      %input.iinput{type: 'radio', name: 'gender', value: 'F'}
+      %input.iinput{type: 'radio', name: 'gender', value: 'F', id: 'form_gender'}
       = _('female')
     %p
      %label.label{for: 'person_title'}= _('person_title')
-     %select.input
+     %select.input{id: 'form_person_title'}
     %p
      %label.label{for: 'form_lname'}= _('lname')
      %input.input{type: 'text', name: 'lname', id: 'form_lname'}
@@ -160,7 +161,7 @@
       = _('publish_agree_no')
      %span.llabel= _('publish_agree_text')
    %p
-    %input.save{type: 'button', value: _(:save_btn)}
+    %input.save{type: 'button', value: _(:save_btn), id: 'form_save_btn'}
 
 :javascript
   ParticipationForm();

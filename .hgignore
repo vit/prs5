@@ -13,5 +13,8 @@ bin/
 *.swp
 *.swo
 *.swn
+*.swm
+*.swl
+*.swk
 *.core
 
