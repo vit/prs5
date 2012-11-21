@@ -5,15 +5,13 @@
 
 :javascript
  window.addEvent('domready',function() {
+   //$('participationcomp').adopt(new Coms.Comp.Conf.ParticipationForm(self.conf.id).panel);
    self.conf.addEvent('init_ok', function(result, error) {
-   // $('participationcomp').adopt(new Coms.Comp.Conf.ParticipationForm(self.conf.id).panel);
-    new Coms.Comp.Conf.ParticipationFormGeneral( $('participationcomp') );
+    $('participationcomp').adopt(new Coms.Comp.Conf.ParticipationForm(self.conf.id).panel);
    });
  });
 #participationcomp{:sstyle=>"display: none"}
- =render "/comp/conf/participation/form_off"
- =render "/comp/conf/participation/form_on"
-
+ %div{name: 'container'}
 
 
 

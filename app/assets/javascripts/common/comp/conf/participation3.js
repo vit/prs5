@@ -1,12 +1,49 @@
 
-
-/*
 'use strict';
 
+(function($) {
+
+	self.Coms = self.Coms || {};
+	self.Coms.Comp = self.Coms.Comp || {};
+	self.Coms.Comp.Conf = self.Coms.Comp.Conf || {};
+
+	self.Coms.Comp.Conf.ParticipationFormGeneral = function(cont) {
+
+			var conf = self.conf;
+			var user = self.user;
+		//	var user_lang_code = Cookie.read('ecms_lang');
+		//	user_lang_code = user_lang_code || 'ru';
+
+		//	var panel = new Element('div', { styles: { } });
+
+		//	alert(user.id);
+			var me = {
+			};
+
+			var form_on_elm = $('[name=form_on]', cont);
+			var form_off_elm = $('[name=form_off]', cont);
+
+			var form_on = ParticipationFormOn( form_on_elm );
+			var form_off = ParticipationFormOff( form_off_elm );
 
 
-var ParticipationForm = function() {
-	return (function($) {
+			RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
+				form_on.init(result);
+				form_off.show(!result);
+				form_on.show(!!result);
+			//	registeredForm.init(result);
+			//	notYetForm.show(!result);
+			//	registeredForm.show(!!result);
+			});
+
+		//	form_on.hide();
+		//	form_on.show();
+	//		form_off.show();
+
+			return me;
+	};
+
+	var ParticipationFormOn = function(cont) {
 		var formStruct = [
 			{name: 'gender', type: 'radio'},
 			{name: 'person_title', type: 'list'},
@@ -41,7 +78,8 @@ var ParticipationForm = function() {
 		];
 		var FormAccess = function( cont, info ) {
 			function initForm() {
-				$.each(formStruct, function(k,v) {
+			//	$.each(formStruct, function(k,v) {
+				$.each(info, function(k,v) {
 					if(v.type=='date')
 						cont.find('[name='+v.name+']').datepicker({
 							"dateFormat": 'yy-mm-dd'
@@ -54,12 +92,20 @@ var ParticipationForm = function() {
 				var rez;
 				if( len > 1 ) {
 					rez = null;
+					elm.each(function() {
+						v = $(this);
+						if( v.attr('checked') ) {
+							rez = v.val();
+						}
+					});
+					/*
 					$.each(elm, function(k, v) {
 						v = $(v);
 						if( v.attr('checked') ) {
 							rez = v.val();
 						}
 					});
+					*/
 				} else {
 					rez = elm.val();
 					if( v.type=='checkbox' ) {
@@ -84,10 +130,16 @@ var ParticipationForm = function() {
 		}
 
 		var me = {
+			panel: cont,
+			init: function(data) {
+			//	di.clear();
+			//	if(data)
+			//		di.set(data)
+			}
 		//	getData: getData
 		};
 
-		var cont = $('#participationcomp');
+//		var cont = $('#participationcomp');
 		var form = new FormAccess( cont, formStruct );
 
 //		$.each(formStruct, function(k,v) {
@@ -113,8 +165,42 @@ var ParticipationForm = function() {
 			alert(JSON.encode(data));
 		});
 
+
+		Mixin.implement(me, Mixin.Observable);
+		Mixin.implement(me, PanelMixin);
 		return me;
-	}(jQuery));
-}
-*/
+	}
+
+
+
+	var ParticipationFormOff = function(cont) {
+
+		var me = {
+			panel: cont
+		//	getData: getData
+		};
+
+
+//		$( "#form_save_btn", cont ).click(function(){
+//		//	var data = getData();
+//			var data = form.get();
+//			alert(JSON.encode(data));
+//		});
+
+
+		Mixin.implement(me, Mixin.Observable);
+		Mixin.implement(me, PanelMixin);
+		return me;
+	}
+
+
+
+	var PanelMixin = {
+		show: function(flag) {
+			$(this.panel).css('display', flag ? 'block' : 'none');
+		}
+	}
+
+
+}(jQuery));
 
