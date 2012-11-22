@@ -5,6 +5,8 @@
  - stylesheet_link_tag 'https://raw.github.com/dbushell/Pikaday/master/css/pikaday.css'
 
 %div{name: 'form_on', style: "display: none"}
+ %div{name: 'dict', style: "display: none"}
+  -#%w[]
  %div{name: 'container'}
   %form.edit#participation_form
    %fieldset
@@ -98,7 +100,7 @@
     %p
      %span.label= _('org_foreign')
      %label
-      %input.iinput{type: 'checkbox', name: 'org_foreign', id: 'form_org_foreign'}
+      %input.iinput{type: 'checkbox', name: 'org_foreign', id: 'form_org_foreign', value: true}
       = _(:org_is_foreign)
    %fieldset
     %legend= _(:participant_contacts)
@@ -158,7 +160,7 @@
       = _('publish_agree_no')
      %span.llabel= _('publish_agree_text')
    %p
-    %input.save{type: 'button', value: _(:save_btn), id: 'form_save_btn'}
+    %input.save{type: 'button', value: _(:save_btn), name: 'form_save_btn'}
 
 :javascript
   //ParticipationForm();
