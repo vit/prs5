@@ -6,8 +6,16 @@
 
 %div{name: 'form_on', style: "display: none"}
  %div{name: 'dict', style: "display: none"}
-  -#%w[]
+  -%w[unregister_are_you_sure].each do |n|
+   %input{name: n, type: 'hidden', value: _(n)}
  %div{name: 'container'}
+  %form.edit{name: 'unregister_form', style: 'display: none'}
+   %fieldset
+    %p= _(:you_are_registered_already)
+    %p= _(:you_can_change_data)
+    %p= _(:you_can_drop_registration)
+    %p
+     %input.save{type: 'button', value: _('unregister_btn'), name: 'unreg_btn'}
   %form.edit#participation_form
    %fieldset
     %legend= _(:person_info)

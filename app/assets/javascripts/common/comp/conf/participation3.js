@@ -3,11 +3,21 @@
 
 (function($) {
 
+
+	var Dict = function(cont){
+		return function(word){
+			var elm = cont ? $('[name="'+word+'"]', cont) : null;
+			var res = elm ? elm.val() : null;
+			return res ? res : word;
+		}
+	}
+
 	self.Coms = self.Coms || {};
 	self.Coms.Comp = self.Coms.Comp || {};
 	self.Coms.Comp.Conf = self.Coms.Comp.Conf || {};
 
 	self.Coms.Comp.Conf.ParticipationFormGeneral = function(cont) {
+		var dict = new Dict( $('[name=dict]', cont) );
 		var conf = self.conf;
 		var user = self.user;
 	//	var user_lang_code = Cookie.read('ecms_lang');
@@ -30,17 +40,34 @@
 			form_on.show(true);
 		});
 
-		RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
-			result = {gender: 'F', lname: 'wqrwrtqrtqrtqrtqrtq', org_foreign: false};
-			form_on.init(result);
-			form_off.show(!result);
-			form_on.show(!!result);
+		function load_data() {
+			RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
+				//	result = {gender: 'F', lname: 'wqrwrtqrtqrtqrtqrtq', org_foreign: false};
+				form_on.init(result);
+				form_off.show(!result);
+				form_on.show(!!result);
+			});
+		}
+
+		form_on.attach('save_form', function(data) {
+			RPC.send('conf.participation.save_my_participation_data', [user.id, conf.id, data], function(result, error) {
+				alert( dict('msg_form_saved_successfully') );
+				load_data();
+			//	form_off.show(true);
+			//	form_on.show(false);
+		//		if(callback) callback();
+			});
+		//}, callback);
 		});
+
+		load_data();
 
 		return me;
 	};
 
 	var ParticipationFormOn = function(cont) {
+	//	alert(cont.attr('name'));
+		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
 		var formStruct = [
 			{name: 'gender', type: 'radio'},
@@ -74,7 +101,67 @@
 			{name: 'publish_agree', type: 'radio'}
 		//	{name: '', type: 'text'},
 		];
-		var FormAccess = function( cont, info ) {
+
+		function init(data) {
+			$('form[name=unregister_form]', cont).css('display', data ? 'block' : 'none');
+		//	di.clear();
+			if(data)
+				di.set(data);
+		}
+
+		var me = {
+			panel: cont,
+			init: init
+		};
+
+//		var cont = $('#participationcomp');
+		var di = new JSComp.FormAccess( form, formStruct );
+
+		$( "[name=form_save_btn]", form ).click(function(){
+		//	confirm(dict('unregister_are_you_sure'));
+		//	var data = getData();
+			var data = di.get();
+		//	alert(JSON.encode(data));
+			me.notify('save_form', data/*, function() {
+				alert('msg_form_saved_successfully');
+			}*/);
+		});
+
+		Mixin.implement(me, Mixin.Observable);
+		Mixin.implement(me, PanelMixin);
+		return me;
+	}
+
+
+
+	var ParticipationFormOff = function(cont) {
+		var form = $('form', cont);
+		var me = {
+			panel: cont
+		};
+
+		$( "[name=form_register_btn]", form ).click(function(){
+			me.notify('want_register');
+		});
+
+		Mixin.implement(me, Mixin.Observable);
+		Mixin.implement(me, PanelMixin);
+		return me;
+	}
+
+
+	var PanelMixin = {
+		show: function(flag) { $(this.panel).css('display', flag ? 'block' : 'none'); }
+	}
+
+
+}(jQuery));
+
+(function($) {
+
+	self.JSComp = self.JSComp || {};
+
+		self.JSComp.FormAccess = function( cont, info ) {
 			function initForm() {
 			//	$.each(formStruct, function(k,v) {
 				$.each(info, function(k,v) {
@@ -142,53 +229,6 @@
 			return me;
 		}
 
-		var me = {
-			panel: cont,
-			init: function(data) {
-			//	di.clear();
-				if(data)
-					di.set(data)
-			}
-		//	getData: getData
-		};
-
-//		var cont = $('#participationcomp');
-		var di = new FormAccess( form, formStruct );
-
-		$( "[name=form_save_btn]", form ).click(function(){
-		//	var data = getData();
-			var data = di.get();
-			alert(JSON.encode(data));
-		});
-
-		Mixin.implement(me, Mixin.Observable);
-		Mixin.implement(me, PanelMixin);
-		return me;
-	}
-
-
-
-	var ParticipationFormOff = function(cont) {
-		var form = $('form', cont);
-		var me = {
-			panel: cont
-		};
-
-		$( "[name=form_register_btn]", form ).click(function(){
-			me.notify('want_register');
-		});
-
-		Mixin.implement(me, Mixin.Observable);
-		Mixin.implement(me, PanelMixin);
-		return me;
-	}
-
-
-
-	var PanelMixin = {
-		show: function(flag) { $(this.panel).css('display', flag ? 'block' : 'none'); }
-	}
-
-
 }(jQuery));
+
 

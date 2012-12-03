@@ -64,6 +64,7 @@ en:
 
         save_btn: Save
 
+        msg_unregister_are_you_sure: Are you sure you want to drop your registration
 
 
 
@@ -131,6 +132,8 @@ ru:
         publish_agree_text: "с тем, чтобы в списке  участников конференции были опубликованы сообщенные мной сведения: имя, фамилия, страна, организация, телефон, факс, email"
 
         save_btn: Сохранить
+
+        msg_unregister_are_you_sure: Вы уверены, что хотите отменить вашу регистрацию
 
 
 
