@@ -132,12 +132,17 @@ $lightshadowcolor: #cccccc;
 	clear: left;
 }
 
-.input, #name, #email, #comments {
-	background-color: #FBEF99;
+.input {
+//	background-color: #FBEF99;
+//	border: solid thin #FBEF99;
 	font-family:"Lucida Console", Monaco, monospace;
 	font-size: .9em;
 	width: 500px;
 	margin-top: -2px;
+}
+.marked {
+//	background-color: red;
+	background-color: #FBEF99;
 }
 .save {
 	margin-left: 240px;

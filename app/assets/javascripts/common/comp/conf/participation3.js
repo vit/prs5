@@ -70,35 +70,35 @@
 		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
 		var formStruct = [
-			{name: 'gender', type: 'radio'},
-			{name: 'person_title', type: 'list'},
-			{name: 'lname', type: 'text'},
-			{name: 'fname', type: 'text'},
-			{name: 'mname', type: 'text'},
-			{name: 'birthdate', type: 'date'},
-			{name: 'part_type', type: 'radio'},
-			{name: 'coauthors', type: 'text'},
-			{name: 'occupation', type: 'radio'},
-			{name: 'organization', type: 'text'},
-			{name: 'position', type: 'text'},
-			{name: 'rank', type: 'text'},
-			{name: 'degree', type: 'text'},
-			{name: 'responsibilities', type: 'text'},
-			{name: 'org_country', type: 'text'},
-			{name: 'org_city', type: 'text'},
-			{name: 'org_postcode', type: 'text'},
-			{name: 'org_street', type: 'text'},
-			{name: 'org_house', type: 'text'},
-			{name: 'org_foreign', type: 'checkbox'},
-			{name: 'phone', type: 'text'},
-			{name: 'mobile_phone', type: 'text'},
-			{name: 'fax', type: 'text'},
-			{name: 'email', type: 'text'},
-			{name: 'nationality', type: 'text'},
-			{name: 'passport', type: 'text'},
-			{name: 'hotel', type: 'radio'},
+			{name: 'gender', type: 'radio', rules: 'required'},
+			{name: 'person_title', type: 'list', rules: 'required'},
+			{name: 'lname', type: 'text', rules: 'required'},
+			{name: 'fname', type: 'text', rules: 'required'},
+			{name: 'mname', type: 'text', rules: 'required'},
+			{name: 'birthdate', type: 'date', rules: 'required'},
+			{name: 'part_type', type: 'radio', rules: 'required'},
+			{name: 'coauthors', type: 'text', rules: 'required'},
+			{name: 'occupation', type: 'radio', rules: 'required'},
+			{name: 'organization', type: 'text', rules: 'required'},
+			{name: 'position', type: 'text', rules: 'required'},
+			{name: 'rank', type: 'text', rules: 'required'},
+			{name: 'degree', type: 'text', rules: 'required'},
+			{name: 'responsibilities', type: 'text', rules: 'required'},
+			{name: 'org_country', type: 'text', rules: 'required'},
+			{name: 'org_city', type: 'text', rules: 'required'},
+			{name: 'org_postcode', type: 'text', rules: 'required'},
+			{name: 'org_street', type: 'text', rules: 'required'},
+			{name: 'org_house', type: 'text', rules: 'required'},
+			{name: 'org_foreign', type: 'checkbox', rules: 'required'},
+			{name: 'phone', type: 'text', rules: 'required'},
+			{name: 'mobile_phone', type: 'text', rules: 'required'},
+			{name: 'fax', type: 'text', rules: 'required'},
+			{name: 'email', type: 'text', rules: 'required'},
+			{name: 'nationality', type: 'text', rules: 'required'},
+			{name: 'passport', type: 'text', rules: 'required'},
+			{name: 'hotel', type: 'radio', rules: 'required'},
 			{name: 'hotel_name', type: 'text'},
-			{name: 'publish_agree', type: 'radio'}
+			{name: 'publish_agree', type: 'radio', rules: 'required'}
 		//	{name: '', type: 'text'},
 		];
 
@@ -120,11 +120,14 @@
 		$( "[name=form_save_btn]", form ).click(function(){
 		//	confirm(dict('unregister_are_you_sure'));
 		//	var data = getData();
-			var data = di.get();
-		//	alert(JSON.encode(data));
-			me.notify('save_form', data/*, function() {
-				alert('msg_form_saved_successfully');
-			}*/);
+
+			if( di.validate() ) {
+				var data = di.get();
+			//	alert(JSON.encode(data));
+				me.notify('save_form', data);
+			} else {
+				alert( dict('msg_missing_required_fields') );
+			}
 		});
 
 		Mixin.implement(me, Mixin.Observable);
@@ -170,6 +173,24 @@
 							"dateFormat": 'yy-mm-dd'
 						});
 				});
+			}
+			function unmarkAllElements() {
+				$.each(info, function(k,v) {
+					markElement(v, false);
+				});
+			}
+			function markElement(v, flag) {
+				var elm = cont.find('[name='+v.name+']');
+				var len = elm.length;
+				if( len > 1 ) {
+					elm.each(function() {
+						var p = $(this).parent();
+						flag ? p.addClass('marked') : p.removeClass('marked');
+					});
+				} else {
+				//	elm.addClass('marked');
+					flag ? elm.addClass('marked') : elm.removeClass('marked');
+				}
 			}
 			function getElemData(v) {
 				var elm = cont.find('[name='+v.name+']');
@@ -221,9 +242,31 @@
 					setElemData(v, data[v.name]);
 				});
 			}
+			function validate() {
+				var err = [];
+				unmarkAllElements();
+				$.each(info, function(k,v) {
+					if( v.rules ) {
+						var rules = v.rules.split('|');
+						var val = getElemData(v);
+						$.each(rules, function(k2,v2) {
+							switch( v2 ) {
+								case 'required':
+									if(!val) {
+										markElement(v, true);
+										err.push({name: v.name, rule: v2});
+									}
+							}
+						});
+					}
+				});
+			//	alert( JSON.stringify(err) );
+				return err.length == 0;
+			}
 			var me = {
 				get: getData,
-				set: setData
+				set: setData,
+				validate: validate
 			};
 			initForm();
 			return me;

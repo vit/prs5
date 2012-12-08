@@ -21,15 +21,16 @@
     %legend= _(:person_info)
     %p
      %span.label= _('gender')
-     %label
-      %input.iinput{type: 'radio', name: 'gender', value: 'M', id: 'form_gender'}
-      = _('male')
-     %label
-      %input.iinput{type: 'radio', name: 'gender', value: 'F', id: 'form_gender'}
-      = _('female')
+     %span.input
+      %label
+       %input.iinput{type: 'radio', name: 'gender', value: 'M', id: 'form_gender'}
+       = _('male')
+      %label
+       %input.iinput{type: 'radio', name: 'gender', value: 'F', id: 'form_gender'}
+       = _('female')
     %p
      %label.label{for: 'person_title'}= _('person_title')
-     %select.input{id: 'form_person_title'}
+     %select.input{name: 'person_title', id: 'form_person_title'}
     %p
      %label.label{for: 'form_lname'}= _('lname')
      %input.input{type: 'text', name: 'lname', id: 'form_lname'}
