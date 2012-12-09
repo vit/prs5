@@ -59,6 +59,16 @@
 			});
 		//}, callback);
 		});
+		form_on.attach('drop_form', function() {
+			RPC.send('conf.participation.drop_my_participation', [user.id, conf.id], function(result, error) {
+				alert( dict('msg_form_dropped_successfully') );
+				load_data();
+			//	form_off.show(true);
+			//	form_on.show(false);
+		//		if(callback) callback();
+			});
+		//}, callback);
+		});
 
 		load_data();
 
@@ -128,6 +138,15 @@
 			} else {
 				alert( dict('msg_missing_required_fields') );
 			}
+		});
+
+		$( "[name=unreg_btn]", form ).click(function(){
+			if( confirm(dict('unregister_are_you_sure')) ) {
+				me.notify('drop_form');
+			}
+		//	var data = getData();
+
+		//	alert('qwerq rtqrwtqwr');
 		});
 
 		Mixin.implement(me, Mixin.Observable);
