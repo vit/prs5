@@ -99,10 +99,21 @@ class Conf::MainController < ApplicationController
 				)
 				inputfile = request.params['file']
 				if inputfile && @can_upload
-					@appl.conf.paper.put_my_paper_file(user_id, @cont_id, @_id, @lng, @type, inputfile[:tempfile], {
-						content_type: inputfile[:type],
-						filename: inputfile[:filename]
+				#	params[:file_upload][:my_file].tempfile
+				#	render :text => params[:file_upload].inspect
+				#	render :text => params['file'].inspect
+			#		render :text => params['file'].read.inspect
+				#	render :text => params['file'].class.inspect
+				#	render :text => inputfile[:tempfile].inspect
+		#			render :text => inputfile.tempfile.inspect
+		#			return
+				#	@appl.conf.paper.put_my_paper_file(user_id, @cont_id, @_id, @lng, @type, inputfile[:tempfile], {
+					@appl.conf.paper.put_my_paper_file(user_id, @cont_id, @_id, @lng, @type, inputfile.tempfile, {
+				#	@appl.conf.paper.put_my_paper_file(user_id, @cont_id, @_id, @lng, @type, inputfile, {
+						content_type: inputfile.content_type,
+						filename: inputfile.original_filename
 					})
+#=begin
 					required_lang_list = ['ru', 'by', 'ua'].include?(@current_user[:info]['country']) ?
 						@lang_list :
 						(@lang_list.length==1 ? @lang_list : ['en'])
@@ -116,6 +127,7 @@ class Conf::MainController < ApplicationController
 						#@cond_ok = true
 						@appl.mail.send_notification :files_uploaded, :both, {receiver_pin: user_id, file_type: @type, paper_id: @_id, cont_id: @cont_id}
 					end
+#=end
 				end
 			end
 		end

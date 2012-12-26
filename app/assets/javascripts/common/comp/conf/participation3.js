@@ -99,7 +99,8 @@
 			{name: 'org_postcode', type: 'text', rules: 'required'},
 			{name: 'org_street', type: 'text', rules: 'required'},
 			{name: 'org_house', type: 'text', rules: 'required'},
-			{name: 'org_foreign', type: 'checkbox', rules: 'required'},
+		//	{name: 'org_foreign', type: 'checkbox', rules: 'required'},
+			{name: 'org_foreign', type: 'checkbox'},
 			{name: 'phone', type: 'text', rules: 'required'},
 			{name: 'mobile_phone', type: 'text', rules: 'required'},
 			{name: 'fax', type: 'text', rules: 'required'},
@@ -279,7 +280,7 @@
 						});
 					}
 				});
-			//	alert( JSON.stringify(err) );
+		//		alert( JSON.stringify(err) );
 				return err.length == 0;
 			}
 			var me = {

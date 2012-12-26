@@ -1,8 +1,15 @@
 
+-@titles = {en: ['Dr.', 'Prof.', 'Eng.', 'Mr.', 'Ms.'], ru: ['Др.', 'Проф.', 'Инж.', 'Господин', 'Госпожа']}
+
 -#=javascript_include_tag 'comp/conf/participation/form.js'
 
 -# content_for :css do
  - stylesheet_link_tag 'https://raw.github.com/dbushell/Pikaday/master/css/pikaday.css'
+
+
+-#lang = @request.cookies['ecms_lang'] || 'en'
+-lang = :en
+
 
 %div{name: 'form_on', style: "display: none"}
  %div{name: 'dict', style: "display: none"}
@@ -31,6 +38,8 @@
     %p
      %label.label{for: 'person_title'}= _('person_title')
      %select.input{name: 'person_title', id: 'form_person_title'}
+      -@titles[lang].each do |t|
+       %option{value: t}= t
     %p
      %label.label{for: 'form_lname'}= _('lname')
      %input.input{type: 'text', name: 'lname', id: 'form_lname'}
@@ -94,6 +103,9 @@
     %p
      %label.label{for: 'form_org_country'}= _('org_country')
      %select.input{name: 'org_country', id: 'form_org_country'}
+      %option{value: ''}= _ :choosecountry
+      = render 'comp/account/country'
+      %option{value: '-1'}= _ :othercountry
     %p
      %label.label{for: 'form_org_city'}= _('org_city')
      %input.input{type: 'text', name: 'org_city', id: 'form_org_city'}
@@ -131,6 +143,9 @@
     %p
      %label.label{for: 'form_nationality'}= _('nationality')
      %select.input{name: 'nationality', id: 'form_nationality'}
+      %option{value: ''}= _ :choosecountry
+      = render 'comp/account/country'
+      %option{value: '-1'}= _ :othercountry
     %p
      %label.label{for: 'form_passport'}= _('passport')
      %input.input{type: 'text', name: 'passport', id: 'form_passport'}
