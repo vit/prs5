@@ -69,7 +69,10 @@ Then upload the abstract/paper file."
         file_abstract: Abstract file
         file_paper: Paper file
         file_presentation: Presentation file
-        file_exdoc: Expert document
+        #file_exdoc: Expert document
+        file_abstract_exdoc: Expert documents file for abstract
+        file_paper_exdoc: Expert documents file for paper
+        only_for_russian: for russian citizens only
 
         t_reviews: Reviews
         t_reviews2: Comments from section managers
@@ -161,7 +164,10 @@ ru:
         file_abstract: Файл реферата
         file_paper: Файл доклада
         file_presentation: Файл презентации
-        file_exdoc: Экспертный документ
+        #file_exdoc: Экспертный документ
+        file_abstract_exdoc: Файл экспертных документов реферата
+        file_paper_exdoc: Файл экспертных документов доклада
+        only_for_russian: только для граждан России
 
         t_reviews: Рецензии
         t_reviews2: Комментарии руководителей секции

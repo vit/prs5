@@ -3,7 +3,11 @@
 -#= @current_user.inspect
 -#= @required_lang_list.inspect
 -#= @cond_ok.inspect if @cond_ok
-
+%head
+ :css
+  * {
+   font-size: 10pt;
+  }
 %table{border: 1, width: '100%', cellpadding: 0, cellspacing: 0, style: 'margin: 0'}
  %tr
   %th= _ :upload_file
@@ -32,7 +36,8 @@
      -if @can_delete
       %input{type: "submit", value: _(:submit_delete)}
      -#%a{href: 'getfile/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type=abstract', target: '_blank'}= _ :download_file
-     %a{href: '../download/abstract/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type='+@type, target: '_blank'}= _ :download_file
+     -#%a{href: '../download/abstract/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type='+@type, target: '_blank'}= _ :download_file
+     %a{href: 'download/'+@file_info[:filename]+'?id='+@_id.to_s+'&lang='+@lng.to_s+'&type='+@type, target: '_blank'}= _ :download_file
 
 -# @_tj_next_template=''
 

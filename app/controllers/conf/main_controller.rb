@@ -16,7 +16,11 @@ class Conf::MainController < ApplicationController
 		@lng = request.params['lang']
 		can_download = false
 		username = "anonymous"
-=begin
+
+	#	render :text => params.inspect, :content_type => 'text/plain'
+#		render :text => request.params.inspect, :content_type => 'text/plain'
+#		return
+
 		if @current_user[:user_id]
 			username = @current_user[:user_id]
 			can_download =
@@ -33,19 +37,19 @@ class Conf::MainController < ApplicationController
 			if @cont_id && @_id && @lng
 				@file = @appl.conf.paper.get_paper_file(@cont_id, @_id, @lng, @type)
 				if @file
-					@response.header['Content-Type'] = @file.content_type
-					@file.read
+#					@response.header['Content-Type'] = @file.content_type
+#					@file.read
+					send_data @file.read, type: @file.content_type #, :filename => "#{client.name}.pdf",
+	#				render :text => "404 Not Found", :status => 404
 				else
-					''
+					render :text => "File Not Found", :status => 404
 				end
 			else
-				''
+				render :text => "404 Not Found", :status => 404
 			end
 		else
-=end
-			#	"Abstract file downloading is not permitted for user '#{username}'"
 			render :inline => "User '#{username}' doesn't have permittion to download this file"
-	#	end
+		end
 	end
 	def mypapers
 		render @current_user[:user_id] ? '/conf/main/mypapers' : '/conf/main/enterplease'
@@ -57,15 +61,16 @@ class Conf::MainController < ApplicationController
 		@lng = request.params['lang']
 		delete = request.params['delete']
 		@can_delete = @can_upload = false
-		if %w[abstract paper presentation exdoc].include? @type
+	#	if %w[abstract abstract_exdoc paper paper_exdoc presentation exdoc].include? @type
+		if %w[abstract abstract_exdoc paper paper_exdoc presentation].include? @type
 			@can_delete =
 				#	@type=='abstract' && @conf_permissions['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
 				#	@type=='paper' && @conf_permissions['PAPREG_PAPER_FILE_REMOVE'] ||
 				#	@type=='presentation' && @conf_permissions['PAPREG_PAPER_PRESENTATION_REMOVE'] ||
-				@type=='abstract' && @user_rights['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
-				@type=='paper' && @user_rights['PAPREG_PAPER_FILE_REMOVE'] ||
-				@type=='presentation' && @user_rights['PAPREG_PAPER_PRESENTATION_REMOVE'] ||
-				@type=='exdoc' && @user_rights['PAPREG_PAPER_EXDOC_REMOVE']
+				(@type=='abstract' || @type=='abstract_exdoc') && @user_rights['PAPREG_PAPER_ABSTRACT_REMOVE'] ||
+				(@type=='paper' || @type=='paper_exdoc') && @user_rights['PAPREG_PAPER_FILE_REMOVE'] ||
+				@type=='presentation' && @user_rights['PAPREG_PAPER_PRESENTATION_REMOVE'] #||
+			#	@type=='exdoc' && @user_rights['PAPREG_PAPER_EXDOC_REMOVE']
 			if user_id && @cont_id && @_id && @lng && delete && @can_delete
 				@appl.conf.paper.delete_my_paper_file(user_id, @cont_id, @_id, @lng, @type)
 			end
@@ -75,13 +80,13 @@ class Conf::MainController < ApplicationController
 					acc
 				end
 				@file_info = @appl.conf.paper.get_my_paper_file_info(user_id, @cont_id, @_id, @lng, @type)
-				@can_upload = 	@type=='abstract' && (
+				@can_upload = 	(@type=='abstract' || @type=='abstract_exdoc') && (
 					#	@file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_REUPLOAD'] ||
 					#	!@file_info && @conf_permissions['PAPREG_PAPER_ABSTRACT_UPLOAD'] ||
 					@file_info && @user_rights['PAPREG_PAPER_ABSTRACT_REUPLOAD'] ||
 					!@file_info && @user_rights['PAPREG_PAPER_ABSTRACT_UPLOAD']
 				) ||
-					@type=='paper' && (
+					(@type=='paper' || @type=='paper_exdoc') && (
 						#	@file_info && @conf_permissions['PAPREG_PAPER_FILE_REUPLOAD'] ||
 						#	!@file_info && @conf_permissions['PAPREG_PAPER_FILE_UPLOAD'] ||
 						@file_info && @user_rights['PAPREG_PAPER_FILE_REUPLOAD'] ||
@@ -92,12 +97,12 @@ class Conf::MainController < ApplicationController
 						#	!@file_info && @conf_permissions['PAPREG_PAPER_PRESENTATION_UPLOAD'] ||
 						@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_REUPLOAD'] ||
 						!@file_info && @user_rights['PAPREG_PAPER_PRESENTATION_UPLOAD']
-				) ||
-					@type=='exdoc' && (
-						@file_info && @user_rights['PAPREG_PAPER_EXDOC_REUPLOAD'] ||
-						!@file_info && @user_rights['PAPREG_PAPER_EXDOC_UPLOAD']
+			#	) ||
+			#		@type=='exdoc' && (
+			#			@file_info && @user_rights['PAPREG_PAPER_EXDOC_REUPLOAD'] ||
+			#			!@file_info && @user_rights['PAPREG_PAPER_EXDOC_UPLOAD']
 				)
-				inputfile = request.params['file']
+				inputfile = request.params['file'] # instance of ActionDispatch::Http::UploadedFile
 				if inputfile && @can_upload
 				#	params[:file_upload][:my_file].tempfile
 				#	render :text => params[:file_upload].inspect

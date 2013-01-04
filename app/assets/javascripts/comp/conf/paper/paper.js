@@ -76,6 +76,7 @@ window.addEvent('domready',function() {
 					s = s ? s.trim() : '';
 					return s.length>lim ? (s.substr(0,lim)+' ...') : s;
 				}
+				var exdoc_side = lang_list.contains('ru') ? 'ru' : 'en';
 				lang_list.each(function(lang){
 					var td = (new Element('td', {styles: {'vertical-align': 'top'}})).inject(tr);
 					td.adopt(
@@ -111,7 +112,9 @@ window.addEvent('domready',function() {
 					}
 					if(p.files) {
 						p.files.filter(function(f){
-							return f && f._meta && f._meta.lang==lang;
+							var is_exdoc = ['paper_exdoc', 'abstract_exdoc'].contains(f.class_code);
+						//	return f && f._meta && f._meta.lang==lang;
+							return f && f._meta && (!is_exdoc && f._meta.lang==lang || is_exdoc && exdoc_side==lang);
 						}).each(function(f){
 							td.adopt( new Element('br'));
 							td.adopt(
@@ -138,7 +141,9 @@ window.addEvent('domready',function() {
 										//href: 'getfile/'+f.filename+'?id='+p._id+'&lang='+lang, target: '_blank',
 										//href: '../download/abstract/'+f.uniquefilename+'?id='+p._id+'&lang='+lang, target: '_blank',
 										//href: '../download/abstract/'+f.filename+'?id='+p._id+'&lang='+lang, target: '_blank',
-										href: '../download/abstract/'+f.filename+'?id='+p._id+'&lang='+lang+'&type='+f.class_code, target: '_blank',
+									//	href: '../download/abstract/'+f.filename+'?id='+p._id+'&lang='+lang+'&type='+f.class_code, target: '_blank',
+									//	href: 'download/'+f.filename+'?id='+p._id+'&lang='+lang+'&type='+f.class_code, target: '_blank',
+										href: 'download/'+f.filename+'?id='+p._id+'&lang='+f._meta.lang+'&type='+f.class_code, target: '_blank',
 										text: dict('download_file')
 									})
 								)
@@ -393,7 +398,8 @@ window.addEvent('domready',function() {
 			var dict = Dict( panel.getChildren('[name="dict"]')[0] );
 			function renderYes() {
 			//	['abstract', 'paper', 'presentation'].each(function(type){
-				['abstract', 'paper', 'presentation', 'exdoc'].each(function(type){
+			//	['abstract', 'paper', 'presentation', 'exdoc'].each(function(type){
+				['abstract', 'paper', 'presentation'].each(function(type){
 					//var h3 = (new Element('h3', {text: dict('file_'+type), align: 'center'})).inject(container);
 					var table = (new Element('table', {border: 1, width: '100%'})).inject(container);
 					var tbody = (new Element('tbody')).inject(table);
@@ -406,6 +412,20 @@ window.addEvent('domready',function() {
 							new Element('iframe', {src: 'mypapers_file?id='+paper_id+'&lang='+lang+'&type='+type, styles: {width: '100%', height: '100pt'}})
 						));
 					});
+					if( ['abstract', 'paper'].contains(type) ) {
+						var tr = (new Element('tr').inject(tbody));
+					//	tr.grab(new Element('td', {align: 'center', text: dict('file_'+type+'_exdoc')+ ' (' + dict('only_for_russian') +')'}));
+						var td = new Element('td', {align: 'center'});
+						td.adopt(
+							new Element('span', {text: dict('file_'+type+'_exdoc')}),
+							new Element('br'),
+							new Element('span', {text: '(' + dict('only_for_russian') +')'})
+						);
+						tr.grab(td);
+						tr.grab(new Element('td', {align: 'center'}).grab(
+							new Element('iframe', {src: 'mypapers_file?id='+paper_id+'&lang='+'ru'+'&type='+type+'_exdoc', styles: {width: '100%', height: '100pt'}})
+						));
+					}
 				});
 			}
 			function renderNo() {

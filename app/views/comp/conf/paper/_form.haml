@@ -7,7 +7,8 @@
 
 #papercomp{:sstyle=>"display: none"}
  %div{name: 'dict', style: 'display: none'}
-  -%w[lang_en lang_ru  delete edit submit_paper delete_paper_confirm submit_paper_confirm msg_bad_title msg_bad_abstract msg_bad_keywords msg_bad_authors msg_bad_files bytes file_type file_size timestamp download_file paper_saved file_abstract file_paper file_presentation file_exdoc].each do |word|
+  -#%w[lang_en lang_ru  delete edit submit_paper delete_paper_confirm submit_paper_confirm msg_bad_title msg_bad_abstract msg_bad_keywords msg_bad_authors msg_bad_files bytes file_type file_size timestamp download_file paper_saved file_abstract file_paper file_presentation file_exdoc].each do |word|
+  -%w[lang_en lang_ru  delete edit submit_paper delete_paper_confirm submit_paper_confirm msg_bad_title msg_bad_abstract msg_bad_keywords msg_bad_authors msg_bad_files bytes file_type file_size timestamp download_file paper_saved file_abstract file_paper file_presentation file_abstract_exdoc file_paper_exdoc].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}
  -#%input#cont_id{:type=>'hidden', :name=>'cont_id', :value => @cont_id}
  -#%input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
@@ -128,7 +129,8 @@
         %th= _ :removeauthor
      %div{name: 'files', style: 'display: none'}
       %div{name: 'dict', style: 'display: none'}
-       -%w[lang_en lang_ru save_before_file_submittion save file_abstract file_paper file_presentation file_exdoc].each do |word|
+       -#%w[lang_en lang_ru save_before_file_submittion save file_abstract file_paper file_presentation file_exdoc].each do |word|
+       -%w[lang_en lang_ru save_before_file_submittion save file_abstract file_paper file_presentation file_abstract_exdoc file_paper_exdoc only_for_russian].each do |word|
         %input{:type=>'hidden', :name=>word, :value => _(word)}
       %div{name: 'container'}
        -#%iframe{src: 'file'}
