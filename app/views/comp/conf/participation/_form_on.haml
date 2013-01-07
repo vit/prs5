@@ -25,7 +25,7 @@
      %input.save{type: 'button', value: _('unregister_btn'), name: 'unreg_btn'}
   %form.edit#participation_form
    %fieldset
-    %legend= _(:person_info)
+    -#%legend= _(:person_info)
     %p
      %span.label= _('gender')
      %span.input
@@ -70,7 +70,7 @@
      %label.label{for: 'form_coauthors'}= _('coauthors')
      %textarea.input{name: 'coauthors', id: 'form_coauthors', rows: 5}
    %fieldset
-    %legend= _(:work_info)
+    -#%legend= _(:work_info)
     %p
      %span.label= _('occupation')
      %label

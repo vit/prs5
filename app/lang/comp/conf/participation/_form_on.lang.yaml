@@ -44,7 +44,8 @@ en:
         fax: Fax number (including country & city codes) 
         email: Email
 
-        participant_security: Security
+        #participant_security: Security
+        participant_security: Extra info
         text_foreign_passport: In accordance with the requirements in the regulations for foreign citizens visiting the territory of enterprises in Russia all conferees-to-be in addition to the above data should provide the following personal data
         nationality: Citizenship (Nationality) 
         passport: Passport number
@@ -57,7 +58,8 @@ en:
         hotel_name: Hotel name
         hotel_no: I don’t need the hotel reservation
 
-        publishing_agreement: Publishing agreement
+        #publishing_agreement: Publishing agreement
+        publishing_agreement: Info publishing agreement
         publish_agree_yes: I agree
         publish_agree_no: "I don't agree"
         publish_agree_text: that my first name, family name, country, organization, phone, fax numbers and email will be published in the list of conferees.
@@ -113,7 +115,8 @@ ru:
         fax: Факс (+код города) (желательно)
         email: Email
 
-        participant_security: Безопасность
+        #participant_security: Безопасность
+        participant_security: Дополнительная информация
         text_foreign_passport: В соответствии с требованиями в правилах пребывания иностранных граждан на территории предприятий Российской Федерации всем участникам конференции, не являющимся гражданами России, дополнительно к выше перечисленному необходимо сообщить следующие паспортные данные
         nationality: Гражданство
         passport: Номер паспорта
@@ -126,7 +129,7 @@ ru:
         hotel_name: Название гостиницы
         hotel_no: Гостиница не требуется
 
-        publishing_agreement: Согласие на публикацию
+        publishing_agreement: Согласие на публикацию сведений
         publish_agree_yes: Я согласен
         publish_agree_no: Я НЕ согласен
         publish_agree_text: "с тем, чтобы в списке  участников конференции были опубликованы сообщенные мной сведения: имя, фамилия, страна, организация, телефон, факс, email"

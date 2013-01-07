@@ -1,6 +1,24 @@
 
 
--#@country_list.each do |c|
--@appl.country.list.each do |c|
+-#@appl.country.list.each do |c|
  %option{value: c[:code]}= request.languages.first=='ru' ? c[:ru] : c[:en]
+
+-names = @appl.country.list.map do |c|
+ -{code: c[:code], name: (request.languages.first=='ru' ? c[:ru] : c[:en])}
+-#sorted = names.sort( &{ |a,b| a[:name] <=> b[:name] })
+-#sorted = names.sort( &->a,b{ a[:name] <=> b[:name] })
+-#sorted = [2,1].sort( &->a,b{ a <=> b})
+-#sorted = [2,1].sort { |a,b| a <=> b}
+-#sorted = names.sort { |a,b| a <=> b}
+-#@names = names.take(10)
+-#if @names.is_a?(Array)
+ -#@ssorted = @names.to_a
+ -#@ssorted = @names.to_a.sort
+ -#@names = [{code: 'en', name: 'EN'}, {code: 'ru', name: 'RU'}]
+ -#sorted = (-> n { n.to_a.sort{|a,b| a[:name]<=>b[:name] } })[@names]
+-#sorted = (-> n { n.to_a.sort{|a,b| a[:name]<=>b[:name] } })[@names]
+-names.each do |c|
+ %option{value: c[:code]}= c[:name]
+ -#%option{value: c[:code]}= names.class
+ -#%option{value: c[:code]}= names.respond_to?(:sort)
 

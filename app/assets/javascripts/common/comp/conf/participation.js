@@ -1,30 +1,11 @@
 
+/*
+
 window.addEvent('domready',function() {
 
 	self.Coms = self.Coms || {};
 	self.Coms.Comp = self.Coms.Comp || {};
 	self.Coms.Comp.Conf = self.Coms.Comp.Conf || {};
-
-	/*
-	var cont_id = self.conf.id;
-	var conf_lang = self.conf.lang;
-	var user_id = $('user_id').get('value');
-	var user_lang_code = Cookie.read('ecms_lang');
-//	var lang_list = conf_lang=='en' ? ['en'] : conf_lang=='ru' ? ['ru'] : ['en', 'ru'];
-	var lang_list = self.conf.lang_list();
-	//var conf_permissions = {};
-	var conf_user_rights = {};
-	*/
-
-	/*
-	self.conf.addEvent('init_ok', function(result, error) {
-		//conf_permissions = self.conf.permissions;
-		conf_user_rights = self.conf.my_rights;
-	//	MyPapers();
-	});
-	*/
-
-	/*  */
 
 	var NotYetForm = function(args) {
 		var conf = self.conf;
@@ -199,4 +180,6 @@ window.addEvent('domready',function() {
 	}());
 
 });
+
+*/
 
