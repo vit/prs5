@@ -3,8 +3,11 @@
 -#@appl.country.list.each do |c|
  %option{value: c[:code]}= request.languages.first=='ru' ? c[:ru] : c[:en]
 
--names = @appl.country.list.map do |c|
+-#names = @appl.country.list.map do |c|
  -{code: c[:code], name: (request.languages.first=='ru' ? c[:ru] : c[:en])}
+
+-names = @appl.country.by_lang request.languages.first
+
 -#sorted = names.sort( &{ |a,b| a[:name] <=> b[:name] })
 -#sorted = names.sort( &->a,b{ a[:name] <=> b[:name] })
 -#sorted = [2,1].sort( &->a,b{ a <=> b})
