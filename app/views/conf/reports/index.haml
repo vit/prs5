@@ -34,7 +34,8 @@
    %br
    %br
    = _(:abstract_ids_with_files)
-   -%w[abstract paper presentation].each do |file_class|
+   -#%w[abstract paper presentation].each do |file_class|
+   -%w[abstract abstract_exdoc paper paper_exdoc presentation].each do |file_class|
     %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= file_class
    %br
    %br

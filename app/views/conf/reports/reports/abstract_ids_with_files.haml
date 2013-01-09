@@ -17,7 +17,8 @@
      %td&= r['_meta']['paper_cnt']
      %td
       - r['files'].select{ |f| f[:class_code]==@file_class_code }.each do |f|
-       %a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
+       -#%a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
+       %a{href: '../download/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
 
 
 -@_tj_next_template = ''
