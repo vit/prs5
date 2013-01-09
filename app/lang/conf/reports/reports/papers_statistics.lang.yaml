@@ -1,0 +1,18 @@
+
+en:
+        title: Papers statistics
+        timestamp: Time of report creation
+        papcnt: Number of abstracts (papers)
+        countrycnt: Number of countries
+        country: Country
+        cnt: Number of submitted abstracts (papers)
+
+ru:
+        title: Статистика подачи докладов
+
+        timestamp: Время создания отчета
+        papcnt: Количество поданных рефератов (докладов)
+        countrycnt: Количество стран
+        country: Страна
+        cnt: Количество поданных рефератов (докладов)
+

@@ -1,0 +1,53 @@
+
+en:
+        title: Papers list with reviews
+
+        id: Paper ID
+        pins: PIN
+        registrator: Registrator
+        pauthors: Author (authors), affiliation, city, country
+        ptitle: Paper title
+        reviews: Reviews
+        reviewer: Reviewer
+        score: Score
+        decision: Decision
+        ipccomments: Comments for IPC
+        authcomments: Comments for authors
+
+        score_uncertain: Uncertain
+        score_a: A/5.0 (Accept)
+        score_b: B/4.0 (Accept if possible)
+        score_c: C/3.0 (Accept as last resort)
+        score_d: D/2.0 (Reject)
+
+        decision_uncertain: Uncertain
+        decision_reject: Reject
+        decision_accept_poster: Accept as a poster
+        decision_accept_plenary: Accept as a plenary paper
+
+ru:
+        title: Список поданных рефератов (докладов) с рецензиями
+
+        id: № реф. в системе
+        pins: PIN
+        registrator: Регистратор
+        pauthors: Автор (авторы), организация, город, страна
+        ptitle: Заголовок доклада
+        reviews: Рецензии
+        reviewer: Рецензент
+        score: Оценка
+        decision: Решение
+        ipccomments: Комментарии для ПК
+        authcomments: Комментарии для авторов
+
+        score_uncertain: Не задано
+        score_a: A/5.0 (Принять)
+        score_b: B/4.0 (Принять по возможности)
+        score_c: C/3.0 (Принять в виде исключения)
+        score_d: D/2.0 (Отклонить)
+
+        decision_uncertain: Не задано
+        decision_reject: Отклонить
+        decision_accept_poster: Принять как стендовый
+        decision_accept_plenary: Принять как пленарный
+

@@ -1,0 +1,24 @@
+
+en:
+        title: Papers list by registrator country
+        paper_cnt: Paper number
+        paper_owner: Registrator
+        paper_authors: Authors
+        paper_title: Title
+        paper_abstract: Abstract
+        paper_keywords: Keywords
+        paper_abstract_file: Abstract file
+        bytes: Bytes
+
+ru:
+        title: Список поданных рефератов по странам регистратора
+        paper_cnt:  Номер реферата
+        paper_owner: Регистратор
+        paper_authors: Авторы
+        paper_title: Название
+        paper_abstract: Рефераты
+        paper_keywords: Ключевые слова
+        paper_abstract_file: Файл реферата
+        bytes: Байт
+
+

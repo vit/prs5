@@ -1,0 +1,47 @@
+
+en:
+        timestamp: Time of report creation
+        papcnt: Number of papers
+        decision: Decision
+        number: Number of papers
+        sections: Sections
+        nosection: Section is uncertain
+
+        #d_uncertain: uncertain
+        #d_rejected: rejected
+        #d_sectional: sectional
+        #d_poster: poster
+        #d_plenary: plenary
+        #d_invited: invited
+
+        uncertain: uncertain
+        reject: rejected
+        #d_sectional: sectional
+        accept: accept
+        accept_poster: poster
+        accept_plenary: plenary
+        #d_invited: invited
+
+ru:
+        timestamp: Время создания отчета
+        papcnt: Количество докладов
+        decision: Решение
+        number: Количество докладов
+        sections: Секции
+        nosection: Секция не задана
+
+        #d_uncertain: не определено
+        #d_rejected: отклонен
+        #d_sectional: секционный
+        #d_poster: стендовый
+        #d_plenary: пленарный
+        #d_invited: приглашенный
+
+        uncertain: не определено
+        reject: отклонен
+        #d_sectional: секционный
+        accept: принять
+        accept_poster: стендовый
+        accept_plenary: пленарный
+        #d_invited: приглашенный
+

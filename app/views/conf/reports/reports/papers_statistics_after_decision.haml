@@ -1,0 +1,109 @@
+
+- @page_title= _ :title
+
+%div
+ %h2{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h2{:align => 'center'}= _(:title)
+ %table{align: 'center', border: 1}
+  -#[:timestamp, :papcnt, :countrycnt].each do |s|
+  -[:timestamp, :papcnt].each do |s|
+   %tr
+    %th{align: 'right'}= _ s
+    %td= @report_data[s.to_s]
+ %br
+ -@decisions = @report_data['decisions']
+ -#@snames = @report_data['snames']
+ -@sections = @report_data['sections']
+
+ %table{align: 'center', border: 1}
+  %tr
+   %th{align: 'right'}= _(:decision) + ':'
+   -@decisions.each_pair do |k,v|
+    %td= _( k.to_s.dup )
+  %tr
+   %th{align: 'right'}= _(:total_number) + ':'
+   -@decisions.each_pair do |k,v|
+    %td{align: 'center'}= v.to_s.dup
+    -#%td= k.to_s.dup
+  -#%br
+  -#%table{align: 'center', border: 1}
+  %tr
+   -#%th{align: 'center'}= _(:section) +' \\ '+ _(:decision)
+   %th{align: 'center'}= _(:section)
+   -#@decisions.each_pair do |k,v|
+    %th= _( k.to_s.dup )
+   %th{colspan: @decisions.size} &nbsp;
+  -@sections.each do |s|
+   %tr
+    -#%td= s[:info]['name']
+    %td{align: 'center'}= -> { s['info']['id']==:uncertain ? _(:uncertain) : s['info']['name'][@data_lang_code] }[]
+    -#%td= s['decision'].inspect
+    -#%td= s[:info].inspect
+    -#%td= @sections.inspect
+    -#@decisions.each_pair do |k,v|
+    -#%td= s['decisions'].inspect
+    -#s['decisions'].each_pair do |k,v|
+    -@decisions.each_pair do |k,v|
+     %td{align: 'center'}= s['decisions'][k] && s['decisions'][k]>0 ? s['decisions'][k] : 0
+
+ -#%div{:aalign => 'center'}
+ -#%table{border: 1, style: "border-collapse: collapse"}
+  %tr
+   %th{rowspan: 3, valign: 'top', align: 'center'} N
+   %th= _ :ptitle
+   %th= _ :registrator
+  %tr
+   %th{colspan: 2}= _ :pauthors
+  %tr
+   %th{colspan: 2}
+    %table{border: 1, width: '100%', style: "border-collapse: collapse"}
+     %tr
+      %th{rowspan: 3}= _ :reviewer
+      %th= _ :score
+      %th= _ :decision
+     %tr
+      %th{colspan: 2, style: "border-bottom: solid 3px black"}= _ :ipccomments
+     %tr
+      %th{colspan: 2}= _ :authcomments
+  -@report_data['papers'].each do |r|
+   %tr
+    %td{rowspan: 3, valign: 'top', align: 'center'}= r['paper_cnt']
+    %td= r['title']
+    %td= (r['registrator_data']['user_name'] + ' (' + r['registrator_data']['pin'].to_s  + ')')
+   %tr
+    %td{colspan: 2}
+     - r['authors_data'].each do |a|
+      =%w[user_name affiliation city].map{|n| a[n]}.join(', ') +', '+ (call '/comp/user/country_name', :locals => {:code => a['country'].dup}).strip
+      -#=a.inspect
+      %br
+   %tr
+    -#%td{colspan: 2}= r.inspect
+    -#%td{colspan: 2}= r['reviews_data'].inspect
+    %td{colspan: 2}
+     %table{border: 1, width: '100%', style: "border-collapse: collapse"}
+      -r['reviews_data'].each do |r|
+       %tr
+        -#%td=r.inspect
+        -#%td=r['reviewer'].inspect
+        -#%td=%w[fname mname lname].map{ |n| r['reviewer'][n][@data_lang_code]}.join(' ') + ' (' + r['reviewer']['userpin'].to_s + ')'
+        %td{rowspan: 3}=r['reviewer']['user_name']
+        %td= _ ('score_'+r['data']['score'])
+        %td= _ ('decision_'+r['data']['decision'])
+       %tr
+        -#%td{colspan: 2, style: "border-bottom: solid 3px black;"}=r['data']['ipccomments'].to_s
+        %td{colspan: 2, style: "border-bottom: solid 3px black"}
+         -@lang_list.select{ |l| r['data']['ipccomments'] && r['data']['ipccomments'][l] && r['data']['ipccomments'][l].length>0 }.each do |l|
+          = l+': '
+          = r['data']['ipccomments'][l]
+          %br
+       %tr
+        -#%td{colspan: 2}=r['data']['authcomments'].to_s
+        %td{colspan: 2}
+         -@lang_list.select{ |l| r['data']['authcomments'] && r['data']['authcomments'][l] && r['data']['authcomments'][l].length>0 }.each do |l|
+          = l+': '
+          = r['data']['authcomments'][l]
+          %br
+
+
+-@_tj_next_template = ''
+

@@ -99,6 +99,15 @@ Prs5::Application.routes.draw do
 #	match '/conf/:cont_id/' => redirect("/conf/%{cont_id}")
 #	match '/conf/:cont_id(/(:action))' => 'main'
 
+	#match '/conf/:cont_id/reports(/(:action/))' => 'reports', :file_name => /[^\/]+/
+	#match '/conf/:cont_id/reports/(:action)' => 'reports', :file_name => /[^\/]+/
+	match '/conf/:cont_id/reports' => redirect("/conf/%{cont_id}/reports/"), :constraints => lambda {|r| !r.original_fullpath.end_with?('/')}
+	match '/conf/:cont_id/reports/' => 'reports#index'
+#	match '/conf/:cont_id/reports/(:file_name)' => 'reports#report', :file_name => /[^\/]+/
+	match '/conf/:cont_id/reports/(:report_id.:ext)' => 'reports#report' #, :report_id => /[^\/]+/
+
+#	match '/conf/:cont_id/reports' => redirect("/conf/%{cont_id}/reports/")
+
 #	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main'
 	match '/conf/:cont_id(/(:action/(:file_name)))' => 'main', :file_name => /[^\/]+/
 	match '/conf/:cont_id/:action' => redirect("/conf/:cont_id/%{action}/")
@@ -106,11 +115,11 @@ Prs5::Application.routes.draw do
 #	match '/conf/archive.html' => 'main#list'
   end
 
-  namespace :conf do
-#	match ':controller/:action' # => 'reports#:page'
-#	match 'reports/' => 'reports#index'
-#	match 'reports/:action' => 'reports'
-	match 'reports/(:action)' => 'reports'
-  end
+#  namespace :conf do
+##	match ':controller/:action' # => 'reports#:page'
+##	match 'reports/' => 'reports#index'
+##	match 'reports/:action' => 'reports'
+#	match 'reports/(:action)' => 'reports'
+#  end
 
 end

@@ -1,0 +1,35 @@
+
+en:
+        title: Papers statistics after decision
+
+        timestamp: Time of report creation
+        papcnt: Number of papers
+        decision: Decision
+        number: Number of papers
+        total_number: Number of papers
+        section: Section
+        nosection: Section is uncertain
+
+        uncertain: uncertain
+        reject: rejected
+        accept: accept
+        accept_poster: poster
+        accept_plenary: plenary
+
+ru:
+        title: Статистика после рецензирования и принятия финального решения
+
+        timestamp: Время создания отчета
+        papcnt: Количество докладов
+        decision: Решение
+        number: Количество докладов
+        total_number: Количество докладов
+        section: Секция
+        nosection: Секция не задана
+
+        uncertain: не определено
+        reject: отклонен
+        accept: принять
+        accept_poster: стендовый
+        accept_plenary: пленарный
+

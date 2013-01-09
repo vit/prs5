@@ -1,0 +1,21 @@
+
+en:
+        page_title: 'Summary'
+
+        context_id: 'Conference ID'
+        context_title: 'Conference title'
+        context_homepage: 'Conference home page'
+        registeredPapers: 'Registered papers'
+        fromCountries: 'Countries (from)'
+
+ru:
+        page_title: 'Статистика'
+
+        context_id: 'Идентификатор конференции'
+        context_title: 'Название конференции'
+        context_homepage: 'Сайт конференции'
+        registeredPapers: 'Зарегистрировано докладов'
+        fromCountries: 'Из скольких стран'
+
+
+

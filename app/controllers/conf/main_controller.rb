@@ -1,5 +1,7 @@
-class Conf::MainController < ApplicationController
-	around_filter :preparation, :except => [:list, :list_archive]
+#class Conf::MainController < ApplicationController
+class Conf::MainController < Conf::ConfController
+	#around_filter :preparation, :except => [:list, :list_archive]
+	#around_filter :except => [:list, :list_archive]
 	def list
 		#@list = Coms::App.model.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='active' }
 		@list = @appl.conf.get_confs_list.select{ |c| c['info'] && c['info']['status']=='active' }
@@ -158,6 +160,7 @@ class Conf::MainController < ApplicationController
 	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2/index' : '/conf/main/norights') : '/conf/main/enterplease'
 		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2' : '/conf/main/norights') : '/conf/main/enterplease'
 	end
+=begin
 	def preparation
 		@cont_id = params[:cont_id].to_s
 		@conf_data = @appl.conf.get_conf_data @cont_id
@@ -191,4 +194,5 @@ class Conf::MainController < ApplicationController
 		}
 		yield
 	end
+=end
 end

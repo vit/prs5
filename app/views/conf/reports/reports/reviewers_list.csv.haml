@@ -1,0 +1,21 @@
+
+-@ss.<< [:ordnum, :pin, :rname, :rphone, :rfax, :remail, :raffiliation, :rcity, :rcountry].map{ |v| _(v) }, :format => {:weight => :bold}
+-@cnt = 0
+-@report_data['reviewers'].each do |r|
+ -@cnt += 1
+ -@cols = []
+ -@cols << @cnt.to_s.force_encoding('utf-8')
+ -@cols << r['pin']
+ -@cols << r['user_name']
+ -@cols << r['phone']
+ -@cols << r['fax']
+ -@cols << r['email']
+ -@cols << r['affiliation']
+ -@cols << r['city']
+ -#@cols << r['country_name']
+ -#@cols << (call '/comp/user/country_name', :locals => {:code => r['country'].dup})
+ -@cols << (call '/comp/user/country_name', :locals => {:code => r['country']}).strip
+ -@ss << @cols
+
+-@_tj_next_template = ''
+

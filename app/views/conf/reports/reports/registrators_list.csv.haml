@@ -1,0 +1,29 @@
+
+-@ss.<< [:id, :ptitle, :PIN, :anames, :aphones, :afaxes, :aemails, :aaffiliations, :acities, :acountries].map{ |v| _(v) }, :format => {:weight => :bold}
+-@ss << []
+-#@report_data['papers'].each_pair do |k,r|
+-@report_data['papers'].each do |r|
+ -@cols = []
+ - k = r['paper_cnt']
+ -#@cols << k.dup
+ -@cols << k.to_s
+ -@cols << r['title']
+ -@cols << r['registrator_data']['pin']
+ -@cols << r['registrator_data']['user_name']
+ -@cols << r['registrator_data']['phone']
+ -@cols << r['registrator_data']['fax']
+ -@cols << r['registrator_data']['email']
+ -@cols << r['registrator_data']['affiliation']
+ -@cols << r['registrator_data']['city']
+ -#@cols << r['authors_data'].map { |a| a['user_name'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| a['phone'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| a['fax'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| a['email'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| a['affiliation'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| a['city'] }.join( ?\n )
+ -#@cols << r['authors_data'].map { |a| (call '/comp/user/country_name', :locals => {:code => a['country']}) }.join( ?\n )
+ -@cols << (call '/comp/user/country_name', :locals => {:code => r['registrator_data']['country']})
+ -@ss << @cols
+
+-@_tj_next_template = ''
+

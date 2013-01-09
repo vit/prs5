@@ -1,0 +1,41 @@
+
+- @page_title= _ :page_title
+-# @page_id='reporst'
+
+%div
+ -#%h3{:align => 'center'}= _ :page_title
+ -#%h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code] + ' / ' + _(:page_title)
+ %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h3{:align => 'center'}= _(:page_title)
+ %div{:align => 'center'}
+
+  %table
+   -#%tr
+    %td{:align=>'left'}
+     %b= _(:context_id)+':'
+    %td{:align=>'left'}&= @summary[:context_id]
+   %tr
+    %td{:align=>'left'}
+     %b= _(:context_title)+':'
+    %td{:align=>'left'}&= @summary[:context_title]
+   %tr
+    %td{:align=>'left'}
+     %b= _(:context_homepage)+':'
+    %td{:align=>'left'}
+     %a{:target=>'_blank', :href=> @summary[:context_homepage]}= _(:context_homepage)
+   %tr
+    %td{:align=>'left'}
+     %b= _(:registeredPapers)+':'
+     %td{:align=>'left'}&= @summary[:papcnt]
+   %tr
+    %td{:align=>'left'}
+     %b= _(:fromCountries)+':'
+     %td{:align=>'left'}&= @summary[:countrycnt]
+
+
+
+-@_tj_next_template = ''
+-#@next_template = '/page/nonexistent'
+-#@next_template = '/page/autohandler'
+
+

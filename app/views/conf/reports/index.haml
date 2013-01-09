@@ -1,3 +1,61 @@
 
-%h1 test
+- @page_title= _ :title
+- @page_id='reports'
+
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title 
+  %div{:align => 'center'}
+   = _(:report_1)+':'
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'report_1.html?data_lang='+data_lang}= data_lang
+   %br
+   %br
+   = _(:report_2)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'report_2.html?data_lang='+data_lang}= data_lang
+   %br
+   = _(:abstracts_by_country)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'abstracts_by_country.html?data_lang='+data_lang}= data_lang
+   %br
+   = _(:papers_by_section)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'papers_by_section.html?data_lang='+data_lang}= data_lang
+   %br
+   %br
+   = _(:abstracts_with_files)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'abstracts_with_files.html?data_lang='+data_lang}= data_lang
+   %br
+   = _(:abstracts_with_paper_files)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'abstracts_with_paper_files.html?data_lang='+data_lang}= data_lang
+   %br
+   %br
+   = _(:abstract_ids_with_files)
+   -%w[abstract paper presentation].each do |file_class|
+    %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= file_class
+   %br
+   %br
+   - with_html = %w[papers_statistics papers_statistics_after_decision papers_list_with_reviews]
+   %table{border: 1, cellpadding: 2}
+    %tr
+     %th &nbsp;
+     -%w[html xls csv].each do |ext|
+      %th{colspan: 1}= ext
+    -%w[papers_statistics papers_statistics_after_decision papers_list_with_reviews papers_list_with_reviews2 authors_list registrators_list reviewers_list].each do |id|
+     %tr
+      %td= _(id.to_sym)+':'
+      -%w[html xls csv].each do |ext|
+       %td
+        - if ext!='html' or with_html.include?(id)
+         -%w[en ru].each do |data_lang|
+          %a{href: id+'.'+ext+'?data_lang='+data_lang}= data_lang
+        - else
+         &nbsp;
+
+
+-#render :file => 'conf/reports/layout'
+-render :file => 'conf/main/layout'
 

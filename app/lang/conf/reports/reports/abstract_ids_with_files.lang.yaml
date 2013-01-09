@@ -1,0 +1,11 @@
+
+en:
+        title: 'Abstract numbers with files'
+        paper_cnt: Paper number
+        paper_files: Files
+
+ru:
+        title: 'Список номеров рефератов с файлами'
+        paper_cnt: Номер реферата
+        paper_files: Файлы
+

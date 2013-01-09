@@ -1,0 +1,45 @@
+
+-@cols = [:id, :pauthors, :ptitle].map{ |v| _(v) }
+
+-@dnames = {0 => :d_uncertain, 1 => :d_rejected, 2 => :d_sectional, 3 => :d_poster, 4 => :d_plenary, 5 => :d_invited}
+
+- reviewers_pos = {}
+- reviewers_list = []
+-@report_data['papers'].each do |r|
+ -r['reviews_data'].each do |a|
+  -owner = a['_meta']['owner'].to_i
+  -a['reviewer']['pin'] = owner
+  -unless reviewers_pos[owner]
+   -reviewers_pos[owner] = reviewers_list.count
+   -reviewers_list << a['reviewer']
+-reviewers_list.each do |r|
+ -@cols << r['user_name'] +' ('+ r['pin'].to_s + ')' + ?\n + _(:score) + ', ' + _(:decision) + ', ' + _(:ipc_comments) + ', ' + _(:auth_comments)
+
+-#@cntmax = 0
+-#@report_data['papers'].each do |r|
+ - k = r['paper_cnt']
+ -@cntmax = r['reviews_data'].count if @cntmax < r['reviews_data'].count
+-#@cntmax.times do
+ -@cols << [ _(:reviewer), '- '+_(:score), '- '+_(:decision) ].join( ?\n )
+- @ss.<< @cols, :format => {:weight => :bold}
+
+-@report_data['papers'].each do |r|
+ - k = r['paper_cnt']
+ -@ss << k.to_s.dup.force_encoding('UTF-8')
+ -@ss << r['authors_data'].map { |a| (a['user_name'].to_s) +', '+ (a['affiliation'].to_s) +', '+ (a['city'].to_s) +', '+ (call '/comp/user/country_name', :locals => {:code => a['country'].dup}).strip }.join(?\n)
+ -@ss << r['title']
+ - p_rev = []
+ -r['reviews_data'].each do |a|
+  -pin = a['reviewer']['pin']
+  -p_rev[ reviewers_pos[pin] ] = a
+  -#@ss << a.inspect
+  -#@ss << a['reviewer'].inspect
+  -#@ss << a['reviewer']['user_name'].to_s + ?\n + _('score_'+a['data']['score'].to_s) + ?\n + _('decision_'+a['data']['decision'].to_s)
+ -p_rev.each do |r|
+  -#@ss.<< (r ? r.inspect : '')
+  -content = _('score_'+r['data']['score'].to_s) + ?\n + _('decision_'+r['data']['decision'].to_s) + ?\n + r['data']['ipccomments'].inspect + ?\n + r['data']['authcomments'].inspect if r
+  -@ss.<< (r ? content : '')
+ - @ss << []
+
+-@_tj_next_template = ''
+

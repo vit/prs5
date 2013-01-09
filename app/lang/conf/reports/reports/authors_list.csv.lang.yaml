@@ -1,0 +1,25 @@
+
+en:
+        id: Paper ID
+        ptitle: Paper title
+        anames: Author(s) name(s)
+        aphones: Phone
+        afaxes: Fax
+        aemails: E-mail
+        aaffiliations: Affiliation
+        acities: City
+        acountries: Country
+
+ru:
+        id: № реф. в системе
+        ptitle: Заголовок доклада
+        anames: ФИО автора (авторов)
+        aphones: Телефон
+        afaxes: Факс
+        aemails: E-mail
+        aaffiliations: Организация
+        acities: Город
+        acountries: Страна
+
+
+

@@ -1,0 +1,23 @@
+
+en:
+        ordnum: '#'
+        pin: PIN
+        rname: "Reviewer's name"
+        rphone: Phone
+        rfax: Fax
+        remail: E-mail
+        raffiliation: Affiliation
+        rcity: City
+        rcountry: Country
+
+ru:
+        ordnum: № п.п.
+        pin: PIN
+        rname: ФИО рецензента
+        rphone: Телефон
+        rfax: Факс
+        remail: E-mail
+        raffiliation: Организация
+        rcity: Город
+        rcountry: Страна
+

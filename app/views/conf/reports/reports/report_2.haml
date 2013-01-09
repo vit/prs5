@@ -1,0 +1,59 @@
+
+- @page_title= _ :title
+-# @page_id='reports'
+
+%div
+ -#%h3{:align => 'center'}= _ :title 
+ -#%h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code] + ' / ' + _(:title)
+ %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h3{:align => 'center'}= _(:title)
+
+ %div{:align => 'center'}
+ -@report_data.each do |r|
+  %div{style: 'margin-bottom: 10pt;'}
+   %b= _(:paper_cnt)+': '
+   %span&= r['_meta']['paper_cnt']
+   %br
+   %b= _(:paper_owner)+': '
+   %span&= r['_meta']['owner'].to_s + ' | ' + %w[fname mname lname].map{ |f| r['owner_info'][f][@data_lang_code] }.join(' ')
+   %br
+   %b><= _(:paper_authors)+': '
+   - authors = r['authors'].map{ |a|
+   -    %w[fname mname lname].map{ |f|
+   -            a[f][@data_lang_code]
+   -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (call '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
+   - }.join('; ')
+   %span&= authors
+   %br
+   %b= _(:paper_title)+': '
+   %span&= r['text']['title'][@data_lang_code]
+   %br
+   %b= _(:paper_abstract)+': '
+   %span&= r['text']['abstract'][@data_lang_code]
+   %br
+   %b= _(:paper_keywords)+': '
+   - keywords = r['keywords'].map{ |kw|
+   -    kw[@data_lang_code]
+   - }.join(', ')
+   %span&= keywords
+   %br
+   %b= _(:paper_abstract_file)+': '
+   -# r['files'].select{ |f| f[:_meta]['lang']==@data_lang_code }.map do |f|
+    %a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']}= _ :paper_abstract_file_download
+    = ' (' + f[:length].to_s + ' ' + _(:bytes) + ', ' + f[:_meta]['ctime'].to_s + ')'
+   - r['files'].select{ |f| f[:class_code]=='abstract' }.each do |f|
+    %a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']}= f[:_meta]['lang']
+    = ' (' + f[:length].to_s + ' ' + _(:bytes) + ', ' + f[:_meta]['ctime'].to_s + ')'
+   %br
+   %b= _(:paper_decision_section)+': '
+   -#%span&= r['decision']['section']
+   -#%span&= r.inspect
+   %span&= -> { section = @conf_sections.select {|s| s['id']==r['decision']['section'] }.first; section && section['name'] ? section['name'][@data_lang_code] : '' }[]
+   %br
+   %b= _(:paper_decision_decision)+': '
+   %span&= _ r['decision']['decision']
+
+
+-@_tj_next_template = ''
+-#@next_template = '/page/nonexistent'
+

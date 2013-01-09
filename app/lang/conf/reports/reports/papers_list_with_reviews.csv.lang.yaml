@@ -1,0 +1,58 @@
+
+en:
+        id: Paper ID
+        pins: PIN
+        pauthors: Author (authors), affiliation, city, country
+        ptitle: Paper title
+        reviews: Reviews
+        reviewer: Reviewer
+        score: Score
+        decision: Decision
+
+        d_uncertain: uncertain
+        d_rejected: rejected
+        d_sectional: sectional
+        d_poster: poster
+        d_plenary: plenary
+        d_invited: invited
+
+        score_uncertain: Uncertain
+        score_a: A/5.0 (Accept)
+        score_b: B/4.0 (Accept if possible)
+        score_c: C/3.0 (Accept as last resort)
+        score_d: D/2.0 (Reject)
+
+        decision_uncertain: Uncertain
+        decision_reject: Reject
+        decision_accept_poster: Accept as a poster
+        decision_accept_plenary: Accept as a plenary paper
+
+ru:
+        id: № реф. в системе
+        pins: PIN
+        pauthors: Автор (авторы), организация, город, страна
+        ptitle: Заголовок доклада
+        reviews: Рецензии
+        reviewer: Рецензент
+        score: Оценка
+        decision: Решение
+
+        d_uncertain: не определено
+        d_rejected: отклонен
+        d_sectional: секционный
+        d_poster: стендовый
+        d_plenary: пленарный
+        d_invited: приглашенный
+
+        score_uncertain: Не задано
+        score_a: A/5.0 (Принять)
+        score_b: B/4.0 (Принять по возможности)
+        score_c: C/3.0 (Принять в виде исключения)
+        score_d: D/2.0 (Отклонить)
+
+        decision_uncertain: Не задано
+        decision_reject: Отклонить
+        decision_accept_poster: Принять как стендовый
+        decision_accept_plenary: Принять как пленарный
+
+

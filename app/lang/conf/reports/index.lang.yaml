@@ -1,0 +1,42 @@
+
+en:
+        title: 'Reports'
+
+        report_1: 'Summary'
+        report_2: 'Papers list with abstracts and keywords'
+        abstracts_by_country: Abstracts by registrator country
+        papers_by_section: Papers by section
+        abstracts_with_files: Abstracts with files
+        abstracts_with_paper_files: Abstracts with paper files
+
+        abstract_ids_with_files: Abstract numbers with files
+
+        papers_statistics: Papers statistics
+        papers_statistics_after_decision: Papers statistics after decision
+        papers_list_with_reviews: Papers list with reviews
+        papers_list_with_reviews2: Papers list with reviews 2
+        authors_list: Authors list
+        registrators_list: Registrators list
+        reviewers_list: Reviewers list
+
+ru:
+        title: 'Отчеты'
+
+        report_1: 'Статистика'
+        report_2: 'Список поданных рефератов с текстами'
+        abstracts_by_country: Рефераты по странам регистраторов
+        papers_by_section: Доклады по секциям
+        abstracts_with_files: Рефераты с файлами
+        abstracts_with_paper_files: Рефераты с файлами докладов
+
+        abstract_ids_with_files: Список номеров рефератов с файлами
+
+        papers_statistics: Статистика подачи докладов
+        papers_statistics_after_decision: Статистика после рецензирования и принятия финального решения
+        papers_list_with_reviews: Списки поданных рефератов (докладов) с рецензиями
+        papers_list_with_reviews2: Списки поданных рефератов (докладов) с рецензиями 2
+        authors_list: Список данных авторов
+        registrators_list: Список данных регистраторов
+        reviewers_list: Список рецензентов
+
+

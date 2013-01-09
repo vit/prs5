@@ -1,0 +1,10 @@
+
+-#%h3{:align => 'center'}= _ :title 
+
+-#%div{:align=>"left"}
+-# =call "/comp/menu/horizontal", :locals => {:current_id => @page_id, :data => [ [_(:info), '../config/info.html', 'info'], [_(:perm), '../config/perm.html', 'perm'], [_(:kw), '../config/kw.html', 'kw'], [_(:groups), '../config/groups.html', 'groups'], [_(:rights), '../config/rights.html', 'rights'] ]}
+
+%div= yield
+
+- @page_id='reports'
+

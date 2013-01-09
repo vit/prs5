@@ -1,0 +1,43 @@
+
+-[:timestamp, :papcnt].each do |s|
+ -@cols = [ _(s), @report_data[s.to_s]]
+ -#= ::CSV.generate_line(@cols, {col_sep: ?;})
+ - @ss << @cols
+
+-#= ''
+- @ss << []
+
+-#@dnames = {0 => :d_uncertain, 1 => :d_rejected, 2 => :d_sectional, 3 => :d_poster, 4 => :d_plenary, 5 => :d_invited}
+-#@dnames = @report_data['dnames']
+-@decisions = @report_data['decisions']
+-@snames = @report_data['snames']
+
+-@cols = [ _(:decision) ]
+-#@dnames.each_pair do |k,v|
+ -@cols << _( v )
+-#@decisions.each do |v|
+ -@cols << _( v )
+-@decisions.each_pair do |k,v|
+ -#@cols << k.to_s
+ -@cols << _( k.to_s.dup )
+- @ss << @cols
+
+-@cols = [ _(:number) ]
+-#@dnames.each_pair do |k,v|
+ -@cols << ( @report_data['tbd'][k.to_s] ? @report_data['tbd'][k.to_s] : 0 )
+-@decisions.each_pair do |k,v|
+ -@cols << v.to_s.dup
+ -#@cols << ( @report_data['tbd'][k.to_s] ? @report_data['tbd'][k.to_s] : 0 )
+-#@decisions.each do |v|
+ -@cols << ( @report_data['tbd'][v.to_s] ? @report_data['tbd'][v.to_s] : 0 )
+- @ss << @cols
+
+-#@report_data['sbd'].each_pair do |ks,s|
+ -@cols = [ @snames[ ks ] ? @snames[ ks ] : _(:nosection) ]
+ -@dnames.each_pair do |k,v|
+  -@cols << ( s[ k.to_s ] ? s[ k.to_s ] : 0 )
+ -#= ::CSV.generate_line(@cols, {col_sep: ?;})
+ - @ss << @cols
+
+-@_tj_next_template = ''
+
