@@ -121,9 +121,12 @@ class Conf::MainController < Conf::ConfController
 						filename: inputfile.original_filename
 					})
 #=begin
-					required_lang_list = ['ru', 'by', 'ua'].include?(@current_user[:info]['country']) ?
-						@lang_list :
-						(@lang_list.length==1 ? @lang_list : ['en'])
+					required_lang_list =
+						(%w[abstract_exdoc paper_exdoc].include? @type) ? ['ru'] : (
+							['ru', 'by', 'ua'].include?(@current_user[:info]['country']) ?
+							@lang_list :
+							(@lang_list.length==1 ? @lang_list : ['en'])
+						)
 					check_files_condition = -> arr {
 						required_lang_list.inject(true) do |acc, l|
 						acc && arr[l]
