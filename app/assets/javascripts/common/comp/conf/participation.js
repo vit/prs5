@@ -79,6 +79,16 @@
 	//	alert(cont.attr('name'));
 		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
+		function rulesCoauthors(name, err) {
+			if( this.get()['part_type'] != 'nonauthor' ) {
+				err('required');
+			}
+		}
+		function rulesDegree(name, err) {
+			if( this.get()['occupation'] == 'work' ) {
+				err('required');
+			}
+		}
 		var formStruct = [
 			{name: 'gender', type: 'radio', rules: 'required'},
 			{name: 'person_title', type: 'list', rules: 'required'},
@@ -87,12 +97,16 @@
 			{name: 'mname', type: 'text', rules: 'required'},
 			{name: 'birthdate', type: 'date', rules: 'required'},
 			{name: 'part_type', type: 'radio', rules: 'required'},
-			{name: 'coauthors', type: 'text', rules: 'required'},
+		//	{name: 'coauthors', type: 'text', rules: 'required'},
+			{name: 'coauthors', type: 'text', rules: rulesCoauthors},
 			{name: 'occupation', type: 'radio', rules: 'required'},
 			{name: 'organization', type: 'text', rules: 'required'},
-			{name: 'position', type: 'text', rules: 'required'},
-			{name: 'rank', type: 'text', rules: 'required'},
-			{name: 'degree', type: 'text', rules: 'required'},
+		//	{name: 'position', type: 'text', rules: 'required'},
+			{name: 'position', type: 'text', rules: rulesDegree},
+		//	{name: 'rank', type: 'text', rules: 'required'},
+			{name: 'rank', type: 'text', rules: rulesDegree},
+		//	{name: 'degree', type: 'text', rules: 'required'},
+			{name: 'degree', type: 'text', rules: rulesDegree},
 			{name: 'responsibilities', type: 'text', rules: 'required'},
 			{name: 'org_country', type: 'text', rules: 'required'},
 			{name: 'org_city', type: 'text', rules: 'required'},
@@ -265,22 +279,34 @@
 			function validate() {
 				var err = [];
 				unmarkAllElements();
+
 				$.each(info, function(k,v) {
 					if( v.rules ) {
-						var rules = v.rules.split('|');
 						var val = getElemData(v);
-						$.each(rules, function(k2,v2) {
-							switch( v2 ) {
-								case 'required':
-									if(!val) {
-										markElement(v, true);
-										err.push({name: v.name, rule: v2});
-									}
-							}
-						});
+		//				alert( $.type(v.rules) );
+						if( $.type(v.rules)=='string' ) {
+							var rules = v.rules.split('|');
+							$.each(rules, function(k2,v2) {
+								switch( v2 ) {
+									case 'required':
+										if(!val) {
+											markElement(v, true);
+											err.push({name: v.name, rule: v2});
+										}
+								}
+							});
+						} else if( $.type(v.rules)=='function' ) {
+						//	v.rules.call(me, v.name, err);
+							v.rules.call(me, v.name, function(rule) {
+								if(!val) {
+									markElement(v, true);
+									err.push({name: v.name, rule: rule});
+								}
+							});
+						}
 					}
 				});
-		//		alert( JSON.stringify(err) );
+				alert( JSON.stringify(err) );
 				return err.length == 0;
 			}
 			var me = {
