@@ -28,6 +28,8 @@ en:
         degree: Degree
         responsibilities: Current responsibilities (mandatory for a speaker)
 
+        choosecountry: Choose country
+
         organization_info: Address of your organization or educational institution
         org_country: Country
         org_city: City
@@ -98,6 +100,8 @@ ru:
         rank: Ученое звание
         degree: Ученая степень
         responsibilities: Сфера деятельности в настоящее время (обязательно для докладчика)
+
+        choosecountry: Выберите страну
 
         organization_info: Адрес организации или учебного заведения
         org_country: Страна
