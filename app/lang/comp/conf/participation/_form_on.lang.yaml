@@ -29,6 +29,7 @@ en:
         responsibilities: Current responsibilities (mandatory for a speaker)
 
         choosecountry: Choose country
+        othercountry: Other country
 
         organization_info: Address of your organization or educational institution
         org_country: Country
@@ -102,6 +103,7 @@ ru:
         responsibilities: Сфера деятельности в настоящее время (обязательно для докладчика)
 
         choosecountry: Выберите страну
+        othercountry: Другая страна
 
         organization_info: Адрес организации или учебного заведения
         org_country: Страна
