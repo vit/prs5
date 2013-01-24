@@ -306,7 +306,7 @@
 						}
 					}
 				});
-				alert( JSON.stringify(err) );
+		//		alert( JSON.stringify(err) );
 				return err.length == 0;
 			}
 			var me = {
