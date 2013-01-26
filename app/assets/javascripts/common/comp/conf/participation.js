@@ -93,7 +93,7 @@
 		}
 		function goOccupationDependent(name) {
 	//		if( this.get()['occupation'] == 'work' ) {
-				this.setEnabled('position', this.get()['occupation'] == 'work');
+				this.enableElement('position', this.get()['occupation'] == 'work');
 			//	err('required');
 	//		}
 		}
@@ -371,9 +371,8 @@
 					else elm.val(d);
 				}
 			}
-			function setEnabled(name, flag) {
-				var elm = cont.find('[name='+name+']');
-				elm.attr('disabled', !flag);
+			function enableElement(name, flag) {
+				cont.find('[name='+name+']').attr('disabled', !flag);
 			}
 			function getData() {
 				var rez = {};
@@ -393,10 +392,10 @@
 				unmarkAllElements();
 
 				$.each(info, function(k,v) {
-					if( v.rules ) {
+					if( v.isvalid ) {
 						var val = getElemData(v);
 		//				alert( $.type(v.rules) );
-						if( $.type(v.rules)=='string' ) {
+						if( $.type(v.isvalid)=='string' ) {
 						//	var rules = v.rules.split('|');
 							var rules = v.isvalid.split('|');
 							$.each(rules, function(k2,v2) {
@@ -426,7 +425,7 @@
 			var me = {
 				get: getData,
 				set: setData,
-				setEnabled: setEnabled,
+				enableElement: enableElement,
 				validate: validate
 			};
 			initForm();
