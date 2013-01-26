@@ -83,21 +83,27 @@
 		var form = $('form', cont);
 		function goPartTypeDependent(name) {
 			var flagEnabled = this.get()['part_type'] != 'nonauthor';
-			this.enableElement('coauthors', flagEnabled);
+		//	this.enableElement('coauthors', flagEnabled);
+			this.setEnabled('coauthors', flagEnabled);
 		}
 		function goOccupationDependent(name) {
 			var flagEnabled = this.get()['occupation'] == 'work';
-			this.enableElement('position', flagEnabled);
-			this.enableElement('rank', flagEnabled);
-			this.enableElement('degree', flagEnabled);
+		//	this.enableElement('position', flagEnabled);
+		//	this.enableElement('rank', flagEnabled);
+		//	this.enableElement('degree', flagEnabled);
+			this.setEnabled('position', flagEnabled);
+			this.setEnabled('rank', flagEnabled);
+			this.setEnabled('degree', flagEnabled);
 		}
 		function goNationalityDependent(name) {
 			var flagEnabled = this.get()['nationality'] != 'ru';
-			this.enableElement('passport', flagEnabled);
+		//	this.enableElement('passport', flagEnabled);
+			this.setEnabled('passport', flagEnabled);
 		}
 		function goHotelDependent(name) {
 			var flagEnabled = this.get()['hotel'] == 'hotel_myself';
-			this.enableElement('hotel_name', flagEnabled);
+		//	this.enableElement('hotel_name', flagEnabled);
+			this.setEnabled('hotel_name', flagEnabled);
 		}
 
 		var formStruct = [
@@ -192,8 +198,41 @@
 
 	self.JSComp = self.JSComp || {};
 
+
+	var FlagsMixin = {
+		set: function(name, flag) {
+			this.hash = this.hash || {};
+			var changed = this.hash[name]!==flag;
+			this.hash[name] = flag;
+			if(changed)
+				this.notify('changed', name, flag);
+		},
+		get: function(name) {
+		//	alert( JSON.stringify(this.hash) );
+			return this.hash ? this.hash[name] : null;
+		}
+	};
+
 		self.JSComp.FormAccess = function( cont, info ) {
 			var infoMap = {};
+			var enabledModel = {};
+			Mixin.implement(enabledModel, Mixin.Observable);
+			Mixin.implement(enabledModel, FlagsMixin);
+			var markedModel = {};
+			Mixin.implement(markedModel, Mixin.Observable);
+			Mixin.implement(markedModel, FlagsMixin);
+
+			function setEnabled(name, flag) { enabledModel.set(name, flag); }
+			function setMarked(name, flag) { markedModel.set(name, flag); }
+
+			function decorateField(name) {
+				var flagEnabled = !!enabledModel.get(name);
+				enableElement(name, flagEnabled);
+			}
+
+			enabledModel.attach('changed', decorateField);
+			markedModel.attach('changed', decorateField);
+	
 			function initForm() {
 				$.each(info, function(k,v) {
 					infoMap[v.name] = v;
@@ -223,10 +262,12 @@
 				});
 			}
 			function unmarkAllElements() {
-				$.each(info, function(k,v) { markElement(v, false); });
+			//	$.each(info, function(k,v) { markElement(v, false); });
+				$.each(info, function(k,v) { markElement(v.name, false); });
 			}
-			function markElement(v, flag) {
-				var elm = cont.find('[name='+v.name+']');
+			function markElement(name, flag) {
+			//	var elm = cont.find('[name='+v.name+']');
+				var elm = cont.find('[name='+name+']');
 				var len = elm.length;
 				if( len > 1 ) {
 					elm.each(function() {
@@ -237,8 +278,9 @@
 					flag ? elm.addClass('marked') : elm.removeClass('marked');
 				}
 			}
-			function getElemData(v) {
-				var elm = cont.find('[name='+v.name+']');
+			function getElemData(name) {
+				var v = infoMap[name];
+				var elm = cont.find('[name='+name+']');
 				var len = elm.length;
 				var rez;
 				if( len > 1 ) {
@@ -256,8 +298,9 @@
 				//var rez = elm.length;
 				return rez;
 			}
-			function setElemData(v, d) {
-				var elm = cont.find('[name='+v.name+']');
+			function setElemData(name, d) {
+				var v = infoMap[name];
+				var elm = cont.find('[name='+name+']');
 				var len = elm.length;
 				if( len > 1 ) {
 					elm.val([d]);
@@ -272,15 +315,18 @@
 			function getData() {
 				var rez = {};
 				$.each(info, function(k,v) {
-					rez[v.name] = getElemData(v);
+					rez[v.name] = getElemData(v.name);
 				});
 				return rez;
 			}
 			function setData(data) {
 			//	alert('set');
 				$.each(info, function(k,v) {
-					setElemData(v, data[v.name]);
+					setElemData(v.name, data[v.name]);
 				});
+			}
+			function validateElement(name) {
+				var v = infoMap[name];
 			}
 			function validate() {
 				var err = [];
@@ -288,23 +334,20 @@
 
 				$.each(info, function(k,v) {
 					if( v.isvalid ) {
-						var val = getElemData(v);
-		//				alert( $.type(v.rules) );
+						var val = getElemData(v.name);
 						if( $.type(v.isvalid)=='string' ) {
-						//	var rules = v.rules.split('|');
 							var rules = v.isvalid.split('|');
 							$.each(rules, function(k2,v2) {
 								switch( v2 ) {
-								//	case 'required':
 									case 'notempty':
 										if(!val) {
-											markElement(v, true);
+										//	markElement(v, true);
+											markElement(v.name, true);
 											err.push({name: v.name, rule: v2});
 										}
 								}
 							});
 						} else if( $.type(v.rules)=='function' ) {
-						//	v.rules.call(me, v.name, err);
 							v.rules.call(me, v.name, function(rule) {
 								if(!val) {
 									markElement(v, true);
@@ -320,7 +363,10 @@
 			var me = {
 				get: getData,
 				set: setData,
-				enableElement: enableElement,
+			//	enableElement: enableElement,
+			//	markElement: markElement,
+				setEnabled: setEnabled,
+				setMarked: setMarked,
 				validate: validate
 			};
 			initForm();
