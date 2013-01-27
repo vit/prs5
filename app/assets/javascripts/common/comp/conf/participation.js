@@ -78,6 +78,34 @@
 
 
 
+
+	function InnerForm(cont) {
+
+		function setData(data) {
+		}
+
+		function getData() {
+			return [1,2,3];
+		}
+
+		function initForm() {
+		}
+
+		function validate() {
+			return true;
+		}
+
+		var me = {
+			get: getData,
+			set: setData,
+			validate: validate
+		};
+		initForm();
+		return me;
+	}
+
+
+
 	var ParticipationFormOn = function(cont) {
 		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
@@ -133,6 +161,7 @@
 			{name: 'email', type: 'text', isvalid: 'notempty'},
 			{name: 'nationality', type: 'text', isvalid: 'notempty', goDependent: goNationalityDependent},
 			{name: 'passport', type: 'text', isvalid: 'notempty'},
+			{name: 'accompaniing', type: 'subform', constructor: InnerForm},
 			{name: 'hotel', type: 'radio', isvalid: 'notempty', goDependent: goHotelDependent},
 			{name: 'hotel_name', type: 'text', isvalid: 'notempty'},
 			{name: 'publish_agree', type: 'radio', isvalid: 'notempty'}
@@ -153,6 +182,8 @@
 		var di = new JSComp.FormAccess( form, formStruct );
 
 		$( "[name=form_save_btn]", form ).click(function(){
+		//	var data = di.get();
+		//	console.log(data);
 			if( di.validate() ) {
 				var data = di.get();
 				me.notify('save_form', data);
@@ -249,6 +280,9 @@
 							"dateFormat": 'yy-mm-dd',
 							changeYear: true
 						});
+					if(v.type=='subform' && $.type(v.constructor)=='function') {
+						v.subform = v.constructor(elem);
+					}
 					if($.type(v.goDependent)=='function') {
 						elem.change(function() {
 							testOneField(v);
@@ -281,31 +315,40 @@
 			function getElemData(name) {
 				var v = infoMap[name];
 				var elm = cont.find('[name='+name+']');
-				var len = elm.length;
 				var rez;
-				if( len > 1 ) {
-					rez = null;
-					elm.each(function() {
-						v = $(this);
-						if( v.attr('checked') ) {
-							rez = v.val();
-						}
-					});
+				if( v.subform ) {
+					rez = v.subform.get();
+				//	rez = [1,2,3];
 				} else {
-					if( v.type=='checkbox' ) rez = elm.attr('checked') ? true : false;
-					else rez = elm.val();
+					var len = elm.length;
+					if( len > 1 ) {
+						rez = null;
+						elm.each(function() {
+							v = $(this);
+							if( v.attr('checked') ) {
+								rez = v.val();
+							}
+						});
+					} else {
+						if( v.type=='checkbox' ) rez = elm.attr('checked') ? true : false;
+						else rez = elm.val();
+					}
 				}
 				return rez;
 			}
 			function setElemData(name, d) {
 				var v = infoMap[name];
 				var elm = cont.find('[name='+name+']');
-				var len = elm.length;
-				if( len > 1 ) {
-					elm.val([d]);
+				if( v.subform ) {
+				//	v.subform.set(d);
 				} else {
-					if( v.type=='checkbox' ) elm.attr('checked', d);
-					else elm.val(d);
+					var len = elm.length;
+					if( len > 1 ) {
+						elm.val([d]);
+					} else {
+						if( v.type=='checkbox' ) elm.attr('checked', d);
+						else elm.val(d);
+					}
 				}
 			}
 			function getData() {
@@ -318,12 +361,16 @@
 				var allValid = true;
 				$.each(info, function(k,v) {
 					var isValid = true;
-					if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
-						var val = getElemData(v.name);
-						if(!val)
-							isValid = false;
+					if( v.subform ) {
+				//		isValid = v.subform.validate();
+					} else {
+						if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
+							var val = getElemData(v.name);
+							if(!val)
+								isValid = false;
+						}
+						markedModel.set(v.name, !isValid);
 					}
-					markedModel.set(v.name, !isValid);
 					allValid = allValid && isValid;
 				});
 				return allValid;
