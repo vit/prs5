@@ -134,7 +134,7 @@
 			{name: 'nationality', type: 'text', isvalid: 'notempty', goDependent: goNationalityDependent},
 			{name: 'passport', type: 'text', isvalid: 'notempty'},
 			{name: 'hotel', type: 'radio', isvalid: 'notempty', goDependent: goHotelDependent},
-			{name: 'hotel_name', type: 'text'},
+			{name: 'hotel_name', type: 'text', isvalid: 'notempty'},
 			{name: 'publish_agree', type: 'radio', isvalid: 'notempty'}
 		];
 
@@ -221,13 +221,20 @@
 			var markedModel = {};
 			Mixin.implement(markedModel, Mixin.Observable);
 			Mixin.implement(markedModel, FlagsMixin);
+		//	var requiredModel = {};
+		//	Mixin.implement(requiredModel, Mixin.Observable);
+		//	Mixin.implement(requiredModel, FlagsMixin);
 
 			function setEnabled(name, flag) { enabledModel.set(name, flag); }
 			function setMarked(name, flag) { markedModel.set(name, flag); }
+		//	function setRequired(name, flag) { requiredModel.set(name, flag); }
 
 			function decorateField(name) {
-				var flagEnabled = !!enabledModel.get(name);
+				var flagEnabled = !! enabledModel.get(name);
+				var flagMarked = !! markedModel.get(name);
 				enableElement(name, flagEnabled);
+				markElement(name, flagMarked && flagEnabled);
+			//	markElement(name, flagMarked);
 			}
 
 			enabledModel.attach('changed', decorateField);
@@ -244,29 +251,21 @@
 						});
 					if($.type(v.goDependent)=='function') {
 						elem.change(function() {
-					//		alert('changed!!!');
 							testOneField(v);
 						});
 					}
+					enabledModel.set(v.name, true);
 				});
-				testAllFields();
+			//	testAllFields();
+				$.each(info, function(k,v) { testOneField( v ); });
 			}
-			function testOneField(v) {
-				if($.type(v.goDependent)=='function') {
-					v.goDependent.call(me, v);
-				}
-			}
-			function testAllFields() {
-				$.each(info, function(k,v) {
-					testOneField( v );
-				});
-			}
-			function unmarkAllElements() {
-			//	$.each(info, function(k,v) { markElement(v, false); });
-				$.each(info, function(k,v) { markElement(v.name, false); });
-			}
+			function testOneField(v) { if($.type(v.goDependent)=='function') { v.goDependent.call(me, v); } }
+		//	function testAllFields() { $.each(info, function(k,v) { testOneField( v ); }); }
+		//	function unmarkAllElements() {
+		//	//	$.each(info, function(k,v) { markElement(v.name, false); });
+		//		$.each(info, function(k,v) { markedModel.set(v.name, false); });
+		//	}
 			function markElement(name, flag) {
-			//	var elm = cont.find('[name='+v.name+']');
 				var elm = cont.find('[name='+name+']');
 				var len = elm.length;
 				if( len > 1 ) {
@@ -278,6 +277,7 @@
 					flag ? elm.addClass('marked') : elm.removeClass('marked');
 				}
 			}
+			function enableElement(name, flag) { cont.find('[name='+name+']').attr('disabled', !flag); }
 			function getElemData(name) {
 				var v = infoMap[name];
 				var elm = cont.find('[name='+name+']');
@@ -295,7 +295,6 @@
 					if( v.type=='checkbox' ) rez = elm.attr('checked') ? true : false;
 					else rez = elm.val();
 				}
-				//var rez = elm.length;
 				return rez;
 			}
 			function setElemData(name, d) {
@@ -309,62 +308,30 @@
 					else elm.val(d);
 				}
 			}
-			function enableElement(name, flag) {
-				cont.find('[name='+name+']').attr('disabled', !flag);
-			}
 			function getData() {
 				var rez = {};
-				$.each(info, function(k,v) {
-					rez[v.name] = getElemData(v.name);
-				});
+				$.each(info, function(k,v) { rez[v.name] = getElemData(v.name); });
 				return rez;
 			}
-			function setData(data) {
-			//	alert('set');
-				$.each(info, function(k,v) {
-					setElemData(v.name, data[v.name]);
-				});
-			}
-			function validateElement(name) {
-				var v = infoMap[name];
-			}
+			function setData(data) { $.each(info, function(k,v) { setElemData(v.name, data[v.name]); }); }
 			function validate() {
-				var err = [];
-				unmarkAllElements();
-
+				var allValid = true;
 				$.each(info, function(k,v) {
-					if( v.isvalid ) {
+					var isValid = true;
+					if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
 						var val = getElemData(v.name);
-						if( $.type(v.isvalid)=='string' ) {
-							var rules = v.isvalid.split('|');
-							$.each(rules, function(k2,v2) {
-								switch( v2 ) {
-									case 'notempty':
-										if(!val) {
-										//	markElement(v, true);
-											markElement(v.name, true);
-											err.push({name: v.name, rule: v2});
-										}
-								}
-							});
-						} else if( $.type(v.rules)=='function' ) {
-							v.rules.call(me, v.name, function(rule) {
-								if(!val) {
-									markElement(v, true);
-									err.push({name: v.name, rule: rule});
-								}
-							});
-						}
+						if(!val)
+							isValid = false;
 					}
+					markedModel.set(v.name, !isValid);
+					allValid = allValid && isValid;
 				});
-		//		alert( JSON.stringify(err) );
-				return err.length == 0;
+				return allValid;
 			}
+
 			var me = {
 				get: getData,
 				set: setData,
-			//	enableElement: enableElement,
-			//	markElement: markElement,
 				setEnabled: setEnabled,
 				setMarked: setMarked,
 				validate: validate
