@@ -81,11 +81,68 @@
 
 	function InnerForm(cont) {
 
+		cont.find('[name=form_addrow_btn]').click(function() {
+		//	alert('click!!!');
+			addRow();
+		//	addRow({fname: 'rta rt sd ts'});
+		});
+		cont = cont.find('[name=accompaniing_cont]');
+
+		var fields = ['fname', 'mname', 'lname'];
+		var elems = [];
+
+		function addRow(data) {
+			data = data || {};
+			var tr = $('<tr></tr>');
+			var inputs = {};
+			$.each(fields, function(k, v) {
+				var td = $('<td></td>');
+				var input = $('<input type=text />');
+				input.val(data[v]);
+				input.css('width', '100%');
+				td.append(input);
+				tr.append(td);
+				inputs[v] = input;
+			});
+			var row = {
+			//	data: data,
+				inputs: inputs,
+				tr: tr
+			};
+			var td = $('<td align=center></td>');
+			var a = $('<a href=# >[X]</a>');
+			var e_len = elems.length;
+			a.click(function() {
+				tr.remove();
+				var index = $.inArray(row, elems);
+				if(index != -1) elems.splice(index, 1);
+				return false;
+			});
+			td.append(a);
+			tr.append(td);
+			cont.append(tr);
+			elems.push( row );
+		}
+
 		function setData(data) {
+			cont.text('');
+			elems.length = 0;
+			if(data)
+				$.each(data, function(k, v) {
+					addRow(v);
+				});
 		}
 
 		function getData() {
-			return [1,2,3];
+			var arr = [];
+			$.each(elems, function(k, v) {
+				var data = {};
+				$.each(fields, function(k2, v2) {
+					data[v2] = v.inputs[v2].val();
+				});
+				arr.push( data );
+			});
+			return arr;
 		}
 
 		function initForm() {
@@ -182,8 +239,8 @@
 		var di = new JSComp.FormAccess( form, formStruct );
 
 		$( "[name=form_save_btn]", form ).click(function(){
-		//	var data = di.get();
-		//	console.log(data);
+	//		var data = di.get();
+	//		console.log(data);
 			if( di.validate() ) {
 				var data = di.get();
 				me.notify('save_form', data);
@@ -278,6 +335,7 @@
 					if(v.type=='date')
 						elem.datepicker({
 							"dateFormat": 'yy-mm-dd',
+							yearRange: "-100:-10",
 							changeYear: true
 						});
 					if(v.type=='subform' && $.type(v.constructor)=='function') {
@@ -340,7 +398,7 @@
 				var v = infoMap[name];
 				var elm = cont.find('[name='+name+']');
 				if( v.subform ) {
-				//	v.subform.set(d);
+					v.subform.set(d);
 				} else {
 					var len = elm.length;
 					if( len > 1 ) {
