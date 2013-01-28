@@ -1,5 +1,19 @@
 
 en:
+        you_are_registered_already: You have filled your registration form
+        you_can_change_data: You can change your registration data
+        you_can_drop_registration: You can drop your registration form
+        unregister_btn: Drop registration form
+
+        msg_missing_required_fields: Missing required fields
+        unregister_are_you_sure: Are you sure you wish to drop your registration form?
+
+        addrow_btn: Add row
+
+        accomp_fname: First name
+        accomp_mname: Middle name
+        accomp_lname: Last name
+
         person_info: Person info
         gender: Sex
         male: Male
@@ -74,6 +88,21 @@ en:
 
 
 ru:
+
+        you_are_registered_already: Вы заполнили регистрационную форму
+        you_can_change_data: Вы можете изменить ваши регистрационные данные
+        you_can_drop_registration: Вы можете отменить регистрацию
+        unregister_btn: Отменить регистрацию
+
+        msg_missing_required_fields: Не все обязательные поля заполнены
+        unregister_are_you_sure: Вы уверены, что хотите отменить регистрацию?
+
+        addrow_btn: Добавить строку
+
+        accomp_fname: Имя
+        accomp_mname: Отчество
+        accomp_lname: Фамилия
+
         person_info: Сведения о человеке
         gender: Пол
         male: Мужской

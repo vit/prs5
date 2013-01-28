@@ -13,7 +13,8 @@
 
 %div{name: 'form_on', style: "display: none"}
  %div{name: 'dict', style: "display: none"}
-  -%w[unregister_are_you_sure].each do |n|
+  -#%w[unregister_are_you_sure].each do |n|
+  -%w[unregister_are_you_sure msg_missing_required_fields].each do |n|
    %input{name: n, type: 'hidden', value: _(n)}
  %div{name: 'container'}
   %form.edit{name: 'unregister_form', style: 'display: none'}
@@ -52,7 +53,6 @@
     %p
      %label.label{for: 'form_birthdate'}= _('birthdate')
      %input.input{type: 'text', name: 'birthdate', id: 'form_birthdate', vvvalue: '1981-03-14'}
-     -#%input.input{type: 'date', name: 'birthdate', id: 'form_birthdate', value: '1981-03-14'}
    %fieldset
     %legend= _(:participation_info)
     %p
@@ -156,8 +156,8 @@
       %thead
        %tr
         %th= _(:accomp_fname)
-        %th= _(:accomp_fname)
-        %th= _(:accomp_fname)
+        %th= _(:accomp_mname)
+        %th= _(:accomp_lname)
         %th &nbsp;
       %tbody{name: 'accompaniing_cont'}
      -#%div{name: 'accompaniing_cont'}
