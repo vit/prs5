@@ -6,10 +6,7 @@
 -# content_for :css do
  - stylesheet_link_tag 'https://raw.github.com/dbushell/Pikaday/master/css/pikaday.css'
 
-
--#lang = @request.cookies['ecms_lang'] || 'en'
--lang = :en
-
+-lang = @language.to_sym
 
 %div{name: 'form_on', style: "display: none"}
  %div{name: 'dict', style: "display: none"}

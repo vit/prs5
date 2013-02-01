@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
 		request.languages.unshift request.cookies['ecms_lang'] if request.cookies['ecms_lang']
 		request.languages << 'en' << 'ru'
 		request.languages.uniq!
+		@language = request.cookies['ecms_lang']=='ru' ? 'ru' : 'en'
 		yield
 	end
 	def wr_web_login
