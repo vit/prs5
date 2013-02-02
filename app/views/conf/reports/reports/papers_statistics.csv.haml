@@ -2,23 +2,13 @@
 -[:timestamp, :papcnt, :countrycnt].each do |s|
  -@cols = [ _(s), @report_data[s.to_s]]
  - @ss << @cols
- -# @ss.<<(@cols, ({:format => {:weight => :bold}}))
- -# @ss << (@cols, ({:format => {:weight => :bold}}))
- -# @ss.write_row(@cols, ({:format => {:weight => :bold}}))
 
 - @ss << []
 
 - @ss << [ _(:country), _(:cnt) ]
 
-
--#@report_data['clist'].each do |c|
- - @ss << [ (call '/comp/user/country_name', :locals => {:code => c['cname'].dup}), c['cnt'] ]
--@report_data['clist'].map{|c| c[:country_title]=(call '/comp/user/country_name', :locals => {:code => c['cname'].dup}); c}.sort{|c1, c2| c1[:country_title]<=>c2[:country_title] }.each do |c|
+-@report_data['clist'].map{|c| c[:country_title]=(render :partial => '/comp/user/country_name', :locals => {:code => c['cname'].dup}); c}.sort{|c1, c2| c1[:country_title]<=>c2[:country_title] }.each do |c|
  - @ss << [c[:country_title], c['cnt'] ]
--#@report_data['clist'].map{|c| c[:country_title]=(call '/comp/user/country_name', :locals => {:code => c['cname'].dup})}.each do |c|
--#@report_data['clist'].each do |c|
--#@report_data['clist'].map{|c| c[:country_title]=(call '/comp/user/country_name', :locals => {:code => c['cname'].dup}); c}.each do |c|
- - @ss << [c['cname'].dup, c['cnt'] ]
 
--@_tj_next_template = ''
+-#@_tj_next_template = ''
 

@@ -12,10 +12,6 @@
  -@cols << r['email']
  -@cols << r['affiliation']
  -@cols << r['city']
- -#@cols << r['country_name']
- -#@cols << (call '/comp/user/country_name', :locals => {:code => r['country'].dup})
- -@cols << (call '/comp/user/country_name', :locals => {:code => r['country']}).strip
+ -@cols << (render :partial => '/comp/user/country_name', :locals => {:code => r['country']}).strip
  -@ss << @cols
-
--@_tj_next_template = ''
 

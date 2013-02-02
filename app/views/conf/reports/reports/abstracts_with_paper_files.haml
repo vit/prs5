@@ -21,7 +21,7 @@
     - authors = r['authors'].map{ |a|
     -    %w[fname mname lname].map{ |f|
     -            a[f][@data_lang_code]
-    -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (call '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
+    -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (render :partial => '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
     - }.join('; ')
     %span&= authors
     %br
@@ -32,7 +32,7 @@
     - r['files'].select{ |f| f[:_meta]['lang']==@data_lang_code }.map do |f|
      %b= _('paper_'+f[:class_code]+'_file')+': '
      -#%a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']}= _ :paper_abstract_file_download
-     %a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= _ :paper_abstract_file_download
+     %a{href: '../download/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]+'&type='+f[:class_code]}= _ :paper_abstract_file_download
      = ' (' + f[:length].to_s + ' ' + _(:bytes) + ', ' + f[:_meta]['ctime'].to_s + ')'
      %br
 

@@ -5,30 +5,15 @@
 %div
  %h2{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
  %h2{:align => 'center'}= _(:title)
- -#%div{:align => 'center'}
  %div{:aalign => 'center'}
-  -# sec_hash = @conf_sections.inject({}) do |a, s|
-   -# a[s[0]] = s[1]
-  -#= @conf_sections.inspect
-  -#%br
-  -# sec_hash = @conf_sections.inject({}) { |a, s| a['qqq'] = s; a }
   - sec_hash = @conf_sections.inject({}) { |a, s| a[s['id']] = s; a }
-  -# sec_ordered = @conf_sections
   - sec_ordered = @conf_sections.map {|sec| {'id' =>sec['id'], 'name' => sec['name'][@data_lang_code]} }.sort {|a,b| a['name']<=>b['name']}
   - sec_ordered << {'id' => nil, 'name' => '***'}
-  -#= sec_hash.inspect
-  -#@report_data.each do |gr|
-  -#@report_data.each_pair do |id, dddata|
   - sec_ordered.each do |sec|
    %h3{:align => 'center'}&= sec['name']
-   -#%h3{:align => 'center'}&= sec['id']
-   -#=@report_data.inspect
    - sec_data = @report_data[sec['id']]
    - if sec_data
-    -# sec_data.each do |gr|
     - sec_data.each do |r|
-     -#= gr.inspect
-     -#%br
      %div{style: 'margin-bottom: 10pt;'}
       %b= _(:paper_cnt)+': '
       %span&= r['_meta']['paper_cnt']
@@ -40,7 +25,7 @@
       - authors = r['authors'].map{ |a|
       -    %w[fname mname lname].map{ |f|
       -            a[f][@data_lang_code]
-      -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (call '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
+      -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (render :partial => '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
       - }.join('; ')
       %span&= authors
       %br
@@ -58,35 +43,13 @@
       %br
       %b= _(:paper_abstract_file)+': '
       - r['files'].select{ |f| f[:_meta]['lang']==@data_lang_code }.map do |f|
-       %a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']}= _ :paper_abstract_file_download
+       %a{href: '../download/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= _ :paper_abstract_file_download
        = ' (' + f[:length].to_s + ' ' + _(:bytes) + ', ' + f[:_meta]['ctime'].to_s + ')'
       %br
       %b= _(:paper_decision_section)+': '
-      -#%span&= r['decision']['section']
-      -#%span&= r.inspect
       %span&= -> { section = @conf_sections.select {|s| s['id']==r['decision']['section'] }.first; section && section['name'] ? section['name'][@data_lang_code] : '' }[]
-   -#= id
-   -#gr[1].each do |r|
-    %div{align: 'left', style: 'margin-bottom: 10pt;'}
-     %b= _(:paper_cnt)+': '
-     %span&= r['_meta']['paper_cnt']
-     %br
-     %b= _(:paper_owner)+': '
-     %span&= r['_meta']['owner'].to_s + ' | ' + %w[fname mname lname].map{ |f| r['owner_info'][f][@data_lang_code] }.join(' ')
-     %br
-     %b= _(:paper_authors)+': '
-     - authors = r['authors'].map{ |a|
-     -    %w[fname mname lname].map{ |f|
-     -            a[f][@data_lang_code]
-     -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (call '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
-     - }.join('; ')
-     %span&= authors
-     %br
-     %b= _(:paper_title)+': '
-     %span&= r['text']['title'][@data_lang_code]
 
-
--@_tj_next_template = ''
+-#@_tj_next_template = ''
 -#@next_template = '/page/nonexistent'
 
 

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info, :wr_menu_access
+	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info, :wr_country_list, :wr_menu_access
 	def wrap_login
 	#	@aaaaa='qqqqq'
 		yield
@@ -82,10 +82,11 @@ class ApplicationController < ActionController::Base
 		end
 		yield
 	end
-#	def wr_country_list
+	def wr_country_list
 #		@appl.country = ::Coms::User::Country
-#		yield
-#	end
+		@country = ::Coms::User::Country
+		yield
+	end
 	HEADERS = -> do
 		@response.header['Content-Type'] = 'text/html; charset=UTF-8'
 		#@response.header['Cache-Control'] = 'no-cache, must-revalidate'

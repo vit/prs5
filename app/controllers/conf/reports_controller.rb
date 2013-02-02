@@ -58,17 +58,19 @@ class Conf::ReportsController < Conf::ConfController
 								#render 'conf/reports/reports/'+report_id, :layout => false
 								render "conf/reports/reports/#{report_id}", :layout => false
 							else
-=begin
-								@ss = ::StreamSheet.writer ext
-								@response.header['Content-Type'] = {
+#=begin
+#								@ss = ::StreamSheet.writer ext
+								response.header['Content-Type'] = {
 									'csv' => 'text/csv; charset=UTF-8',
 									'xls' => 'application/vnd.ms-excel'
 								}[ ext ]
+	#							response.header['Content-Type'] = 'application/vnd.ms-excel'
 								eval "@report_data = @appl.conf.report.#{report_id} @cont_id, @data_lang_code"
-								render "/page/conf/id/reports/#{report_id}.csv"
-								@ss.to_s
-=end
-								render :text => @reports.inspect
+#								render "/conf/reports/#{report_id}.csv"
+#								@ss.to_s
+#=end
+			#					render :text => @reports.inspect
+								render "/conf/reports/csv_wrapper", :layout => false, :locals => {ext: ext, report_id: report_id}
 							end
 						else
 							render :text => "Access to the report '#{report_id}' not permitted for user '#{username}'"

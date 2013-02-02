@@ -37,6 +37,7 @@ gem 'mongo'
 #gem 'pg'
 gem 'bson_ext'
 gem 'unicode_utils'
+gem 'spreadsheet'
 
 # Deploy with Capistrano
 # gem 'capistrano'

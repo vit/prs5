@@ -3,16 +3,11 @@
 -# @page_id='reports'
 
 %div
- -#%h2{:align => 'center'}= _ :title 
- -#%h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code] + ' / ' + _(:title)
  %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
  %h3{:align => 'center'}= _(:title)
  %div{:align => 'center'}
-  -#@report_data.each do |gr|
-  -@report_data.map{|gr| {country_code: gr[0], country_title: (call '/comp/user/country_name', :locals => {:code => gr[0]}), papers: gr[1]}}.sort{|c1, c2| c1[:country_title]<=>c2[:country_title] }.each do |c|
-   -#%h3{:align => 'center'}&= (call '/comp/user/country_name', :locals => {:code => gr[0]})
+  -@report_data.map{|gr| {country_code: gr[0], country_title: (render :partial => '/comp/user/country_name', :locals => {:code => gr[0]}), papers: gr[1]}}.sort{|c1, c2| c1[:country_title]<=>c2[:country_title] }.each do |c|
    %h3{:align => 'center'}&= c[:country_title]
-   -#gr[1].each do |r|
    -c[:papers].each do |r|
     %div{align: 'left', style: 'margin-bottom: 10pt;'}
      %b= _(:paper_cnt)+': '
@@ -25,7 +20,7 @@
      - authors = r['authors'].map{ |a|
      -    %w[fname mname lname].map{ |f|
      -            a[f][@data_lang_code]
-     -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (call '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
+     -    }.join(' ') + ' ('+ [ a['affiliation'][@data_lang_code], a['city'][@data_lang_code], (render :partial => '/comp/user/country_name', :locals => {:code => a['country']}) ].join(', ') + ')'
      - }.join('; ')
      %span&= authors
      %br
@@ -33,7 +28,7 @@
      %span&= r['text']['title'][@data_lang_code]
 
 
--@_tj_next_template = ''
+-#@_tj_next_template = ''
 -#@next_template = '/page/nonexistent'
 
 
