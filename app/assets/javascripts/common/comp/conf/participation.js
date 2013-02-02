@@ -167,15 +167,15 @@
 		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
 		function goPartTypeDependent(name) {
-			var flagEnabled = this.get()['part_type'] != 'nonauthor';
-		//	this.enableElement('coauthors', flagEnabled);
+			var val = this.get()['part_type'];
+			var flagEnabled = val!='nonauthor';
+			var flagRequired = val=='speaker';
+			this.setRequired('coauthors', flagRequired);
 			this.setEnabled('coauthors', flagEnabled);
+			this.setRequired('responsibilities', flagRequired);
 		}
 		function goOccupationDependent(name) {
 			var flagEnabled = this.get()['occupation'] == 'work';
-		//	this.enableElement('position', flagEnabled);
-		//	this.enableElement('rank', flagEnabled);
-		//	this.enableElement('degree', flagEnabled);
 			this.setEnabled('position', flagEnabled);
 			this.setEnabled('rank', flagEnabled);
 			this.setEnabled('degree', flagEnabled);
@@ -309,13 +309,13 @@
 			var markedModel = {};
 			Mixin.implement(markedModel, Mixin.Observable);
 			Mixin.implement(markedModel, FlagsMixin);
-		//	var requiredModel = {};
-		//	Mixin.implement(requiredModel, Mixin.Observable);
-		//	Mixin.implement(requiredModel, FlagsMixin);
+			var requiredModel = {};
+			Mixin.implement(requiredModel, Mixin.Observable);
+			Mixin.implement(requiredModel, FlagsMixin);
 
 			function setEnabled(name, flag) { enabledModel.set(name, flag); }
 			function setMarked(name, flag) { markedModel.set(name, flag); }
-		//	function setRequired(name, flag) { requiredModel.set(name, flag); }
+			function setRequired(name, flag) { requiredModel.set(name, flag); }
 
 			function decorateField(name) {
 				var flagEnabled = !! enabledModel.get(name);
@@ -327,6 +327,11 @@
 
 			enabledModel.attach('changed', decorateField);
 			markedModel.attach('changed', decorateField);
+			requiredModel.attach('changed', decorateField);
+
+//			markedModel.attach('changed', function() {
+//				
+//			});
 	
 			function initForm() {
 				$.each(info, function(k,v) {
@@ -347,6 +352,7 @@
 						});
 					}
 					enabledModel.set(v.name, true);
+					requiredModel.set(v.name, v.isvalid && v.isvalid=='notempty');
 				});
 			//	testAllFields();
 				$.each(info, function(k,v) { testOneField( v ); });
@@ -394,6 +400,7 @@
 				}
 				return rez;
 			}
+
 			function setElemData(name, d) {
 				var v = infoMap[name];
 				var elm = cont.find('[name='+name+']');
@@ -422,12 +429,15 @@
 					if( v.subform ) {
 				//		isValid = v.subform.validate();
 					} else {
-						if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
+						//if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
+						if( requiredModel.get(v.name) && enabledModel.get(v.name) ) {
 							var val = getElemData(v.name);
 							if(!val)
 								isValid = false;
 						}
 						markedModel.set(v.name, !isValid);
+					//	if(!isValid)
+					//		alert(v.name);
 					}
 					allValid = allValid && isValid;
 				});
@@ -439,6 +449,7 @@
 				set: setData,
 				setEnabled: setEnabled,
 				setMarked: setMarked,
+				setRequired: setRequired,
 				validate: validate
 			};
 			initForm();
