@@ -1,11 +1,16 @@
 
--@ss.<< [:ordnum, :pin, :rname, :rphone, :rfax, :remail, :raffiliation, :rcity, :rcountry].map{ |v| _(v) }, :format => {:weight => :bold}
+-fields = ['gender', 'person_title', 'lname', 'fname', 'mname', 'birthdate', 'part_type', 'coauthors', 'occupation', 'organization', 'position', 'rank', 'degree', 'responsibilities', 'org_country', 'org_city', 'org_postcode', 'org_street', 'org_house', 'org_foreign', 'phone', 'mobile_phone', 'fax', 'email', 'nationality', 'passport', 'accompaniing', 'hotel', 'hotel_name', 'publish_agree']
+-funcs = {}
+-funcs['accompaniing'] = -> lst { lst && lst.length > 0 ? '+' : '-' }
+-@ss.<< fields.map{ |v| _(v) }, :format => {:weight => :bold}
+-#@ss.<< [:ordnum, :pin, :rname, :rphone, :rfax, :remail, :raffiliation, :rcity, :rcountry].map{ |v| _(v) }, :format => {:weight => :bold}
 -@cnt = 0
 -@report_data['forms'].each do |r|
- -@cnt += 1
- -@cols = []
- -@cols << r.to_s
- -@ss << @cols
+ -@ss.<< fields.map{ |v| d = r['rawdata']; funcs[v] ? funcs[v][d[v]] : d[v] }
+ -#@cnt += 1
+ -#@cols = []
+ -#@cols << r['rawdata'].to_s
+ -#@ss << @cols
 -#@report_data['reviewers'].each do |r|
  -@cnt += 1
  -@cols = []
