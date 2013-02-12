@@ -180,10 +180,17 @@
 			this.setEnabled('rank', flagEnabled);
 			this.setEnabled('degree', flagEnabled);
 		}
+		function goForeignDependent(name) {
+			goNationalityDependent.call(this, 'nationality');
+//			var flagEnabled = this.get()['org_foreign'] == true;
+//			alert( this.get()['org_foreign'] );
+//		//	this.setEnabled('hotel_name', flagEnabled);
+		}
 		function goNationalityDependent(name) {
 			var flagEnabled = this.get()['nationality'] != 'ru';
-		//	this.enableElement('passport', flagEnabled);
-			this.setEnabled('passport', flagEnabled);
+			var foreign = this.get()['org_foreign'] == true;
+		//	this.setEnabled('passport', flagEnabled);
+			this.setEnabled('passport', flagEnabled || foreign);
 		}
 		function goHotelDependent(name) {
 			var flagEnabled = this.get()['hotel'] == 'hotel_myself';
@@ -211,7 +218,8 @@
 			{name: 'org_postcode', type: 'text', isvalid: 'notempty'},
 			{name: 'org_street', type: 'text', isvalid: 'notempty'},
 			{name: 'org_house', type: 'text', isvalid: 'notempty'},
-			{name: 'org_foreign', type: 'checkbox'},
+		//	{name: 'org_foreign', type: 'checkbox'},
+			{name: 'org_foreign', type: 'checkbox', goDependent: goForeignDependent},
 			{name: 'phone', type: 'text', isvalid: 'notempty'},
 			{name: 'mobile_phone', type: 'text'},
 			{name: 'fax', type: 'text'},

@@ -11,6 +11,10 @@
    });
  });
 #participationcomp{:sstyle=>"display: none"}
+ %div{name: 'dict', style: "display: none"}
+  -#%w[unregister_are_you_sure].each do |n|
+  -%w[msg_form_saved_successfully msg_form_dropped_successfully].each do |n|
+   %input{name: n, type: 'hidden', value: _(n)}
  =render "/comp/conf/participation/form_off"
  =render "/comp/conf/participation/form_on"
 
