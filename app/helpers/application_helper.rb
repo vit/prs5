@@ -1,15 +1,6 @@
 module ApplicationHelper
 	def _ s
-	#	@__translation[s]
-	#	@__translation.inspect
-	#	@__translation ? @__translation[s] : s
-	#	@__translation ? @__translation['qqq'] : s
-	#	@__translations_stack ? @__translations_stack.last['qqq'] : s
-#	puts s.to_s+'@@@'
-#	puts	@__translations_stack ? @__translations_stack.last[s] : s
-#		@__translations_stack ? @__translations_stack.last[s] : s
 		@__translations_stack && @__translations_stack.last && @__translations_stack.last[s] ? @__translations_stack.last[s] : s.to_s
-	#	`pwd`
 	end
 	def init_translation
 		id0 = get_current_template_name
@@ -27,7 +18,9 @@ module ApplicationHelper
 	#	@__translation = TranslationLoader.get_translation 'ru', id
 		@__translations_stack ||= []
 	#	__translation = TranslationLoader.get_translation 'ru', id
-		__translation = TranslationLoader.get_translation request.languages, id
+	#	__translation = TranslationLoader.get_translation request.languages, id
+		langs = ['en', 'ru'].unshift( @language )
+		__translation = TranslationLoader.get_translation langs, id
 		@__translations_stack << __translation
 	end
 	def drop_translation
