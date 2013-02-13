@@ -1,6 +1,9 @@
--@ss = "eewrerwerwerwewetwet"
--@ss = ::StreamSheet.writer 'csv'
+-#@ss = "eewrerwerwerwewetwet"
+-#@ss = ::StreamSheet.writer 'csv'
+-@ss = ::StreamSheet.writer ext
 -#@ss = ::StreamSheet.writer ext
 -#render "/conf/reports/#{report_id}.csv"
 -render :file => "/conf/reports/reports/#{report_id}.csv"
+-#!=@ss.to_s
 !=@ss.to_s
+-#=@ss.to_s

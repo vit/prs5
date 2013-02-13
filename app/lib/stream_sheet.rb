@@ -36,7 +36,7 @@ class StreamSheet
 		def to_s
 			s = StringIO.new
 			@book.write s
-			s.string
+			s.string.force_encoding("BINARY")
 		end
 	end
 	class CSV
@@ -51,8 +51,6 @@ class StreamSheet
 			@row_buf << value.to_s.force_encoding('utf-8')
 		end
 		def write_row values, args={}
-		#	@buf += ::CSV.generate_line(@row_buf+values, {col_sep: ?,})
-		#	@buf += ::CSV.generate_line(@row_buf+values.force_encoding('utf-8'), {col_sep: ?,})
 		#	@buf += ::CSV.generate_line(@row_buf+values.map{ |s| s.force_encoding('utf-8') }, {col_sep: ','.force_encoding('utf-8')})
 			@buf += ::CSV.generate_line(@row_buf+values.map{ |s| s.to_s.force_encoding('utf-8') }, {col_sep: ?,})
 			@row_buf = []

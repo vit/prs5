@@ -10,12 +10,6 @@ module ApplicationHelper
 	#	id2 = id1.gsub(/\.(.*)$/, 'q')
 	#	id2 = id1.gsub(/\.(.*)/, 'q')
 		id = id.gsub(/\.\w*$/, '')
-#		puts id
-	#	puts '>>>>>> init'
-	#	id = 'app/lang/test'
-#		id = 'test'
-		#id = '../../app/lang/test'
-	#	@__translation = TranslationLoader.get_translation 'ru', id
 		@__translations_stack ||= []
 	#	__translation = TranslationLoader.get_translation 'ru', id
 	#	__translation = TranslationLoader.get_translation request.languages, id
@@ -24,9 +18,7 @@ module ApplicationHelper
 		@__translations_stack << __translation
 	end
 	def drop_translation
-		#@__translation = nil
 		@__translations_stack ? @__translations_stack.pop : nil
-	#	puts '<<<<<< drop'
 	end
 
 	def push_template_name s
