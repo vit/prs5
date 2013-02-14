@@ -423,6 +423,7 @@
 						else elm.val(d);
 					}
 				}
+				testOneField(v);
 			}
 			function getData() {
 				var rez = {};
