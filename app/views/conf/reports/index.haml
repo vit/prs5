@@ -33,10 +33,11 @@
     %a{:href => 'abstracts_with_paper_files.html?data_lang='+data_lang}= data_lang
    %br
    %br
-   = _(:abstract_ids_with_files)
+   = _(:abstract_ids_with_files)+':'
    -#%w[abstract paper presentation].each do |file_class|
    -%w[abstract abstract_exdoc paper paper_exdoc presentation].each do |file_class|
-    %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= file_class
+    -#%a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= file_class
+    %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= _( 'class_'+file_class )
    %br
    %br
    - with_html = %w[papers_statistics papers_statistics_after_decision papers_list_with_reviews]

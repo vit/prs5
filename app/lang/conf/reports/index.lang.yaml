@@ -18,6 +18,13 @@ en:
         authors_list: Authors list
         registrators_list: Registrators list
         reviewers_list: Reviewers list
+        participation_forms: Participation forms
+
+        class_abstract: abstract
+        class_abstract_exdoc: exp. docs. for abstract
+        class_paper: paper
+        class_paper_exdoc: exp. docs. for paper
+        class_presentation: presentation
 
 ru:
         title: 'Отчеты'
@@ -38,5 +45,12 @@ ru:
         authors_list: Список данных авторов
         registrators_list: Список данных регистраторов
         reviewers_list: Список рецензентов
+        participation_forms: Формы участников
+
+        class_abstract: реферат
+        class_abstract_exdoc: эксп. док. реферата
+        class_paper: доклад
+        class_paper_exdoc: эксп. док. доклада
+        class_presentation: презентация
 
 
