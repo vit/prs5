@@ -1,9 +1,14 @@
 
--fields = ['gender', 'person_title', 'lname', 'fname', 'mname', 'birthdate', 'part_type', 'coauthors', 'occupation', 'organization', 'position', 'rank', 'degree', 'responsibilities', 'org_country', 'org_city', 'org_postcode', 'org_street', 'org_house', 'org_foreign', 'phone', 'mobile_phone', 'fax', 'email', 'nationality', 'passport', 'accompaniing', 'hotel', 'hotel_name', 'publish_agree']
+-#fields = ['gender', 'person_title', 'lname', 'fname', 'mname', 'birthdate', 'part_type', 'coauthors', 'occupation', 'organization', 'position', 'rank', 'degree', 'responsibilities', 'org_country', 'org_city', 'org_postcode', 'org_street', 'org_house', 'org_foreign', 'phone', 'mobile_phone', 'fax', 'email', 'nationality', 'passport', 'accompaniing', 'hotel', 'hotel_name', 'publish_agree']
+-fields = %w[gender person_title lname fname mname birthdate part_type coauthors occupation organization position rank degree responsibilities org_country org_city org_postcode org_street org_house org_foreign phone mobile_phone fax email nationality passport accompaniing hotel hotel_name publish_agree]
 -funcs = {}
 -funcs['accompaniing'] = -> lst { lst && lst.length > 0 ? '+' : '-' }
--@ss.<< fields.map{ |v| _(v) }, :format => {:weight => :bold}
+-@ss.<< [_('pin')] + fields.map{ |v| _(v) }, :format => {:weight => :bold}
 -@cnt = 0
 -@report_data['forms'].each do |r|
- -@ss.<< fields.map{ |v| d = r['rawdata']; funcs[v] ? funcs[v][d[v]] : d[v] }
+ -row = []
+ -row << r['pin']
+ -row += fields.map{ |v| d = r['rawdata']; funcs[v] ? funcs[v][d[v]] : d[v] }
+ -@ss.<< row
+ -#@ss.<< fields.map{ |v| d = r['rawdata']; funcs[v] ? funcs[v][d[v]] : d[v] }
 

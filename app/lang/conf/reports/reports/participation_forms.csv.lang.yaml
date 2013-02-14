@@ -1,0 +1,67 @@
+
+en:
+        pin: User PIN
+        gender: Sex
+        person_title: Title
+        lname: Last name
+        fname: First name
+        mname: Middle name
+        birthdate: Birth date
+        part_type: Participation type
+        coauthors: Coauthors etc
+        occupation: Occupation
+        organization: Organization
+        position: Position
+        rank: Rank
+        degree: Degree
+        responsibilities: Responsibilities
+        org_country: Country
+        org_city: City
+        org_postcode: Post code
+        org_street: Street
+        org_house: House
+        org_foreign: Foreign org.
+        phone: Phone
+        mobile_phone: Mob. phone
+        fax: Fax
+        email: Email
+        nationality: Nationality
+        passport: Passport
+        accompaniing: Accompaniing persons
+        hotel: Hotel reservation
+        hotel_name: Hotel name
+        publish_agree: Info publication agreement
+
+ru:
+        pin: PIN пользователя
+        gender: Пол
+        person_title: Обращение
+        lname: Фамилия
+        fname: Имя
+        mname: Отчество
+        birthdate: Дата рождения
+        part_type: Тип участия
+        coauthors: Соавторы и пр.
+        occupation: Род занятий
+        organization: Организация
+        position: Должность
+        rank: Ученое звание
+        degree: Степень
+        responsibilities: Сфера деятельности
+        org_country: Страна
+        org_city: Город
+        org_postcode: Индекс
+        org_street: Улица
+        org_house: Номер дома
+        org_foreign: Иностр. организация
+        phone: Телефон
+        mobile_phone: Моб. телефон
+        fax: Факс
+        email: Email
+        nationality: Гражданство
+        passport: Паспорт
+        accompaniing: Сопр. лица
+        hotel: Бронирование гостиницы
+        hotel_name: Название гостиницы
+        publish_agree: Согл. на публ. сведений
+
