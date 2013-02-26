@@ -17,8 +17,10 @@
   %form.edit{name: 'unregister_form', style: 'display: none'}
    %fieldset
     %p= _(:you_are_registered_already)
-    %p= _(:you_can_change_data)
-    %p= _(:you_can_drop_registration)
+    %p{name: 'form_you_can_change'}= _(:you_can_change_data)
+    %p{name: 'form_you_cant_change'}= _ :you_cant_change_data
+    %p{name: 'form_you_can_drop'}= _(:you_can_drop_registration)
+    %p{name: 'form_you_cant_drop'}= _(:you_cant_drop_registration)
     %p
      %input.save{type: 'button', value: _('unregister_btn'), name: 'unreg_btn'}
   %form.edit#participation_form
@@ -192,6 +194,7 @@
      %span.llabel= _('publish_agree_text')
    %p
     %input.save{type: 'button', value: _(:save_btn), name: 'form_save_btn'}
+    -#%div{name: 'form_edit_disabled'}= _ :you_cant_edit
 
 :javascript
   //ParticipationForm();

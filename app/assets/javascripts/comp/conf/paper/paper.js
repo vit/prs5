@@ -380,7 +380,7 @@ window.addEvent('domready',function() {
 				get: function() {
 					return trs.ffold([], function(arr, tr){
 						var di = FormDataInputs( tr, fields );
-						alert( JSON.stringify(di.get()) );
+				//		alert( JSON.stringify(di.get()) );
 						arr.push( di.get() );
 						return arr;
 					});

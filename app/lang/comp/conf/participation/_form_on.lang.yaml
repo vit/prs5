@@ -2,7 +2,9 @@
 en:
         you_are_registered_already: You have filled your registration form
         you_can_change_data: You can change your registration data
+        you_cant_change_data: "You can't change your registration data at the moment"
         you_can_drop_registration: You can drop your registration form
+        you_cant_drop_registration: "You can't drop your registration form at the moment"
         unregister_btn: Drop registration form
 
         msg_missing_required_fields: Missing required fields
@@ -91,7 +93,9 @@ ru:
 
         you_are_registered_already: Вы заполнили регистрационную форму
         you_can_change_data: Вы можете изменить ваши регистрационные данные
+        you_cant_change_data: Вы не можете изменить ваши регистрационные данные в настоящее время
         you_can_drop_registration: Вы можете отменить регистрацию
+        you_cant_drop_registration: Вы не можете отменить регистрацию в настоящее время
         unregister_btn: Отменить регистрацию
 
         msg_missing_required_fields: Не все обязательные поля заполнены

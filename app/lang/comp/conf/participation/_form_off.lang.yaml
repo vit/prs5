@@ -2,8 +2,10 @@
 en:
         register_my_participation: If you intend to participate in the conference, you have to fill in the registration form
         register_btn: Fill in the form
+        you_cant_register: "You can't register at the moment"
 
 ru:
         register_my_participation: Если вы хотите стать участником конференции, вам нужно заполнить регистрационную форму
         register_btn: Заполнить
+        you_cant_register: Вы не можете зарегистрироваться в настоящее время`
 

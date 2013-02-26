@@ -44,6 +44,7 @@
 		function load_data() {
 			RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
 				//	result = {gender: 'F', lname: 'wqrwrtqrtqrtqrtqrtq', org_foreign: false};
+				form_off.init(result);
 				form_on.init(result);
 				form_off.show(!result);
 				form_on.show(!!result);
@@ -233,6 +234,16 @@
 		];
 
 		function init(data) {
+			var flag_edit = data && window.conf.my_rights['PARTICIPANT_EDIT_REGFORM'] || !data && window.conf.my_rights['USER_REGISTER_PARTICIPATION'];
+			$( "[name=form_save_btn]", form ).css('display', flag_edit ? 'block' : 'none');
+			$( "[name=form_you_can_change]", form ).css('display', flag_edit ? 'block' : 'none');
+			$( "[name=form_you_cant_change]", form ).css('display', !flag_edit ? 'block' : 'none');
+
+			var flag_drop = window.conf.my_rights['PARTICIPANT_GIVE_UP_PARTICIPATION'];
+			$( "[name=unreg_btn]", form ).css('display', flag_drop ? 'block' : 'none');
+			$( "[name=form_you_can_drop]", form ).css('display', flag_drop ? 'block' : 'none');
+			$( "[name=form_you_cant_drop]", form ).css('display', !flag_drop ? 'block' : 'none');
+
 			$('form[name=unregister_form]', cont).css('display', data ? 'block' : 'none');
 		//	di.clear();
 			if(data)
@@ -272,8 +283,15 @@
 		var me = {
 			panel: cont
 		};
+		me.init = function() {
+		//	alert( JSON.stringify( window.conf.my_rights ) );
+			var flag = window.conf.my_rights['USER_REGISTER_PARTICIPATION'];
+			$( "[name=form_register_btn]", form ).css('display', flag ? 'block' : 'none');
+			$( "[name=form_register_disabled]", form ).css('display', !flag ? 'block' : 'none');
+		}
 
 		$( "[name=form_register_btn]", form ).click(function(){
+		//	alert( JSON.stringify( window.conf.my_rights ) );
 			me.notify('want_register');
 		});
 
