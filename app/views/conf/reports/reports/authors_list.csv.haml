@@ -14,7 +14,7 @@
  -@cols << r['authors_data'].map { |a| a['email'] }.join( ', ' )
  -@cols << r['authors_data'].map { |a| a['affiliation'] }.join( ', ' )
  -@cols << r['authors_data'].map { |a| a['city'] }.join( ', ' )
- -@cols << r['authors_data'].map { |a| (render :partial => '/comp/user/country_name', :locals => {:code => a['country']}) }.join( ', ' )
+ -@cols << r['authors_data'].map { |a| (render :partial => '/comp/user/country_name', :locals => {:code => a['country']}).strip }.join( ', ' )
  -@ss << @cols
 
 -@_tj_next_template = ''
