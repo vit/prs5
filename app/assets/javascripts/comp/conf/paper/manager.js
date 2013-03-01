@@ -611,12 +611,12 @@ window.addEvent('domready',function() {
 						panelFun: createTabReviewsPanel
 					});
 				}
-			//	if(conf.my_rights['delete_reviews']){
-					list.push({
-						title: dict('tab_messages'),
-						panelFun: createTabMessagesPanel
-					});
-			//	}
+//			//	if(conf.my_rights['delete_reviews']){
+//					list.push({
+//						title: dict('tab_messages'),
+//						panelFun: createTabMessagesPanel
+//					});
+//			//	}
 			//	alert( JSON.encode(conf.my_rights) );
 				return TabsPure({items: list});
 			}

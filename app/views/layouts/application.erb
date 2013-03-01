@@ -24,7 +24,7 @@
 			<div class=left>
 			<%= render :partial => "comp/menu/horizontal", :locals => {:current_id => @part_id, :data => [
 				[_(:conf), '/conf', 'conf'],
-				[_(:lib), '/lib', 'lib'],
+			#	[_(:lib), '/lib', 'lib'],
 				[_(:adm), '/adm/', 'adm', :adm]
 			]} %>
 			</div>
@@ -34,7 +34,7 @@
 				<!-- div class=item -->
 					<%= render :partial => "comp/user/lang-switch" %>
 					<%= render :partial => "comp/user/logon-form" %>
-					<%= render :partial => "comp/user/my-messages" %>
+					<%#= render :partial => "comp/user/my-messages" %>
 				<!-- /div -->
 			</div>
 			<div class="clear"></div>
