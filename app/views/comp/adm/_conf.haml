@@ -16,6 +16,8 @@
    %div{name: 'dict', style: 'display: none'}
     -%w[role_rights role_members delete_role delete_role_confirm].each do |word|
      %input{:type=>'hidden', :name=>word, :value => _(word)}
+    -%w[keywordsimported keywordsimportlistisempty].each do |word|
+     %input{:type=>'hidden', :name=>word, :value => _(word)}
    %div{name: 'conftitle', style: 'font-weight: bold; margin: 2px 0 5px 0;'}
    %input{name: 'tolistbutton', type: 'button', value: _(:back)}
    -#%input{name: 'savebutton', type: 'button', value: _(:save)}
@@ -84,7 +86,21 @@
          %input{name: 'saveinfobutton', type: 'button', value: _(:saveinfo)}
      %div{name: 'keywords', style: 'display: none'}
       %input{name: 'newkeywordbutton', type: 'button', value: _(:newkeyword)}
+      %input{name: 'importkeywordsbutton', type: 'button', value: _(:importkeywords)}
       %input{name: 'savekeywordsbutton', type: 'button', value: _(:savekeywords)}
+      %fieldset{name: 'importblock', style: 'display: none;'}
+       %legend= _(:importblock)
+       %input{name: 'hideimportkeywordsbutton', type: 'button', value: _(:hideimportkeywords)}
+       %input{name: 'importcheckedkeywordsbutton', type: 'button', value: _(:importcheckedkeywords)}
+       %table{border: 1, width: '100%'}
+        %tr
+         %th= _(:importconfslist)
+         %th= _(:importkeywordslist)
+        %tr
+         %td{name: 'importconfslist', valign: 'top'}
+         %td
+          %input{type: 'checkbox', name: 'importkeywordscheckbox'}= _(:selectallcheckbox)
+          %div{name: 'importkeywordslist'}
       %table{name: 'container', border: 1, width: '100%'}
        %tr
         -%w[en ru].each do |lang_code|

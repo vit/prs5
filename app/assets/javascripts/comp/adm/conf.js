@@ -1,4 +1,89 @@
+
+'use strict';
+
+(function($) {
+	var PanelMixin = {
+		show: function(flag) { $(this.panel).css('display', flag ? 'block' : 'none'); }
+	}
+
+	var lang_list = ['en', 'ru'];
+
+	self.Coms = self.Coms || {};
+	self.Coms.Comp = self.Coms.Comp || {};
+	self.Coms.Comp.Admin = self.Coms.Comp.Admin || {};
+	self.Coms.Comp.Admin.ConfImportKeywords = function(cont, dict) {
+		var me = {
+			panel: cont
+		};
+		me.init = function() {
+			var confsBlock = $( "[name=importconfslist]", cont );
+			var kwBlock = $( "[name=importkeywordslist]", cont );
+			var cbAll = $( "[name=importkeywordscheckbox]", cont );
+
+			cbAll.click(function() {
+				var flag = cbAll.is(':checked');
+				$.each(cbArr, function(k, d) { d.elm.prop("checked", flag); });
+			});
+			$( "[name=hideimportkeywordsbutton]", cont ).click(function() { me.show(false); });
+			$( "[name=importcheckedkeywordsbutton]", cont ).click(function() {
+				var kwlist = cbArr.reduce(function(acc, k) {
+					if( k.elm.is(':checked') ) { acc.push(k.data); }
+					return acc;
+				}, []);
+				me.notify('add_keywords', kwlist);
+			});
+			var cbArr = [];
+			RPC.send('conf.get_confs_list', [], function(result, error) {
+				var cArr = [];
+				function onConfElement(k, conf) {
+					if( conf.info && conf.info.title ) {
+						var a = $('<a href="javascript:" style="display: block">');
+						a.text(
+							conf.info && conf.info.title ? lang_list.reduce(function(acc, k) {
+								acc.push(conf.info.title[k]);
+								return acc;
+							}, []).join( ' | ' ) : ''
+						);
+						confsBlock.append( a );
+						cArr.push(a);
+						a.click(function() {
+							$.each(cArr, function(k, v) { v.css('background', ''); });
+							a.css('background', '#ccffcc');
+							RPC.send('conf.get_conf_keywords', [conf._id], function(result, error) {
+								kwBlock.text('');
+								cbArr = [];
+								$.each(result, function(k, kw) {
+									cbAll.prop("checked", false);
+									var li = $('<div>');
+									var input = $('<input type="checkbox"></input>');
+									var span = $('<span>');
+									span.text( JSON.encode( kw ));
+									li.append( input, span );
+									kwBlock.append( li );
+									cbArr.push({
+										elm: input,
+										data: kw
+									});
+								});
+							});
+						});
+					}
+				}
+				$.each(result, onConfElement);
+			});
+		}
+
+		Mixin.implement(me, Mixin.Observable);
+		Mixin.implement(me, PanelMixin);
+		me.init();
+		return me;
+	}
+
+}(jQuery));
+
 window.addEvent('domready',function() {
+
+
 	var user_lang_code = Cookie.read('ecms_lang');
 	var lang_list = ['en', 'ru'];
 	var comp = $('confcomp');
@@ -111,6 +196,9 @@ window.addEvent('domready',function() {
 				panel.getElement('[name="newkeywordbutton"]').addEvent('click', function() {
 					addRow();
 				});
+				panel.getElement('[name="importkeywordsbutton"]').addEvent('click', function() {
+					importBlock.show(true);
+				});
 				panel.getElement('[name="savekeywordsbutton"]').addEvent('click', function() {
 					var res = trs.ffold([], function(arr, tr){
 						arr.push( lang_list.ffold({}, function(acc, lang){
@@ -122,6 +210,18 @@ window.addEvent('domready',function() {
 					RPC.send('conf.save_conf_keywords', [_id, res], function(result, error) {
 						alert('OK');
 					});
+				});
+
+				var importBlock = new Coms.Comp.Admin.ConfImportKeywords( panel.getElement('[name="importblock"]', dict) );
+				importBlock.attach('add_keywords', function(data) {
+					if( data.length > 0 ) {
+						data.each(function( d ) {
+							addRow( d );
+						});
+						alert( dict('keywordsimported') );
+					} else {
+						alert( dict('keywordsimportlistisempty') );
+					}
 				});
 
 				return {

@@ -23,6 +23,17 @@ en:
         removekeywords: Remove
         savekeywords: Save keywords list
 
+        importkeywords: Import keywords from other conferences
+        hideimportkeywords: Hide keywords import block
+        importblock: Import block
+        importcheckedkeywords: Import checked keywords
+        importconfslist: Select the conference
+        importkeywordslist: Keywords
+        selectallcheckbox: Select/deselect all in the list below
+        keywordsimported: "Selected keywords have been added to the end of the list. Please don't forget to save the list."
+        keywordsimportlistisempty: "You didn't select anything"
+
+
         tab_info: Info
         tab_keywords: Keywords
         tab_sections: Sections
@@ -156,6 +167,17 @@ ru:
         newkeyword: Добавить ключевое слово
         removekeyword: Удалить
         savekeywords: Сохранить список ключевых слов
+
+        importkeywords: Импортировать из других конференций
+        importblock: Блок импорта
+        hideimportkeywords: Скрыть блок импорта
+        importcheckedkeywords: Импортировать выбранные ключевые слова
+        importconfslist: Выберите конференцию
+        importkeywordslist: Ключевые слова
+        selectallcheckbox: Выделить/отменить выделение всех элементов в списке ниже
+        keywordsimported: Выбранные ключевые слова добавлены в конец списка. Не забудьте теперь сохранить список.
+        keywordsimportlistisempty: Вы не выбрали ни одного ключевого слова
+
 
         tab_info: Инфо
         tab_keywords: Ключевые слова
