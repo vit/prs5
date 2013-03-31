@@ -14,6 +14,7 @@ en:
         open_paper_page: Open
         score: Score
         decision: Recommended decision
+        section: Recommended section
         ipccomments: Comments to the IPC
         authcomments: Comments to the authors
         score_uncertain: Uncertain
@@ -61,6 +62,7 @@ ru:
         open_paper_page: Открыть
         score: Оценка
         decision: Рекомендованное решение
+        section: Рекомендованная секция
         ipccomments: Комментарий для МПК
         authcomments: Комментарий для авторов
         score_uncertain: Не задано

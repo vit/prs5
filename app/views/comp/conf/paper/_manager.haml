@@ -8,7 +8,7 @@
  %div{name: 'dict', style: 'display: none'}
   -%w[lang_en lang_ru language back_to_list tab_paper tab_review tab_reviewers tab_reviews tab_finaldecision open_paper_page].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}
-  -%w[review_submit review_saved score decision ipccomments authcomments score_uncertain].each do |word|
+  -%w[review_submit review_saved score decision section ipccomments authcomments score_uncertain].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}
   -%w[score_a score_b score_c score_d].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}

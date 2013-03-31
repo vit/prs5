@@ -356,6 +356,10 @@ window.addEvent('domready',function() {
 					decision.grab(new Element('option', {value: '', text: dict('decision_uncertain')}));
 					createSimpleTableRow(createTextElement(dict('decision')), decision).inject(t);
 
+					var section = di.createElement('section', null, 'select', {});
+					section.grab(new Element('option', {value: '', text: dict('section_uncertain')}));
+					createSimpleTableRow(createTextElement(dict('section')), section).inject(t);
+
 					conf.lang_list().each(function(lang){
 						createEmptyRow().inject(t);
 						createSimpleTableRow(createTextElement(dict('language')), createTextElement(dict('lang_'+lang))).inject(t);
@@ -381,10 +385,30 @@ window.addEvent('domready',function() {
 							if (result) result.each(function(dec_id){
 								decision.grab(new Element('option', {value: dec_id, text: dict('decision_'+dec_id)}));
 							});
-							RPC.send('conf.review.get_my_review_data', [user.id, conf.id, paper_id], function(result, error) {
-							//	alert( JSON.encode(result) );
-								di.set(result);
+
+
+
+							RPC.send('conf.get_conf_sections', [conf.id], function(result, error) {
+								if (result) result.each(function(sec){
+									section.grab(new Element('option', {value: sec.id,
+										text: conf.lang_list().map(function(k){return sec.name[k]}).join(' | ')
+									}));
+								});
+					//			RPC.send('conf.paper.get_paper_decision', [conf.id, paper_id], function(result, error) {
+					//			//	alert( JSON.encode(result) );
+					//				di.set(result);
+					//			});
+								RPC.send('conf.review.get_my_review_data', [user.id, conf.id, paper_id], function(result, error) {
+								//	alert( JSON.encode(result) );
+									di.set(result);
+								});
 							});
+
+
+//							RPC.send('conf.review.get_my_review_data', [user.id, conf.id, paper_id], function(result, error) {
+//							//	alert( JSON.encode(result) );
+//								di.set(result);
+//							});
 						});
 					});
 
