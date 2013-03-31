@@ -1,4 +1,36 @@
 
+(function($) { $(function() {
+		var comp = $('#enter_menu');
+		if( comp.length > 0 ) {
+		//	alert(comp);
+			var btn = $('.btn', comp);
+		//	var block = $('.block2', comp);
+			var panel = $('.block2 .panel', comp);
+			var close_btn = $('.close_btn', panel);
+			btn.click(function(event) {
+		//		alert('click');
+			//	block.show();
+			//	block.toggle();
+				panel.toggle();
+				event.stopPropagation();
+			});
+
+
+			$(panel).click(function(event) {
+			//	alert('clicked inside');
+				event.stopPropagation();
+			});
+
+			$(document).click(function( e ) {
+				panel.hide();
+			});
+			close_btn.click(function( e ) {
+				panel.hide();
+			});
+
+		//	alert(btn.length);
+		}
+}); }(jQuery));
 
 //$(document).ready(function () {
 window.addEvent('domready',function() {

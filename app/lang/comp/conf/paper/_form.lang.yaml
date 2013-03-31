@@ -7,7 +7,8 @@ en:
 
         new_paper: Create new abstract/paper
         papers: Papers
-        edit: Edit / view
+        #edit: Edit / view
+        edit: Edit / view / submit files etc.
         delete: Delete
         delete_paper_confirm: Delete abstract/paper, are you sure?
         submit_paper: Submit
@@ -103,7 +104,8 @@ ru:
 
         new_paper: Создать новый реферат/доклад
         papers: Рефераты/доклады
-        edit: Изменить / просмотреть
+        #edit: Изменить / просмотреть
+        edit: Изменить / просмотреть / подать файлы и пр.
         delete: Удалить
         delete_paper_confirm: Вы правда хотите удалить этот реферат/доклад? 
         submit_paper: Подать

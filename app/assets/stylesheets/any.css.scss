@@ -195,6 +195,28 @@ body.any {
 								}
 							}
 						}
+						.block2 {
+							position: relative;
+							.panel {
+								.close_btn {
+									cursor: pointer;
+									float: right;
+								}
+								border-radius: 0 0 15px 15px;
+								padding: 0.4em;
+							//	padding: 2em;
+								background-color: $color4;
+								position: absolute;
+								display: none;
+								right: -2px;
+								table {
+									padding: 0.5em;
+								}
+								td {
+									padding: 0.2em;
+								}
+							}
+						}
 					}
 						.lang {
 							padding: 0.5em 0.5em 0.5em 0.5em;

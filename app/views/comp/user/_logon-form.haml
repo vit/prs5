@@ -2,7 +2,57 @@
 = javascript_include_tag 'comp/user/logon'
 
 - user = @current_user
-.item
+-if user[:user_id]
+ .item
+  .highlighted
+   %a{href: '/my'}><
+    %span.underlined><
+     %span.username><&= user[:info]['fullname']
+     =', ' + _(:pin) + ': '
+     %span.name><= user[:user_id]
+    %span>< &darr;
+   .block
+    .panel
+     %input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
+     %a{href: '/my/profile'}><&= _(:profile)
+     %br
+     %br
+     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+      %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
+-else
+ .item
+  .highlighted
+   %a{href: '/account/new'}><= _( :addnewuser )
+ .item
+  .highlighted
+   %a{href: '/account/restore'}><= _( :restorepassword )
+ .item
+  .highlighted#enter_menu
+   %a.btn{hhref: '#'}><
+    %span.underlined><= _ :enter
+    -#%span>< &darr;
+   .block2
+    .panel
+     %a.close_btn [X]
+     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+      %table
+       %tr
+        %td
+         =_(:pin)+':'
+        %td
+         %input.logoninput{:type=>'text', :name=>'log_pin', :size=>'6'}
+        %td
+         =_(:password)+':'
+        %td
+         %input.logoninput{:type=>'password', :name=>'log_pass', :size=>'6'}
+        %td
+         %input.logonbutton{:type=>'submit', :name=>"login", :value=>_(:login)}
+
+
+-#= javascript_include_tag 'comp/user/logon'
+
+-#- user = @current_user
+-#.item
  .highlighted
   -if user[:user_id]
    %a{href: '/my'}><
