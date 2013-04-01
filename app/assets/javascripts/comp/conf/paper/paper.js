@@ -257,13 +257,33 @@ window.addEvent('domready',function() {
 						opts = {};
 						var cnt = 0;
 					//	alert( JSON.encode(result) );
-						if( result ) result.each(function(v){
-							opts[++cnt] = v;
-							predefined.grab( new Element('option', {value: cnt, text: lang_list.ffold([], function(acc, lang){
-								acc.push(v[lang]);
-								return acc;
-							}).join(' | ')}));
-						});
+
+						if( result ) {
+							var kws = result.map(function(v) {
+								return lang_list.ffold([], function(acc, lang){
+									acc.push(v[lang]);
+									return acc;
+								}).join(' | ')
+						//	}).sort();
+							}).sort(function(a, b) {
+								var a1 = a.toLowerCase();
+								var b1 = b.toLowerCase();
+								return a1==b1 ? 0 : a1<b1 ? -1 : 1;
+							});
+						//	alert(JSON.encode(kws));
+							kws.each(function(v){
+								opts[++cnt] = v;
+								predefined.grab( new Element('option', {value: cnt, text: v}));
+							});
+						}
+
+			//			if( result ) result.each(function(v){
+			//				opts[++cnt] = v;
+			//				predefined.grab( new Element('option', {value: cnt, text: lang_list.ffold([], function(acc, lang){
+			//					acc.push(v[lang]);
+			//					return acc;
+			//				}).join(' | ')}));
+			//			});
 					});
 				},
 				get: function() {
