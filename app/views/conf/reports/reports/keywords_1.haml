@@ -1,0 +1,31 @@
+
+- @page_title= _ :title
+-# @page_id='reports'
+
+%div
+ %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h3{:align => 'center'}= _(:title)
+
+ %div{:align => 'center'}
+ -@report_data.each do |r|
+  -#=r.inspect
+  -if r['keywords'].length > 0
+   %div{style: 'margin-bottom: 10pt;'}
+    %b= _(:paper_cnt)+': '
+    %span&= r['_meta']['paper_cnt']
+    %br
+    %b= _(:paper_keywords)+': '
+    - keywords = r['keywords'].map{ |kw|
+    -    %w[en ru].map{ |lang|
+    -      kw[lang]
+    -    }.join(' | ')
+    - }.join(', ')
+    %span&= keywords
+    %br
+    -#%b= _(:paper_keywords)+': '
+    -#- keywords = r['keywords'].map{ |kw|
+    -#-    kw[@data_lang_code]
+    -#- }.join(', ')
+    -#%span&= keywords
+    -#%br
+

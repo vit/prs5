@@ -1,0 +1,49 @@
+
+- @page_title= _ :title
+-# @page_id='reports'
+
+-lst = []
+-@report_data.each do |r|
+ -if r['keywords'] && r['keywords'].length > 0 then
+  -r['keywords'].each{ |kw|
+  -    lst.push %w[en ru].map{ |lang|
+  -      kw[lang]
+  -#      kw[lang].capitalize
+  -    }.join(' | ')
+  -}
+-#lst.map! {|k| k.capitalize}
+-#lst.sort!
+-lst.sort! { |a,b| a.downcase <=> b.downcase }
+-lst.uniq!
+-#end
+%div
+ %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h3{:align => 'center'}= _(:title)
+ =#lst.inspect
+ -lst.each do |k|
+  %div= k
+    
+
+
+ -#%div{:align => 'center'}
+  -#
+   %span&= keywords
+   -#%div{style: 'margin-bottom: 10pt;'}
+    %b= _(:paper_cnt)+': '
+    %span&= r['_meta']['paper_cnt']
+    %br
+    %b= _(:paper_keywords)+': '
+    - keywords = r['keywords'].map{ |kw|
+    -    %w[en ru].map{ |lang|
+    -      kw[lang]
+    -    }.join(' | ')
+    - }.join(', ')
+    %span&= keywords
+    %br
+    -#%b= _(:paper_keywords)+': '
+    -#- keywords = r['keywords'].map{ |kw|
+    -#-    kw[@data_lang_code]
+    -#- }.join(', ')
+    -#%span&= keywords
+    -#%br
+

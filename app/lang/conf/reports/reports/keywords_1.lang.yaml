@@ -1,0 +1,11 @@
+
+en:
+        title: 'Papers with keywords'
+        paper_cnt: Paper number
+        paper_keywords: Keywords
+
+ru:
+        title: 'Рефераты с ключевыми словами'
+        paper_cnt:  Номер реферата
+        paper_keywords: Ключевые слова
+

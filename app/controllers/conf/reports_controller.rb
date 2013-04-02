@@ -54,6 +54,10 @@ class Conf::ReportsController < Conf::ConfController
 								when 'abstract_ids_with_files' then
 									@report_data = @appl.conf.report.abstracts_with_files @cont_id, @data_lang_code
 								#	render '/page/conf/id/reports/abstract_ids_with_files'
+								when 'keywords_1' then
+									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
+								when 'keywords_2' then
+									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								end
 								#render 'conf/reports/reports/'+report_id, :layout => false
 								render "conf/reports/reports/#{report_id}", :layout => false

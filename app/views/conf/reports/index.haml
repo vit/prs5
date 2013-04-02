@@ -33,6 +33,15 @@
     %a{:href => 'abstracts_with_paper_files.html?data_lang='+data_lang}= data_lang
    %br
    %br
+   = _(:keywords_1)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'keywords_1.html?data_lang='+data_lang}= data_lang
+   %br
+   = _(:keywords_2)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'keywords_2.html?data_lang='+data_lang}= data_lang
+   %br
+   %br
    = _(:abstract_ids_with_files)+':'
    -#%w[abstract paper presentation].each do |file_class|
    -%w[abstract abstract_exdoc paper paper_exdoc presentation].each do |file_class|

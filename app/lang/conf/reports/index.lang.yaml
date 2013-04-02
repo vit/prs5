@@ -26,6 +26,9 @@ en:
         class_paper_exdoc: exp. docs. for paper
         class_presentation: presentation
 
+        keywords_1: Papers with keywords
+        keywords_2: Papers list with abstracts and keywords
+
 ru:
         title: 'Отчеты'
 
@@ -53,4 +56,6 @@ ru:
         class_paper_exdoc: эксп. док. доклада
         class_presentation: презентация
 
+        keywords_1: Рефераты с ключевыми словами
+        keywords_2: Использованные в конференции ключевые слова
 
