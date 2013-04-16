@@ -216,12 +216,15 @@ window.addEvent('domready',function() {
 
 		var tab_keywords = (function( panel ) {
 			var trs = [];
-			var opts = {};
+			//var opts = {};
+			var opts = [];
 			//var cont = panel.getElement('[name="container"]');
 			var cont = panel.getElement('[name="container"]').getElement('tbody');
 			var predefined = panel.getElement('[name="predefined"]');
 			function addRow( data ) {
-				data = $H({}).extend( data );
+			//	data = $H({}).extend( data );
+				data = data || {};
+			//	console.log( data );
 				var tr = (new Element('tr')).inject(cont);
 				lang_list.each(function( lang ){
 					tr.grab((new Element('td')).grab(
@@ -243,8 +246,9 @@ window.addEvent('domready',function() {
 			}
 			panel.getElement('[name="fromlistbutton"]').addEvent('click', function() {
 				var i = predefined.getProperty('value').toInt();
+			//	console.log( opts[i] );
 				if( i )
-					addRow( opts[i] );
+					addRow( opts[i].v );
 				//	alert(i);
 			});
 			panel.getElement('[name="newkeywordbutton"]').addEvent('click', function() {
@@ -254,26 +258,32 @@ window.addEvent('domready',function() {
 			return {
 				init: function( after ) {
 					RPC.send('conf.get_conf_keywords', [cont_id], function(result, error) {
-						opts = {};
+						//opts = {};
+						opts = [];
 						var cnt = 0;
 					//	alert( JSON.encode(result) );
 
 						if( result ) {
 							var kws = result.map(function(v) {
-								return lang_list.ffold([], function(acc, lang){
-									acc.push(v[lang]);
-									return acc;
-								}).join(' | ')
-						//	}).sort();
+								return {
+									s: lang_list.ffold([], function(acc, lang){
+	     									acc.push(v[lang]);
+										return acc;
+									}).join(' | '),
+									v: v
+								}	
+							//	return lang_list.ffold([], function(acc, lang){
+							//		acc.push(v[lang]);
+							//		return acc;
+							//	}).join(' | ')
 							}).sort(function(a, b) {
-								var a1 = a.toLowerCase();
-								var b1 = b.toLowerCase();
+								var a1 = a.s.toLowerCase();
+								var b1 = b.s.toLowerCase();
 								return a1==b1 ? 0 : a1<b1 ? -1 : 1;
 							});
-						//	alert(JSON.encode(kws));
 							kws.each(function(v){
 								opts[++cnt] = v;
-								predefined.grab( new Element('option', {value: cnt, text: v}));
+								predefined.grab( new Element('option', {value: cnt, text: v.s}));
 							});
 						}
 
