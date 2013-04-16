@@ -4,7 +4,8 @@ en:
         msg_form_dropped_successfully: Registration form dropped successfully
 
 ru:
-        msg_form_saved_successfully: Регистрационная форма успешно сохранена
+        #msg_form_saved_successfully: Регистрационная форма успешно сохранена
+        msg_form_saved_successfully: Регистрационная форма успешно сохранена и будет обработана рабочей группой конференции
         msg_form_dropped_successfully: Регистрационная форма удалена (регистрация отменена)
 
 
