@@ -55,6 +55,9 @@ body.any {
 	a {
 		color: black;
 	}
+	a:hover, a.current {
+		background-color: $color4;
+	}
 	background-color: $bgcolor;
 	//color: red;
 	.menu_block {

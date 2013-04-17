@@ -462,6 +462,11 @@ window.addEvent('domready',function() {
 				var newblock = panel.getElement('[name="newblock"]');
 				var roleslist = panel.getElement('[name="roleslist"]');
 
+			//	var markedLink = null;
+
+			//	var role_rights_list = [];
+			//	var role_members_list = [];
+
 				var rights = (function(panel){
 					var rid = null;
 					panel.getElements('input[type=checkbox]').addEvent('change', function(e) {
@@ -558,9 +563,24 @@ window.addEvent('domready',function() {
 						roleslist.getElements('div a[name="role_members"]').removeClass('current');
 						elm.addClass('current');
 						page.show( data.id );
+					//	if( markedLink ) markedLink.setStyles({backgroundColor: ''});
+					//	elm.setStyles({backgroundColor: '#ffff44'});
+					//	markedLink = elm;
 						return false;
 					}
 					var li = (new Element('div', {styles: {margin: '25px'}})).inject(roleslist);
+				//	var role_rights_a = new Element('a', {name: 'role_rights', text: dict('role_rights'), href: '#', events: {
+				//		click: function() {
+				//			changePages(this, rights);
+				//			return false;
+				//		}
+				//	}});
+				//	var role_members_a = new Element('a', {name: 'role_members', text: dict('role_members'), href: '#', events: {
+				//		click: function() {
+				//			changePages(this, members);
+				//			return false;
+				//		}
+				//	}});
 					li.adopt(
 						new Element('b', {text: data.name}),
 						new Element('br'),
@@ -570,6 +590,7 @@ window.addEvent('domready',function() {
 								return false;
 							}
 						}}),
+				//		role_rights_a,
 						new Element('span', {text: ' | '}),
 						new Element('a', {name: 'role_members', text: dict('role_members'), href: '#', events: {
 							click: function() {
@@ -577,6 +598,7 @@ window.addEvent('domready',function() {
 								return false;
 							}
 						}}),
+				//		role_members_a,
 						new Element('span', {text: ' | '}),
 						new Element('a', {text: dict('delete_role'), href: '#', events: {
 							click: function(){
@@ -590,6 +612,8 @@ window.addEvent('domready',function() {
 					);
 				}
 				function deleteRows() {
+				//	role_rights_list = [];
+				//	role_members_list = [];
 					roleslist.empty();
 				}
 				function reload( after ) {
