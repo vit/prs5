@@ -13,7 +13,7 @@
    -reviewers_pos[owner] = reviewers_list.count
    -reviewers_list << a['reviewer']
 -reviewers_list.each do |r|
- -@cols << r['user_name'] +' ('+ r['pin'].to_s + ')' + ?\n + _(:score) + ', ' + _(:decision) + ', ' + _(:ipc_comments) + ', ' + _(:auth_comments)
+ -@cols << r['user_name'] +' ('+ r['pin'].to_s + ')' + ?\n + _(:score) + ', ' + _(:decision) + ', ' + _(:section) + ', ' + _(:ipc_comments) + ', ' + _(:auth_comments)
 
 - @ss.<< @cols, :format => {:weight => :bold}
 
@@ -27,7 +27,11 @@
   -pin = a['reviewer']['pin']
   -p_rev[ reviewers_pos[pin] ] = a
  -p_rev.each do |r|
-  -content = _('score_'+r['data']['score'].to_s) + ?\n + _('decision_'+r['data']['decision'].to_s) + ?\n + r['data']['ipccomments'].inspect + ?\n + r['data']['authcomments'].inspect if r
+  -#content = _('score_'+r['data']['score'].to_s) + ?\n + _('decision_'+r['data']['decision'].to_s) + ?\n + r['data']['ipccomments'].inspect + ?\n + r['data']['authcomments'].inspect if r
+  -content = _('score_'+r['data']['score'].to_s) + ?\n + _('decision_'+r['data']['decision'].to_s) + ?\n +
+  - (r['data']['section'] && @conf_sections_map[ r['data']['section'] ] && @conf_sections_map[ r['data']['section'] ]['name'] ? @conf_sections_map[ r['data']['section'] ]['name'][@data_lang_code].to_s : _(:section_uncertain)) +
+  - ?\n +
+  - r['data']['ipccomments'].inspect + ?\n + r['data']['authcomments'].inspect if r
   -@ss.<< (r ? content : '')
  - @ss << []
 

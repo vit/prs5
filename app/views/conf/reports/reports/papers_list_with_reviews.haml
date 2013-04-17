@@ -16,9 +16,11 @@
    %th{colspan: 2}
     %table{border: 1, width: '100%', style: "border-collapse: collapse"}
      %tr
-      %th{rowspan: 3}= _ :reviewer
+      %th{rowspan: 4}= _ :reviewer
       %th= _ :score
       %th= _ :decision
+     %tr
+      %th{colspan: 2, style: "border-bottom: solid 3px black"}= _ :section
      %tr
       %th{colspan: 2, style: "border-bottom: solid 3px black"}= _ :ipccomments
      %tr
@@ -39,9 +41,13 @@
      %table{border: 1, width: '100%', style: "border-collapse: collapse"}
       -r['reviews_data'].each do |r|
        %tr
-        %td{rowspan: 3}=r['reviewer']['user_name']
+        %td{rowspan: 4}=r['reviewer']['user_name']
         %td= _ ('score_'+r['data']['score'])
         %td= _ ('decision_'+r['data']['decision'])
+       %tr
+        %td{colspan: 2, style: "border-bottom: solid 3px black"}
+         -#= r['data']['section'] && @conf_sections_map[ r['data']['section'] ] && @conf_sections_map[ r['data']['section'] ]['name'] ? @lang_list.inject([]){ |acc,l| acc << @conf_sections_map[ r['data']['section'] ]['name'][l]; acc }.join(' | ') : _(:uncertain)
+         = r['data']['section'] && @conf_sections_map[ r['data']['section'] ] && @conf_sections_map[ r['data']['section'] ]['name'] ? @conf_sections_map[ r['data']['section'] ]['name'][@data_lang_code] : _(:section_uncertain)
        %tr
         %td{colspan: 2, style: "border-bottom: solid 3px black"}
          -@lang_list.select{ |l| r['data']['ipccomments'] && r['data']['ipccomments'][l] && r['data']['ipccomments'][l].length>0 }.each do |l|

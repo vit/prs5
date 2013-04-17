@@ -5,6 +5,10 @@ class Conf::ConfController < ApplicationController
 		@conf_data = @appl.conf.get_conf_data @cont_id
 		@conf_permissions = @conf_data['permissions'] || {}
 		@conf_sections = @appl.conf.get_conf_sections @cont_id
+		@conf_sections_map = @conf_sections.inject({}) do |acc, v|
+			acc[v['id']] = v
+			acc
+		end
 		@conf_lang = @conf_data['info']['lang']
 		@lang_list = case @conf_lang
 			     when 'en' then %w[en]

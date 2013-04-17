@@ -29,6 +29,9 @@ en:
         decision_accept_poster: Accept as a poster
         decision_accept_plenary: Accept as a plenary paper
 
+        section: Section
+        section_uncertain: Section is uncertain
+
 ru:
         id: № реф. в системе
         pins: PIN
@@ -58,5 +61,8 @@ ru:
         decision_reject: Отклонить
         decision_accept_poster: Принять как стендовый
         decision_accept_plenary: Принять как пленарный
+
+        section: Секция
+        section_uncertain: Секция не задана
 
 

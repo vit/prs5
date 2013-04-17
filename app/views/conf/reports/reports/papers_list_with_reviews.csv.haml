@@ -10,7 +10,7 @@
  - k = r['paper_cnt']
  -@cntmax = r['reviews_data'].count if @cntmax < r['reviews_data'].count
 -@cntmax.times do
- -@cols << [ _(:reviewer), '- '+_(:score), '- '+_(:decision) ].join( ?\n )
+ -@cols << [ _(:reviewer), '- '+_(:score), '- '+_(:decision), '- '+_(:section) ].join( ?\n )
 - @ss.<< @cols, :format => {:weight => :bold}
 
 -#@report_data['papers'].each_pair do |k,r|
@@ -20,7 +20,8 @@
  -@ss << r['authors_data'].map { |a| (a['user_name'].to_s) +', '+ (a['affiliation'].to_s) +', '+ (a['city'].to_s) +', '+ (render :partial => '/comp/user/country_name', :locals => {:code => a['country'].dup}).strip }.join(?\n)
  -@ss << r['title']
  -r['reviews_data'].each do |a|
-  -@ss << a['reviewer']['user_name'].to_s + ?\n + _('score_'+a['data']['score'].to_s) + ?\n + _('decision_'+a['data']['decision'].to_s)
+  -#@ss << a['reviewer']['user_name'].to_s + ?\n + _('score_'+a['data']['score'].to_s) + ?\n + _('decision_'+a['data']['decision'].to_s)
+  -@ss << a['reviewer']['user_name'].to_s + ?\n + _('score_'+a['data']['score'].to_s) + ?\n + _('decision_'+a['data']['decision'].to_s) + ?\n + (a['data']['section'] && @conf_sections_map[ a['data']['section'] ] && @conf_sections_map[ a['data']['section'] ]['name'] ? @conf_sections_map[ a['data']['section'] ]['name'][@data_lang_code].to_s : _(:section_uncertain))
  - @ss << []
 
 
