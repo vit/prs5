@@ -40,7 +40,8 @@ window.addEvent('domready',function() {
 						di_acc.mark('field_error', f);
 					}
 				});
-				['gender', 'country', 'phone', 'fax'].each(function(f){
+			//	['gender', 'country', 'phone', 'fax'].each(function(f){
+				['gender', 'country', 'phone'].each(function(f){
 					if( !(data.info[f] && data.info[f].trim()) ) {
 						data_missing = true;
 						di_info.mark('field_error', f);
