@@ -1,0 +1,32 @@
+#! /bin/sh
+
+# PROVIDE: ep_devel
+# REQUIRE: NETWORK
+# KEYWORD: shutdown
+
+name=prs5_devel
+export LANG=ru_RU.UTF-8
+
+. /etc/rc.subr
+
+rcvar=${name}_enable
+load_rc_config $name
+
+start_cmd="prs_start"
+stop_cmd="prs_stop"
+
+export PATH=/usr/local/bin:$PATH
+
+prs_start()
+{
+        cd /root/projects/prs5/
+        /usr/local/rvm/wrappers/ruby-1.9.3-p125@prs5/unicorn_rails -E development -c unicorn_conf_devel.rb config.ru &
+}
+prs_stop()
+{
+        /bin/kill -s TERM `cat /tmp/prs5_devel.pid`
+}
+
+run_rc_command "$1"
+
+
