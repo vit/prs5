@@ -3,7 +3,8 @@
 -@ss = ::StreamSheet.writer ext
 -#@ss = ::StreamSheet.writer ext
 -#render "/conf/reports/#{report_id}.csv"
--render :file => "/conf/reports/reports/#{report_id}.csv"
+-#render :file => "/conf/reports/reports/#{report_id}.csv"
+-render :file => "/conf/reports/reports/#{report_id}", formats: [:csv]
 -#!=@ss.to_s
 !=@ss.to_s
 -#=@ss.to_s

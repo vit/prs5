@@ -11,7 +11,9 @@ window.addEvent('domready',function() {
 					urlEncoded: false,
 					headers: {'Content-Type': 'application/json'},
 					onComplete: function(answer){
-						if(callback) callback( JSON.decode(answer) );
+					//	if(callback) callback( JSON.decode(answer) );
+						data = JSON && JSON.parse(answer) || JSON.decode(answer);
+						if(callback) callback( data );
 					}
 				})).send( {data: JSON.encode(data)} );
 			//	})).send( {data: vvv} );
