@@ -3,10 +3,20 @@ window.addEvent('domready',function() {
 	var user = self.user;
 	//	alert(user);
 
+	function createTextElement(text){ return new Element('span', {text: text}); }
+	function createSimpleTableRow(){
+		var tr = (new Element('tr'));
+		for(var i=0; i<arguments.length; i++)
+			(new Element('td', {})).inject(tr).grab(arguments[i]);
+		return tr;
+	}
+
 	function PapersList(args) {
 		var panel = args.panel;
 		var container = panel;
 		var dict = args.dict;
+
+		var selectInputs = [];
 
 		var me = {
 			init: function(){
@@ -22,114 +32,147 @@ window.addEvent('domready',function() {
 		OM.implement(me, OM.Events);
 		OM.implement(me, OM.Messages);
 
+
+		function createTabGroupFinalDecisionPanel(){
+			function saveData(data, ids) {
+			//	alert(JSON.encode(data));
+				RPC.send('conf.paper.set_paper_decision', [conf.id, ids, data], function(result, error) {
+					alert( dict('final_decision_saved') );
+				});
+			}
+			function createEmptyRow(){
+				return createSimpleTableRow(new Element('br', {}), new Element('br', {}));
+			}
+
+			var set_final_block = (new Element('fieldset', {})).inject(container);
+			(new Element('legend', {text: dict('group_set_final_title')})).inject(set_final_block);
+
+		//	var panel = (new Element('div', {}));
+			var panel = (new Element('div', {})).inject(set_final_block);
+			var di = FormDataInputs( panel, {} );
+			var t = new Element('tbody').inject( (new Element('table', {border: 0})).inject(panel) );
+
+			var decision = di.createElement('decision', null, 'select', {});
+			decision.grab(new Element('option', {value: '', text: dict('decision_uncertain')}));
+			createSimpleTableRow(createTextElement(dict('final_decision')), decision).inject(t);
+
+			var section = di.createElement('section', null, 'select', {});
+			section.grab(new Element('option', {value: '', text: dict('section_uncertain')}));
+			createSimpleTableRow(createTextElement(dict('final_section')), section).inject(t);
+
+		//	createEmptyRow().inject(t);
+			createSimpleTableRow( new Element('input', {type: 'button', value: dict('final_decision_submit'), events: {
+				click: function() {
+					var data = di.get();
+					var ids = selectInputs.ffold([], function(acc, elm) {
+						if( elm.inp.getProperty('checked') ) {
+							acc.push( elm.id );
+						}
+						return acc;
+					});
+					if( ids.length > 0 )
+						saveData( data, ids );
+					else
+						alert( dict('nothing_is_selected') );
+				}
+			}}), createTextElement('')).inject(t);
+
+				RPC.send('conf.get_reviewer_decisions', [conf.id], function(result, error) {
+					if (result) result.each(function(dec_id){
+						decision.grab(new Element('option', {value: dec_id, text: dict('decision_'+dec_id)}));
+					});
+					RPC.send('conf.get_conf_sections', [conf.id], function(result, error) {
+						if (result) result.each(function(sec){
+							section.grab(new Element('option', {value: sec.id,
+								text: conf.lang_list().map(function(k){return sec.name[k]}).join(' | ')
+							}));
+						});
+				//		RPC.send('conf.paper.get_paper_decision', [conf.id, paper_id], function(result, error) {
+				//		//	alert( JSON.encode(result) );
+				//			di.set(result);
+				//		});
+					});
+				});
+		//	return panel;
+			return set_final_block;
+		}
+
+
+
+
 		function renderList(data) {
 			container.empty();
+			selectInputs = [];
+
+			var can_set_final = conf.my_rights['set_final_decision'];
 			var table = (new Element('table', {border: 1, width: '100%'})).inject(container);
 			var tbody = (new Element('tbody')).inject(table);
 			var tr = new Element('tr');
+			if(can_set_final) {
+				var th = new Element('th', {html: ''});
+				var a1 = new Element('a', {href: 'javascript:null', text: '[+]', events: {click: function() {
+					selectInputs.each(function(elm, k) {
+						elm.inp.setProperty('checked', true);
+					});
+				}}});
+				var a2 = new Element('a', {href: 'javascript:null', text: '[-]', events: {click: function() {
+					selectInputs.each(function(elm, k) {
+						elm.inp.setProperty('checked', false);
+					});
+				}}});
+				var a3 = new Element('a', {href: 'javascript:null', text: '[!]', events: {click: function() {
+					selectInputs.each(function(elm, k) {
+						elm.inp.setProperty('checked', !elm.inp.getProperty('checked'));
+					});
+				}}});
+				th.adopt(
+					a1,
+					new Element('span', {text: ' '}),
+					a2,
+					new Element('span', {text: ' '}),
+					a3
+				);
+				tr.grab(th);
+			}
 			tr.grab(new Element('th', {html: '&nbsp;'}));
 			tbody.grab(tr);
 			conf.lang_list().each(function(lang){
 				tr.grab(new Element('th', {text: dict('lang_'+lang)}));
 			});
-			if(data) data.each( function(p) {
-				var tr = (new Element('tr').inject(tbody));
-				tr.grab(new Element('td', {align: 'center', styles: {'vertical-align': 'top'}}).adopt(
- 				//	new Element('b', {text: 'N='+p._meta.paper_cnt}),
-				//	new Element('br'),
-				//	new Element('a', {href: '#', text: dict('open_paper_page'), events: {click: function(){
-					new Element('a', {href: '#', text: 'N='+p._meta.paper_cnt, events: {click: function(){
-						me.fireEvent('open_paper_page', p._id);
-						return false;
-					}}}),
-				//	new Element('br'),
-			//		new Element('br'),
-			//		new Element('a', {href: '#', text: dict('edit'), events: {click: function(){
-			//			//switchToPaperForm( p._id );
-			//			args.onEdit( p._id );
-			//			return false;
-			//		}}}),
-			//		new Element('br'),
-			//		new Element('br'),
-			//		conf_permissions.PAPREG_PAPER_DELETE ?
-			//		new Element('a', {href: '#', text: dict('delete'), events: {click: function(){
-			//			if(confirm(dict('delete_paper_confirm')))
-			//			RPC.send('conf.paper.delete_my_paper', [user_id, cont_id, p._id], function(result, error) {
-			//			//	alert( JSON.encode(result) );
-			//				reload();
-			//				args.onDelete(p._id);
-			//			});
-			//			return false;
-			//		}}}) : null,
-					new Element('br')
-				));
-				function limit(s, lim){
-					s = s ? s.trim() : '';
-					return s.length>lim ? (s.substr(0,lim)+' ...') : s;
-				}
-				conf.lang_list().each(function(lang){
-					var td = (new Element('td', {styles: {'vertical-align': 'top'}})).inject(tr);
-					td.adopt(
-					//	new Element('b', {text: limit(p.text.title[lang], 120)}) //,
-						new Element('span', {text: limit(p.text.title[lang], 120)}) //,
-					//	new Element('br'),
-					//	new Element('span', {text: limit(p.text.abstract[lang], 250)})
-					);
-					/*
-					if( p.keywords && p.keywords.length > 0 ) {
+			if(data) {
+				data.each( function(p) {
+				//			console.log(p);
+					var tr = (new Element('tr').inject(tbody));
+					if(can_set_final) {
+						var td = new Element('td', {align: 'center'});
+						var inp = new Element('input', {type: 'checkbox'});
+						selectInputs.push({inp: inp, id: p._id});
+					//	inp.setEvents({click: });
+						td.grab( inp );
+						tr.grab( td );
+					}
+					tr.grab(new Element('td', {align: 'center', styles: {'vertical-align': 'top'}}).adopt(
+							new Element('a', {href: '#', text: 'N='+p._meta.paper_cnt, events: {click: function(){
+								me.fireEvent('open_paper_page', p._id);
+								return false;
+							}}}),
+							new Element('br')
+					));
+					function limit(s, lim){
+						s = s ? s.trim() : '';
+						return s.length>lim ? (s.substr(0,lim)+' ...') : s;
+					}
+					conf.lang_list().each(function(lang){
+						var td = (new Element('td', {styles: {'vertical-align': 'top'}})).inject(tr);
 						td.adopt(
-							new Element('br'),
-							new Element('br'),
-							new Element('i', {text: p.keywords.map(function(k){
-								return k[lang];
-							}).join(', ')})
+							new Element('span', {text: limit(p.text.title[lang], 120)}) //,
 						);
-					}
-					if( p.authors && p.authors.length > 0 ) {
-						td.adopt( new Element('br'));
-						p.authors.each(function(a){
-							td.adopt(
-								new Element('br'),
-								new Element('i', {text:
-									a['fname'][lang] + ' ' +
-									a['mname'][lang] + ' ' +
-									a['lname'][lang] + ', ' +
-									a['affiliation'][lang] + ', ' +
-									a['city'][lang]// + ', ' +
-								//	common.country_helper.getNameByCode( a['country'] )
-								})
-							);
-						});
-					}
-					if(p.files) {
-						p.files.filter(function(f){
-							return f && f._meta && f._meta.lang==lang;
-						}).each(function(f){
-							td.adopt( new Element('br'));
-							td.adopt(
-								new Element('br'),
-								(new Element('span')).adopt(
-									new Element('span', {text:
-										dict('file_type') + ' ' + f.content_type + ', ' +
-										dict('file_size') + ' ' + f.length + ' ' + dict('bytes')
-									}),
-									new Element('br'),
-									new Element('span', {text:
-										dict('timestamp') + ' ' + f._meta.ctime
-									}),
-									new Element('br'),
-									new Element('a', {
-										//href: 'getfile?id='+p._id+'&lang='+lang, target: '_blank',
-										href: 'getfile/'+f.filename+'?id='+p._id+'&lang='+lang, target: '_blank',
-										text: dict('download_file')
-									})
-								)
-							);
-						});
-					}
-					*/
+					});
 				});
-			});
+				if(can_set_final) {
+					createTabGroupFinalDecisionPanel().inject(container);
+				}
+			}
 		}
 		function reload(){
 			//RPC.send('conf.paper.get_my_drafts_list', [user_id, cont_id], function(result, error) {
@@ -157,7 +200,7 @@ window.addEvent('domready',function() {
 		var panel = args.panel;
 		var container = panel;
 		var dict = args.dict;
-
+/*
 		function createTextElement(text){ return new Element('span', {text: text}); }
 		function createSimpleTableRow(){
 			var tr = (new Element('tr'));
@@ -165,6 +208,7 @@ window.addEvent('domready',function() {
 				(new Element('td', {})).inject(tr).grab(arguments[i]);
 			return tr;
 		}
+*/
 
 		function renderPanel(paper_id){
 			var DataCenter = (function(){
@@ -495,14 +539,6 @@ window.addEvent('domready',function() {
 					var section = di.createElement('section', null, 'select', {});
 					section.grab(new Element('option', {value: '', text: dict('section_uncertain')}));
 					createSimpleTableRow(createTextElement(dict('final_section')), section).inject(t);
-
-				//	conf.lang_list().each(function(lang){
-				//		createEmptyRow().inject(t);
-				//		createSimpleTableRow(createTextElement(dict('language')), createTextElement(dict('lang_'+lang))).inject(t);
-				//		['ipccomments', 'authcomments'].each(function(name){
-				//			createSimpleTableRow(createTextElement(dict(name)), di.createElement(name, lang, 'textarea', {cols: 60, rows: 3})).inject(t);
-				//		});
-				//	});
 
 					createEmptyRow().inject(t);
 					createSimpleTableRow( new Element('input', {type: 'button', value: dict('final_decision_submit'), events: {

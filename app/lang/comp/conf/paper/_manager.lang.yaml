@@ -30,6 +30,8 @@ en:
         section_uncertain: Uncertain
         final_decision: Final decision
         final_section: Final section (session)
+        group_set_final_title: Set final decision for selected
+        nothing_is_selected: Nothing is selected
 
         review_submit: Save review
         review_saved: Review is saved
@@ -78,6 +80,8 @@ ru:
         section_uncertain: Не задано
         final_decision: Финальное решение
         final_section: Финальная секция (заседание)
+        group_set_final_title: Назначить финальное решение для выделенных
+        nothing_is_selected: Ничего не выделено
 
         review_submit: Сохранить рецензию
         review_saved: Рецензия сохранена

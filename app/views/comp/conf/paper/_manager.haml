@@ -16,6 +16,8 @@
    %input{:type=>'hidden', :name=>word, :value => _(word)}
   -%w[section_uncertain final_decision final_section final_decision_submit final_decision_saved].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[group_set_final_title nothing_is_selected].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
   -%w[file_type file_size bytes timestamp download_file].each do |word|
    %input{:type=>'hidden', :name=>word, :value => _(word)}
   -%w[reviewers_list add_pin].each do |word|

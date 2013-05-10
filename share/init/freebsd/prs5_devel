@@ -20,7 +20,8 @@ export PATH=/usr/local/bin:$PATH
 prs_start()
 {
         cd /root/projects/prs5/
-        /usr/local/rvm/wrappers/ruby-1.9.3-p125@prs5/unicorn_rails -E development -c unicorn_conf_devel.rb config.ru &
+#        /usr/local/rvm/wrappers/ruby-1.9.3-p125@prs5/unicorn_rails -E development -c unicorn_conf_devel.rb config.ru &
+        /usr/local/rvm/wrappers/ruby-2.0.0-p0@prs5/unicorn_rails -E development -c unicorn_conf_devel.rb config.ru &
 }
 prs_stop()
 {
