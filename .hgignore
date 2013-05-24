@@ -18,3 +18,5 @@ bin/
 *.swk
 *.core
 
+config/prs_model_conf.yaml
+
