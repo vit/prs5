@@ -42,7 +42,8 @@ en:
         position: Posision (mandatory for working persons)
         rank: Academic rank
         degree: Degree
-        responsibilities: Current responsibilities (mandatory for a speaker)
+        #responsibilities: Current responsibilities (mandatory for a speaker)
+        responsibilities: Research interests
 
         choosecountry: Choose country
         othercountry: Other country
@@ -133,7 +134,8 @@ ru:
         position: Должность (обязательно для работающих)
         rank: Ученое звание
         degree: Ученая степень
-        responsibilities: Сфера деятельности в настоящее время (обязательно для докладчика)
+        #responsibilities: Сфера деятельности в настоящее время (обязательно для докладчика)
+        responsibilities: Область научных интересов
 
         choosecountry: Выберите страну
         othercountry: Другая страна
