@@ -3,9 +3,9 @@
 - @page_id='mailing'
 
 -content_for :post_page_content do
+ %h3= @page_title
  %div
-  mailing page
-  -#=render "comp/adm/conf", :locals => {:current_id => @page_id}
+  =render "comp/adm/post/mailing", :locals => {:current_id => @page_id}
 
 -render :file => 'adm/post/layout'
 

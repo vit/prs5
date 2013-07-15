@@ -1,0 +1,61 @@
+
+-#= javascript_include_tag 'comp/adm/post/templates'
+
+#mailingcomp{}
+ =params.to_s
+ %form#new_task{method: 'post'}
+  %input{type: 'hidden', name: 'op', value: 'add_task'}
+  %table
+   %tr
+    %td= _(:name)
+    %td
+     %input{type: 'text', name: 'name'}
+   %tr
+    %td= _(:producer)
+    %td
+     %select{name: 'producer'}
+      -@mail_producers.each do |p|
+       %option{value: p}= p
+   %tr
+    %td= _(:template)
+    %td
+     %select{name: 'template'}
+      -@mail_templates.each do |t|
+       %option{value: t['_id']}= t['title'].to_s
+   %tr
+    %td &nbsp;
+    %td
+     %b= _(:args)
+   %tr
+    %td &nbsp;
+    %td= _(:select_confs)
+   %tr
+    %td &nbsp;
+    %td
+     %div{width: '100%', style: 'overflow: scroll; height: 150px;'}
+      %table{border: 1, width: '100%'}
+       -@confs_list.each do |c|
+        %tr
+         %td
+          %input{type: 'checkbox', name: 'args_confs[]', value: c['_id']}
+           %td= c['info']['title'].to_s
+   %tr
+    %td &nbsp;
+    %td
+     %button{onclick: "if(this.form.name.value.trim().length > 0) { alert(this.form.name.value); } else {alert('#{_(:name_empty)}'); return false;}"}= _(:add_task)
+ %form#tasks_list{method: 'post'}
+  %input{type: 'hidden', name: 'op', value: 'delete_tasks'}
+  %table{border: 1, width: '100%'}
+   -@mail_tasks.each do |t|
+    %tr
+     %td
+      %input{type: 'checkbox', name: 'tasks[]', value: t['_id']}
+     %td= t.to_s
+  %button{onclick: "if( confirm('#{_ (:are_you_sure)}') ) {} else {return false;}"}= _(:delete_tasks)
+ -#%fieldset
+  %span= _ :querytext
+  %input{name: 'userquery', type: 'text'}
+  %fieldset
+   %legend= _ :result
+   %div{name: 'container'}
+
