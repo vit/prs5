@@ -42,7 +42,7 @@
    %tr
     %td &nbsp;
     %td
-     %button{onclick: "if(this.form.name.value.trim().length > 0) { alert(this.form.name.value); } else {alert('#{_(:name_empty)}'); return false;}"}= _(:add_task)
+     %button{onclick: "if(this.form.name.value.trim().length > 0) { /*alert(this.form.name.value);*/ } else {alert('#{_(:name_empty)}'); return false;}"}= _(:add_task)
  %form#tasks_list{method: 'post'}
   %input{type: 'hidden', name: 'op', value: 'delete_tasks'}
   %table{border: 1, width: '100%'}
@@ -50,7 +50,8 @@
     %tr
      %td
       %input{type: 'checkbox', name: 'tasks[]', value: t['_id']}
-     %td= t.to_s
+       %td
+        %a{href: 'mailing_items?task_id='+t['_id']}= t.to_s
   %button{onclick: "if( confirm('#{_ (:are_you_sure)}') ) {} else {return false;}"}= _(:delete_tasks)
  -#%fieldset
   %span= _ :querytext

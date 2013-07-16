@@ -1,0 +1,44 @@
+
+- @page_title= _ :title
+- @page_id='mailing'
+
+-content_for :post_page_content do
+ %h3= @page_title
+ %div
+  #mailingitems{}
+   %div{style: 'margin: 10px;'}=params.to_s
+   %div{style: 'margin: 10px;'}
+    %a{href: 'mailing'}= '<< '+_(:back_to_tasks)
+   %div
+    %b= _(:task_info)+': '
+    =@mail_task_info.to_s
+   %div
+    %form#tasks_list{method: 'post'}
+     %input{type: 'hidden', name: 'op', value: ''}
+     %div
+      %button{onclick: "if(confirm('#{_(:make_list_confirm)}')) this.form.op.value='make_list'; else return false;"}= _(:make_list_btn)
+      %button{onclick: "if(confirm('#{_(:delete_all_confirm)}')) this.form.op.value='delete_all'; else return false;"}= _(:delete_all_btn)
+      &nbsp;
+      %button{onclick: "if(confirm('#{_(:send_all_prepared_confirm)}')) this.form.op.value='send_all_prepared'; else return false;"}= _(:send_all_prepared_btn)
+     %table{border: 1}
+      -@mail_task_items.each do |t|
+       %tr
+        %td
+         %input{type: 'checkbox', name: 'items[]', value: t['_id']}
+        %td
+         %div
+          %b= _(:item_attr)+': '
+          = t['attr'].to_s
+         %div
+          %b= _(:item_data)+': '
+          = t['data'].to_s
+         -if t['_meta']['log']
+          %div
+           %b= _(:item_log)+': '
+           = t['_meta']['log'].to_s
+        %td
+         %div= t['_meta']['state'].to_s
+
+
+-render :file => 'adm/post/layout'
+
