@@ -1,0 +1,28 @@
+
+en:
+        task_name: Task name
+        producer: Producer
+        template: Template
+        additional_args: Additional args
+        select_confs: Select conferences
+
+        name_empty: Empty name
+        delete_are_you_sure: Are you sure?
+
+        add_task: Add new task
+        delete_tasks: Delete marked tasks
+
+ru:
+        task_name: Имя задачи
+        producer: Продюсер
+        template: Шаблон
+        additional_args: Дополнительные аргументы
+        select_confs: Выберите конференции
+
+        name_empty: Пустое имя
+        delete_are_you_sure: Вы уверены?
+
+        add_task: Добавить новую задачу
+        delete_tasks: Удалить помеченные задачи
+
+
