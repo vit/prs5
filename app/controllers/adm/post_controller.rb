@@ -55,8 +55,12 @@ class Adm::PostController < ApplicationController
 						@appl.post.taskmgr.gen_task_elms params['task_id']
 					when 'delete_all' then
 						@appl.post.taskmgr.remove_task_elms params['task_id']
+					when 'delete_marked' then
+						@appl.post.taskmgr.remove_task_elms params['task_id'], params['items'] ? params['items'] : []
 					when 'send_all_prepared' then
 						@appl.post.taskmgr.change_task_elms_state params['task_id'], 'prepared', 'sending'
+					when 'send_marked' then
+						@appl.post.taskmgr.change_task_elms_state params['task_id'], nil, 'sending', params['items'] ? params['items'] : []
 					end
 					@mail_task_items = @appl.post.taskmgr.get_task_elms params['task_id']
 				end

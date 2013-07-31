@@ -6,11 +6,15 @@ en:
 
         make_list_btn: Generate list
         delete_all_btn: Delete all
+        delete_marked_btn: Delete marked
         send_all_prepared_btn: Send all prepared
+        send_marked_btn: Send marked
         
         make_list_confirm: Are you sure you want to generate items?
         delete_all_confirm: Are you sure you want to delete all items?
+        delete_marked_confirm: Are you sure you want to delete marked items?
         send_all_prepared_confirm: Are you sure you want to send all prepared items?
+        send_marked_confirm: Are you sure you want to send marked items?
 
         item_attr: Item attr
         item_data: Item data
@@ -23,11 +27,15 @@ ru:
 
         make_list_btn: Сгенерировать список
         delete_all_btn: Удалить все
+        delete_marked_btn: Удалить помеченные
         send_all_prepared_btn: Отправить все подготовленные
+        send_marked_btn: Отправить помеченные
          
         make_list_confirm: Вы уверены, что хотите сгенерировать элементы?
         delete_all_confirm: Вы уверены, что хотите удалить все элементы?
+        delete_marked_confirm: Вы уверены, что хотите удалить помеченные элементы?
         send_all_prepared_confirm: Вы уверены, что хотите отправить все подготовленные элементы?
+        send_marked_confirm: Вы уверены, что хотите отправить помеченные элементы?
 
         item_attr: Атрибуты элемента
         item_data: Данные элемента

@@ -6,7 +6,7 @@
  %h3= @page_title
  %div
   #mailingitems{}
-   -#%div{style: 'margin: 10px;'}=params.to_s
+   %div{style: 'margin: 10px;'}=params.to_s
    %div{style: 'margin: 10px;'}
     %a{href: 'mailing'}= '<< '+_(:back_to_tasks)
    %div
@@ -18,8 +18,10 @@
      %div
       %button{onclick: "if(confirm('#{_(:make_list_confirm)}')) this.form.op.value='make_list'; else return false;"}= _(:make_list_btn)
       %button{onclick: "if(confirm('#{_(:delete_all_confirm)}')) this.form.op.value='delete_all'; else return false;"}= _(:delete_all_btn)
+      %button{onclick: "if(confirm('#{_(:delete_marked_confirm)}')) this.form.op.value='delete_marked'; else return false;"}= _(:delete_marked_btn)
       &nbsp;
       %button{onclick: "if(confirm('#{_(:send_all_prepared_confirm)}')) this.form.op.value='send_all_prepared'; else return false;"}= _(:send_all_prepared_btn)
+      %button{onclick: "if(confirm('#{_(:send_marked_confirm)}')) this.form.op.value='send_marked'; else return false;"}= _(:send_marked_btn)
      %table{border: 1}
       -@mail_task_items.each do |t|
        %tr
