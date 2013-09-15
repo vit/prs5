@@ -71,9 +71,18 @@ Prs5::Application.routes.draw do
   #match '/lib(/(:action))' => 'lib'
 
 #  scope 'lib' do
-#	#match '' => redirect("/lib/")
+#  scope module: 'lib' do
+  namespace :lib do
+	  #resources :admin do
+	  #scope :admin do
+	  namespace :admin do
+		  resources :items
+	  end
+	match '/admin' => redirect('/lib/admin/items')
+	match '(/:id)' => 'home#show'
+	#match '' => redirect("/lib/")
 #	match '(/(:action))' => 'lib'
-#  end
+  end
 
   namespace :adm do
 	match '/post(/(:action))' => 'post'

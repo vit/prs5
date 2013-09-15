@@ -1,0 +1,25 @@
+
+<% content_for :page_content do %>
+<%= render :partial => 'path' %>
+<% if @data %>
+<div>
+	<h2>Item Data</h2>
+	<%= @data['text'].to_s %>
+</div>
+<br />
+<% end %>
+<% if @children.length > 0 %>
+<div>
+	<h2>Children</h2>
+	<ul>
+		<% @children.each do |c| %>
+			<li><%= link_to c['text']['title'].to_s, lib_path(c['_id'].to_s) %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<% end %>
+
+<% render :file => 'lib/layout' %>
+

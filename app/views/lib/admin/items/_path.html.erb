@@ -1,0 +1,10 @@
+
+<br />
+<div>
+<%= link_to 'Root', lib_admin_items_path %>
+<% @path.each do |p| %>
+	/ <%= link_to p['text']['title'].to_s, lib_admin_item_path(p['_id']) %>
+<% end if @path %>
+</div>
+<br />
+

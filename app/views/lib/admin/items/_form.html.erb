@@ -1,0 +1,13 @@
+
+<% text = @data && @data['text'] ?  @data['text'] : {'title' => {}, 'abstract' => {}} %>
+<%= form_tag( @id ? lib_admin_item_path(@id) : lib_admin_items_path, method: @id ? :put : :post ) do %>
+	<%= hidden_field_tag('parent', params[:parent]) if params[:parent] %>
+	<%= label_tag(:title) %><br />
+	en: <%= text_field_tag('title[en]',  text['title']['en'], size: '100') %><br />
+	ru: <%= text_field_tag('title[ru]', text['title']['ru'], size: '100') %><br />
+	<%= label_tag(:abstract) %><br />
+	en: <%= text_area_tag('abstract[en]', text['abstract']['en'], size: '100x6') %><br />
+	ru: <%= text_area_tag('abstract[ru]', text['abstract']['ru'], size: '100x6') %><br />
+	<%= submit_tag('Submit') %><br />
+<% end %>
+
