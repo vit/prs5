@@ -3,17 +3,40 @@
 <%= render :partial => 'path' %>
 <% if @data %>
 <div>
-	<h2>Item Data</h2>
-	<%= @data['text'].to_s %>
+	<!--h2>Item Data</h2-->
+	<%#= @data['text'].to_s %>
+	<!--br /-->
+	<%#= @data['authors'].to_s %>
+	<table cellpadding=5 cellspacing=5 width=100%>
+		<tr>
+			<% %w[en ru].each do |l| %>
+				<td valign=top>
+					<% if @data && @data['text'] && @data['text']['title'] %>
+						<h3 align=center><%= @data['text']['title'][l] %></h3>
+					<% end %>
+					<% if @data && @data['authors'] %>
+						<p align=center><b><%= @data['authors'].map{ |a|
+							(a['fname'] ? a['fname'][l].to_s : '') + ' ' +
+							(a['lname'] ? a['lname'][l].to_s : '')
+						}.join(', ')%></b></p>
+					<% end %>
+					<% if @data && @data['text'] && @data['text']['abstract'] %>
+						<p aalign=center><%= @data['text']['abstract'][l] %></p>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	</table>
 </div>
 <br />
 <% end %>
 <% if @children.length > 0 %>
 <div>
-	<h2>Children</h2>
+	<h2><%= _ :children %></h2>
 	<ul>
 		<% @children.each do |c| %>
-			<li><%= link_to c['text']['title'].to_s, lib_path(c['_id'].to_s) %></li>
+			<!--li><%#= link_to c['text']['title'].to_s, lib_path(c['_id'].to_s) %></li-->
+			<li><%= link_to ml_to_s(c['text']['title']), lib_path(c['_id'].to_s) %></li>
 		<% end %>
 	</ul>
 </div>

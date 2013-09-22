@@ -70,7 +70,10 @@ class Lib::HomeController < ApplicationController
 	end
 	def get_data id
 		c = @coll.find_one( {'_meta.class' => 'COMS:LIB:ITEM', '_id' => BSON::ObjectId(id) })
-		data = { 'text' => c['text'] }
+		data = {
+			'text' => c['text'],
+			'authors' => c['authors']
+		}
 		data
 	end
 end

@@ -76,7 +76,17 @@ Prs5::Application.routes.draw do
 	  #resources :admin do
 	  #scope :admin do
 	  namespace :admin do
-		  resources :items
+		resources :items do
+			member do
+			      post 'save'
+			end
+			collection do
+			      post 'add'
+			end
+		#	member do
+		#	      get 'json'
+		#	end
+		end
 	  end
 	match '/admin' => redirect('/lib/admin/items')
 	match '(/:id)' => 'home#show'

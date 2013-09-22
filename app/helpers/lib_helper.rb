@@ -13,4 +13,9 @@ module LibHelper
 		end
 		pairs.length>0 ? '?'+pairs.map{ |e| e[:k]+'='+e[:v] }.join('&') : ''
 	end
+
+	def ml_to_s elm
+		%w[en ru].map{ |l| elm[l].to_s }.join(' | ')
+	end
+
 end

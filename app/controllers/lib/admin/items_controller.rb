@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class Lib::Admin::ItemsController < ApplicationController
 	#before_action :mongo
 	before_filter :mongo
@@ -32,8 +34,32 @@ class Lib::Admin::ItemsController < ApplicationController
 
 	#	render text: params.to_s
 	#	render text: @children.to_s
-		render :show
+#		render :show
+		respond_to do |format|
+			format.html { render :show }
+			format.json { render json: @data}
+		end
 	end
+=begin
+	def json
+		@id = params[:id] ? params[:id] : nil
+		@data = nil
+		if @id
+			@data = get_data @id
+#			@data['text']['title']['ru'].force_encoding('UTF-8')
+#			@path = get_path @id
+		end
+#		@children = @coll.find( {'_meta.class' => 'COMS:LIB:ITEM', '_meta.parent' => @id ? BSON::ObjectId(@id) : nil}).map{ |d| d }
+
+		render :json => @data
+
+	#	render :text => @data.to_json
+#		render :text => @data.to_json.to_s
+#		render :text => JSON(@data)
+#		response.headers['Content-type'] = 'text/plain; charset=utf-8'
+	#	response.headers['Content-type'] = 'application/json; charset=utf-8'
+	end
+=end
 	def create
 		parent = params[:parent]
 		text = {title: params[:title], abstract: params[:abstract]}
@@ -56,6 +82,41 @@ class Lib::Admin::ItemsController < ApplicationController
 		)
 		redirect_to lib_admin_item_path(@id)
 	end
+
+	def save
+		@id = params[:id]
+		item = params[:item]
+		answer = {}
+		if @id && item
+			@coll.update(
+				{'_meta.class' => 'COMS:LIB:ITEM', '_id' => @id ? BSON::ObjectId(@id) : nil},
+				{'$set' => {
+					text: item['text'],
+					authors: item['authors']
+				}}
+			)
+			answer = item
+		end
+		render json: answer
+	end
+	def add
+		parent = params[:parent]
+		item = params[:item]
+		id = nil
+		if item
+			data = item['data']
+			if item
+				id = @coll.insert({
+					_meta: {class: 'COMS:LIB:ITEM', parent: parent ? BSON::ObjectId(parent) : nil},
+					text: data['text'],
+					authors: data['authors']
+				})
+			end
+		end
+		render json: {id: id.to_s}
+#		render json: item
+	end
+
 	def destroy
 		parent = params[:parent]
 		@id = params[:id] ? params[:id] : nil
@@ -87,7 +148,10 @@ class Lib::Admin::ItemsController < ApplicationController
 	end
 	def get_data id
 		c = @coll.find_one( {'_meta.class' => 'COMS:LIB:ITEM', '_id' => BSON::ObjectId(id) })
-		data = { 'text' => c['text'] }
+		data = {
+			'text' => c['text'],
+			'authors' => c['authors']
+		}
 		data
 	end
 end
