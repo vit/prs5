@@ -1,6 +1,8 @@
 # encoding: UTF-8
 
 class Lib::Admin::ItemsController < ApplicationController
+	TS = -> { Time.now.utc.iso8601(10) }
+
 	#before_action :mongo
 	before_filter :mongo
 
@@ -99,6 +101,39 @@ class Lib::Admin::ItemsController < ApplicationController
 		end
 		render json: answer
 	end
+
+	def upload
+		id = params['id']
+		op = params['op']
+		if id
+			parent = BSON::ObjectId(id)
+			if op=='upload'
+				file = params['file']
+				lang = params['lang']
+				if file && lang
+					put_file parent, 'paper', lang, file, {content_type: file.content_type, original_filename: file.original_filename}
+				end
+			end
+			if op=='delete'
+				lang = params['lang']
+				if lang
+					delete_file parent, 'paper', lang
+				end
+			end
+		end
+		render json: {par: params.inspect}
+	end
+	def rpc
+		method = params['method']
+		id = params['params']['id']
+		rez = nil
+		case method
+			when 'get_files' then rez = find_files( BSON::ObjectId(id) )
+		end
+	#	render json: {par: params.inspect}
+		render json: {result: rez}
+	end
+
 	def add
 		parent = params[:parent]
 		item = params[:item]
@@ -132,6 +167,8 @@ class Lib::Admin::ItemsController < ApplicationController
 	def mongo
 		@coll_name = 'lib'
 		@coll = @appl.mongo.open_collection @coll_name
+		@grid = @appl.mongo.open_grid @coll_name
+		@collfiles = @appl.mongo.open_collection @coll_name+'.files'
 	end
 
 	def get_path id
@@ -153,6 +190,35 @@ class Lib::Admin::ItemsController < ApplicationController
 			'authors' => c['authors']
 		}
 		data
+	end
+
+	def find_files parent
+		@collfiles.find( {'_meta.parent' => parent} ).map do |f|
+	#	@collfiles.find( {} ).map do |f|
+			f
+		end
+	end
+	def find_file parent, type, lang
+	#	res = @collfiles.find_one( {'_meta.parent' => parent} )
+#		res = @collfiles.find_one()
+		res = @collfiles.find_one( {'_meta.parent' => parent, '_meta.type' => type, '_meta.lang' => lang} )
+		res ? res['_id'] : nil
+	end
+	def delete_file parent, type, lang
+		old_id = find_file parent, type, lang
+		@grid.delete(old_id) if old_id
+	end
+	def put_file parent, type, lang, input, args={}
+		delete_file parent, type, lang
+		ts = TS[]
+		args.merge!({_meta: {
+			parent: parent,
+			type: type,
+			lang: lang,
+			ctime: ts,
+			mtime: ts
+		}})
+		@grid.put input, args
 	end
 end
 

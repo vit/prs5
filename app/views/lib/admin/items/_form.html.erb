@@ -7,7 +7,7 @@
 		params[:parent] ? 'parent="'+params[:parent].to_s+'"' : ""
 %>"</span>
 
-<span ng-init="items_path='<%= lib_admin_items_path %>'"</span>
+<span ng-init="items_path='<%= lib_admin_items_path %>'"></span>
 <span ng-init="load()"</span>
 
 <%= form_tag( @id ? lib_admin_item_path(@id) : lib_admin_items_path, method: @id ? :put : :post ) do %>
@@ -36,5 +36,38 @@
 	</div>
 	<button type=button ng-click="submit()">Submit</button>
 <% end %>
+
+<% if @id %>
+	<hr>
+	<div ng-app ng-controller='ItemFilesCtrl' ng-init='init()'>
+		<span ng-init="id='<%= @id.to_s %>'" ></span>
+		<span ng-init="items_path='<%= lib_admin_items_path %>'"></span>
+		<h3>Paper files</h3>
+		<div ng-repeat="lang in ['en', 'ru']" style='margin: 1em'>
+			<!--div ng-switch on="data.files.paper[lang]"-->
+			<div ng-switch on="files.paper[lang]">
+				<form name='{{lang}}'>
+						{{lang}}: 
+						<input type=hidden name=lang value='{{lang}}' />
+					<span ng-switch-when='true'>
+						<input type=hidden name=op value='delete' />
+						<button type=button ng-click="submit('paper',lang)">Delete File</button>
+					</span>
+					<span ng-switch-default>
+						<input type=hidden name=op value='upload' />
+						<input type=file name=file />
+						<button type=button ng-click="submit('paper',lang)">Upload File</button>
+					</span>
+						<span ng-switch on="uploadInProgress['paper_'+lang]">
+							<span ng-switch-when='true'>
+								<span>In progress...</span>
+							</span>
+						</span>
+				</form>
+			</div>
+		</div>
+	</div>
+<% end %>
+
 </div>
 

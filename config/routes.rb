@@ -79,9 +79,11 @@ Prs5::Application.routes.draw do
 		resources :items do
 			member do
 			      post 'save'
+			      post 'upload'
 			end
 			collection do
 			      post 'add'
+			      post 'rpc'
 			end
 		#	member do
 		#	      get 'json'
@@ -90,6 +92,7 @@ Prs5::Application.routes.draw do
 	  end
 	match '/admin' => redirect('/lib/admin/items')
 	match '(/:id)' => 'home#show'
+	match '(/:id/download(/:filename))' => 'home#download'
 	#match '' => redirect("/lib/")
 #	match '(/(:action))' => 'lib'
   end

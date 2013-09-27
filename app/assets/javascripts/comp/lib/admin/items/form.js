@@ -60,17 +60,62 @@ function ItemFormCtrl($scope, $http, $window) {
 		);
 	}
 
-	/*
-		$scope.data={
-			text: {
-				title: {en: '', ru: ''},
-				abstract: {en: '', ru: ''}
-			},
-			authors: [
-				{fname: {en: '', ru: ''}, lname: {en: '', ru: ''}},
-				{fname: {en: '', ru: ''}, lname: {en: '', ru: ''}}
-			]
-		}
-		*/
 }
+
+function ItemFilesCtrl($scope, $http, $element) {
+
+	var rpc = function(method, params, callback) {
+		var path = $scope.items_path+'/rpc';
+		$http.post(path, {method: method, params: params}).success(function(answer){
+			callback(answer);
+		});
+	}
+
+	function loadFilesList() {
+		rpc('get_files', {id: $scope.id}, function(answer) {
+		//	console.log(answer);
+		//	$scope.files = {paper: {en: true, ru: false}};
+			$scope.files = [];
+			answer.result.forEach(function(f) {
+				console.log(f);
+				$scope.files[ f['_meta']['type'] ] = $scope.files[ f['_meta']['type'] ] || {};
+				$scope.files[ f['_meta']['type'] ][ f['_meta']['lang'] ] = true;
+			});
+		});
+	}
+
+	$scope.init = function() {
+		$scope.uploadInProgress = {};
+		loadFilesList();
+	}
+
+	$scope.submit = function(type, lang) {
+	//	console.log(lang);
+		var form = jQuery('form[name='+lang+']', $element)[0];
+	//	console.log(form);
+		formData = new FormData(form);
+	//	console.log(formData);
+		$scope.uploadInProgress[type+'_'+lang] = true;
+		jQuery.ajax({
+			url: $scope.items_path+'/'+$scope.id+'/upload',
+			type: 'POST',
+	//		beforeSend: function(xhr, settings) {
+	//			var upload = xhr.upload;
+	//			upload.addEventListener('progress', function() {
+	//				console.log('progress');
+	//			}, false);
+	//		},
+			success: function(answer) {
+		//		console.log(answer);
+				loadFilesList();
+				$scope.uploadInProgress[type+'_'+lang] = false;
+			},
+			processData: false,
+			contentType: false,
+			cache: false,
+			data: formData
+		});
+	};
+}
+
 

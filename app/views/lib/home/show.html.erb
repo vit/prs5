@@ -23,6 +23,16 @@
 					<% if @data && @data['text'] && @data['text']['abstract'] %>
 						<p aalign=center><%= @data['text']['abstract'][l] %></p>
 					<% end %>
+					<% if @files.is_a? Array %>
+						<p>
+						<% @files.select do |f| %>
+							<% f['_meta'] && f['_meta']['type']=='paper' && f['_meta']['lang']==l %>
+						<% end.map do |f| %>
+							<%#= f.inspect %>
+							<%= link_to _('download_file'), lib_path(@id)+'/download/'+@id.to_s+'_paper_'+l+'?'+ {type: 'paper', lang: l}.to_param %>
+						<% end %>
+						</p>
+					<% end %>
 				</td>
 			<% end %>
 		</tr>

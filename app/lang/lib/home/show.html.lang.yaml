@@ -1,8 +1,10 @@
 
 en:
         children: Children
+        download_file: Download file
 
 ru:
         children: Дочерние элементы
+        download_file: Скачать файл
 
 

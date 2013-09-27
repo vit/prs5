@@ -1,9 +1,9 @@
 class Lib::HomeController < ApplicationController
 #class LibController < ApplicationController
 #	around_filter :wrap_query
-	def wrap_query
-		yield
-	end
+#	def wrap_query
+#		yield
+#	end
 
 	before_filter :mongo
 
@@ -31,10 +31,22 @@ class Lib::HomeController < ApplicationController
 		if @id
 			@data = get_data @id
 			@path = get_path @id
+			@files = find_files BSON::ObjectId(@id)
 		end
 		@children = @coll.find( {'_meta.class' => 'COMS:LIB:ITEM', '_meta.parent' => @id ? BSON::ObjectId(@id) : nil}).map{ |d| d }
+
 	#	render text: @id.to_s
 	end
+	def download
+		parent = BSON::ObjectId(params['id'])
+		type = params['type']
+		lang = params['lang']
+		file = get_file parent, type, lang
+		send_data file.read, type: file.content_type #, :filename => "#{client.name}.pdf",
+	#	render text: file.content_type
+	end
+
+=begin
   def item id=nil
 	id = params['id'] unless id
 #	@children = []
@@ -48,12 +60,14 @@ class Lib::HomeController < ApplicationController
 #	render :file => 'lib/conferences'
 	render :file => 'lib/item'
   end
-
+=end
 	private
 
 	def mongo
 		@coll_name = 'lib'
 		@coll = @appl.mongo.open_collection @coll_name
+		@grid = @appl.mongo.open_grid @coll_name
+		@collfiles = @appl.mongo.open_collection @coll_name+'.files'
 	end
 
 	def get_path id
@@ -76,5 +90,21 @@ class Lib::HomeController < ApplicationController
 		}
 		data
 	end
+
+	def find_files parent
+		@collfiles.find( {'_meta.parent' => parent} ).map do |f|
+	#	@collfiles.find().map do |f|
+			f
+		end
+	end
+	def find_file parent, type, lang
+		res = @collfiles.find_one( {'_meta.parent' => parent, '_meta.type' => type, '_meta.lang' => lang} )
+		res ? res['_id'] : nil
+	end
+			def get_file parent, type, lang
+				fid = find_file parent, type, lang
+				fid ? @grid.get(fid) : nil
+			end
+
 end
 
