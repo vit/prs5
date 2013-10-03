@@ -129,6 +129,9 @@ class Lib::Admin::ItemsController < ApplicationController
 		rez = nil
 		case method
 			when 'get_files' then rez = find_files( BSON::ObjectId(id) )
+			when 'get_conferences_list' then rez = @appl.conf.get_confs_list
+			when 'get_conferences_list' then rez = @appl.conf.get_confs_list
+			when 'get_papers_list' then rez = @appl.conf.paper.get_all_papers_list id
 		end
 	#	render json: {par: params.inspect}
 		render json: {result: rez}

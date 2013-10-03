@@ -16,7 +16,9 @@
 	<%= link_to 'Edit', edit_lib_admin_item_path(@id) %>
 </div>
 <br />
+<%= render :partial => 'import_children' %>
 <% end %>
+
 <% if @children.length > 0 %>
 <div>
 	<h2>Children</h2>
