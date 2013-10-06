@@ -17,6 +17,7 @@
 					<% if @data && @data['authors'] %>
 						<p align=center><b><%= @data['authors'].map{ |a|
 							(a['fname'] ? a['fname'][l].to_s : '') + ' ' +
+							(a['mname'] ? a['mname'][l].to_s : '') + ' ' +
 							(a['lname'] ? a['lname'][l].to_s : '')
 						}.join(', ')%></b></p>
 					<% end %>

@@ -42,26 +42,6 @@ class Lib::Admin::ItemsController < ApplicationController
 			format.json { render json: @data}
 		end
 	end
-=begin
-	def json
-		@id = params[:id] ? params[:id] : nil
-		@data = nil
-		if @id
-			@data = get_data @id
-#			@data['text']['title']['ru'].force_encoding('UTF-8')
-#			@path = get_path @id
-		end
-#		@children = @coll.find( {'_meta.class' => 'COMS:LIB:ITEM', '_meta.parent' => @id ? BSON::ObjectId(@id) : nil}).map{ |d| d }
-
-		render :json => @data
-
-	#	render :text => @data.to_json
-#		render :text => @data.to_json.to_s
-#		render :text => JSON(@data)
-#		response.headers['Content-type'] = 'text/plain; charset=utf-8'
-	#	response.headers['Content-type'] = 'application/json; charset=utf-8'
-	end
-=end
 	def create
 		parent = params[:parent]
 		text = {title: params[:title], abstract: params[:abstract]}
@@ -132,6 +112,8 @@ class Lib::Admin::ItemsController < ApplicationController
 			when 'get_conferences_list' then rez = @appl.conf.get_confs_list
 			when 'get_conferences_list' then rez = @appl.conf.get_confs_list
 			when 'get_papers_list' then rez = @appl.conf.paper.get_all_papers_list id
+		#	when 'import_children_from_conferences' then rez = params['params']
+			when 'import_children_from_conference' then rez = import_children_from_conference params['params']['id'],  params['params']['conf_id'],  params['params']['papers']
 		end
 	#	render json: {par: params.inspect}
 		render json: {result: rez}
@@ -143,13 +125,7 @@ class Lib::Admin::ItemsController < ApplicationController
 		id = nil
 		if item
 			data = item['data']
-			if item
-				id = @coll.insert({
-					_meta: {class: 'COMS:LIB:ITEM', parent: parent ? BSON::ObjectId(parent) : nil},
-					text: data['text'],
-					authors: data['authors']
-				})
-			end
+			id = create_new_item parent, data
 		end
 		render json: {id: id.to_s}
 #		render json: item
@@ -167,11 +143,46 @@ class Lib::Admin::ItemsController < ApplicationController
 
 	private
 
-	def mongo
-		@coll_name = 'lib'
-		@coll = @appl.mongo.open_collection @coll_name
-		@grid = @appl.mongo.open_grid @coll_name
-		@collfiles = @appl.mongo.open_collection @coll_name+'.files'
+	def create_new_item parent, data
+		id = nil
+		if data
+			id = @coll.insert({
+				_meta: {class: 'COMS:LIB:ITEM', parent: parent ? BSON::ObjectId(parent) : nil},
+				text: data['text'],
+				authors: data['authors']
+			})
+		end
+		id
+	end
+
+	def import_children_from_conference parent, conf_id, papers
+		rez = []
+		papers.each do |p_id|
+			p = @appl.conf.paper.get_paper_info conf_id, p_id
+			data = {
+				'authors' => p['authors'] ? p['authors'].map{ |a| {fname: a['fname'], mname: a['mname'], lname: a['lname'] } } : [],
+				'text' => p['text']
+			}
+			id = create_new_item parent, data
+			if p['files']
+				p['files'].each do |f|
+				#	rez << f[:class_code]
+					if f[:class_code]=='paper'
+						rez << id
+						lang = f[:_meta]['lang']
+						fdata = @appl.conf.paper.get_paper_file conf_id, p_id, lang, 'paper'
+						put_file id, 'paper', lang, fdata, {content_type: f[:content_type], original_filename: f[:filename]}
+					#	rez << {content_type: f[:content_type], original_filename: f[:original_filename]}
+					#	rez << {content_type: f[:content_type], original_filename: f[:filename]}
+					#	rez<< lang
+					#	rez << fdata
+					end
+				end
+			end
+		#	rez << data
+	#		rez << p
+		end
+		rez
 	end
 
 	def get_path id
@@ -223,5 +234,13 @@ class Lib::Admin::ItemsController < ApplicationController
 		}})
 		@grid.put input, args
 	end
+
+	def mongo
+		@coll_name = 'lib'
+		@coll = @appl.mongo.open_collection @coll_name
+		@grid = @appl.mongo.open_grid @coll_name
+		@collfiles = @appl.mongo.open_collection @coll_name+'.files'
+	end
+
 end
 

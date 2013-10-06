@@ -25,7 +25,8 @@
 	<table border=1>
 		<% @children.each do |c| %>
 			<tr>
-				<td><%= link_to c['text']['title'].to_s, lib_admin_item_path(c['_id'].to_s) %></td>
+				<td><%= link_to c['text'] ? c['text']['title'].to_s : '???', lib_admin_item_path(c['_id'].to_s) %></td>
+				<!--td><%#= link_to c.inspect, lib_admin_item_path(c['_id'].to_s) %></td-->
 				<td><%= link_to 'Edit', edit_lib_admin_item_path(c['_id'].to_s) %></td>
 				<td><%= link_to 'Delete', lib_admin_item_path(c['_id'].to_s, @id ? {parent: @id} : {}), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 			</tr>

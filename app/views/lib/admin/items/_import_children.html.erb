@@ -1,0 +1,46 @@
+
+<div ng-app ng-controller='ImportChildrenCtrl' ng-init='init()'>
+<script src='/assets/comp/lib/admin/items/import_children.js'></script>
+
+<span ng-init="items_path='<%= lib_admin_items_path %>'"></span>
+<span ng-init="load()"</span>
+<span ng-init="<%= 'id="'+@id.to_s+'"' %>"</span> 
+<fieldset>
+	<legend>Import children from Conferences to this directory | <a href='javascript:void(0)'ng-click='showHide()'><span ng-hide='visible'>Show</span><span ng-show='visible'>Collapse</span></a></legend>
+	<div ng-show='visible'>
+		<table border=1 width=100%>
+			<tr>
+				<td valign=top>
+		<div ng-repeat="conf in confs" style='margin: 1em'>
+			<div ng-switch on="!!conf.info.title">
+				<div ng-switch-when="true">
+					<div ng-switch on="conf._id==conf_id">
+						<a href='javascript:void(0)' ng-click='confClick(conf._id)'>
+							<span ng-switch-when="true"><b>{{conf.info.title}}</b></span>
+							<span ng-switch-default>{{conf.info.title}}</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</td>
+		<td valign=top>
+		<a ng-click='selectAllChange(1)'>[+]</a>
+		<a ng-click='selectAllChange(0)'>[-]</a>
+		<a ng-click='selectAllChange(-1)'>[*]</a>
+		<div ng-repeat="(key, paper) in papers" style='margin: 1em'>
+			<div nng-switch on="!!paper.info.title">
+				<div nng-switch-when="true">
+					<label><input type='checkbox' ng-model='paper.selected' />{{paper.text.title}}</label>
+				</div>
+			</div>
+		</div>
+		</td>
+		</tr>
+		</table>
+		<button ng-click='importSelected()'>Import Selected</button>
+	</div>
+</fieldset>
+
+</div>
+
