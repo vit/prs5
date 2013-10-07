@@ -1,0 +1,12 @@
+
+<% @page_title= _ :title %>
+
+<% content_for :page_content do %>
+	<div>
+		<h3 align='center'><%= _ :title %></h3>
+		<div><%= _ :text %></div>
+<% end %>
+
+
+<% render :file => 'lib/layout' %>
+

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info, :wr_country_list, :wr_menu_access
+	#around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_web_login, :wr_web_logout, :wr_user_id, :wr_user_info, :wr_country_list, :wr_menu_access
+	around_filter :wrap_login, :wr_accept_language, :wr_application, :wr_user_session, :wr_lang_selected, :wr_user_id, :wr_user_info, :wr_country_list, :wr_menu_access
 	def wrap_login
 	#	@aaaaa='qqqqq'
 		yield
@@ -38,8 +39,8 @@ class ApplicationController < ActionController::Base
 	#	}[request.languages] : 'en'
 		yield
 	end
+=begin
 	def wr_web_login
-#=begin
 	#	p request.params.inspect
 		if request.params && request.params['log_pin']
 			user_id = request.params['log_pin'].to_i
@@ -53,7 +54,6 @@ class ApplicationController < ActionController::Base
 			end
 		end
 	#	puts @current_user
-#=end
 		yield
 	end
 	def wr_web_logout
@@ -63,6 +63,7 @@ class ApplicationController < ActionController::Base
 		end
 		yield
 	end
+=end
 	def wr_user_id
 		if @current_user[:session_key]
 			user_id = @appl.user.auth.checkSessionKey @current_user[:session_key]

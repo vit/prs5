@@ -17,7 +17,8 @@
      %a{href: '/my/profile'}><&= _(:profile)
      %br
      %br
-     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+     -#%form{:style=>"margin: 0;", :method=>'post', :action=>""}
+     %form{:style=>"margin: 0;", :method=>'post', :action=>"/account/logout?#{ {:return_url => request.original_url}.to_query }"}
       %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
 -else
  .item
@@ -34,7 +35,8 @@
    .block2
     .panel
      %a.close_btn [X]
-     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
+     -#%form{:style=>"margin: 0;", :method=>'post', :action=>url_for("/account/login", :url => request.original_url)}
+     %form{:style=>"margin: 0;", :method=>'post', :action=>"/account/login?#{ {:return_url => request.original_url}.to_query }" }
       %table
        %tr
         %td
@@ -47,57 +49,5 @@
          %input.logoninput{:type=>'password', :name=>'log_pass', :size=>'6'}
         %td
          %input.logonbutton{:type=>'submit', :name=>"login", :value=>_(:login)}
-
-
--#= javascript_include_tag 'comp/user/logon'
-
--#- user = @current_user
--#.item
- .highlighted
-  -if user[:user_id]
-   %a{href: '/my'}><
-    %span.underlined><
-     %span.username><&= user[:info]['fullname']
-     =', ' + _(:pin) + ': '
-     %span.name><= user[:user_id]
-    %span>< &darr;
-   .block
-    .panel
-     %input#user_id{:type=>'hidden', :name=>'user_id', :value => @current_user[:user_id]}
-     -#%a{href: '/user/profile.html'}><&= _(:profile)
-     %a{href: '/my/profile'}><&= _(:profile)
-     %br
-     %br
-     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
-      %input.logonbutton{:type=>'submit', :name=>"logout", :value=> _(:logout) }
-  -else
-   %a{hhref: '#'}><
-    %span.underlined><= _ :enter
-    %span>< &darr;
-   .block
-    .panel
-     %form{:style=>"margin: 0;", :method=>'post', :action=>""}
-      %table
-       %tr
-        %td
-         =_(:pin)+':'
-        %td
-         %input.logoninput{:type=>'text', :name=>'log_pin', :size=>'6'}
-        %td
-         =_(:password)+':'
-        %td
-         %input.logoninput{:type=>'password', :name=>'log_pass', :size=>'6'}
-        %td
-         %input.logonbutton{:type=>'submit', :name=>"login", :value=>_(:login)}
-     %br
-     %table
-      %tr
-       %td
-        -#%a{href: '/user/restore.html'}><= _( :restorepassword )
-        %a{href: '/account/restore'}><= _( :restorepassword )
-       %td
-        -#%a{href: '/user/new.html'}><= _( :addnewuser )
-        %a{href: '/account/new'}><= _( :addnewuser )
-
 
 

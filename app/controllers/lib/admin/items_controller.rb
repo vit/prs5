@@ -5,6 +5,7 @@ class Lib::Admin::ItemsController < ApplicationController
 
 	#before_action :mongo
 	before_filter :mongo
+	around_filter :check_access_rights
 
 	def index
 	#	render text: params.to_s
@@ -44,25 +45,30 @@ class Lib::Admin::ItemsController < ApplicationController
 	end
 	def create
 		parent = params[:parent]
-		text = {title: params[:title], abstract: params[:abstract]}
-		id = @coll.insert({
-			_meta: {class: 'COMS:LIB:ITEM', parent: parent ? BSON::ObjectId(parent) : nil},
-			text: text
-		})
-		redirect_to parent ? lib_admin_item_path(parent) : lib_admin_items_path
+		if  params[:title] and params[:abstract]
+			text = {title: params[:title], abstract: params[:abstract]}
+			id = @coll.insert({
+				_meta: {class: 'COMS:LIB:ITEM', parent: parent ? BSON::ObjectId(parent) : nil},
+				text: text
+			})
+			redirect_to parent ? lib_admin_item_path(parent) : lib_admin_items_path
+		end
 	#	render text: params.to_s
 #		render text: id.to_s
 	end
 	def update
 		@id = params[:id] ? params[:id] : nil
-		text = {title: params[:title], abstract: params[:abstract]}
-		@coll.update(
-			{'_meta.class' => 'COMS:LIB:ITEM', '_id' => @id ? BSON::ObjectId(@id) : nil},
-			{'$set' => {
-				text: text
-			}}
-		)
-		redirect_to lib_admin_item_path(@id)
+		if  @id and params[:title] and params[:abstract]
+			text = {title: params[:title], abstract: params[:abstract]}
+			@coll.update(
+			#	{'_meta.class' => 'COMS:LIB:ITEM', '_id' => @id ? BSON::ObjectId(@id) : nil},
+				{'_meta.class' => 'COMS:LIB:ITEM', '_id' => BSON::ObjectId(@id)},
+				{'$set' => {
+					text: text
+				}}
+			)
+			redirect_to lib_admin_item_path(@id)
+		end
 	end
 
 	def save
@@ -240,6 +246,15 @@ class Lib::Admin::ItemsController < ApplicationController
 		@coll = @appl.mongo.open_collection @coll_name
 		@grid = @appl.mongo.open_grid @coll_name
 		@collfiles = @appl.mongo.open_collection @coll_name+'.files'
+	end
+
+
+	def check_access_rights
+		if @appl.user.is_admin(@current_user[:user_id])
+			yield
+		else
+			render 'norights'
+		end
 	end
 
 end

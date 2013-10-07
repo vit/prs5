@@ -1,0 +1,25 @@
+
+-content_for :section_content do
+
+ %h2{:align => 'center'}= _ :title
+
+ -if @current_user[:user_id]
+ -else
+  %form{:style=>"margin: 0;", :method=>'post', :action=>"/account/login?#{ {:return_url => params[:return_url]}.to_query }" }
+   %table
+    %tr
+     %td
+      =_(:pin)+':'
+     %td
+      %input.logoninput{:type=>'text', :name=>'log_pin', :size=>'6'}
+     %td
+      =_(:password)+':'
+     %td
+      %input.logoninput{:type=>'password', :name=>'log_pass', :size=>'6'}
+     %td
+      %input.logonbutton{:type=>'submit', :name=>"login", :value=>_(:login)}
+
+- @page_id='user'
+- @page_title = _ :title
+
+

@@ -48,6 +48,7 @@
 		<% @children.each do |c| %>
 			<!--li><%#= link_to c['text']['title'].to_s, lib_path(c['_id'].to_s) %></li-->
 			<li><%= link_to ml_to_s(c['text']['title']), lib_path(c['_id'].to_s) %></li>
+			<!-- li><%#= link_to c.inspect, lib_path(c['_id'].to_s) %></li-->
 		<% end %>
 	</ul>
 </div>
