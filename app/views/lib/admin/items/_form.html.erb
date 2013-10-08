@@ -23,15 +23,15 @@
 	</div>
 	<div style='margin: 2em'>
 		<%= label_tag(:authors) %>
-			&nbsp;<a href='javascript:null' ng-click="addAuthor(-1)">[+]</a>&nbsp;
+			&nbsp;<a href='javascript:void(0)' ng-click="addAuthor(-1)">[+]</a>&nbsp;
 		<br />
 		<div ng-repeat="author in data.authors" style='margin: 1em'>
 			en: First name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.fname.en'}) %> Middle name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.mname.en'}) %> Last name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.lname.en'}) %><br />
 			ru: First name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.fname.ru'}) %> Middle name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.mname.ru'}) %> Last name <%= text_field_tag('', '', {size: '40', 'ng-model' => 'author.lname.ru'}) %><br />
-			&nbsp;<a href='javascript:null' ng-click="addAuthor($index)">[+&darr;]</a>&nbsp;
-			<span ng-switch on="!$last"><span ng-switch-when='true'>&nbsp;<a href='javascript:null' ng-click="moveAuthor($index, 1)">[&dArr;]</a>&nbsp;</span></span>
-			<span ng-switch on="!$first"><span ng-switch-when='true'>&nbsp;<a href='javascript:null' ng-click="moveAuthor($index, -1)">[&uArr;]</a>&nbsp;</span></span>
-			&nbsp;<a href='javascript:null' ng-click="removeAuthor($index)">[X]</a>&nbsp;
+			&nbsp;<a href='javascript:void(0)' ng-click="addAuthor($index)">[+&darr;]</a>&nbsp;
+			<span ng-switch on="!$last"><span ng-switch-when='true'>&nbsp;<a href='javascript:void(0)' ng-click="moveAuthor($index, 1)">[&dArr;]</a>&nbsp;</span></span>
+			<span ng-switch on="!$first"><span ng-switch-when='true'>&nbsp;<a href='javascript:void(0)' ng-click="moveAuthor($index, -1)">[&uArr;]</a>&nbsp;</span></span>
+			&nbsp;<a href='javascript:void(0)' ng-click="removeAuthor($index)">[X]</a>&nbsp;
 		</div>
 	</div>
 	<button type=button ng-click="submit()">Submit</button>
