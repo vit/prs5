@@ -8,7 +8,8 @@ en:
         mname: Middle name
         birthdate: Birth date
         part_type: Participation type
-        coauthors: Coauthors etc
+        #coauthors: Coauthors etc
+        coauthors: Paper title
         occupation: Occupation
         organization: Organization
         position: Position
@@ -41,7 +42,8 @@ ru:
         mname: Отчество
         birthdate: Дата рождения
         part_type: Тип участия
-        coauthors: Соавторы и пр.
+        #coauthors: Соавторы и пр.
+        coauthors: Название доклада
         occupation: Род занятий
         organization: Организация
         position: Должность
