@@ -1,0 +1,30 @@
+-# require "unicode_utils"
+
+- @page_title= _ :title
+-# @page_id='reports'
+
+-lst = {}
+-@report_data.each do |r|
+ -if r['keywords'] && r['keywords'].length > 0 then
+  -r['keywords'].each{ |kw|
+  -    str = %w[en ru].map{ |lang|
+  -      kw[lang]
+  -#    }.join(' | ').downcase
+  -    }.join(' | ')
+  -    str = UnicodeUtils.downcase(str)
+  -    lst[ str ] ||= 0
+  -    lst[ str ] += 1
+  -}
+-#lst.map! {|k| k.capitalize}
+-#lst.sort!
+
+-#lst2 = lst.to_a.sort { |a,b| a[0].downcase <=> b[0].downcase }
+-lst2 = lst.to_a.sort { |a,b| b[1] <=> a[1] }
+-#lst.uniq!
+%div
+ %h3{:align => 'center'}= @conf_data['info']['title'][@data_lang_code]
+ %h3{:align => 'center'}= _(:title)
+ =#lst.inspect
+ -lst2.each do |k|
+  %div= k.to_s
+

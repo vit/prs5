@@ -58,6 +58,8 @@ class Conf::ReportsController < Conf::ConfController
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								when 'keywords_2' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
+								when 'keywords_3' then
+									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								end
 								#render 'conf/reports/reports/'+report_id, :layout => false
 								render "conf/reports/reports/#{report_id}", :layout => false

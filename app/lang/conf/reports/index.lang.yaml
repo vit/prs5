@@ -28,6 +28,7 @@ en:
 
         keywords_1: Papers with keywords
         keywords_2: Papers list with abstracts and keywords
+        keywords_3: Papers list with abstracts and keywords, variant
 
 ru:
         title: 'Отчеты'
@@ -58,4 +59,5 @@ ru:
 
         keywords_1: Рефераты с ключевыми словами
         keywords_2: Использованные в конференции ключевые слова
+        keywords_3: Использованные в конференции ключевые слова, вариант
 
