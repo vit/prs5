@@ -1,7 +1,13 @@
 en:
-        title: Post
+  main: Main
+  title: Post
+  templates: Templates
+  mailing: Mailing
 
 ru:
-        title: Письма
+  main: Начало
+  title: Письма
+  templates: Шаблоны
+  mailing: Рассылка
 
 

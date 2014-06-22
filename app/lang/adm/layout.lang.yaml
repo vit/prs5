@@ -1,13 +1,16 @@
 
 en:
-        adminterface: Admin interface
-        conf: Conferences
-        admins: Superusers
-        users: Users
+  adminterface: Admin interface
+  conf: Conferences
+  post: Post
+  admins: Superusers
+  users: Users
 
 ru:
-        adminterface: Администрирование
-        conf: Конференции
-        users: Пользователи
+  adminterface: Администрирование
+  conf: Конференции
+  post: Почта
+  admins: Суперпользователи
+  users: Пользователи
 
 

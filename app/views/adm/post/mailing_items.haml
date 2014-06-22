@@ -11,6 +11,8 @@
     %a{href: 'mailing'}= '<< '+_(:back_to_tasks)
    %div
     %b= _(:task_info)+': '
+    %br
+    %b= @mail_task_info['attr']['name'].to_s
     =@mail_task_info.to_s
    %div
     %form#tasks_list{method: 'post'}

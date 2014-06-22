@@ -9,7 +9,8 @@
    -#=call "/comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users'] ]}
    -#=render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users'] ]}
    -#=render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users'], [_(:post), './post.html', 'post'] ]}
-   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:post), './post/', 'post'], [_(:lib), './lib/', 'lib'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users']]}
+   -#=render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:post), './post/', 'post'], [_(:lib), './lib/', 'lib'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users']]}
+   =render :partial => "comp/menu/horizontal", :locals => {:current_id => @page_id, :base =>"/adm/", :data => [ [_(:conf), './', 'conf'], [_(:post), './post/', 'post'], [_(:admins), './admins.html', 'admins'], [_(:users), './users.html', 'users']]}
    .clear
 
   %div= yield :page_content
