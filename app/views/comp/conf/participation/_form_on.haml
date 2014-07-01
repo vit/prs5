@@ -54,6 +54,19 @@
      %input.input{type: 'text', name: 'birthdate', id: 'form_birthdate', vvvalue: '1981-03-14'}
    %fieldset
     %legend= _(:participation_info)
+    -if @conf_data['info']['part_presence'] && @conf_data['info']['part_presence']!='both'
+     %p
+      %span.label= _('part_presence')
+      %span= _( 'part_'+@conf_data['info']['part_presence'] )
+    -else
+     %p
+      %span.label= _('part_presence')
+      %label
+       %input{type: 'radio', name: 'part_presence', value: 'internal'}
+       = _('part_internal')
+      %label
+       %input{type: 'radio', name: 'part_presence', value: 'online'}
+       = _('part_online')
     %p
      %span.label= _('part_type')
      %label

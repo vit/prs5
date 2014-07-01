@@ -9,13 +9,27 @@ window.addEvent('domready',function() {
 				RPC.send('conf.get_conf_permissions', [me.id], function(result, error) {
 				//	alert( JSON.encode(result) );
 					if (result) me.permissions = result;
+//					RPC.send('conf.get_my_rights', [self.user.id, me.id], function(result, error) {
+//					//	alert( JSON.encode(result) );
+//						if (result) me.my_rights = result;
+//						me.fireEvent('init_ok');
+//					});
 					RPC.send('conf.get_my_rights', [self.user.id, me.id], function(result, error) {
 					//	alert( JSON.encode(result) );
 						if (result) me.my_rights = result;
-						me.fireEvent('init_ok');
+					//	me.fireEvent('init_ok');
+
+						RPC.send('conf.get_conf_info', [me.id], function(result, error) {
+						//	alert( JSON.encode(result) );
+				//			console.log( result );
+							if (result) me.info = result;
+							me.fireEvent('init_ok');
+						});
+
 					});
 				});
 			},
+			info: {},
 			permissions: {},
 			my_rights: {},
 			id: args.id,

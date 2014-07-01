@@ -27,6 +27,9 @@ en:
         birthdate: Date of birth
 
         participation_info: Participation info
+        part_presence: I will particicate
+        part_internal: as internal
+        part_online: online
         part_type: I am an
         part_author: author
         part_speaker: author speaker
@@ -119,6 +122,9 @@ ru:
         birthdate: Дата рождения
 
         participation_info: Информация об участии
+        part_presence: Я приму участие
+        part_internal: очно
+        part_online: онлайн
         part_type: Я -
         part_author: автор
         part_speaker: автор-докладчик

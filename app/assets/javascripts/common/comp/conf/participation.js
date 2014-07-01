@@ -167,6 +167,9 @@
 	var ParticipationFormOn = function(cont) {
 		var dict = new Dict( $('[name=dict]', cont) );
 		var form = $('form', cont);
+		function goPartPresenceDependent(name) {
+			goHotelDependent.call(this, name);
+		}
 		function goPartTypeDependent(name) {
 			var val = this.get()['part_type'];
 			var flagEnabled = val!='nonauthor';
@@ -194,9 +197,16 @@
 			this.setEnabled('passport', flagEnabled || foreign);
 		}
 		function goHotelDependent(name) {
+
+//			console.log( this.get()['part_presence'] );
+
+		//	var internalEnabled = this.get()['part_presence'] == 'internal';
+			var internalEnabled = this.get()['part_presence'] != 'online';
+			this.setEnabled('hotel', internalEnabled);
 			var flagEnabled = this.get()['hotel'] == 'hotel_myself';
 		//	this.enableElement('hotel_name', flagEnabled);
 			this.setEnabled('hotel_name', flagEnabled);
+			this.setEnabled('hotel_name', flagEnabled && internalEnabled);
 		}
 
 		var formStruct = [
@@ -206,6 +216,7 @@
 			{name: 'fname', type: 'text', isvalid: 'notempty'},
 			{name: 'mname', type: 'text', isvalid: 'notempty'},
 			{name: 'birthdate', type: 'date', isvalid: 'notempty'},
+			{name: 'part_presence', type: 'radio', isvalid: 'notempty', goDependent: goPartPresenceDependent},
 			{name: 'part_type', type: 'radio', isvalid: 'notempty', goDependent: goPartTypeDependent},
 			{name: 'coauthors', type: 'text'},
 			{name: 'occupation', type: 'radio', isvalid: 'notempty', goDependent: goOccupationDependent},

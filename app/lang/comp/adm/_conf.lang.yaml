@@ -3,6 +3,10 @@ en:
         lang_en: English
         lang_ru: Russian
         lang_bilingual: Bilingual
+        conf_part_presence: Participant presence
+        part_presence_internal: Internal
+        part_presence_online: Online
+        part_presence_both: Internal or Online
         inactive: Inactive
         active: Active
         archived: Archived
@@ -148,6 +152,10 @@ ru:
         lang_en: Английский
         lang_ru: Русский
         lang_bilingual: Двуязычная
+        conf_part_presence: Форма присутствие участника
+        part_presence_internal: Очно
+        part_presence_online: Онлайн
+        part_presence_both: Очно или Онлайн
         inactive: Неактивная
         active: Активная
         archived: Архивная

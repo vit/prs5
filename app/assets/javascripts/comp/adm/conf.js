@@ -146,6 +146,7 @@ window.addEvent('domready',function() {
 			//	var di = DataInputs( panel, {
 				var di = FormDataInputs( panel, {
 					lang: null,
+					part_presence: null,
 					status: null,
 					email: null,
 					homepage: 'ml',

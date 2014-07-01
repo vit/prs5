@@ -43,6 +43,13 @@
            %option{value: v}= _ ('lang_'+v).to_sym
        %tr
         %td{:align=>"left"}
+         %b= _ :conf_part_presence
+        %td
+         %select{name: 'part_presence'}
+          -%w[both internal online].each do |v|
+           %option{value: v}= _ ('part_presence_'+v).to_sym
+       %tr
+        %td{:align=>"left"}
          %b= _ :conf_status
         %td
          %select{name: 'status'}
