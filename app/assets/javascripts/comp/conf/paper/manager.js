@@ -361,7 +361,8 @@ window.addEvent('domready',function() {
 												//href: 'getfile?id='+p._id+'&lang='+lang, target: '_blank',
 												//href: 'getfile/'+f.filename+'?id='+p._id+'&lang='+lang, target: '_blank',
 												//href: '../download/abstract/'+f['uniquefilename']+'?id='+f['_meta']['parent']+'&lang='+f['_meta']['lang'],
-												href: '../download/abstract/'+f['uniquefilename']+'?id='+f['_meta']['parent']+'&lang='+f['_meta']['lang']+'&type='+f.class_code,
+										//		href: '../download/abstract/'+f['uniquefilename']+'?id='+f['_meta']['parent']+'&lang='+f['_meta']['lang']+'&type='+f.class_code,
+												href: 'download/'+f['uniquefilename']+'?id='+f['_meta']['parent']+'&lang='+f['_meta']['lang']+'&type='+f.class_code,
 											//	'getfile/'+f.filename+'?id='+p._id+'&lang='+lang, target: '_blank',
 												text: dict('download_file')
 											})
