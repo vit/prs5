@@ -57,7 +57,8 @@
     -if @conf_data['info']['part_presence'] && @conf_data['info']['part_presence']!='both'
      %p
       %span.label= _('part_presence')
-      %span= _( 'part_'+@conf_data['info']['part_presence'] )
+      -#%span= _( 'part_'+@conf_data['info']['part_presence'] )
+      %span= _( 'part_'+ (@conf_data['info']['part_presence']=='' ? 'internal' : @conf_data['info']['part_presence']) )
     -else
      %p
       %span.label= _('part_presence')

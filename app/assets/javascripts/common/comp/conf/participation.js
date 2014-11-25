@@ -216,7 +216,8 @@
 			{name: 'fname', type: 'text', isvalid: 'notempty'},
 			{name: 'mname', type: 'text', isvalid: 'notempty'},
 			{name: 'birthdate', type: 'date', isvalid: 'notempty'},
-			{name: 'part_presence', type: 'radio', isvalid: 'notempty', goDependent: goPartPresenceDependent},
+		//	{name: 'part_presence', type: 'radio', isvalid: 'notempty', goDependent: goPartPresenceDependent},
+			{name: 'part_presence', type: 'radio', isvalid: '', goDependent: goPartPresenceDependent},
 			{name: 'part_type', type: 'radio', isvalid: 'notempty', goDependent: goPartTypeDependent},
 			{name: 'coauthors', type: 'text'},
 			{name: 'occupation', type: 'radio', isvalid: 'notempty', goDependent: goOccupationDependent},
@@ -470,8 +471,10 @@
 						//if( v.isvalid && enabledModel.get(v.name) && v.isvalid=='notempty' ) {
 						if( requiredModel.get(v.name) && enabledModel.get(v.name) ) {
 							var val = getElemData(v.name);
-							if(!val)
+							if(!val) {
+						//		console.log("invalid " + v.name);
 								isValid = false;
+							}
 						}
 						markedModel.set(v.name, !isValid);
 					//	if(!isValid)
