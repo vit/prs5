@@ -1,0 +1,12 @@
+
+<table border=1>
+	<% @report_data['countries'].each do |c| %>
+	<tr>
+		<td><%= c  %></td>
+		<td><%= render :partial => '/comp/user/country_name', :locals => {:code => c}%></td>
+	</tr>
+	<% end %>
+</table>
+
+
+<%#= @report_data.inspect %>

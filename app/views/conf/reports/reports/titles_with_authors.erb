@@ -1,0 +1,57 @@
+
+<table border=1>
+	<tr>
+		<th rowspan=2>ID</th>
+		<th rowspan=2><%= _(:paper_title_ru)  %></th>
+		<th rowspan=2><%= _(:paper_title_en)  %></th>
+		<th rowspan=2><%= _(:authors_ru)  %></th>
+		<th rowspan=2><%= _(:authors_en)  %></th>
+		<th rowspan=2><%= _(:registrator)  %></th>
+		<th colspan=3><%= _(:contacts)  %></th>
+	</tr>
+	<tr>
+		<th><%= _(:reg_phone)  %></th>
+		<th><%= _(:reg_fax)  %></th>
+		<th><%= _(:reg_email)  %></th>
+	</tr>
+	<% @report_data['papers'].each do |p| %>
+	<tr>
+		<td><%= p['paper_cnt'] %></td>
+		<td><%= p['title']['ru'] %></td>
+		<td><%= p['title']['en'] %></td>
+		<td><% p['authors_data'].each do |a| %>
+			<%= a['user_name_ru'] %>
+			<%#= a['country'] %>
+			<br>
+			<%= a['affiliation_ru'] %>
+			<br>
+		<% end %></td>
+		<td><% p['authors_data'].each do |a| %>
+			<%= a['user_name_en'] %>
+			<%#= a['country'] %>
+			<br>
+			<%= a['affiliation_en'] %>
+			<br>
+		<% end %></td>
+		<td>
+			<%= p['registrator_data']['user_name'] %>
+			<br>
+			<%= p['registrator_data']['pin'] %>
+			<br>
+			<%= p['registrator_data']['affiliation'] %>
+		</td>
+		<td>
+			<%= p['registrator_data']['phone'] %>
+		</td>
+		<td>
+			<%= p['registrator_data']['fax'] %>
+		</td>
+		<td>
+			<%= p['registrator_data']['email'] %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<%= @report_data.inspect %>
+

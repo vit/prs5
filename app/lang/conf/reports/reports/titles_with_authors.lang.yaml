@@ -1,0 +1,24 @@
+
+en:
+  paper_title_ru: Title (eng)
+  paper_title_en: Title (rus)
+  authors_ru: Authors (eng)
+  authors_en: Authors (rus)
+  registrator: Registrator
+  contacts: Contacts
+  reg_phone: Phone
+  reg_fax: Fax
+  reg_email: Email
+
+ru:
+  paper_title_ru: Заголовок (анг)
+  paper_title_en: Заголовок (рус)
+  authors_ru: Авторы (анг)
+  authors_en: Авторы (рус)
+  registrator: Регистратор
+  contacts: Контакты
+  reg_phone: Тел.
+  reg_fax: Факс
+  reg_email: Email
+
+

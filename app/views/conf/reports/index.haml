@@ -33,6 +33,15 @@
     %a{:href => 'abstracts_with_paper_files.html?data_lang='+data_lang}= data_lang
    %br
    %br
+   = _(:titles_with_authors)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'titles_with_authors.html?data_lang='+data_lang}= data_lang
+   %br
+   = _(:paper_countries_list)
+   -%w[en ru].each do |data_lang|
+    %a{:href => 'paper_countries_list.html?data_lang='+data_lang}= data_lang
+   %br
+   %br
    = _(:keywords_1)
    -%w[en ru].each do |data_lang|
     %a{:href => 'keywords_1.html?data_lang='+data_lang}= data_lang
@@ -53,6 +62,9 @@
     %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= _( 'class_'+file_class )
    %br
    %br
+   -#%a{:href => 'paper_countries_list.html'}= _( :paper_countries_list )
+   -#%br
+   -#%br
    - with_html = %w[papers_statistics papers_statistics_after_decision papers_list_with_reviews]
    %table{border: 1, cellpadding: 2}
     %tr

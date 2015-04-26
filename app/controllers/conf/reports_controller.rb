@@ -24,44 +24,35 @@ class Conf::ReportsController < Conf::ConfController
 								case report_id
 								when 'report_1' then
 									@summary = @appl.conf.report.get_summary @cont_id, @data_lang_code
-							#		render '/page/conf/id/reports/summary'
-								#	render :file => 'conf/reports/reports/summary'
-								#	render 'conf/reports/reports/summary', :layout => false
 								when 'report_2' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/paperslist'
 								when 'abstracts_by_country' then
 									@report_data = @appl.conf.report.abstracts_by_country @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/abstracts_by_country'
 								when 'papers_by_section' then
 									@report_data = @appl.conf.report.papers_by_section @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/papers_by_section'
 								when 'papers_statistics_after_decision' then
 									@report_data = @appl.conf.report.papers_statistics_after_decision @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/papers_statistics_after_decision'
 								when 'papers_statistics' then
 									@report_data = @appl.conf.report.papers_statistics @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/papers_statistics'
 								when 'papers_list_with_reviews' then
 									@report_data = @appl.conf.report.papers_list_with_reviews @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/papers_list_with_reviews'
 								when 'abstracts_with_files' then
 									@report_data = @appl.conf.report.abstracts_with_files @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/abstracts_with_files'
 								when 'abstracts_with_paper_files' then
 									@report_data = @appl.conf.report.abstracts_with_paper_files @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/abstracts_with_paper_files'
 								when 'abstract_ids_with_files' then
 									@report_data = @appl.conf.report.abstracts_with_files @cont_id, @data_lang_code
-								#	render '/page/conf/id/reports/abstract_ids_with_files'
 								when 'keywords_1' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								when 'keywords_2' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								when 'keywords_3' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
+								when 'paper_countries_list' then
+									@report_data = @appl.conf.report.paper_countries_list @cont_id, @data_lang_code
+								when 'titles_with_authors' then
+									@report_data = @appl.conf.report.titles_with_authors @cont_id, @data_lang_code
 								end
-								#render 'conf/reports/reports/'+report_id, :layout => false
 								render "conf/reports/reports/#{report_id}", :layout => false
 							else
 #=begin
