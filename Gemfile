@@ -48,6 +48,8 @@ gem 'spreadsheet'
 gem 'mail'
 #gem 'erb'
 
+gem 'russian'
+gem 'rubyzip', '>= 1.0.0'
 
 # Deploy with Capistrano
 # gem 'capistrano'

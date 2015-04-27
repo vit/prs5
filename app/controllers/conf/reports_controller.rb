@@ -52,6 +52,8 @@ class Conf::ReportsController < Conf::ConfController
 									@report_data = @appl.conf.report.paper_countries_list @cont_id, @data_lang_code
 								when 'titles_with_authors' then
 									@report_data = @appl.conf.report.titles_with_authors @cont_id, @data_lang_code
+								when 'download_files_one_archive' then
+									@report_data = {}
 								end
 								render "conf/reports/reports/#{report_id}", :layout => false
 							else

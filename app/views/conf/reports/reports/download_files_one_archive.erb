@@ -1,0 +1,16 @@
+
+<ul>
+<%
+
+public_dir = "generated/#{@cont_id}/"
+dst_dir = "public/generated/#{@cont_id}/"
+lst = Dir.entries(dst_dir).reject{|entry| entry.to_s.start_with?(".")}
+#lst = Dir[dst_dir+"*.zip"]
+lst.each do |d|
+	file_name = dst_dir+d
+	file_size = File.size(file_name)
+%>
+<li><%= file_size %> bytes | <a href='<%= "/#{public_dir}#{d}"%>'><%= d %></a></li>
+<% end %>
+</ul>
+

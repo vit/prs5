@@ -19,4 +19,5 @@ bin/
 *.core
 
 config/prs_model_conf.yaml
+public/generated/
 
