@@ -1,9 +1,9 @@
 
 en:
-  paper_title_ru: Title (eng)
-  paper_title_en: Title (rus)
-  authors_ru: Authors (eng)
-  authors_en: Authors (rus)
+  paper_title_ru: Title (rus)
+  paper_title_en: Title (eng)
+  authors_ru: Authors (rus)
+  authors_en: Authors (eng)
   registrator: Registrator
   contacts: Contacts
   reg_phone: Phone
@@ -11,10 +11,10 @@ en:
   reg_email: Email
 
 ru:
-  paper_title_ru: Заголовок (анг)
-  paper_title_en: Заголовок (рус)
-  authors_ru: Авторы (анг)
-  authors_en: Авторы (рус)
+  paper_title_ru: Заголовок (рус)
+  paper_title_en: Заголовок (анг)
+  authors_ru: Авторы (рус)
+  authors_en: Авторы (анг)
   registrator: Регистратор
   contacts: Контакты
   reg_phone: Тел.
