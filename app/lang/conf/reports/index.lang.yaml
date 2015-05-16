@@ -33,6 +33,7 @@ en:
         titles_with_authors: Paper titles with authors etc
         paper_countries_list: Countries for accepted papers
         download_files_one_archive: Download all files in one archive
+        download_files_one_archive_no_exdoc: Download main files in one archive
 
 
 ru:
@@ -69,5 +70,6 @@ ru:
         titles_with_authors: Заголовки статей, авторы и пр.
         paper_countries_list: Список стран для принятых статей
         download_files_one_archive: Скачать все файлы в одном архиве
+        download_files_one_archive_no_exdoc: Скачать основные файлы в одном архиве
 
 
