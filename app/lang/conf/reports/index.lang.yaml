@@ -15,6 +15,7 @@ en:
         papers_statistics_after_decision: Papers statistics after decision
         papers_list_with_reviews: Papers list with reviews
         papers_list_with_reviews2: Papers list with reviews 2
+        papers_list_with_reviews3: Papers list with reviews 3
         authors_list: Authors list
         registrators_list: Registrators list
         reviewers_list: Reviewers list
@@ -52,6 +53,7 @@ ru:
         papers_statistics_after_decision: Статистика после рецензирования и принятия финального решения
         papers_list_with_reviews: Списки поданных рефератов (докладов) с рецензиями
         papers_list_with_reviews2: Списки поданных рефератов (докладов) с рецензиями 2
+        papers_list_with_reviews3: Списки поданных рефератов (докладов) с рецензиями 3
         authors_list: Список данных авторов
         registrators_list: Список данных регистраторов
         reviewers_list: Список рецензентов
