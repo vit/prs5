@@ -54,7 +54,13 @@ class Conf::ReportsController < Conf::ConfController
 									@report_data = @appl.conf.report.titles_with_authors @cont_id, @data_lang_code
 								when 'download_files_one_archive' then
 									@report_data = {}
-								when 'download_files_one_archive_no_exdoc' then
+								#when 'download_files_one_archive_no_exdoc' then
+								#	@report_data = {}
+								when 'download_files_one_archive_abstracts' then
+									@report_data = {}
+								when 'download_files_one_archive_papers' then
+									@report_data = {}
+								when 'download_files_one_archive_presentations' then
 									@report_data = {}
 								end
 								render "conf/reports/reports/#{report_id}", :layout => false
