@@ -16,6 +16,10 @@
     %td{:align=>'left'}&= @summary[:context_id]
    %tr
     %td{:align=>'left'}
+     %b= _(:report_date_time)+':'
+    %td{:align=>'left'}&= DateTime.now.strftime("%F %H:%M %Z")
+   %tr
+    %td{:align=>'left'}
      %b= _(:context_title)+':'
     %td{:align=>'left'}&= @summary[:context_title]
    %tr
@@ -31,6 +35,20 @@
     %td{:align=>'left'}
      %b= _(:fromCountries)+':'
      %td{:align=>'left'}&= @summary[:countrycnt]
+
+
+
+
+%div
+ %h3{:align => 'center'}= _(:by_country_title)
+ %div{:align => 'center'}
+  %table
+   -@summary[:by_country].map{|gr| {country_code: gr[0], country_title: (render :partial => '/comp/user/country_name', :locals => {:code => gr[0]}), cnt: gr[1]}}.sort{|c1, c2| c1[:country_title]<=>c2[:country_title] }.each do |c|
+    %tr
+     %td{:align=>'left'}
+      %b=c[:country_title]
+     %td{:align=>'left'}&= c[:cnt]
+
 
 
 

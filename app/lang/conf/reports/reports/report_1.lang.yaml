@@ -8,6 +8,9 @@ en:
         registeredPapers: 'Registered papers'
         fromCountries: 'Countries (from)'
 
+        by_country_title: 'Countries'
+        report_date_time: 'Report generated at'
+
 ru:
         page_title: 'Статистика'
 
@@ -17,5 +20,7 @@ ru:
         registeredPapers: 'Зарегистрировано докладов'
         fromCountries: 'Из скольких стран'
 
+        by_country_title: 'Страны'
+        report_date_time: 'Отчет создан'
 
 
