@@ -71,6 +71,10 @@
     -#%a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= file_class
     %a{:href => 'abstract_ids_with_files.html?file_class='+file_class}= _( 'class_'+file_class )
    %br
+   = _(:abstract_ids_with_files_by_date)+':'
+   -%w[abstract abstract_exdoc paper paper_exdoc presentation].each do |file_class|
+    %a{:href => 'abstract_ids_with_files_by_date.html?file_class='+file_class}= _( 'class_'+file_class )
+   %br
    %br
    -#%a{:href => 'paper_countries_list.html'}= _( :paper_countries_list )
    -#%br

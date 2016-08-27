@@ -10,6 +10,7 @@ en:
         abstracts_with_paper_files: Abstracts with paper files
 
         abstract_ids_with_files: Abstract numbers with files
+        abstract_ids_with_files_by_date: Abstract numbers with files by date
 
         papers_statistics: Papers statistics
         papers_statistics_after_decision: Papers statistics after decision
@@ -34,7 +35,10 @@ en:
         titles_with_authors: Paper titles with authors etc
         paper_countries_list: Countries for accepted papers
         download_files_one_archive: Download all files in one archive
-        download_files_one_archive_no_exdoc: Download main files in one archive
+        #download_files_one_archive_no_exdoc: Download main files in one archive
+        download_files_one_archive_abstracts: Download files in one archive - abstracts
+        download_files_one_archive_papers: Download files in one archive - papers
+        download_files_one_archive_presentations: Download files in one archive - presentations
 
 
 ru:
@@ -48,6 +52,7 @@ ru:
         abstracts_with_paper_files: Рефераты с файлами докладов
 
         abstract_ids_with_files: Список номеров рефератов с файлами
+        abstract_ids_with_files_by_date: Список номеров рефератов с файлами по датам
 
         papers_statistics: Статистика подачи докладов
         papers_statistics_after_decision: Статистика после рецензирования и принятия финального решения
@@ -72,6 +77,9 @@ ru:
         titles_with_authors: Заголовки статей, авторы и пр.
         paper_countries_list: Список стран для принятых статей
         download_files_one_archive: Скачать все файлы в одном архиве
-        download_files_one_archive_no_exdoc: Скачать основные файлы в одном архиве
+        #download_files_one_archive_no_exdoc: Скачать основные файлы в одном архиве
+        download_files_one_archive_abstracts: Скачать файлы в одном архиве - рефераты
+        download_files_one_archive_papers: Скачать файлы в одном архиве - доклады
+        download_files_one_archive_presentations: Скачать файлы в одном архиве - презентации
 
 

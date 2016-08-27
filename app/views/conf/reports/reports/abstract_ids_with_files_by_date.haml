@@ -1,0 +1,41 @@
+
+- @page_title= _ :title
+-# @page_id='reports'
+
+%div
+ %h3{:align => 'center'}= %w[en ru].map{ |lang| @conf_data['info']['title'][lang] }.join(' | ')
+ %h3{:align => 'center'}= _(:title)
+ %div{:align => 'center'}
+  =@file_class_code
+ -#files = @report_data.select{ |r| r['files'].select{ |f| f[:class_code]==@file_class_code }.first }.map{ |r| r['files'].map{|f| {cnt:r['_meta']['paper_cnt'], file:f} } }.flatten
+ -files = @report_data.map{ |r| r['files'].select{ |f| f[:class_code]==@file_class_code }.map{|f| {cnt:r['_meta']['paper_cnt'], file:f} } }.flatten
+ -#files_sorted = files.group_by{|r| r[:file][:_meta]['ctime'] }
+ -files_sorted = files.group_by{|r| DateTime.parse(r[:file][:_meta]['ctime']).strftime("%F") }.to_a.sort{|a,b| b[0]<=>a[0] }
+ =#files.inspect
+ =#files_sorted.inspect
+ %table{cellspacing: 2, border: 1, align: 'center'}
+  %tr
+   %th= _(:paper_cnt)
+   %th= _(:paper_files)
+   -files_sorted.each do |a|
+    %tr
+     %th{colspan: 2}= a[0]
+    -a[1].each do |r|
+     %tr
+      %td= r[:cnt]
+      %td
+       -f = r[:file]
+       %a{href: '../download/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
+  -#@report_data.each do |r|
+   - if r['files'].select{ |f| f[:class_code]==@file_class_code }.first
+    %tr
+     %td&= r['_meta']['paper_cnt']
+     %td
+      - r['files'].select{ |f| f[:class_code]==@file_class_code }.each do |f|
+       -#%a{href: '../download/abstract/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
+       %a{href: '../download/'+f[:uniquefilename]+'?id='+f[:_meta]['parent']+'&lang='+f[:_meta]['lang']+'&type='+f[:class_code]}= f[:_meta]['lang']
+
+
+-@_tj_next_template = ''
+-#@next_template = '/page/nonexistent'
+

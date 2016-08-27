@@ -42,6 +42,8 @@ class Conf::ReportsController < Conf::ConfController
 									@report_data = @appl.conf.report.abstracts_with_paper_files @cont_id, @data_lang_code
 								when 'abstract_ids_with_files' then
 									@report_data = @appl.conf.report.abstracts_with_files @cont_id, @data_lang_code
+								when 'abstract_ids_with_files_by_date' then
+									@report_data = @appl.conf.report.abstracts_with_files @cont_id, @data_lang_code
 								when 'keywords_1' then
 									@report_data = @appl.conf.report.papers_full_list @cont_id, @data_lang_code
 								when 'keywords_2' then
