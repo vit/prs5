@@ -144,6 +144,7 @@ class Conf::MainController < Conf::ConfController
 		render :layout => false
 	end
 	def myparticipation
+		@full_user_info = @appl.user.get_user_info_ext @current_user[:user_id]
 		render @current_user[:user_id] ? '/conf/main/myparticipation' : '/conf/main/enterplease'
 	end
 	def myparticipation1

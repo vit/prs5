@@ -8,6 +8,22 @@
 
 -lang = @language.to_sym
 
+-#%div= @current_user.inspect
+-#%div= @full_user_info.inspect
+- my_country = @full_user_info['country']
+- my_lang = ['ru', 'ua', 'by'].include?(my_country) ? 'ru' : 'en'
+- lang = my_lang.to_sym
+- my_title = @full_user_info['title'][my_lang] rescue ''
+-# my_title = @full_user_info['title'][lang.to_s] rescue ''
+- my_fname = @full_user_info['fname'][my_lang] rescue ''
+- my_mname = @full_user_info['mname'][my_lang] rescue ''
+- my_lname = @full_user_info['lname'][my_lang] rescue ''
+- my_organization = @full_user_info['affiliation'][my_lang] rescue ''
+- my_city = @full_user_info['city'][my_lang] rescue ''
+
+-#%div= my_title
+
+
 %div{name: 'form_on', style: "display: none"}
  %div{name: 'dict', style: "display: none"}
   -#%w[unregister_are_you_sure].each do |n|
@@ -30,25 +46,25 @@
      %span.label= _('gender')
      %span.input
       %label
-       %input.iinput{type: 'radio', name: 'gender', value: 'M', id: 'form_gender'}
+       %input.iinput{type: 'radio', name: 'gender', value: 'M', id: 'form_gender', checked: (@full_user_info['gender']=='M' ? 'checked' : nil)}
        = _('male')
       %label
-       %input.iinput{type: 'radio', name: 'gender', value: 'F', id: 'form_gender'}
+       %input.iinput{type: 'radio', name: 'gender', value: 'F', id: 'form_gender', checked: (@full_user_info['gender']=='F' ? 'checked' : nil)}
        = _('female')
     %p
      %label.label{for: 'person_title'}= _('person_title')
      %select.input{name: 'person_title', id: 'form_person_title'}
       -@titles[lang].each do |t|
-       %option{value: t}= t
+       %option{value: t, selected: (my_title.to_s==t.to_s ? 'selected' : nil)}= t
     %p
      %label.label{for: 'form_lname'}= _('lname')
-     %input.input{type: 'text', name: 'lname', id: 'form_lname'}
+     %input.input{type: 'text', name: 'lname', id: 'form_lname', value: my_lname}
     %p
      %label.label{for: 'form_fname'}= _('fname')
-     %input.input{type: 'text', name: 'fname', id: 'form_fname'}
+     %input.input{type: 'text', name: 'fname', id: 'form_fname', value: my_fname}
     %p
      %label.label{for: 'form_mname'}= _('mname')
-     %input.input{type: 'text', name: 'mname', id: 'form_mname'}
+     %input.input{type: 'text', name: 'mname', id: 'form_mname', value: my_mname}
     %p
      %label.label{for: 'form_birthdate'}= _('birthdate')
      %input.input{type: 'text', name: 'birthdate', id: 'form_birthdate', vvvalue: '1981-03-14'}
@@ -97,7 +113,7 @@
       = _('occupation_postgraduate')
     %p
      %label.label{for: 'form_organization'}= _('organization')
-     %textarea.input{name: 'organization', id: 'form_organization', rows: 5}
+     %textarea.input{name: 'organization', id: 'form_organization', rows: 5}= my_organization
     %p
      %label.label{for: 'form_position'}= _('position')
      %textarea.input{name: 'position', id: 'form_position', rows: 5}
@@ -117,11 +133,12 @@
      %label.label{for: 'form_org_country'}= _('org_country')
      %select.input{name: 'org_country', id: 'form_org_country'}
       %option{value: ''}= _ :choosecountry
-      = render 'comp/account/country'
+      -#= render 'comp/account/country'
+      = render partial: 'comp/account/country', locals: {selected_country: my_country}
       %option{value: '-1'}= _ :othercountry
     %p
      %label.label{for: 'form_org_city'}= _('org_city')
-     %input.input{type: 'text', name: 'org_city', id: 'form_org_city'}
+     %input.input{type: 'text', name: 'org_city', id: 'form_org_city', value: my_city}
     %p
      %label.label{for: 'form_org_postcode'}= _('org_postcode')
      %input.input{type: 'text', name: 'org_postcode', id: 'form_org_postcode'}
@@ -140,24 +157,25 @@
     %legend= _(:participant_contacts)
     %p
      %label.label{for: 'form_phone'}= _('phone')
-     %input.input{type: 'text', name: 'phone', id: 'form_phone'}
+     %input.input{type: 'text', name: 'phone', id: 'form_phone', value: @full_user_info['phone']}
     %p
      %label.label{for: 'form_mobile_phone'}= _('mobile_phone')
      %input.input{type: 'text', name: 'mobile_phone', id: 'form_mobile_phone'}
     %p
      %label.label{for: 'form_fax'}= _('fax')
-     %input.input{type: 'text', name: 'fax', id: 'form_fax'}
+     %input.input{type: 'text', name: 'fax', id: 'form_fax', value: @full_user_info['fax']}
     %p
      %label.label{for: 'form_email'}= _('email')
-     %input.input{type: 'text', name: 'email', id: 'form_email'}
+     %input.input{type: 'text', name: 'email', id: 'form_email', value: @full_user_info['email']}
    %fieldset
     %legend= _(:participant_security)
     %p= _(:text_foreign_passport)
     %p
      %label.label{for: 'form_nationality'}= _('nationality')
-     %select.input{name: 'nationality', id: 'form_nationality'}
+     %select.input{name: 'nationality', id: 'form_nationality', value: @full_user_info['country']}
       %option{value: ''}= _ :choosecountry
-      = render 'comp/account/country'
+      -#= render partial: 'comp/account/country'
+      = render partial: 'comp/account/country', locals: {selected_country: my_country}
       %option{value: '-1'}= _ :othercountry
     %p
      %label.label{for: 'form_passport'}= _('passport')
@@ -209,6 +227,8 @@
    %p
     %input.save{type: 'button', value: _(:save_btn), name: 'form_save_btn'}
     -#%div{name: 'form_edit_disabled'}= _ :you_cant_edit
+
+=#render partial: '/comp/conf/form_on_init'
 
 :javascript
   //ParticipationForm();
