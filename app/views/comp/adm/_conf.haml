@@ -23,7 +23,7 @@
    -#%input{name: 'savebutton', type: 'button', value: _(:save)}
    %div{name: 'tabs'}
     %div.menu{name: 'header'}><
-     -%w[tab_info tab_keywords tab_sections tab_decisions tab_roles tab_permissions].each do |t|
+     -%w[tab_info tab_keywords tab_sections tab_decisions tab_roles tab_permissions tab_downloads].each do |t|
       %li{nname: t}><
        %a{href: '#'}><= _( t.to_sym )
     %div{name: 'container'}
@@ -194,6 +194,14 @@
               %li
                = _('role_'+r)
                %input{:type=>'checkbox', :name=>r}
+           %li
+            %i= _(:other)+':'
+            %ul
+             -#%w[USER_REGISTER_NEW_PAPER PAPREG_PAPER_EDIT PAPREG_PAPER_DELETE PAPREG_PAPER_ABSTRACT_UPLOAD PAPREG_PAPER_ABSTRACT_REUPLOAD PAPREG_PAPER_ABSTRACT_REMOVE PAPREG_PAPER_FILE_UPLOAD PAPREG_PAPER_FILE_REUPLOAD PAPREG_PAPER_FILE_REMOVE PAPREG_PAPER_PRESENTATION_UPLOAD PAPREG_PAPER_PRESENTATION_REUPLOAD PAPREG_PAPER_PRESENTATION_REMOVE PAPREG_PAPER_EXDOC_UPLOAD PAPREG_PAPER_EXDOC_REUPLOAD PAPREG_PAPER_EXDOC_REMOVE PAPREG_VIEW_FINAL_DECISION PAPREG_VIEW_REVIEWERS_COMMENTS PAPREG_VIEW_SECTMANS_COMMENTS].each do |r|
+             -%w[download_proceedings].each do |r|
+              %li
+               = _('role_'+r)
+               %input{:type=>'checkbox', :name=>r}
      %div{name: 'permissions', style: 'display: none'}
       %div{name: 'container'}
        %ul
@@ -201,4 +209,28 @@
          %li
           %input{:type=>'checkbox', :name=>k.to_s}
           =_( k )
+     %div{name: 'downloads', style: 'display: none'}
+      %div{name: 'container'}
+       %table{:aalign=>"center", :border=>0, wwidth: '100%'}
+        -%w[en ru].each do |lang_code|
+         %tr
+          %td{:align=>"left"}
+           %b= _ :language
+          %td
+           %b= _( ('lang_'+lang_code).to_sym )
+         %tr
+          %td{:align=>"left"}
+           %b= _ :link_toc
+          %td
+           %input{type: 'text', name: 'link_toc_'+lang_code, size: 60}
+         %tr
+          %td{:align=>"left"}
+           %b= _ :link_archive
+          %td
+           %input{type: 'text', name: 'link_archive_'+lang_code, size: 60}
+       %tr
+        %td{:align=>"left"}
+         %br
+        %td
+         %input{name: 'savedownloadsbutton', type: 'button', value: _(:savedownloads)}
 

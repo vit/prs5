@@ -164,6 +164,11 @@ class Conf::MainController < Conf::ConfController
 	#	render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2/index' : '/conf/main/norights') : '/conf/main/enterplease'
 		render @current_user[:user_id] ? (can_view ? '/conf/main/reviewing2' : '/conf/main/norights') : '/conf/main/enterplease'
 	end
+	def download_proceedings
+		can_view = @user_rights['download_proceedings']
+		@data = @appl.conf.get_conf_downloads(@cont_id)
+		render @current_user[:user_id] ? (can_view ? '/conf/main/download_proceedings' : '/conf/main/norights') : '/conf/main/enterplease'
+	end
 =begin
 	def preparation
 		@cont_id = params[:cont_id].to_s

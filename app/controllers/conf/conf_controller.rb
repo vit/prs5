@@ -32,6 +32,10 @@ class Conf::ConfController < ApplicationController
 					@appl.conf.paper.has_papers_for_reviewing(@current_user[:user_id], @cont_id)
 			when :reviewing2 then
 				@appl.conf.user_is_section_manager(@current_user[:user_id], @cont_id)
+
+			when :download_proceedings then
+				@user_rights['download_proceedings']
+
 			else prev_menu_access[id]
 			end
 		}

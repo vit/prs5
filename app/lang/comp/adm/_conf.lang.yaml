@@ -37,6 +37,9 @@ en:
         keywordsimported: "Selected keywords have been added to the end of the list. Please don't forget to save the list."
         keywordsimportlistisempty: "You didn't select anything"
 
+        savedownloads: Save links
+        link_toc: Link to Table of Contents
+        link_archive: Link to papers archive
 
         tab_info: Info
         tab_keywords: Keywords
@@ -44,6 +47,7 @@ en:
         tab_decisions: Decisions
         tab_roles: Roles
         tab_permissions: Permissions
+        tab_downloads: Downloads
 
 
         newrole: Add new role
@@ -186,6 +190,9 @@ ru:
         keywordsimported: Выбранные ключевые слова добавлены в конец списка. Не забудьте теперь сохранить список.
         keywordsimportlistisempty: Вы не выбрали ни одного ключевого слова
 
+        savedownloads: Сохранить ссылки
+        link_toc: Ссылка на файл содержания
+        link_archive: Ссылка на архив с докладами
 
         tab_info: Инфо
         tab_keywords: Ключевые слова
@@ -193,6 +200,7 @@ ru:
         tab_decisions: Решения
         tab_roles: Роли
         tab_permissions: Разрешения
+        tab_downloads: Ссылки для скачивания
 
 
         newrole: Добавить новую роль

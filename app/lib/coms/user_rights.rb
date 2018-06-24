@@ -49,6 +49,8 @@ module Coms
 		#CONF
 			'conf.new' => SUPERUSER,
 			'conf.save_conf_info' => SUPERUSER_OR_CONF_OWNER,
+			'conf.save_conf_downloads' => SUPERUSER_OR_CONF_OWNER,
+			'conf.get_conf_downloads' => SUPERUSER_OR_CONF_OWNER,
 			'conf.save_conf_keywords' => SUPERUSER_OR_CONF_OWNER,
 			'conf.new_conf_role' => SUPERUSER_OR_CONF_OWNER,
 			'conf.set_conf_role_rights' => SUPERUSER_OR_CONF_OWNER,

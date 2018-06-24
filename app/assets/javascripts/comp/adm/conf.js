@@ -666,21 +666,47 @@ window.addEvent('domready',function() {
 				};
 			}( confpage.getElement('[name="permissions"]') ));
 
+			var tab_downloads = (function( panel ) {
+			//	var di = DataInputs( panel, {
+				var di = FormDataInputs( panel, {
+					link_toc: 'ml',
+					link_archive: 'ml'
+				} );
+				panel.getElement('[name="savedownloadsbutton"]').addEvent('click', function() {
+					RPC.send('conf.save_conf_downloads', [_id, di.get()], function(result, error) {
+						alert('OK');
+					});
+				});
+				return {
+					init: function( after ) {
+						RPC.send('conf.get_conf_downloads', [_id], function(result, error) {
+							di.set( result );
+							conftitle.set('text', lang_list.map(function(k){ return result.title[k]; }).join(' | '));
+							if ( after ) after();
+						});
+					}
+				};
+			}( confpage.getElement('[name="downloads"]') ));
+
 			return {
 				enter: function( id ) {
 					_id = id;
 					tab_info.init(function() {
+///*
 						tab_keywords.init(function() {
 							tab_sections.init(function() {
 								tab_decisions.init(function() {
 									tab_roles.init(function() {
 										tab_permissions.init(function() {
-										//	confpage.setStyles({ display: 'block' });
+											tab_downloads.init(function() {
+											//	confpage.setStyles({ display: 'block' });
+											});
 										});
 									});
 								});
 							});
 						});
+//*/
 					});
 					confpage.setStyles({ display: 'block' });
 				},
@@ -689,6 +715,7 @@ window.addEvent('domready',function() {
 					confpage.setStyles({ display: 'none' });
 				}
 			};
+//	});
 	}( comp.getElement('[name="confpage"]') ));
 
 	function switchToConfsList() {

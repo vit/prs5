@@ -11,6 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //q= require jquery
-//= require jquery_ujs
+//q= require jquery_ujs
 //q= require_tree .
 //= require_tree ./common
