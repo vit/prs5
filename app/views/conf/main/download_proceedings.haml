@@ -1,0 +1,12 @@
+
+- @page_title= _ :title
+- @page_id='download_proceedings'
+
+-content_for :page_content do
+ %div
+  %h3{:align => 'center'}= _ :title
+
+  =render "/comp/conf/other/download_proceedings", :locals => {:current_id => @page_id}
+
+-render :file => 'conf/main/layout'
+

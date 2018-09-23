@@ -78,10 +78,11 @@ module Coms
 				appl = attr[:appl]
 				user_id
 			}),
-			'conf.get_confs_list' => (-> user_id, attr {
-				appl = attr[:appl]
-				user_id
-			}),
+		#	'conf.get_confs_list' => (-> user_id, attr {
+		#		appl = attr[:appl]
+		#		user_id
+		#	}),
+			'conf.get_confs_list' => ANYONE,
 			'conf.get_conf_role_rights' => (-> user_id, attr {
 				appl = attr[:appl]
 				user_id
