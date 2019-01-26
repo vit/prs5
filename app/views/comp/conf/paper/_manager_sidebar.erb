@@ -1,0 +1,101 @@
+
+        <div class="buttons is-centered">
+            <button class="button is-primary is-small" @click="lst.each(function(p) {p.show_details = false;})">
+                <span class="icon is-small">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                </span>
+                <span>
+                    {{ dict('collapse_all') }}
+                </span>
+            </button>
+            <!--button class="button is-primary is-small" @click="lst.each(function(p) {p.show_details = true;})">
+                <span class="icon is-small">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </span>
+                <span>
+                    {{ dict('expand_all') }}
+                </span>
+            </button-->
+        </div>
+
+        <h4 class="iis-size-5 has-text-centered">
+            <span class="icon is-small">
+                <i class="fas fa-filter"></i>
+            </span>
+            <span>
+                {{ dict('filter_my_reviews') }}
+            </span>
+        </h4>
+
+
+<div class="menu">
+  <!--p class="menu-label">
+    {{ dict('filter_by_common') }}
+  </p-->
+  <ul class="menu-list">
+        <my-menu-item
+            v-for="rd in ['all', 'complete', 'incomplete', 'absent']"
+            v-on:item-clicked="filter_my_full = {type: 'common', value: rd}"
+            :content="dict('filter_'+rd)"
+            :key="rd"
+            :cnt="counters_my.common[rd]"
+            :active="filter_my_full.type=='common' && filter_my_full.value==rd"
+        >
+        </my-menu-item>
+  </ul>
+  <p class="menu-label">
+    {{ dict('filter_by_decision') }}
+  </p>
+  <ul class="menu-list">
+        <my-menu-item
+            v-for="rd in ['uncertain'].concat(conf.reviewer_decisions)"
+            v-on:item-clicked="filter_my_full = {type: 'decision', value: rd}"
+            :content="dict('decision_'+rd)"
+            :key="rd"
+            :cnt="counters_my.decision[rd]"
+            :active="filter_my_full.type=='decision' && filter_my_full.value==rd"
+            :color="decisionIcon(rd).color || '#000'"
+        >
+        </my-menu-item>
+  </ul>
+  <p class="menu-label">
+    {{ dict('filter_by_score') }}
+  </p>
+  <ul class="menu-list">
+        <my-menu-item
+            v-for="rd in conf.reviewer_scores"
+            v-on:item-clicked="filter_my_full = {type: 'score', value: rd}"
+            vv:content="scoreShortText(rd)"
+            :content="dict('score_'+rd)"
+            :key="rd"
+            :cnt="counters_my.score[rd]"
+            :active="filter_my_full.type=='score' && filter_my_full.value==rd"
+            :ccolor="decisionIcon(rd).color || '#000'"
+        >
+        </my-menu-item>
+  </ul>
+  <p class="menu-label">
+    {{ dict('filter_by_section') }}
+  </p>
+  <ul class="menu-list">
+        <my-menu-item
+            v-for="rd in conf.sections"
+            v-on:item-clicked="filter_my_full = {type: 'section', value: rd.id}"
+            :content="sectionText(rd)"
+            :ccontent="rd.id"
+            :key="rd.id"
+            :cnt="counters_my.section[rd.id]"
+            :active="filter_my_full.type=='section' && filter_my_full.value==rd.id"
+        >
+        </my-menu-item>
+  </ul>
+</div>
+
+
+<!--div class="box hhas-text-centered">
+
+{{ filter_my_full }}
+
+</div-->
+
+

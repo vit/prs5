@@ -1,0 +1,18 @@
+<%
+@page_title= _ :title
+@page_id='reviewing'
+%>
+
+<%
+content_for :page_content do
+%>
+ <div style="bborder: solid thin green;">
+  <h3 class="title is-3" align="center"><%= _ :title %></h3>
+
+  <%= render "/comp/conf/paper/manager", :locals => {:current_id => @page_id} %>
+<%
+end
+
+render :file => 'conf/main/layout'
+%>
+

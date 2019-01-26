@@ -1,0 +1,118 @@
+
+
+<div id="components-demo" class="ccontent ccontainer" style="bborder: solid thin red;">
+
+    <div class="wrapper" style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div cclass="main" style="bborder: 3px solid seagreen; ppadding: 15px; background-color: #fff; hheight: 150vh; width: 100%;">
+
+        <%= render partial: 'comp/conf/paper/manager_lst' %>
+
+      </div>
+      <div style="padding: 15px; bbackground-color: #fff; position: -webkit-sticky; position: sticky; top: 0; width: 400px; margin-left: 5px;">
+
+        <%= render partial: 'comp/conf/paper/manager_sidebar' %>
+
+      </div>
+    </div>
+
+</div>
+
+
+<%= render partial: 'comp/conf/paper/manager_comp' %>
+
+<%
+content_for :css do
+    #stylesheet_link_tag 'https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css'
+    stylesheet_link_tag 'https://use.fontawesome.com/releases/v5.6.3/css/all.css'
+end
+content_for :css do
+    stylesheet_link_tag 'https://unpkg.com/buefy@0.7.1/dist/buefy.min.css'
+end
+%>
+
+
+<%#= render partial: 'comp/conf/paper/manager_dict' %>
+
+
+
+
+<div id='manager-dict' style='display: none'>
+    <% %w[
+      lang_en lang_ru language back_to_list
+      tab_paper tab_review tab_reviewers tab_reviews tab_finaldecision open_paper_page
+      review_submit review_saved score decision section ipccomments authcomments score_uncertain
+      score_a score_b score_c score_d
+      decision_uncertain decision_reject decision_accept decision_accept_poster decision_accept_plenary
+      section_uncertain final_decision final_section final_decision_submit final_decision_saved
+      group_set_final_title nothing_is_selected
+      file_type file_size bytes timestamp download_file
+      reviewers_list add_pin
+      delete_review_are_you_sure
+      
+      collapse_all
+      expand_all
+      filter_my_reviews
+
+      filter_by_common
+      filter_by_score
+      filter_by_decision
+      filter_by_section
+
+      filter_all
+      filter_complete
+      filter_incomplete
+      filter_absent
+
+      select_score
+      select_decision
+      select_section
+
+      file_abstract
+      file_abstract_exdoc
+      file_paper
+      file_paper_exdoc
+      file_presentation
+      
+    ].each do |word| %>
+        <input type='hidden' name="<%= word %>" value="<%= _(word) %>">
+    <% end %>
+<!--
+  -%w[review_submit review_saved score decision section ipccomments authcomments score_uncertain].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[score_a score_b score_c score_d].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[decision_uncertain decision_reject decision_accept decision_accept_poster decision_accept_plenary].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[section_uncertain final_decision final_section final_decision_submit final_decision_saved].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[group_set_final_title nothing_is_selected].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[file_type file_size bytes timestamp download_file].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[reviewers_list add_pin].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+  -%w[delete_review_are_you_sure].each do |word|
+   %input{:type=>'hidden', :name=>word, :value => _(word)}
+-->
+
+        
+</div>
+
+
+
+
+
+
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/buefy"></script>
+<script src="https://unpkg.com/deepmerge/dist/umd.js"></script>
+<script>
+//    Vue.use(Buefy.default);
+    Vue.use(Buefy.default);
+</script>
+
+
+<script src="/assets/comp/conf/paper/manager_vue.js"></script>
+
+

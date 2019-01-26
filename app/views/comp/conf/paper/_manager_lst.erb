@@ -1,0 +1,226 @@
+
+
+<div class="card" v-for="p in lst" v-bind:style="{backgroundColor: (p.show_details ? '#f5f5f5': 'white')}" v-if="listItemVisible(p)">
+    <a style="display: block;" href="#" class="card-header ccard-content" @click.prevent="clickItem(p)">
+
+        <p class="card-header-title" style="display: block;">
+            <b-icon class="is-pulled-right"
+                pack="fas"
+                icon="caret-down"
+                :iicon="p.show_details ? 'chevron-up' : 'chevron-down'"
+                v-bind:style="{transition: '0.70s', transform: (p.show_details ? 'rotate(180deg)': 'none') }"
+            >
+            </b-icon>
+            <!--i
+                class="fas fa-square is-pulled-right"
+                v-bind:style="{color: decisionIcon(p['final_decision'].decision).color}"
+                v-if="p['final_decision'] && p['final_decision'].decision"
+            ></i-->
+            <span
+                class="is-pulled-right tag is-light is-rounded"
+                :style="{backgroundColor: decisionIcon(p['my_review'].decision).color}"
+                style="color: #fff;"
+                v-if="p['my_review']">
+                <template vv-if="p['my_review'] && p['my_review'].score">
+                    <span
+                        style="font-style: normal;"
+                        vv-bind:class="decisionIcon(p['my_review'] ? p['my_review'].score : null).icon"
+                        vv-bind:style="{color: decisionIcon(p['my_review'] ? p['my_review'].score : null).color}"
+                    >{{ scoreShortText(p['my_review'] ? p['my_review'].score : null) }}</span>
+                </template>
+                &nbsp;
+                [<template vv-if="p['my_review'] && p['my_review'].score">
+                    <span
+                        style="font-style: normal;"
+                        vv-bind:class="decisionIcon(p['my_review'] ? p['my_review'].score : null).icon"
+                        vv-bind:style="{color: decisionIcon(p['my_review'] ? p['my_review'].score : null).color}"
+                    >&nbsp;=> {{ conf.sections_by_id && p['my_review'].section ? conf.sections_by_id[p['my_review'].section].index : "?" }}&nbsp;</span>
+                </template>]
+
+                <!--i
+                    v-bind:class="decisionIcon(p['my_review'] ? p['my_review'].decision : null).icon"
+                    class="ffas ffa-circle iis-pulled-right"
+                    v-bind:style="{color: decisionIcon(p['my_review'] ? p['my_review'].decision : null).color}"
+                ></i-->
+            </span>
+            {{ p['_meta']['paper_cnt'] }}:
+            {{ conf.lang_list().map(function( l ){ return p.text.title[l]; }).join(' | ') }}
+            <template v-if="p.authors && p.authors.length > 0">
+                <br>
+                <template v-for="a in p.authors">
+                    <br>
+                    <small style="font-weight: normal;">
+                        {{
+                            conf.lang_list().map(
+                                function( l ) {
+                                    return a['fname'][l] +" "+ a['mname'][l] +" "+ a['lname'][l] +", "+ a['affiliation'][l] +", "+ a['city'][l];
+                                }
+                            ).join(' | ')
+                        }}
+                    </small>
+                </template>
+            </template>
+            
+        </p>
+    </a>
+    <div
+        v-if="p.show_details"
+        class="card-content"
+        style="padding: 0;"
+        vv:style="{display: p.show_details ? 'block' : 'none'}"
+        vv-on:before-enter="beforeEnter"
+        vv-on:enter="enter"
+        vv-on:leave="leave"
+    >
+
+        <b-tabs vv-model="activeTab" ttype="is-boxed">
+            <b-tab-item :label="dict('tab_paper')">
+                <table class="table is-bordered is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th v-for="l in conf.lang_list()">{{ dict('lang_'+l) }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td v-for="l in conf.lang_list()">
+                                <template v-if="p.text && p.text.title">
+                                    <b>{{ p.text.title[l] }}</b><br>
+                                </template>
+                                <template v-if="p.text && p.text.abstract">
+                                    {{ p.text.abstract[l] }}<br>
+                                </template>
+                                <template v-if="p.keywords && p.keywords.length > 0">
+                                    <br>
+                                    <i>{{ p.keywords.map(function(k) { return k[l] }).join(', ') }}</i>
+                                </template>
+                                <template v-if="p.authors && p.authors.length > 0">
+                                    <br>
+                                    <template v-for="a in p.authors">
+                                        <br>
+                                        <i>
+                                            {{ a['fname'][l] }} {{ a['mname'][l] }} {{ a['lname'][l] }},
+                                            {{ a['affiliation'][l] }},
+                                            {{ a['city'][l] }}
+                                        </i>
+                                    </template>
+                                </template>
+
+                                <template v-for="f in p.files.filter(function(f) { return f && f._meta && f._meta.lang==l; })">
+                                    <br>
+                                    <br>
+                                    <span>
+                                        <span>
+                                            {{ dict('file_'+f.class_code) }}:<br>
+                                            {{ dict('file_type') }} {{ f.content_type }},
+                                            {{ dict('file_size') }} {{ f.length }} {{ dict('bytes') }}
+                                        </span>
+                                        <br>
+                                        <span>
+                                            {{ dict('timestamp') }} {{ f._meta.ctime }}
+                                        </span>
+                                        <br>
+                                        <a :href="'download/'+f['uniquefilename']+'?id='+f['_meta']['parent']+'&lang='+f['_meta']['lang']+'&type='+f.class_code">
+                                            {{ dict('download_file') }}
+                                        </a>
+                                    </span>
+                                </template>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </b-tab-item>
+            <b-tab-item :label="dict('tab_review')">
+
+                <b-field llabel="" class="is-horizontal" v-for="s in myReviewSelects()" :key="s.label">
+                    <div class="field-label is-normal">
+                        <label class="label">{{ dict(s.id) }}</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <b-select
+                                    :placeholder="s.placeholder"
+                                    class="is-primary is-fullwidth"
+                                    v-model="p.my_review_data[s.id]"
+                                    style="max-width: 600px;"
+                                >
+                                    <option
+                                        v-for="i in s.items"
+                                        :value="i.id"
+                                        :key="i.id">
+                                        {{ i.name }}
+                                    </option>
+                                </b-select>
+                            </div>
+                        </div>
+                    </div>
+                </b-field>
+
+                <template v-for="l in conf.lang_list()">
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">{{ dict('language') }}</label>
+                        </div>
+                        <div class="field-body is-normal">
+                            <!--label class="label">{{ {'en': 'English', ru: 'Russian'}[l] }}</label-->
+                            <label class="label">{{ dict('lang_'+l) }}</label>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal" v-for="ta in myReviewTextAreas()">
+                        <div class="field-label is-normal">
+                            <label class="label">{{ dict(ta.id) }}</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <textarea class="textarea" pplaceholder="" v-model="p.my_review_data[ta.id][l]"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+
+
+<div class="field is-horizontal">
+  <div class="field-label">
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <button class="button is-success" @click="saveMyReview(p)">
+          {{ dict('review_submit') }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+            </b-tab-item>
+
+            <!--b-tab-item label="Reviewers">
+            </b-tab-item>
+
+            <b-tab-item label="Decision">
+                {{ p.final_decision }}
+            </b-tab-item-->
+        </b-tabs>
+
+    </div>
+</div>
+<div class="has-text-centered" v-if="loadInProgress" style="bbackground-color: red; width: 100%;">
+                    <b-icon
+                        pack="fas"
+                        icon="spinner"
+                        size="is-large"
+                        ttype="is-info"
+                        custom-class="fa-spin"
+                        >
+                    </b-icon>
+</div>
+

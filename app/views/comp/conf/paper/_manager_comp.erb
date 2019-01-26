@@ -1,0 +1,24 @@
+
+
+
+<script type="text/x-template" id="my-menu-item-comp">
+        <li class="field"
+            style="margin-bottom: 0px; border: none;"
+        >
+            <a
+                v-if="cnt>0"
+                ssize="is-small"
+                ttype="is-info"
+                style="margin-bottom: 0px; background-color: #fff; border: none; box-shadow: 1px 1px 1px #000; border-radius: 0;"
+                :style="{fontWeight: active ? 'bold' : 'normal', color: (color ? color : '#000') }"
+                onMouseOver="this.style.backgroundColor='#eaffea'"
+                onMouseOut="this.style.backgroundColor='#fff'"
+                v-on:click="$emit('item-clicked')"
+            >
+                <span class="is-pulled-right ttag iis-small iis-rounded" style="color: blue; font-weight: bold;">{{ cnt }}</span> <span v-bind:style="{color: (color ? color : '#000')}">{{ content }}</span>
+            </a>
+        </li>
+</script>
+
+
+
