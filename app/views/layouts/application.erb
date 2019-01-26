@@ -4,6 +4,10 @@
   <title>Prs5</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+  <!--link href="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/quasar.mat.min.css" rel="stylesheet" type="text/css"-->
+  <!--link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css"-->
+
   <!-- script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js" type="text/javascript"></script -->
   <!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
@@ -17,6 +21,11 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= content_for?(:css) ? yield(:css) : yield(:qqq) %>
+
+  <!--link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css"-->
+  <!--link rel="stylesheet" href="https://unpkg.com/buefy@0.7.1/dist/buefy.min.css"-->
+	<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"-->
+
 </head>
 <body class="<%= 'any'+ (@part_id ? ' '+@part_id.to_s : '') %>">
 	<div class=top>

@@ -38,7 +38,7 @@ en:
         final_decision_submit: Save decision
         final_decision_saved: Decision is saved
 
-        file_type: Type
+        file_type: Document type
         file_size: Size
         bytes: Bytes
         timestamp: Timestamp
@@ -48,6 +48,31 @@ en:
         add_pin: Add PIN
 
         delete_review_are_you_sure: Are you sure?
+
+        collapse_all: Collapse all
+        expand_all: Expand all
+        filter_my_reviews: Filter by my reviews
+
+        filter_by_common: In common
+        filter_by_score: By score
+        filter_by_decision: By decision
+        filter_by_section: By section
+
+        filter_all: All papers
+        filter_complete: Review is complete
+        filter_incomplete: Review is incomplete
+        filter_absent: No review
+
+        select_score: Select score
+        select_decision: Select decision
+        select_section: Select section
+
+        file_abstract: Abstract file
+        file_abstract_exdoc: Abstract expert document file
+        file_paper: Paper file
+        file_paper_exdoc: Paper expert document file
+        file_presentation: Presentation file
+
 
 ru:
         language: Язык
@@ -88,7 +113,7 @@ ru:
         final_decision_submit: Сохранить решение
         final_decision_saved: Решение сохранено
 
-        file_type: Тип
+        file_type: Тип документа
         file_size: Размер
         bytes: Байт
         timestamp: Время загрузки
@@ -99,5 +124,29 @@ ru:
 
         delete_review_are_you_sure: Вы уверены?
 
+
+        collapse_all: Свернуть все
+        expand_all: Развернуть все
+        filter_my_reviews: Фильтр по моим рецензиям
+
+        filter_by_common: В общем
+        filter_by_score: По оценке
+        filter_by_decision: По решению
+        filter_by_section: По секции
+
+        filter_all: Все статьи
+        filter_complete: Рецензия полная
+        filter_incomplete: Рецензия неполная
+        filter_absent: Нет рецензии совсем
+
+        select_score: Выберите оценку
+        select_decision: Выберите решение
+        select_section: Выберите секцию
+
+        file_abstract: Файл реферата
+        file_abstract_exdoc: Файл экспертного заключения реферата
+        file_paper: Файл доклада
+        file_paper_exdoc: Файл экспертного заключения доклада
+        file_presentation: Файл презентации
 
 

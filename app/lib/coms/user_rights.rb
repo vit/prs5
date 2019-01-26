@@ -139,6 +139,11 @@ module Coms
 				(r['review_everything'] || r['appoint_reviewers'] || r['set_final_decision']) && user_id
 				#user_id
 			}),
+			'conf.paper.get_all_papers_list_2' => (-> user_id, attr {
+				#r = attr[:appl].conf.get_my_rights user_id, attr[:rpc_params][0] || {}
+				r = attr[:appl].conf.get_my_rights user_id, attr[:rpc_params][1] || {}
+				(r['review_everything'] || r['appoint_reviewers'] || r['set_final_decision']) && user_id
+			}),
 			'conf.paper.get_paper_info' => (-> user_id, attr {
 			#	user_id && user_id.to_s == attr[:rpc_params].first.to_s
 			#!!!!!!
