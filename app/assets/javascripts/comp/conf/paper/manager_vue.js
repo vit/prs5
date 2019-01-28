@@ -5,8 +5,8 @@ window.addEvent('domready',function() {
 	const user = self.user;
 
     const dict = Dict( $('manager-dict') );
-    console.log(dict);
-    console.log(dict('lang_ru'));
+    //console.log(dict);
+    //console.log(dict('lang_ru'));
 
     function createFullMyReviewData(r) {
         const stub = {

@@ -73,6 +73,10 @@ en:
         file_paper_exdoc: Paper expert document file
         file_presentation: Presentation file
 
+        text_header: Text
+        authors_header: Authors
+        keywords_header: Keywords
+
 
 ru:
         language: Язык
@@ -148,5 +152,9 @@ ru:
         file_paper: Файл доклада
         file_paper_exdoc: Файл экспертного заключения доклада
         file_presentation: Файл презентации
+
+        text_header: Текст
+        authors_header: Авторы
+        keywords_header: Ключевые слова
 
 

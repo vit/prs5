@@ -8,7 +8,7 @@
         <%= render partial: 'comp/conf/paper/manager_lst' %>
 
       </div>
-      <div style="padding: 15px; bbackground-color: #fff; position: -webkit-sticky; position: sticky; top: 0; width: 400px; margin-left: 5px;">
+      <div style="padding: 15px; position: -webkit-sticky; position: sticky; top: 0; width: 400px; max-height: 100vh; mmargin-left: 5px; bbackground-color: #fcfcfc; overflow-y: auto;">
 
         <%= render partial: 'comp/conf/paper/manager_sidebar' %>
 
@@ -72,6 +72,10 @@ end
       file_paper
       file_paper_exdoc
       file_presentation
+
+      text_header
+      authors_header
+      keywords_header
       
     ].each do |word| %>
         <input type='hidden' name="<%= word %>" value="<%= _(word) %>">
