@@ -195,6 +195,9 @@
 			var foreign = this.get()['org_foreign'] == true;
 		//	this.setEnabled('passport', flagEnabled);
 			this.setEnabled('passport', flagEnabled || foreign);
+			this.setEnabled('birthplace', flagEnabled || foreign);
+			this.setEnabled('passport_issued_date', flagEnabled || foreign);
+			this.setEnabled('passport_expires_date', flagEnabled || foreign);
 		}
 		function goHotelDependent(name) {
 
@@ -239,6 +242,9 @@
 			{name: 'email', type: 'text', isvalid: 'notempty'},
 			{name: 'nationality', type: 'text', isvalid: 'notempty', goDependent: goNationalityDependent},
 			{name: 'passport', type: 'text', isvalid: 'notempty'},
+			{name: 'birthplace', type: 'text', isvalid: 'notempty'},
+			{name: 'passport_issued_date', type: 'date', isvalid: 'notempty', yearRange: '-50:-0'},
+			{name: 'passport_expires_date', type: 'date', isvalid: 'notempty', yearRange: '+0:+20'},
 			{name: 'accompaniing', type: 'subform', constructor: InnerForm},
 			{name: 'hotel', type: 'radio', isvalid: 'notempty', goDependent: goHotelDependent},
 			{name: 'hotel_name', type: 'text', isvalid: 'notempty'},
@@ -375,12 +381,17 @@
 				$.each(info, function(k,v) {
 					infoMap[v.name] = v;
 					var elem = cont.find('[name='+v.name+']');
-					if(v.type=='date')
+					if(v.type=='date') {
+//						var yearRange="-100:-10";
+//						if(v.yearRange)
+//							yearRange=v.yearRange;
+						var yearRange = v.yearRange || "-100:-10";
 						elem.datepicker({
 							"dateFormat": 'yy-mm-dd',
-							yearRange: "-100:-10",
+							yearRange: yearRange,
 							changeYear: true
 						});
+					}
 					if(v.type=='subform' && $.type(v.constructor)=='function') {
 						v.subform = v.constructor(elem);
 					}

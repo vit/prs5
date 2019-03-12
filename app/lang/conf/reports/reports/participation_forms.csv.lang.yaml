@@ -28,6 +28,9 @@ en:
         email: Email
         nationality: Nationality
         passport: Passport
+        birthplace: Birthplace
+        passport_issued_date: Passport issue date
+        passport_expires_date: Passport validity
         accompaniing: Accompaniing persons
         hotel: Hotel reservation
         hotel_name: Hotel name
@@ -62,6 +65,9 @@ ru:
         email: Email
         nationality: Гражданство
         passport: Паспорт
+        birthplace: Место рождения
+        passport_issued_date: Дата выдачи паспорта
+        passport_expires_date: Срок действия паспорта
         accompaniing: Сопр. лица
         hotel: Бронирование гостиницы
         hotel_name: Название гостиницы

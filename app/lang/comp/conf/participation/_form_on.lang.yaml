@@ -72,6 +72,9 @@ en:
         text_foreign_passport: In accordance with the requirements in the regulations for foreign citizens visiting the territory of enterprises in Russia all conferees-to-be in addition to the above data should provide the following personal data
         nationality: Citizenship (Nationality) 
         passport: Passport number
+        birthplace: Birthplace
+        passport_issued_date: Passport issue date
+        passport_expires_date: Passport validity
 
         accompanying_persons: Accompanying persons
 
@@ -167,6 +170,9 @@ ru:
         text_foreign_passport: В соответствии с требованиями в правилах пребывания иностранных граждан на территории предприятий Российской Федерации всем участникам конференции, не являющимся гражданами России, дополнительно к выше перечисленному необходимо сообщить следующие паспортные данные
         nationality: Гражданство
         passport: Номер паспорта
+        birthplace: Место рождения
+        passport_issued_date: Дата выдачи паспорта
+        passport_expires_date: Срок действия паспорта
 
         accompanying_persons: Сопровождающие лица
 

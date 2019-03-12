@@ -1,6 +1,7 @@
 
 -#fields = ['gender', 'person_title', 'lname', 'fname', 'mname', 'birthdate', 'part_type', 'coauthors', 'occupation', 'organization', 'position', 'rank', 'degree', 'responsibilities', 'org_country', 'org_city', 'org_postcode', 'org_street', 'org_house', 'org_foreign', 'phone', 'mobile_phone', 'fax', 'email', 'nationality', 'passport', 'accompaniing', 'hotel', 'hotel_name', 'publish_agree']
--fields = %w[gender person_title lname fname mname birthdate part_type coauthors occupation organization position rank degree responsibilities org_country org_city org_postcode org_street org_house org_foreign phone mobile_phone fax email nationality passport accompaniing hotel hotel_name publish_agree]
+-#fields = %w[gender person_title lname fname mname birthdate part_type coauthors occupation organization position rank degree responsibilities org_country org_city org_postcode org_street org_house org_foreign phone mobile_phone fax email nationality passport accompaniing hotel hotel_name publish_agree]
+-fields = %w[gender person_title lname fname mname birthdate part_type coauthors occupation organization position rank degree responsibilities org_country org_city org_postcode org_street org_house org_foreign phone mobile_phone fax email nationality passport birthplace passport_issued_date passport_expires_date accompaniing hotel hotel_name publish_agree]
 -funcs = {}
 -funcs['accompaniing'] = -> lst { lst && lst.length > 0 ? '+' : '-' }
 -@ss.<< [_('pin')] + fields.map{ |v| _(v) }, :format => {:weight => :bold}
