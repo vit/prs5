@@ -129,6 +129,7 @@ module Coms
 			}),
 
 			'conf.paper.get_papers_for_reviewing_list' => ITS_ME,
+			'conf.paper.get_papers_for_reviewing_list_2' => ITS_ME,
 			'conf.paper.get_papers_managed_list' => ITS_ME,
 
 			'conf.paper.get_all_papers_list' => (-> user_id, attr {

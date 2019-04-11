@@ -234,9 +234,10 @@ window.addEvent('domready',function() {
 //        	    console.log("reload()");
 
         	    comp.loadInProgress = true;
-    			if(conf.my_rights['appoint_reviewers'] || conf.my_rights['review_everything'] || conf.my_rights['set_final_decision']){
+//    			if(conf.my_rights['appoint_reviewers'] || conf.my_rights['review_everything'] || conf.my_rights['set_final_decision']){
+    			if(conf.my_rights['review_everything']){
     				comp.lst = [];
-            	    comp.loadOneChunk();
+            	    comp.loadOneChunk('all');
 /*
     				RPC.send('conf.paper.get_all_papers_list_2', [user.id, , conf.id], function(result, error) {
     					if(!result) result = [];
@@ -249,6 +250,8 @@ window.addEvent('domready',function() {
     				});
 */
     			} else {
+    				comp.lst = [];
+            	    comp.loadOneChunk('my');
 //            	    console.log("reload() 003");
 /*
     				RPC.send('conf.paper.get_papers_for_reviewing_list', [user.id, conf.id], function(result, error) {
@@ -264,8 +267,9 @@ window.addEvent('domready',function() {
 */
     			}
     		},
-    		loadOneChunk: function(offset=0, limit=20) {
-    				RPC.send('conf.paper.get_all_papers_list_2', [user.id, , conf.id, offset, limit], function(result, error) {
+    		loadOneChunk: function(scope="my", offset=0, limit=20) {
+
+    				var callback = function(result, error) {
     					if(!result) result = [];
     					if(result.length > 0) {
         					result.each(function(p) {
@@ -274,13 +278,19 @@ window.addEvent('domready',function() {
         					});
         					//console.log(result);
         					comp.lst = comp.lst.concat(result);
-        					comp.loadOneChunk(offset+limit, limit);
+        					comp.loadOneChunk(scope, offset+limit, limit);
         					//comp.loadInProgress = false;
         					//console.log(comp.lst);
     					} else {
         					comp.loadInProgress = false;
     					}
-    				});
+    				}
+
+    				RPC.send(
+    				    (scope=="all" ? 'conf.paper.get_all_papers_list_2' : 'conf.paper.get_papers_for_reviewing_list_2'),
+    				    [user.id, conf.id, offset, limit],
+    				    callback
+    				);
     		},
     		myReviewSelects: function() {
     		    const rez = [
