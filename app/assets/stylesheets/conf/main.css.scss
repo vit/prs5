@@ -140,6 +140,16 @@ $lightshadowcolor: #cccccc;
 	width: 500px;
 	margin-top: -2px;
 }
+
+[disabled],
+	input.input[disabled],
+	textarea.input[disabled],
+	{
+		background-color: #ddd;
+		border: none;
+//		border-color: #fff;
+	}
+
 .marked {
 //	background-color: red;
 	background-color: #FBEF99;
@@ -147,7 +157,9 @@ $lightshadowcolor: #cccccc;
 .save {
 	margin-left: 240px;
 	background-color: #CBD893;
-	font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+	font-family: sans-serif;
+	font-size: 120%;
+	padding: 10px;
 }
 
 

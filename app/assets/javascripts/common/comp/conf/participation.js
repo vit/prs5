@@ -43,7 +43,6 @@
 
 		function load_data() {
 			RPC.send('conf.participation.get_my_participation_data', [user.id, conf.id], function(result, error) {
-				//	result = {gender: 'F', lname: 'wqrwrtqrtqrtqrtqrtq', org_foreign: false};
 				form_off.init(result);
 				form_on.init(result);
 				form_off.show(!result);
@@ -198,6 +197,14 @@
 			this.setEnabled('birthplace', flagEnabled || foreign);
 			this.setEnabled('passport_issued_date', flagEnabled || foreign);
 			this.setEnabled('passport_expires_date', flagEnabled || foreign);
+			this.setEnabled('passport_expires_date_absent', flagEnabled || foreign);
+		}
+		function goPassportExpiresDateAbsentDependent() {
+			var flagEnabled = this.get()['nationality'] != 'ru';
+			var foreign = this.get()['org_foreign'] == true;
+			var absent = this.get()['passport_expires_date_absent'] == true;
+		//	this.setEnabled('passport', flagEnabled);
+			this.setEnabled('passport_expires_date', (flagEnabled || foreign) && !absent);
 		}
 		function goHotelDependent(name) {
 
@@ -234,7 +241,6 @@
 			{name: 'org_postcode', type: 'text', isvalid: 'notempty'},
 			{name: 'org_street', type: 'text', isvalid: 'notempty'},
 			{name: 'org_house', type: 'text', isvalid: 'notempty'},
-		//	{name: 'org_foreign', type: 'checkbox'},
 			{name: 'org_foreign', type: 'checkbox', goDependent: goForeignDependent},
 			{name: 'phone', type: 'text', isvalid: 'notempty'},
 			{name: 'mobile_phone', type: 'text'},
@@ -245,6 +251,7 @@
 			{name: 'birthplace', type: 'text', isvalid: 'notempty'},
 			{name: 'passport_issued_date', type: 'date', isvalid: 'notempty', yearRange: '-50:-0'},
 			{name: 'passport_expires_date', type: 'date', isvalid: 'notempty', yearRange: '+0:+20'},
+			{name: 'passport_expires_date_absent', type: 'checkbox', goDependent: goPassportExpiresDateAbsentDependent},
 			{name: 'accompaniing', type: 'subform', constructor: InnerForm},
 			{name: 'hotel', type: 'radio', isvalid: 'notempty', goDependent: goHotelDependent},
 			{name: 'hotel_name', type: 'text', isvalid: 'notempty'},

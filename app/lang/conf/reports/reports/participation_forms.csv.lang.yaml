@@ -31,6 +31,7 @@ en:
         birthplace: Birthplace
         passport_issued_date: Passport issue date
         passport_expires_date: Passport validity
+        passport_expires_date_absent: Passport validity not specified
         accompaniing: Accompaniing persons
         hotel: Hotel reservation
         hotel_name: Hotel name
@@ -68,6 +69,7 @@ ru:
         birthplace: Место рождения
         passport_issued_date: Дата выдачи паспорта
         passport_expires_date: Срок действия паспорта
+        passport_expires_date_absent: Срок действия паспорта не указан
         accompaniing: Сопр. лица
         hotel: Бронирование гостиницы
         hotel_name: Название гостиницы
