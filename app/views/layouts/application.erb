@@ -3,21 +3,33 @@
 <head>
   <title>Prs5</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+
+  <!--link rel="stylesheet" href="//code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" /-->
+  <link rel="stylesheet" href="/assets/jquery-ui.css" />
 
   <!--link href="https://cdn.jsdelivr.net/npm/quasar-framework@0.17.8/dist/umd/quasar.mat.min.css" rel="stylesheet" type="text/css"-->
   <!--link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css"-->
 
   <!-- script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools.js" type="text/javascript"></script -->
   <!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
+
+  <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js" type="text/javascript"></script-->
+  <script src="/assets/jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/jquery-ui.min.js" type="text/javascript"></script>
+
   <script type="text/javascript">
     $.noConflict();
   </script>
-  <script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools.js" type="text/javascript"></script>
+
+  <!--script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools.js" type="text/javascript"></script-->
+  <script src="/assets/mootools.js" type="text/javascript"></script>
+
   <!--script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script-->
-  <script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script>
+
+  <!--script src="http://code.angularjs.org/1.2.0-rc.2/angular.min.js"></script-->
+  <script src="/assets/angular.min.js"></script>
+
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= content_for?(:css) ? yield(:css) : yield(:qqq) %>

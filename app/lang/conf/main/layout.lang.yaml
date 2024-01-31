@@ -14,7 +14,8 @@ en:
         objects: 'Conference objects'
         mail: 'Post office'
         reports: 'Reports'
-        download_proceedings: Download proceedings
+        #download_proceedings: Download proceedings
+        download_proceedings: Online conference
 
 ru:
 
@@ -31,7 +32,8 @@ ru:
         objects: 'Объекты конференции'
         mail: 'Почтовая система'
         reports: 'Отчеты'
-        download_proceedings: Скачать труды
+        #download_proceedings: Скачать труды
+        download_proceedings: Онлайн-конференция
 
 
 

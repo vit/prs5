@@ -40,6 +40,7 @@ en:
         savedownloads: Save links
         link_toc: Link to Table of Contents
         link_archive: Link to papers archive
+        link_join: Link to Online Conference
 
         tab_info: Info
         tab_keywords: Keywords
@@ -191,8 +192,11 @@ ru:
         keywordsimportlistisempty: Вы не выбрали ни одного ключевого слова
 
         savedownloads: Сохранить ссылки
-        link_toc: Ссылка на файл содержания
-        link_archive: Ссылка на архив с докладами
+        #link_toc: Ссылка на файл содержания
+        #link_archive: Ссылка на архив с докладами
+        link_toc: Ссылка на программу
+        link_archive: Ссылка на сборник препринтов
+        link_join: Ссылка на Онлайн-конференцию
 
         tab_info: Инфо
         tab_keywords: Ключевые слова

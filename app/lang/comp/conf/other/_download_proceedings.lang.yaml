@@ -2,11 +2,17 @@
 en:
     lang_en: In English
     lang_ru: In Russian
+    #link_toc: Table of Contents
+    #link_archive: Archive
     link_toc: Table of Contents
     link_archive: Archive
+    link_join: Join
 
 ru:
     lang_en: На английском
     lang_ru: На русском
-    link_toc: Содержание
-    link_archive: Архив
+    #link_toc: Содержание
+    #link_archive: Архив
+    link_toc: Программа
+    link_archive: Сборник препринтов
+    link_join: Принять участие

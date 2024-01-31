@@ -670,9 +670,11 @@ window.addEvent('domready',function() {
 			//	var di = DataInputs( panel, {
 				var di = FormDataInputs( panel, {
 					link_toc: 'ml',
-					link_archive: 'ml'
+					link_archive: 'ml',
+					link_join: 'ml'
 				} );
 				panel.getElement('[name="savedownloadsbutton"]').addEvent('click', function() {
+					//console.log(di.get());
 					RPC.send('conf.save_conf_downloads', [_id, di.get()], function(result, error) {
 						alert('OK');
 					});
@@ -681,7 +683,7 @@ window.addEvent('domready',function() {
 					init: function( after ) {
 						RPC.send('conf.get_conf_downloads', [_id], function(result, error) {
 							di.set( result );
-							conftitle.set('text', lang_list.map(function(k){ return result.title[k]; }).join(' | '));
+							//conftitle.set('text', lang_list.map(function(k){ return result.title[k]; }).join(' | '));
 							if ( after ) after();
 						});
 					}

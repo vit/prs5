@@ -10,14 +10,14 @@
     %tr
      -%w[lang_en lang_ru].each do |lang|
       %th= _(lang)
-    -%w[link_toc link_archive].each do |lt|
-     %tr
-      -rec = @data[lt]
-      -if rec
+    -%w[link_toc link_archive link_join].each do |lt|
+     -rec = @data[lt] rescue nil
+     -if rec
+      %tr
        -%w[en ru].each do |lang|
         %td
-         -lnk = rec[lang]
-         -if !rec[lang].blank?
-          %a{href: rec[lang]}= _(lt)
+         -lnk = rec[lang] rescue ''
+         -if lnk && !lnk.blank?
+          %a{href: lnk}= _(lt)
      
 
